@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['variable'=> "hola"]);
 });
+
+Route::get('home', [App\Http\Controllers\homeController::class, 'show']);
