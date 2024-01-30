@@ -11,12 +11,11 @@
     <title>@yield('title') | Airbnb</title>
 
     <!-- Styles -->
-    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    <style>
+    <!-- <style>
         body {
             color: #565a5c;
             background-color: #F8F8F8;
@@ -31,7 +30,7 @@
             font-size: 2em;
             font-weight: 400;
         }
-    </style>
+    </style> -->
 </head>
 <body>
 <div id="app">

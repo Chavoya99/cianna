@@ -13,8 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', ['variable'=> "hola"]);
+
+
+Route::controller(App\Http\Controllers\HomeController::class)->group(function(){
+    Route::get('/', 'redirectTo');
+    Route::get('home', 'show')->name('home');
 });
 
-Route::get('home', [App\Http\Controllers\homeController::class, 'show']);
+Route::controller(App\Http\Controllers\Auth\LoginRegisterController::class)->group(function(){
+    Route::get('login', 'show');
+});
+
