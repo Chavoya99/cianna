@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
-                        Login
+                        Iniciar sesión
                     </div>
                     <div class="d-flex gap-1 justify-content-center mt-1">
                         <div>¿No tienes una cuenta?</div>
