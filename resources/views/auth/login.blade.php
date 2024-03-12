@@ -1,49 +1,48 @@
-@extends('../layouts/base')
+<x-guest-layout>
+    <x-authentication-card>
+        <x-slot name="logo">
+            <x-authentication-card-logo />
+        </x-slot>
 
-@section('content')
-    <div class="container text-center w-auto mt-5">
-        <div class="row">
-        <div class="col-md-6 mx-auto text-center">
-                <div class="bg-white p-5 rounded-5 text-secondary shadow">
-                    <div class="d-flex justify-content-center">
-                        <img src="{{asset('assets/img/login-icon.svg')}}" alt="login-icon" style="height: 7rem"/>
-                    </div>
-                    <div class="text-center fs-1 fw-bold">Login</div>
-                    <div class="input-group mt-4">
-                        <div class="input-group-text bg-info">
-                            <i data-lucide="user"></i>
-                        </div>
-                        <input class="form-control bg-light" type="email" placeholder="Correo"/>
-                    </div>
-                    <div class="input-group mt-1">
-                        <div class="input-group-text bg-info">
-                            <i data-lucide="lock-keyhole"></i>
-                        </div>
-                        <input class="form-control bg-light" type="password" placeholder="Contraseña"/>
-                    </div>
-                    <div class="d-flex justify-content-around mt-1">
-                        <div class="d-flex align-items-center gap-1">
-                        <input class="form-check-input" type="checkbox" />
-                        <div class="pt-1" style="font-size: 0.9rem">Remember me</div>
-                        </div>
-                        <div class="pt-1">
-                        <a href="#" class="text-decoration-none text-info fw-semibold fst-italic">
-                            ¿Olvidó su contraseña?</a>
-                        </div>
-                    </div>
-                    <div class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
-                        Iniciar sesión
-                    </div>
-                    <div class="d-flex gap-1 justify-content-center mt-1">
-                        <div>¿No tienes una cuenta?</div>
-                        <a href="#" class="text-decoration-none text-info fw-semibold">
-                            Regístrate
-                        </a>
-                    </div>
-                    </div>
-                </div>
+        <x-validation-errors class="mb-4" />
+
+        @if (session('status'))
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ session('status') }}
             </div>
-        </div>
-    </div>
+        @endif
 
-@endsection
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <div>
+                <x-label for="email" value="{{ __('Email') }}" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="password" value="{{ __('Password') }}" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            </div>
+
+            <div class="block mt-4">
+                <label for="remember_me" class="flex items-center">
+                    <x-checkbox id="remember_me" name="remember" />
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                </label>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
+
+                <x-button class="ms-4">
+                    {{ __('Log in') }}
+                </x-button>
+            </div>
+        </form>
+    </x-authentication-card>
+</x-guest-layout>
