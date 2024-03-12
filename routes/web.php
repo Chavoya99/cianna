@@ -15,16 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::controller(App\Http\Controllers\HomeController::class)->group(function(){
-    Route::get('/', 'redirectTo');
-    Route::get('home', 'show')->name('home');
-});
-
-Route::controller(App\Http\Controllers\Auth\LoginRegisterController::class)->group(function(){
-    Route::get('login', 'show');
-});
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
