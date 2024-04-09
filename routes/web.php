@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+/* RUTA PRINCIPAL */
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-
+/* DASHBOARD: Inicio de sesión*/
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
