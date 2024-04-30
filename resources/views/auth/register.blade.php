@@ -25,6 +25,11 @@
             </div>
 
             <div class="mt-4">
+                <x-label for="tipo" value="{{ __('Tipo') }}" />
+                <x-input id="tipo" class="block mt-1 w-full" type="text" name="tipo" required />
+            </div>
+
+            <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
