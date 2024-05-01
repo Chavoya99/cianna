@@ -1,5 +1,3 @@
-
-
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo" >
@@ -25,11 +23,6 @@
 
             <div class="mt-4 relative">
                 <x-input id="password" class="block mt-1 w-full pr-12" type="password" name="password" required autocomplete="new-password" placeholder="Contraseña" />
-                <button id="togglePassword" type="button" class="absolute right-0 top-1/2 transform -translate-y-1/2 mr-3 focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm-2-2a1 1 0 100-2 1 1 0 000 2zm-1 6a5.001 5.001 0 00-3.89 1.916L4 18.329V20a2 2 0 002 2h12a2 2 0 002-2v-1.671l-3.109-3.413A5.001 5.001 0 0012 16z" />
-                    </svg>
-                </button>
             </div>
 
             <div class="mt-4">
@@ -86,25 +79,3 @@
         </div>
     </footer>
 </x-guest-layout>
-
-<script>
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
-    const passwordConfirmationInput = document.getElementById('password_confirmation');
-
-    togglePassword.addEventListener('click', function() {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        passwordConfirmationInput.setAttribute('type', type);
-        
-        // Cambiar el icono al hacer clic
-        const svgIcon = this.querySelector('svg');
-        if (svgIcon.classList.contains('fa-eye')) {
-            svgIcon.classList.remove('fa-eye');
-            svgIcon.classList.add('fa-eye-slash');
-        } else {
-            svgIcon.classList.remove('fa-eye-slash');
-            svgIcon.classList.add('fa-eye');
-        }
-    });
-</script>
