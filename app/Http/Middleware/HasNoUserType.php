@@ -17,14 +17,7 @@ class HasNoUserType
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->tipo){
-            $this->redirectTo();
-        }
 
-        return $next($request);
-    }
-
-    public function redirectTo(){
         if(Auth::user()->tipo == 'admin'){
             return redirect(RouteServiceProvider::HOME);
         }else{
@@ -34,5 +27,7 @@ class HasNoUserType
                 return redirect('/dashB');
             }
         }
+
+        return $next($request);
     }
 }
