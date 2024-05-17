@@ -30,10 +30,9 @@
             </div>
 
             <div class="mt-4">
-                <select class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                <select name=tipo class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
                     <option value="A">Estoy buscando dónde quedarme</option>
                     <option value="B">Ya tengo casa</option>
-                    <option value="Admin">Admin (Solo personal autorizado XD)</option>
                 </select>  
             </div>
 
