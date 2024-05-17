@@ -16,12 +16,7 @@
             @csrf
 
             <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
-
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
+                <x-label for="email" value="{{ __('Correo') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             </div>
 
@@ -33,11 +28,11 @@
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
                     <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Recordarme') }}</span>
                 </label>
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        {{ __('Recuperar contraseña') }}
                     </a>
                 @endif
             </div>
@@ -45,11 +40,11 @@
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('register'))
                     <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md 
-                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Don't have an account? Sign in</a>
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">¿Aún no tienes cuenta? Regístrate</a>
                 @endif
 
                 <x-button class="ms-4">
-                    {{ __('Log in') }}
+                    {{ __('Iniciar sesión') }}
                 </x-button>
             </div>
         </form>
