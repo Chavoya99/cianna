@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\ProfileUpdate;
@@ -7,6 +8,7 @@ use App\Http\Middleware\ProfileUpdated;
 use App\Http\Middleware\ProfileNotUpdated;
 use App\Http\Middleware\UserAMiddleware;
 use App\Http\Middleware\UserBMiddleware;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +49,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('/homeB', function(){
                 return 'homeB';
             })->name('homeB');
-        });   
+        });
+        
+        
     });
 
 
@@ -62,6 +66,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
 
     Route::get('/dashboard', function () {
         return view('dashboard');})->name('dashboard');
+
+    Route::get('/redirigir', [LoginRegisterController::class, 'redirectTo']);
     
 });
 
