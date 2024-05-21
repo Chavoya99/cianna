@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_a', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->smallInteger('edad');
+        Schema::create('postulaciones', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_b_id');
+            $table->foreignId('postulable_id');
+            $table->string('postulable_type');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_a');
+        Schema::dropIfExists('postulaciones');
     }
 };

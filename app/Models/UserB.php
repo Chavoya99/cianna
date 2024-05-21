@@ -10,4 +10,8 @@ class UserB extends Model
     use HasFactory;
 
     protected $table = 'users_b';
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

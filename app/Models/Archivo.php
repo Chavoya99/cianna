@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserA extends Model
+class Archivo extends Model
 {
     use HasFactory;
-    
-    protected $table = 'users_a';
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function archivable(){
+        return $this->morphTo(__FUNCTION__,'archivable_id', 'archivable_type');
     }
 }
