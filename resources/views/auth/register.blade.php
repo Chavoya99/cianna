@@ -17,7 +17,7 @@
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Nombre" />
             </div>
 
-            <div>
+            <div class="mt-4">
                 <x-input id="apellido" class="block mt-1 w-full" type="text" name="apellido" :value="old('apellido')" required autofocus autocomplete="name" placeholder="Apellido" />
             </div>
 
