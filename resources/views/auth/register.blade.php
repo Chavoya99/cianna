@@ -18,6 +18,10 @@
             </div>
 
             <div class="mt-4">
+                <x-input id="apellido" class="block mt-1 w-full" type="text" name="apellido" :value="old('apellido')" required autofocus autocomplete="name" placeholder="Apellido" />
+            </div>
+
+            <div class="mt-4">
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Correo" />
             </div>
 
@@ -30,10 +34,10 @@
             </div>
 
             <div class="mt-4">
-                <select class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-                    <option value="A">Estoy buscando dónde quedarme</option>
-                    <option value="B">Ya tengo casa</option>
-                    <option value="Admin">Admin (Solo personal autorizado XD)</option>
+                <x-label for="tipo">¿Cuál es tu situación actual?</x-label>
+                <select name=tipo class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                    <option value="A">Ya tengo casa, busco compañeros</option>
+                    <option value="B">Busco donde quedarme</option>
                 </select>  
             </div>
 

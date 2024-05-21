@@ -1,5 +1,5 @@
 <div class="min-h-screen relative flex flex-col sm:justify-center items-center pt-6 sm:pt-0" style="background-color: #F1EFE9;">
-    <div class="absolute top-0 left-0 p-4">
+    <div>
         {{ $logo }}
     </div>
 
