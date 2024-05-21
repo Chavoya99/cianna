@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('archivos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('archivable_id');
+            $table->foreignId('archivable_id')->constrained()->onDelete('cascade');
             $table->string('archivable_type');
             $table->string('archivo_type');
-            $table->string('ruta_imagen');
+            $table->string('ruta_archivo');
             $table->timestamps();
         });
     }
