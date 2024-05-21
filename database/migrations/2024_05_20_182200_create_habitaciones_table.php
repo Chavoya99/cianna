@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('habitaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_a_id');
+            $table->foreignId('user_a_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
