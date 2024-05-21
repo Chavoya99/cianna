@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('postulaciones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_b_id');
+            $table->timestamp('fecha');
             $table->foreignId('postulable_id');
             $table->string('postulable_type');
             $table->timestamps();
