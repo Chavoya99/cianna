@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('users_a', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->smallInteger('edad');
+            $table->string('genero')->default('N/A');
+            $table->string('gustos_intereses');
+            $table->string('carrera');
+            $table->string('codigo');
             $table->timestamps();
         });
     }

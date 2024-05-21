@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('postulaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_b_id');
+            $table->foreignId('user_b_id')->constrained()->onDelete('cascade');
             $table->timestamp('fecha');
             $table->foreignId('postulable_id');
             $table->string('postulable_type');

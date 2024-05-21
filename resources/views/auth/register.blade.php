@@ -18,6 +18,10 @@
             </div>
 
             <div class="mt-4">
+                <x-input id="apellido" class="block mt-1 w-full" type="text" name="apellido" :value="old('apellido')" required autofocus autocomplete="name" placeholder="Apellido" />
+            </div>
+
+            <div class="mt-4">
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Correo" />
             </div>
 
