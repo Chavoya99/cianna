@@ -6,9 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\Caster\RedisCaster;
 
-class HasUserType
+class UserBMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,10 +16,14 @@ class HasUserType
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::user()->tipo){
-            return redirect('/formularioRegistroA');
+        $userType = Auth::user()->tipo;
+        if($userType != 'B'){
+           if($userType == 'admin'){
+                return redirect(route('homeAdmin'));
+           }else if($userType == 'A'){
+                return redirect(route('homeA'));
+           }
         }
-
         return $next($request);
     }
 }

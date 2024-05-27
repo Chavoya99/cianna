@@ -22,14 +22,12 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 if(Auth::user()->tipo == 'admin'){
-                    return redirect(RouteServiceProvider::HOME);
+                    return redirect(route('homeAdmin'));
                 }else{
                     if(Auth::user()->tipo == 'A'){
-                        return redirect('/dashA');
+                        return redirect(route('homeA'));
                     }else if(Auth::user()->tipo == 'B'){
-                        return redirect('/dashB');
-                    }else{
-                        return redirect('/formularioRegistroA');
+                        return redirect(route('homeB'));
                     }
                 }
             }
