@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('archivable_id');
             $table->string('archivable_type');
             $table->string('archivo_type');
+            $table->string('MIME');
             $table->string('ruta_archivo');
             $table->timestamps();
         });

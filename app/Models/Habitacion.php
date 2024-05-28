@@ -22,6 +22,6 @@ class Habitacion extends Model
     }
 
     public function postulaciones(){
-        return $this->morphMany(Postulacion::class, 'postulable');
+        return $this->hasMany(Postulacion::class);
     }
 }

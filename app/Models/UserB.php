@@ -14,4 +14,12 @@ class UserB extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function postulaciones(){
+        return $this->hasMany(Postulacion::class);
+    }
+
+    public function archivos(){
+        return $this->morphMany(Archivo::class, 'archivable');
+    }
 }
