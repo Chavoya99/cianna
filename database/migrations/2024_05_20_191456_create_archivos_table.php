@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('archivos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('archivable_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('archivable_id');
             $table->string('archivable_type');
             $table->string('archivo_type');
             $table->string('ruta_archivo');

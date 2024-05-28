@@ -35,7 +35,7 @@ class LoginRegisterController extends Controller
         }
     }
 
-    public function registerUser(){
+    public function configuracion_inicial_perfil(Request $request){
 
     }
 }
