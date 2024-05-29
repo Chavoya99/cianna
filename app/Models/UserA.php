@@ -19,4 +19,8 @@ class UserA extends Model
         return $this->morphMany(Archivo::class, 'archivable');
     }
 
+    public function carrera(){
+        return $this->hasOne(Carrera::class);
+    }
+
 }

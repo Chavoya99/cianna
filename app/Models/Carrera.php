@@ -9,4 +9,12 @@ class Carrera extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre'];
+
+    public function user_a(){
+        return $this->belongsTo(UserA::class);
+    }
+
+    public function user_b(){
+        return $this->belongsTo(UserB::class);
+    }
 }
