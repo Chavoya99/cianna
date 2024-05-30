@@ -10,9 +10,15 @@ class Postulacion extends Model
     use HasFactory;
     protected $table = 'postulaciones';
 
-    public function postulable(){
+    public function user_b(){
 
-        return $this->morphTo(__FUNCTION__,'postulable_id', 'postulable_type');
+        return $this->belongsTo(UserB::class);
+        
+    }
+
+    public function habitacion(){
+
+        return $this->belongsTo(Habitacion::class);
         
     }
 }

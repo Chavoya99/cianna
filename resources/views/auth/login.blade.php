@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -19,8 +23,14 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Correo" />
             </div>
 
-            <div class="mt-8">
+            <div class="mt-8 relative">
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Contraseña" />
+                <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 px-3 py-2 text-gray-500">
+                    <!-- Icono para mostrar la contraseña -->
+                    <i id="show-icon" class="fas fa-eye"></i>
+                    <!-- Icono para ocultar la contraseña -->
+                    <i id="hide-icon" class="fas fa-eye-slash hidden"></i>
+                </button>
             </div>
 
             <div class="block mt-4">
@@ -48,3 +58,20 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+
+<script>
+function togglePasswordVisibility() {
+    const passwordField = document.getElementById('password');
+    const showIcon = document.getElementById('show-icon');
+    const hideIcon = document.getElementById('hide-icon');
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        showIcon.classList.add('hidden');
+        hideIcon.classList.remove('hidden');
+    } else {
+        passwordField.type = 'password';
+        showIcon.classList.remove('hidden');
+        hideIcon.classList.add('hidden');
+    }
+}
+</script>

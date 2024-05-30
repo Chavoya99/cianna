@@ -26,10 +26,8 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
     'verified',])->group(function () {
-
 
     Route::middleware(ProfileUpdated::class)->group(function(){
         
@@ -71,5 +69,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
     
 });
 
-
+/* QUITAR AL FINAL*/
+Route::get('/usuarioA', function(){
+    return view('userA.usera');
+});
 

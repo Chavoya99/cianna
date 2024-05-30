@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Habitacion extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    
     protected $tabla = 'habitaciones';
 
     public function archivos(){
@@ -19,6 +22,6 @@ class Habitacion extends Model
     }
 
     public function postulaciones(){
-        return $this->morphMany(Postulacion::class, 'postulable');
+        return $this->hasMany(Postulacion::class);
     }
 }

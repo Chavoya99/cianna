@@ -10,6 +10,6 @@ class Archivo extends Model
     use HasFactory;
 
     public function archivable(){
-        return $this->morphTo(__FUNCTION__,'archivable_id', 'archivable_type');
+        return $this->morphTo();//__FUNCTION__,'archivable_id', 'archivable_type');
     }
 }
