@@ -71,5 +71,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
     
 });
 
-
+/* QUITAR AL FINAL*/
+Route::get('/usuarioA', function(){
+    return view('userA.usera');
+});
 
