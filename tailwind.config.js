@@ -16,6 +16,13 @@ export default {
             fontFamily: {
                 sans: ['Century Gothic', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'cianna-gray': '#BFBEBA',
+                'cianna-white': '#F1EFE7',
+                'cianna-orange': '#D47814',
+                'cianna-green': '#2B7B2C',
+                'ciannna-blue': '#272D45',
+            }
         },
     },
 

@@ -1,95 +1,153 @@
 <!-- resources/views/usera.blade.php -->
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <x-guest-layout>
     <x-configuracion-cuenta-card>
-        <div>
-            <h1 style="font-size: 40px; text-align: center; color: #D47814;">Configuración de la cuenta</h1>
-        </div>
-        <form method="POST" action="">
-            <!-- EDAD -->
-            <div class="font-sans">
-                <label>Edad</label>
-                <x-custom-input id="edad" name="edad" class="block mt-1 w-full" type="number" min="18" max="35" :value="old('edad')" required autofocus autocomplete="edad" placeholder="Edad" />
-            </div>
-            <!-- SEXO -->
-            <div class="mt-4 font-sans">
-                <label>Sexo</label>
-                <x-custom-select id="sexo" name="sexo">
-                    <option value="masculino">Masculino</option>
-                    <option value="femenino">Femenino</option>
-                </x-custom-select>
-            </div>
-            <!-- CARRERA -->
-            <div class="mt-4 font-sans">
-                <label>Carrera</label>
-                <x-custom-select id="carrera" name="carrera">
-                    <option value="ing_alim_biot">Ing. en Alimentos y Biotecnología</option>
-                    <option value="ing_biom">Ing. Biómedica</option>
-                    <option value="ing_civi">Ing. Civil</option>
-                    <option value="ing_comp">Ing. Computación</option>
-                    <option value="ing_com_elec">Ing. en Comunicaciones y Eléctrónica</option>
-                    <option value="ing_log_trans">Ing. en Logística y Transporte</option>
-                    <option value="ing_topo">Ing. en Topografía Geomática</option>
-                    <option value="ing_foto">Ing. Fotónica</option>
-                    <option value="ing_indu">Ing. Industrial</option>
-                    <option value="ing_info">Ing. Informática</option>
-                    <option value="ing_meca">Ing. Mecánica Eléctrica</option>
-                    <option value="ing_quim">Ing. Química</option>
-                    <option value="ing_robo">Ing. Robótica</option>
-                    <option value="lic_cien_mate">Lic. en Ciencia de Materiales</option>
-                    <option value="lic_fis">Lic. en Física</option>
-                    <option value="lic_mate">Lic. en Matemáticas</option>
-                    <option value="lic_quim">Lic. en Química</option>
-                    <option value="lic_qfb">Lic. en Químico Farmacéutico Biólogo</option>
-                </x-custom-select>
-            </div>
-            <!-- CÓDIGO -->
-            <div class="mt-4 font-sans">
-                <label>Código de estudiante</label>
-                <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full" type="number" minlength="9" maxlength="9" :value="old('codigo')" required autocomplete="codigo" placeholder="" />
-            </div>
-            <!-- DESCRIPCIÓN -->
-            <div class="mt-4 font-sans">
-                <label>Cuéntanos sobre ti</label>
-                <div class="relative">
-                    <textarea id="desc" name="desc" class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" placeholder="Escribe algo..." maxlength="255"></textarea>
-                    <div class="absolute bottom-0 right-0 mb-2 mr-2 text-gray-500">
-                        <span id="char-count">0</span>/255
+        <x-slot name="logo">
+            <x-authentication-card-logo />
+        </x-slot>
+        <!-- CONTENEDOR PRINCIPAL DEL FORMULARIO -->
+        <div class="flex justify-center w-full">
+            <!-- FORMULARIO -->
+            <form class="w-full">
+                <!-- TÍTULO -->
+                <div class="relative px-20 bg-cianna-white" style="width: 80%;">
+                    <h1 class="text-cianna-orange" style="font-size: 64px;">Configuración de la cuenta</h1>
+                </div>
+                
+                <!-- CONTENEDOR HORIZONTAL 1 -->
+                <div class="flex w-full">
+                    <!-- CONTENEDOR DESCRIPCIÓN -->
+                    <div class="relative px-20 bg-cianna-white" style="width: 60%;">
+                        <x-custom-label for="desc">Cuéntanos sobre ti</x-custom-label>
+                        <x-about-you></x-about-you>
+                    </div>
+                    <!-- CONTENEDOR SUP/DER (MORADO) -->
+                    <div class="px-3 bg-cianna-white" style="width: 40%;">
+                        <x-foto-perfil></x-foto-perfil>
                     </div>
                 </div>
+                
+
+                    <!-- CONTENEDOR HORIZONTAL 2 -->
+                    <div class="flex w-full" style="background-color: #BD00FF;">
+                        <!-- CONTENEDOR IZQ -->
+                        <div class="relative px-20" style="width: 60%">
+                            <x-has-pets></x-has-pets>
+                        </div>
+                        <!-- CONTENEDOR DER -->
+                        <div class="relative px-3" style="width: 40%">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="phone">
+                                Teléfono
+                            </label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" name="phone" type="text" placeholder="Teléfono">
+                        </div>
+                    </div>
+                    <!-- Otros campos del formulario -->
+                    <div class="flex justify-center w-full">
+                        <div class="px-3">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onclick="displayFormData()">
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                    <!-- CONTENEDOR HORIZONTAL 2 -->
+            </form>
+        </div>
+
+        <!-- SE MUESTRAN DATOS -->
+        <div class="flex justify-center mt-8">
+            <div class="w-full max-w-lg bg-gray-100 p-6 rounded-lg shadow-md" id="formDataDisplay" style="display: none;">
+                <h2 class="text-xl font-bold mb-4">Datos enviados:</h2>
+                <p><strong>Nombre:</strong> <span id="displayFirstName"></span></p>
+                <p><strong>Apellido:</strong> <span id="displayLastName"></span></p>
+                <p><strong>Correo electrónico:</strong> <span id="displayEmail"></span></p>
+                <p><strong>Teléfono:</strong> <span id="displayPhone"></span></p>
             </div>
-            <!-- GUSTOS E INTERESES -->
-            <div class="mt-4 font-sans">
-                <label>Gustos e intereses</label>
-                <div class="mt-4">
-                    <x-custom-checkbox id="ejemplo1" name="gust_int[]" value="ejemplo1" label="Ejemplo 1" />
-                    <x-custom-checkbox id="ejemplo2" name="gust_int[]" value="ejemplo2" label="Ejemplo 2" class="mt-2" />
-                    <x-custom-checkbox id="ejemplo3" name="gust_int[]" value="ejemplo3" label="Ejemplo 3" class="mt-2" />
-                </div>
-            </div>
-            <!-- FOTO DE PERFIL -->
-            <div class="mt-4 font-sans">
-                <label>Foto de perfil</label>
-                <x-foto-perfil>
-                Esta será tu foto de perfil
-                </x-foto-perfil>
-            </div>
-            <!-- KARDEX -->
-            <div class="mt-4 font-sans">
-                <label>Kárdex del estudiante</label>
-                <x-subir-kardex id="kardex" name="kardex">
-                    Sube tu Kardex (PDF)
-                </x-subir-kardex>
-            </div>
-        </form>
+        </div>
     </x-configuracion-cuenta-card>
 </x-guest-layout>
 
 <!-- SCRIPTS -->
-<script>
-    const textarea = document.querySelector('textarea');
-    const charCount = document.getElementById('char-count');
 
-    textarea.addEventListener('input', () => {
-        charCount.textContent = textarea.value.length;
+<script>
+    // PARA CONTAR LOS CARACTERES EN LA DESCRIPCION
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const textarea = document.getElementById('desc');
+        const charCount = document.getElementById('char-count');
+        const maxLength = textarea.getAttribute('maxlength');
+
+        textarea.addEventListener('input', () => {
+            const remaining = maxLength - textarea.value.length;
+            charCount.textContent = remaining;
+        });
+    /////////////////////
+
+    // PARA MOSTRAR CAMPO DE NÚMERO DE MASCOTAS
+    const petsYes = document.getElementById('mascota-si');
+    const petsNo = document.getElementById('mascota-no');
+    const petsNumber = document.getElementById('num-mascotas');
+
+    // Función para actualizar el estado del campo y cambiar su color
+    function updatePetsNumberField() {
+        if (petsNumber.disabled) {
+            petsNumber.classList.remove('bg-white');
+            petsNumber.classList.add('bg-cianna-gray');
+        } else {
+            petsNumber.classList.remove('bg-cianna-gray');
+            petsNumber.classList.add('bg-white');
+        }
+    }
+
+    petsYes.addEventListener('change', () => {
+        petsNumber.disabled = false;
+        updatePetsNumberField();
     });
+
+    petsNo.addEventListener('change', () => {
+        petsNumber.disabled = true;
+        updatePetsNumberField();
+    });
+
+    // Inicializar el color del campo según su estado actual
+    updatePetsNumberField();
+    });
+    /////////////////////////
+
+    // MOSTRAR LO ENVIADO
+    function displayFormData() {
+        // Obtener los valores de los campos del formulario
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+
+        // Mostrar los valores en la sección de datos enviados
+        document.getElementById('displayFirstName').innerText = firstName;
+        document.getElementById('displayLastName').innerText = lastName;
+        document.getElementById('displayEmail').innerText = email;
+        document.getElementById('displayPhone').innerText = phone;
+
+        // Mostrar la sección de datos enviados
+        document.getElementById('formDataDisplay').style.display = 'block';
+    }
+</script>
+
+<script>
+    function previewImage(input) {
+        var preview = document.getElementById('preview');
+        var imageContainer = document.getElementById('imageContainer');
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                imageContainer.style.display = 'block'; // Mostrar el contenedor de imagen
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.src = "#";
+            imageContainer.style.display = 'none'; // Ocultar el contenedor de imagen
+        }
+    }
 </script>
