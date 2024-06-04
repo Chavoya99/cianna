@@ -74,5 +74,9 @@ class User extends Authenticatable
         return $this->hasOne(UserB::class);
     }
 
+    public function archivos(){
+        return $this->morphMany(Archivo::class, 'archivable');
+    }
+
     
 }

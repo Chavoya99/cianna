@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('postulaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_b_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('user_b_id');
+            $table->foreign('user_b_id')->references('user_id')->on('users_b')->onDelete('cascade');
+            $table->foreignId('habitacion_id');
             $table->timestamp('fecha');
-            $table->foreignId('postulable_id');
-            $table->string('postulable_type');
             $table->timestamps();
         });
     }

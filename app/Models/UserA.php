@@ -14,4 +14,13 @@ class UserA extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function archivos(){
+        return $this->morphMany(Archivo::class, 'archivable');
+    }
+
+    public function carrera(){
+        return $this->hasOne(Carrera::class);
+    }
+
 }
