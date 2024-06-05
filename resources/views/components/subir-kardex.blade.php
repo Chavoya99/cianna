@@ -1,11 +1,11 @@
 <!-- resources/views/components/file-upload.blade.php -->
 @props(['id' => 'kardex', 'name' => 'kardex', 'accept' => 'application/pdf'])
 
-<div class="flex flex-col items-center">
-    <label for="{{ $id }}" class="block text-sm font-medium text-gray-700">
-        {{ $slot }}
-    </label>
-    <div class="mt-1 flex items-center">
-        <input id="{{ $id }}" name="{{ $name }}" type="file" accept="{{ $accept }}" class="ml-5 rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+<div class="flex flex-col">
+    <x-custom-label for="$id">
+        Sube aquí tu kárdex
+    </x-custom-label>
+    <div class="mt-1 flex">
+        <input id="{{ $id }}" name="{{ $name }}" type="file" accept="{{ $accept }}" class="block w-full file:bg-cianna-blue file:text-white file:cursor-pointer text-sm rounded-md cursor-pointer bg-cianna-gray border border-cianna-gray focus:border-cianna-orange focus:outline-none focus:ring-1 focus:ring-cianna-orange">
     </div>
 </div>
