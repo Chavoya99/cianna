@@ -1,5 +1,5 @@
 <!-- resources/views/components/foto-perfil.blade.php -->
-@props(['id' => 'img_perf', 'name' => 'img_perf', 'defaultImage' => asset('build/img/avatar-default-svgrepo-com.png')])
+@props(['id' => 'img_perf', 'name' => 'img_perf', 'defaultImage' => asset('img/avatar-default-svgrepo-com.png')])
 <div class="flex flex-col items-center py-3">
     <div class="flex flex-col items-center block w-full">
         <div id="imageContainer" class="inline-block h-40 w-40 overflow-hidden rounded-md bg-gray-100 mb-2">

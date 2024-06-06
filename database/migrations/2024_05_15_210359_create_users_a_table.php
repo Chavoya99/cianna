@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->smallInteger('edad');
             $table->string('sexo');
-            $table->mediumText('descripcion');
+            $table->string('descripcion', length:300);
             $table->string('gustos_intereses');
             $table->string('carrera');
             $table->string('codigo');
