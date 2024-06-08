@@ -10,13 +10,15 @@ class UserA extends Model
     use HasFactory;
     
     protected $table = 'users_a';
+    protected $fillable = ['user_id', 'edad','sexo', 'descripcion', 'mascota', 
+    'padecimiento', 'nom_padecimiento', 'lifestyle', 'carrera', 'codigo'];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function archivos(){
-        return $this->morphMany(Archivo::class, 'archivable');
-    }
+    // public function archivos(){
+    //     return $this->morphMany(Archivo::class, 'archivable');
+    // }
 
 }

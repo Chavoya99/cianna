@@ -19,7 +19,7 @@ class ProfileNotUpdated
     {
         
         if(Auth::user()->profile_update){
-            if(!Auth::user()->tipo == 'admin'){
+            if(Auth::user()->tipo == 'admin'){
                 return redirect('homeAdmin');
             }else{
                 if(Auth::user()->tipo == 'A'){

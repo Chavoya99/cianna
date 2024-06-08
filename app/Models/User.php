@@ -31,6 +31,7 @@ class User extends Authenticatable
         'email',
         'password',
         'tipo',
+        'profile_update',
     ];
 
     /**
@@ -76,7 +77,7 @@ class User extends Authenticatable
     }
 
     public function archivos(){
-        return $this->morphMany(Archivo::class, 'archivable');
+        return $this->hasMany(Archivo::class);
     }
 
     

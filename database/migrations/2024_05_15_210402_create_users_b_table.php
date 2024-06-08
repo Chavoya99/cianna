@@ -16,10 +16,16 @@ return new class extends Migration
             $table->smallInteger('edad');
             $table->string('sexo');
             $table->string('descripcion', length:300);
-            $table->string('gustos_intereses');
+            $table->string('mascota');
+            $table->smallInteger('num_mascotas')->default(0);
+            $table->string('padecimiento');
+            $table->string('nom_padecimiento')->default('N/A');
+            $table->string('lifestyle');
             $table->string('carrera');
             $table->string('codigo');
             $table->timestamps();
+
+            $table->primary('user_id');
         });
     }
 

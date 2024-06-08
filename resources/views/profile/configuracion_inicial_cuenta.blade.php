@@ -3,14 +3,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <x-guest-layout>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+    <!-- Authentication -->
     <x-configuracion-cuenta-card>
+
+        <!-- Reemplazar el sigueinte link por un elemento en navbar  -->
+        <form method="POST" action="{{ route('logout') }}" x-data>
+            @csrf
+            <a href="{{ route('logout') }}"
+                        @click.prevent="$root.submit();">
+                        {{ __('Cerrar sesión') }}
+            </a>
+        </form>
+
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
         <!-- CONTENEDOR PRINCIPAL DEL FORMULARIO -->
         <div class="flex justify-center w-full">
             <!-- FORMULARIO -->
-            <form class="w-full" id="configForm" action="{{route('guardar_configuracion_inicial_cuenta')}}" method="POST">
+            <form class="w-full" id="configForm" action="{{route('guardar_configuracion_inicial_cuenta')}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <!-- TÍTULO -->
                 <div class="relative px-20 bg-cianna-white" style="width: 80%;">
                     <h1 class="text-cianna-orange" style="font-size: 64px;">Configuración de la cuenta</h1>
@@ -27,6 +50,7 @@
                     <!-- CONTENEDOR SUP/DER FOTO DE PERFIL -->
                     <div class="bg-cianna-white px-44" style="width: 40%;">
                         <x-foto-perfil></x-foto-perfil>
+                        <label for="img_perf">(max. 4mb)</label>
                     </div>
                 </div>
                 
@@ -53,7 +77,7 @@
                     <!-- CONTENEDOR DEL CODIGO-->
                     <div class="px-44" style="width: 40%">
                         <x-custom-label>Código de estudiante</x-custom-label>
-                        <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full h-8 text-md" type="text" minlength="9" maxlength="9" :value="old('codigo')" required autocomplete="codigo" placeholder="" />
+                        <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full h-8 text-md" type="text" minlength="9" maxlength="9" value="{{old('codigo')}}" pattern="[0-9]{9}" required autocomplete="codigo" placeholder="" />
                     </div>
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 3 -->
@@ -78,6 +102,7 @@
                     <!-- CONTENEDOR DER KARDEX -->
                     <div class="px-44" style="width: 40%">
                         <x-subir-kardex><label>Sube aquí tu kárdex</label></x-subir-kardex>
+                        <label for="kardex">(max. 4mb)</label>
                     </div>
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 5 -->
