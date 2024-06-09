@@ -89,7 +89,7 @@ class LoginRegisterController extends Controller
                 'padecimiento' => $request->padecimiento,
                 'nom_padecimiento' => $nom_padecimiento,
                 'codigo' => $request->codigo,
-                'lifestyle' => $request->carrera,
+                'lifestyle' => $request->lifestyle,
                 'carrera' => $request->carrera,
             ]);
 
@@ -106,7 +106,7 @@ class LoginRegisterController extends Controller
                 'padecimiento' => $request->padecimiento,
                 'nom_padecimiento' => $nom_padecimiento,
                 'codigo' => $request->codigo,
-                'lifestyle' => $request->carrera,
+                'lifestyle' => $request->lifestyle,
                 'carrera' => $request->carrera,
             ]);
 
