@@ -50,7 +50,7 @@ class LoginRegisterController extends Controller
             'codigo' => 'required|regex:/^[a-zA-Z0-9_-]+$/|unique:users_b',
             'lifestyle' => 'required',
             'carrera' => 'required',
-            //'kardex' => 'required|mimes:pdf|max:4096',
+            'kardex' => 'required|mimes:pdf|max:4096',
         ],[
             'desc.min' => 'Debes dar una descripción de al menos 100 caracteres',
             'img_perf.mimes' => 'Sólo se permiten imagenes .jpg, .png o .jpeg',
@@ -83,7 +83,7 @@ class LoginRegisterController extends Controller
                 'user_id' => Auth::id(),
                 'descripcion' => $request->desc,
                 'mascota' => $request->mascota,
-                'num_mascota' => $num_mascotas,
+                'num_mascotas' => $num_mascotas,
                 'edad' => $request->edad,
                 'sexo' => $request->sexo,
                 'padecimiento' => $request->padecimiento,
@@ -98,7 +98,7 @@ class LoginRegisterController extends Controller
                 'user_id' => Auth::id(),
                 'descripcion' => $request->desc,
                 'mascota' => $request->mascota,
-                'num_mascota' => $num_mascotas,
+                'num_mascotas' => $num_mascotas,
                 'edad' => $request->edad,
                 'sexo' => $request->sexo,
                 'padecimiento' => $request->padecimiento,
@@ -115,8 +115,6 @@ class LoginRegisterController extends Controller
                 $imagen = $request->file('img_perf');
                 $ubicacion = $imagen->store('imagenes_perfil', 'public');
 
-                $modelo = get_class($user); // Asegúrate de que esto retorna el modelo correcto
-
                 $user->archivos()->create([
                     'archivo_type' => 'img_perf',
                     'MIME' => $imagen->getClientMimeType(),
@@ -126,12 +124,28 @@ class LoginRegisterController extends Controller
                 // Maneja el caso donde no hay archivo cargado
                 return back()->withErrors(['img_perf' => 'No se ha cargado ningún archivo.']);
             }
+
+            if ($request->hasFile('kardex')) {
+                $kardex = $request->file('kardex');
+                $ubicacion = $kardex->store('archivos_kardex', 'public');
+
+                $user->archivos()->create([
+                    'archivo_type' => 'kardex',
+                    'MIME' => $kardex->getClientMimeType(),
+                    'ruta_archivo' => $ubicacion,
+                ]);
+            } else {
+                // Maneja el caso donde no hay archivo cargado
+                return back()->withErrors(['kardex' => 'No se ha cargado ningún archivo.']);
+            }
         } else {
             // Maneja el caso donde no hay usuario autenticado
             return back()->withErrors(['user' => 'El usuario no está autenticado.']);
         }
 
         $user->update(['profile_update' => now()]);
+
+        return redirect(route('homeB'));
 
         
         

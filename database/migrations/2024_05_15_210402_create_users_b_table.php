@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('sexo');
             $table->string('descripcion', length:300);
             $table->string('mascota');
-            $table->smallInteger('num_mascotas')->default(0);
+            $table->smallInteger('num_mascotas');
             $table->string('padecimiento');
             $table->string('nom_padecimiento')->default('N/A');
             $table->string('lifestyle');
