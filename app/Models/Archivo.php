@@ -13,6 +13,6 @@ class Archivo extends Model
     'archivo_type','MIME', 'ruta_archivo'];
 
     public function archivo(){
-        return $this->belongsTo(User::class);//__FUNCTION__,'archivable_id', 'archivable_type');
+        return $this->belongsTo(User::class);
     }
 }

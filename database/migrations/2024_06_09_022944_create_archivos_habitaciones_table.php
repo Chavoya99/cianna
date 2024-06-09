@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('archivos_habitaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('habitacion_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('habitacion_id');
+            $table->foreign('habitacion_id')->references('id')->on('habitaciones')->onDelete('cascade');
             $table->string('clasificacion_foto');
             $table->string('MIME');
             $table->string('ruta_archivo');

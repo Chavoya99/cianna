@@ -18,8 +18,8 @@ class UserA extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function archivos(){
-    //     return $this->morphMany(Archivo::class, 'archivable');
-    // }
+    public function habitacion(){
+        return $this->hasOne(Habitacion::class, 'user_a_id');
+    }
 
 }

@@ -13,4 +13,8 @@ class ArchivoHabitacion extends Model
     
     protected $fillable = ['habitacion_id',
     'archivo_type','MIME', 'ruta_archivo'];
+
+    public function habitacion(){
+        return $this->belongsTo(Habitacion::class);
+    }
 }

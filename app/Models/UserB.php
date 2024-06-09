@@ -19,10 +19,7 @@ class UserB extends Model
     }
 
     public function postulaciones(){
-        return $this->hasMany(Postulacion::class);
+        return $this->hasMany(Postulacion::class, 'user_b_id');
     }
 
-    // public function archivos(){
-    //     return $this->hasMany(Archivo::class);
-    // }
 }
