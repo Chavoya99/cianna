@@ -93,6 +93,8 @@ class LoginRegisterController extends Controller
                 'carrera' => $request->carrera,
             ]);
 
+            $ruta = 'homeA';
+
         }else if(Auth::user()->tipo == 'B'){
             $user = UserB::create([
                 'user_id' => Auth::id(),
@@ -107,6 +109,10 @@ class LoginRegisterController extends Controller
                 'lifestyle' => $request->carrera,
                 'carrera' => $request->carrera,
             ]);
+
+            $ruta = 'homeB';
+
+
         }
 
         $user = User::find(Auth::id());
@@ -145,7 +151,7 @@ class LoginRegisterController extends Controller
 
         $user->update(['profile_update' => now()]);
 
-        return redirect(route('homeB'));
+        return redirect()->route($ruta)->with('success', 'Configuración de cuenta terminada');
 
         
         
