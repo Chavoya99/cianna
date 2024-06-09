@@ -10,8 +10,9 @@ class UserB extends Model
     use HasFactory;
 
     protected $table = 'users_b';
+    protected $primaryKey = 'user_id';
     protected $fillable = ['user_id', 'edad','sexo', 'descripcion', 'mascota', 
-    'padecimiento', 'nom_padecimiento', 'lifestyle', 'carrera', 'codigo'];
+    'num_mascotas','padecimiento', 'nom_padecimiento', 'lifestyle', 'carrera', 'codigo'];
 
     public function user(){
         return $this->belongsTo(User::class);
