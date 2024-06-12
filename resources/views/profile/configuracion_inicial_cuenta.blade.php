@@ -42,15 +42,14 @@
                 <!-- CONTENEDOR HORIZONTAL 1 -->
                 <div class="flex w-full mt-8">
                     <!-- CONTENEDOR DESCRIPCIÓN -->
-                    <div class="relative px-20 bg-cianna-white" style="width: 60%;">
+                    <div class="relative px-20 bg-cianna-white" style="width: 57%;">
                         <x-custom-label for="desc">Cuéntanos sobre ti</x-custom-label>
                         <x-about-you></x-about-you>
                         
                     </div>
                     <!-- CONTENEDOR SUP/DER FOTO DE PERFIL -->
-                    <div class="bg-cianna-white px-44" style="width: 40%;">
+                    <div class="bg-cianna-white px-44" style="width: 43%;">
                         <x-foto-perfil></x-foto-perfil>
-                        <label for="img_perf">(max. 4mb)</label>
                     </div>
                 </div>
                 
@@ -58,11 +57,11 @@
                 <!-- CONTENEDOR HORIZONTAL 2 -->
                 <div class="flex w-full mt-3">
                     <!-- CONTENEDOR IZQ MASCOTAS -->
-                    <div class="relative px-20 bg-cianna-white" style="width: 60%">
+                    <div class="relative px-20 bg-cianna-white" style="width: 57%">
                         <x-has-pets></x-has-pets>
                     </div>
                     <!-- CONTENEDOR DER EDAD Y SEXO-->
-                    <div class="px-44 bg-cianna-white" style="width: 40%">
+                    <div class="px-44 bg-cianna-white" style="width: 43%">
                         <x-age-sex></x-age-sex>
                     </div>
                 </div>
@@ -71,13 +70,13 @@
                 <!-- CONTENEDOR HORIZONTAL 3 -->
                 <div class="flex w-full bg-cianna-white mt-3">
                     <!-- CONTENEDOR IZQ PADECIMIENTOS -->
-                    <div class="relative px-20" style="width: 60%">
+                    <div class="relative px-20" style="width: 57%">
                         <x-medical-conditions></x-medical-conditions>
                     </div>
                     <!-- CONTENEDOR DEL CODIGO-->
-                    <div class="px-44" style="width: 40%">
+                    <div class="px-44" style="width: 43%">
                         <x-custom-label>Código de estudiante</x-custom-label>
-                        <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full h-8 text-md" type="text" minlength="9" maxlength="9" value="{{old('codigo')}}" pattern="[0-9]{9}" required autocomplete="codigo" placeholder="" />
+                        <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full h-8 text-sm" type="text" minlength="9" maxlength="9" value="{{old('codigo')}}" pattern="[0-9]{9}" required autocomplete="codigo" placeholder="El mismo con el que ingresas a SIIAU" />
                     </div>
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 3 -->
@@ -85,11 +84,11 @@
                 <!-- CONTENEDOR HORIZONTAL 4 -->
                 <div class="flex w-full bg-cianna-white mt-3">
                     <!-- CONTENEDOR IZQ LIFESTYLE -->
-                    <div class="relative px-20" style="width: 60%">
+                    <div class="relative px-20" style="width: 57%">
                         <x-lifestyle></x-lifestyle>
                     </div>
                     <!-- CONTENEDOR DER CARRERA -->
-                    <div class="px-44" style="width: 40%">
+                    <div class="px-44" style="width: 43%">
                         <x-career></x-career>
                     </div>
                 </div>
@@ -98,11 +97,10 @@
                 <!-- CONTENEDOR HORIZONTAL 5 -->
                 <div class="flex w-full bg-cianna-white mt-3">
                     <!-- CONTENEDOR IZQ  -->
-                    <div class="relative px-20" style="width: 60%"></div>
+                    <div class="relative px-20" style="width: 57%"></div>
                     <!-- CONTENEDOR DER KARDEX -->
-                    <div class="px-44" style="width: 40%">
+                    <div class="px-44" style="width: 43%">
                         <x-subir-kardex><label>Sube aquí tu kárdex</label></x-subir-kardex>
-                        <label for="kardex">(max. 4mb)</label>
                     </div>
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 5 -->
@@ -110,9 +108,9 @@
                 <!-- CONTENEDOR HORIZONTAL 6 -->
                 <div class="flex w-full bg-cianna-white mt-3">
                     <!-- CONTENEDOR IZQ  -->
-                    <div class="relative px-20" style="width: 60%"></div>
+                    <div class="relative px-20" style="width: 57%"></div>
                     <!-- CONTENEDOR DER BOTÓN ACEPTAR -->
-                    <div class="px-44" style="width: 40%">
+                    <div class="px-44" style="width: 43%">
                         <button class="block w-full bg-cianna-blue hover:bg-sky-950 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onclick="displayFormData()">
                             Enviar
                         </button>

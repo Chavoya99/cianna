@@ -2,7 +2,7 @@
 
 <div>
     <x-custom-label>Carrera</x-custom-label>
-    <x-custom-select id="carrera" name="carrera">
+    <x-custom-select id="carrera" name="carrera" class="text-sm">
         <option value="ing_alim_biot">Ing. en Alimentos y Biotecnología</option>
         <option value="ing_biom">Ing. Biómedica</option>
         <option value="ing_civi">Ing. Civil</option>

@@ -1,7 +1,7 @@
 <!-- resources/views/components/medical-conditions.blade.php -->
 
 <div class="flex flex-wrap">
-    <div>
+    <div style="width: 45%">
         <x-custom-label for="padecimiento">
             ¿Tienes algún padecimiento médico?
         </x-custom-label>
@@ -11,12 +11,12 @@
                 Sí
             </label>
             <label>
-                <input type="radio" name="padecimiento" value="no" id="padecimiento-no" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" @if(old('padecimiento')== 'no') checked @endif>
+                <input type="radio" name="padecimiento" value="no" id="padecimiento-no" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" checked @if(old('padecimiento')== 'no') checked @endif>
                 No
             </label>
         </div>
     </div>
-    <div class="flex items-end md:w-1/2 px-4 md:mb-0">
-        <input class="appearance-none w-full text-md text-gray-600 border rounded leading-tight focus:ring-cianna-orange focus:bg-white focus:border-cianna-orange hover:disabled:cursor-not-allowed" id="nom-padecimiento" name="nom-padecimiento" type="text" placeholder="Si es importante que lo sepamos escríbelo aquí" @if(old('padecimiento') == 'si') value="{{old('nom-padecimiento')}}" @else disabled @endif>
+    <div class="flex items-end w-full px-4" style="width: 55%">
+        <input class="appearance-none w-full text-sm text-gray-600 border rounded leading-tight focus:ring-cianna-orange focus:bg-white focus:border-cianna-orange hover:disabled:cursor-not-allowed" id="nom-padecimiento" name="nom-padecimiento" type="text" placeholder="Si es importante que lo sepamos escríbelo aquí" @if(old('padecimiento') == 'si') value="{{old('nom-padecimiento')}}" @else disabled @endif>
     </div>
 </div>
