@@ -11,7 +11,7 @@
                 Sí
             </label>
             <label>
-                <input type="radio" name="mascota" value="no" id="mascota-no" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" @if(old('mascota')== 'no') checked @endif>
+                <input type="radio" name="mascota" value="no" id="mascota-no" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" checked @if(old('mascota')== 'no') checked @endif>
                 No
             </label>
         </div>

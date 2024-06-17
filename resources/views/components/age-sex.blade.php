@@ -6,7 +6,7 @@
         <input id="edad" name="edad" class="block w-24 focus:border-cianna-orange focus:ring-cianna-orange border border-cianna-gray rounded-md" 
         type="number" min="18" max="35" value="{{old('edad')}}"  placeholder="18 a 35" required autocomplete="edad">
     </div>
-    <div class="ml-auto">
+    <div class="ml-auto w-32">
         <x-custom-label for="sexo" class="text-center">Sexo</x-custom-label>
         <x-custom-select id="sexo" name="sexo" class="block w-36">
             <option @selected(old('sexo') == 'masculino') value="masculino">Masculino</option>
