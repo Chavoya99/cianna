@@ -2,8 +2,8 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+@section('title') {{'Configura tu cuenta'}} @endsection
 <x-guest-layout>
-
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -35,8 +35,8 @@
             <form class="w-full" id="configForm" action="{{route('guardar_configuracion_inicial_cuenta')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- TÍTULO -->
-                <div class="relative px-20 bg-cianna-white" style="width: 80%;">
-                    <h1 class="text-cianna-orange" style="font-size: 64px;">Configuración de la cuenta</h1>
+                <div class="relative px-20 bg-cianna-white w-4/5"">
+                    <h1 class="text-cianna-orange text-6xl">Configuración de la cuenta</h1>
                 </div>
                 
                 <!-- CONTENEDOR HORIZONTAL 1 -->
@@ -45,7 +45,6 @@
                     <div class="relative px-20 bg-cianna-white" style="width: 57%;">
                         <x-custom-label for="desc">Cuéntanos sobre ti</x-custom-label>
                         <x-about-you></x-about-you>
-                        
                     </div>
                     <!-- CONTENEDOR SUP/DER FOTO DE PERFIL -->
                     <div class="bg-cianna-white px-44" style="width: 43%;">

@@ -1,7 +1,7 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
+@section('title') {{'Inicia sesión'}} @endsection
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -20,11 +20,11 @@
             @csrf
 
             <div>
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Correo" />
+                <x-custom-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Correo" />
             </div>
 
             <div class="mt-8 relative">
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Contraseña" />
+                <x-custom-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Contraseña" />
                 <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 px-3 py-2 text-gray-500">
                     <!-- Icono para mostrar la contraseña -->
                     <i id="show-icon" class="fas fa-eye"></i>
@@ -58,6 +58,8 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+<!-- Footer -->
+@include('partials.footer')
 
 <script>
 function togglePasswordVisibility() {
