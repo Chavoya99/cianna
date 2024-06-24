@@ -12,15 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users_a', function (Blueprint $table) {
-            
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->smallInteger('edad');
             $table->string('sexo');
-            $table->mediumText('descripcion');
-            $table->string('gustos_intereses');
+            $table->string('descripcion', length:300);
+            $table->string('mascota');
+            $table->smallInteger('num_mascotas')->default(0);
+            $table->string('padecimiento');
+            $table->string('nom_padecimiento')->default('N/A');
+            $table->string('lifestyle');
             $table->string('carrera');
             $table->string('codigo');
             $table->timestamps();
+
+            $table->primary('user_id');
         });
     }
 

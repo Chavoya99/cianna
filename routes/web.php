@@ -45,7 +45,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
 
         Route::middleware(UserBMiddleware::class)->group(function(){
             Route::get('/homeB', function(){
-                return 'homeB';
+                $ruta = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
+                return view('userB.prueba_perfil', compact('ruta'));
             })->name('homeB');
         });
         
@@ -53,15 +54,12 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
     });
 
 
-    Route::get('/formularioRegistroA', function(){
-        return 'formA';
-    })->middleware(UserAMiddleware::class,ProfileNotUpdated::class);
+    Route::get('/configuracion_inicial_cuenta', [LoginRegisterController::class, 
+    'ver_configuracion_inicial_cuenta'])->name('ver_configuracion_inicial_cuenta')->middleware(ProfileNotUpdated::class);
     
-    Route::get('/formularioRegistroB', function(){
-        return 'FormB';
-    })->middleware(UserBMiddleware::class, ProfileNotUpdated::class);
-        
-
+    Route::post('/configuracion_inicial_cuenta', [LoginRegisterController::class, 
+    'guardar_configuracion_inicial_cuenta'])->name('guardar_configuracion_inicial_cuenta')->middleware(ProfileNotUpdated::class);
+    
     Route::get('/dashboard', function () {
         return view('dashboard');})->name('dashboard');
 

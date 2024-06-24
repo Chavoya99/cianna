@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carreras', function (Blueprint $table) {
+        Schema::create('archivos_habitaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->unsignedBigInteger('habitacion_id');
+            $table->foreign('habitacion_id')->references('id')->on('habitaciones')->onDelete('cascade');
+            $table->string('clasificacion_foto');
+            $table->string('MIME');
+            $table->string('ruta_archivo');
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carreras');
+        Schema::dropIfExists('archivos_habitaciones');
     }
 };

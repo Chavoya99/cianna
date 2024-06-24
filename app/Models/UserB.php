@@ -10,20 +10,16 @@ class UserB extends Model
     use HasFactory;
 
     protected $table = 'users_b';
+    protected $primaryKey = 'user_id';
+    protected $fillable = ['user_id', 'edad','sexo', 'descripcion', 'mascota', 
+    'num_mascotas','padecimiento', 'nom_padecimiento', 'lifestyle', 'carrera', 'codigo'];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
     public function postulaciones(){
-        return $this->hasMany(Postulacion::class);
+        return $this->hasMany(Postulacion::class, 'user_b_id');
     }
 
-    public function archivos(){
-        return $this->morphMany(Archivo::class, 'archivable');
-    }
-
-    public function carrera(){
-        return $this->hasOne(Carrera::class);
-    }
 }

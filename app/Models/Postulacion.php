@@ -12,13 +12,13 @@ class Postulacion extends Model
 
     public function user_b(){
 
-        return $this->belongsTo(UserB::class);
+        return $this->belongsTo(UserB::class, 'user_b_id');
         
     }
 
     public function habitacion(){
 
-        return $this->belongsTo(Habitacion::class);
+        return $this->belongsTo(Habitacion::class, 'habitacion_id');
         
     }
 }

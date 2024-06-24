@@ -14,11 +14,11 @@ class Habitacion extends Model
     protected $tabla = 'habitaciones';
 
     public function archivos(){
-        return $this->morphMany(Archivo::class, 'archivable');
+        return $this->hasMany(ArchivoHabitacion::class, 'habitacion_id');
     }
 
     public function user_a(){
-        return $this->belongsTo(UserA::class);
+        return $this->belongsTo(UserA::class, 'user_a_id');
     }
 
     public function postulaciones(){
