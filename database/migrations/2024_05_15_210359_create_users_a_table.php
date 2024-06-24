@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users_a', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->timestamp('registro_completo')->nullable(); //Se actualiza con el registro de casa
             $table->smallInteger('edad');
             $table->string('sexo');
             $table->string('descripcion', length:300);

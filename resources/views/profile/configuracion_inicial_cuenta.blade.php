@@ -4,8 +4,16 @@
 </head>
 @section('title') {{'Configura tu cuenta'}} @endsection
 <x-guest-layout>
+
+    
+    
+
+    <!-- Authentication -->
+    <x-configuracion-cuenta-card>
         @if ($errors->any())
-            <div class="alert alert-danger">
+
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">¡Algo salió mal!</strong>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -13,19 +21,6 @@
                 </ul>
             </div>
         @endif
-
-    <!-- Authentication -->
-    <x-configuracion-cuenta-card>
-
-        <!-- Reemplazar el sigueinte link por un elemento en navbar  -->
-        <form method="POST" action="{{ route('logout') }}" x-data>
-            @csrf
-            <a href="{{ route('logout') }}"
-                        @click.prevent="$root.submit();">
-                        {{ __('Cerrar sesión') }}
-            </a>
-        </form>
-
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>

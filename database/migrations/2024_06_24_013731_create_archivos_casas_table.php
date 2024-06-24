@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('postulaciones', function (Blueprint $table) {
+        Schema::create('archivos_casas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_b_id');
-            $table->foreign('user_b_id')->references('user_id')->on('users_b')->onDelete('cascade');
             $table->unsignedBigInteger('casa_id');
             $table->foreign('casa_id')->references('id')->on('casas')->onDelete('cascade');
-            $table->timestamp('fecha');
+            $table->string('clasificacion_foto');
+            $table->string('MIME');
+            $table->string('ruta_archivo');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('postulaciones');
+        Schema::dropIfExists('archivos_casas');
     }
 };

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Departamento;
+use App\Models\ArchivoCasa;
 use Illuminate\Http\Request;
 
-class DepartamentoController extends Controller
+class ArchivoCasaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class DepartamentoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Departamento $departamento)
+    public function show(ArchivoCasa $archivoCasa)
     {
         //
     }
@@ -42,7 +42,7 @@ class DepartamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Departamento $departamento)
+    public function edit(ArchivoCasa $archivoCasa)
     {
         //
     }
@@ -50,7 +50,7 @@ class DepartamentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Departamento $departamento)
+    public function update(Request $request, ArchivoCasa $archivoCasa)
     {
         //
     }
@@ -58,7 +58,7 @@ class DepartamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Departamento $departamento)
+    public function destroy(ArchivoCasa $archivoCasa)
     {
         //
     }
