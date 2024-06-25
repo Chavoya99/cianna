@@ -23,7 +23,7 @@ class UserA extends Model
     // }
 
     public function casa(){
-        return $this->hasOne(Habitacion::class, 'user_a_id');
+        return $this->hasOne(Casa::class, 'user_a_id');
     }
 
 }

@@ -12,6 +12,9 @@ class Casa extends Model
     use SoftDeletes;
     
     //protected $tabla = 'casas';
+    protected $fillable = ['user_a_id','calle','num_ext','num_int','codigo_postal',
+    'ciudad','colonia','descripcion','acepta_mascotas', 'acepta_visitas','riguroza_limpieza',
+    'regla_adicional', 'muebles','servicios','requisitos', 'precio'];
 
     public function archivos(){
         return $this->hasMany(ArchivoCasa::class, 'casa_id');
