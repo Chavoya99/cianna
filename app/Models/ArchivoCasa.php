@@ -12,7 +12,7 @@ class ArchivoCasa extends Model
     protected $table = 'archivos_casas';
     
     protected $fillable = ['casa_id',
-    'clasificacion_foto','MIME', 'ruta_archivo'];
+    'clasificacion_archivo','MIME', 'ruta_archivo'];
 
     public function casa(){
         return $this->belongsTo(Casa::class, 'casa_id');

@@ -25,7 +25,13 @@ class LoginRegisterController extends Controller
                     return redirect(route('homeAdmin'));
                     break;
                 case 'A':
-                    return redirect(route('homeA'));
+                    if(Auth::user()->user_a->registro_completo){
+                        return redirect(route('homeA'));
+                    }
+                    else{
+                        return redirect(route('config_hogar'));
+                    }
+                    
                     break;
                 case 'B':
                     return redirect(route('homeB'));
@@ -93,7 +99,7 @@ class LoginRegisterController extends Controller
                 'carrera' => $request->carrera,
             ]);
 
-            $ruta = 'homeA';
+            $ruta = 'config_hogar';
 
         }else if(Auth::user()->tipo == 'B'){
             $user = UserB::create([

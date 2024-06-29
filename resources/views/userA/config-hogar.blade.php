@@ -1,6 +1,18 @@
 <!-- resources/views/config-hogar.blade.php -->
 @section('title') {{'Configuración del hogar'}} @endsection
 <x-guest-layout>
+
+    @if ($errors->any())
+
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">¡Algo salió mal!</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <x-config-hogar-card>
         <x-slot name="logo">
             <x-authentication-card-logo/>
@@ -8,7 +20,8 @@
         <!-- CONTENEDOR PRINCIPAL DEL FORMULARIO -->
         <div class="flex justify-center w-full">
             <!-- FORMULARIO -->
-            <form class="w-full" id="configHomeForm" action="" method="POST" enctype="multipart/form-data">
+            <form class="w-full" id="configHomeForm" action="{{route('guardar_hogar')}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <!-- TITULO -->
                 <div class="relative px-20 bg-cianna-white w-4/5">
                     <h1 class="text-cianna-orange text-6xl">Configuración del hogar</h1>

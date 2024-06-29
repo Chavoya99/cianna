@@ -1,14 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginRegisterController;
-use App\Http\Middleware\AdminMiddleware;
+use App\Models\UserA;
+use App\Models\UserB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\ProfileUpdate;
 use App\Http\Middleware\ProfileUpdated;
-use App\Http\Middleware\ProfileNotUpdated;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserAMiddleware;
 use App\Http\Middleware\UserBMiddleware;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\ProfileNotUpdated;
+use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\CasaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,14 +42,26 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
 
         Route::middleware(UserAMiddleware::class)->group(function(){
             Route::get('/homeA', function(){
-                return 'homeA';
+                $user = UserA::find(Auth::id());
+                $usuarios = Auth::user();
+                $ruta = $user->user->archivos()->where('archivo_type', 'img_perf')->first();
+                
+                return view('userB.prueba_perfil', compact('ruta', 'usuarios'));
             })->name('homeA');
+
+            //Nota: cuando se establezcan las nuevas rutas relacionadas a la casa se deberá implementar un redireccionamiento
+            //para evitar que el usuario pueda entrar a configuracion de hogar sin antes completar el registro del mismo.
+            Route::get('/configuracion_inicial_casa', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
+            Route::post('/guardar_configuracion_inicial_casa', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
+
         });
 
         Route::middleware(UserBMiddleware::class)->group(function(){
             Route::get('/homeB', function(){
+                $user = UserB::find(Auth::id());
+                $usuarios = Auth::user();
                 $ruta = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
-                return view('userB.prueba_perfil', compact('ruta'));
+                return view('userB.prueba_perfil', compact('ruta', 'usuarios'));
             })->name('homeB');
         });
         

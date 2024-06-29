@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('casa_id');
             $table->foreign('casa_id')->references('id')->on('casas')->onDelete('cascade');
-            $table->string('clasificacion_foto');
+            $table->string('clasificacion_archivo');
             $table->string('MIME');
             $table->string('ruta_archivo');
             $table->timestamps();
