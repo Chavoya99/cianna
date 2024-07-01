@@ -1,4 +1,4 @@
-<footer class="text-gray-600 bg-gray-300 py-6 font-bold flex justify-between">
+<footer class="w-full relative text-gray-600 bg-gray-300 py-6 font-bold flex justify-between">
     <div>
         © {{ date('Y') }} Cianna. Todos los derechos reservados.
     </div>

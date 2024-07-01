@@ -75,3 +75,7 @@ Route::get('/usuarioA', function(){
 Route::get('/configuracion_hogar', function(){
     return view('userA.config-hogar');
 });
+
+Route::get('/home', function(){
+    return view('profile.home');
+});
