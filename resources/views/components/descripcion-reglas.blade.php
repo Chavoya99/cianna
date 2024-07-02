@@ -14,18 +14,18 @@
         <div class="w-1/2 px-2">
             <x-custom-label for="cod_post">Reglas</x-custom-label>
             <div class="bg-white rounded-md px-1 py-1 border border-cianna-gray mr-12">
-                <x-custom-checkbox id="mascota" name="reglas[]" value="mascota" label="Se aceptan mascotas"/>
+                <x-custom-checkbox id="mascota" name="reglas[]" :checked="is_array(old('reglas')) && in_array('mascota', old('reglas'))" value="mascota" label="Se aceptan mascotas"/>
             </div>
             <div class="mt-2 bg-white rounded-md px-1 py-1 border border-cianna-gray mr-12">
-                <x-custom-checkbox id="visita" name="reglas[]" value="visita" label="Se aceptan visitas"/>
+                <x-custom-checkbox id="visita" name="reglas[]" :checked="is_array(old('reglas')) && in_array('visita', old('reglas'))" value="visita" label="Se aceptan visitas"/>
             </div>
             <div class="mt-2 bg-white rounded-md px-1 py-1 border border-cianna-gray mr-12">
-                <x-custom-checkbox id="limpieza" name="reglas[]" value="limpieza" label="Rigurosa limpieza"/>
+                <x-custom-checkbox id="limpieza" name="reglas[]" :checked="is_array(old('reglas')) && in_array('limpieza', old('reglas'))" value="limpieza" label="Rigurosa limpieza"/>
             </div>
         </div>
         <div class="w-1/2 px-2 mt-8">
             <div>
-                <x-custom-input id="reglaXtra" name="reglaXtra" class="w-full h-8 text-sm" placeholder="Puedes agregar otra regla"></x-custom-input>
+                <x-custom-input id="reglaXtra" name="reglaXtra" class="w-full h-8 text-sm" value="{{old('reglaXtra')}}" placeholder="Puedes agregar otra regla"></x-custom-input>
             </div>
             <div class="flex items-center mt-2">
                 <div class="mr-10">
