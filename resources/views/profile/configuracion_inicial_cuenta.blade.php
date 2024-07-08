@@ -21,11 +21,17 @@
                 </ul>
             </div>
         @endif
+
+    <!-- Authentication -->
+    <x-configuracion-cuenta-card>
+
+        <!-- Reemplazar el sigueinte link por un elemento en navbar  -->
+
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
         <!-- CONTENEDOR PRINCIPAL DEL FORMULARIO -->
-        <div class="flex justify-center w-full">
+        <div class="flex justify-center w-full bg-cianna-white">
             <!-- FORMULARIO -->
             <form class="w-full" id="configForm" action="{{route('guardar_configuracion_inicial_cuenta')}}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -105,24 +111,22 @@
                     <div class="relative px-20" style="width: 57%"></div>
                     <!-- CONTENEDOR DER BOTÓN ACEPTAR -->
                     <div class="px-44" style="width: 43%">
-                        <button class="block w-full bg-cianna-blue hover:bg-sky-950 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onclick="displayFormData()">
+                        <button class="block w-full bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onclick="displayFormData()">
                             Enviar
                         </button>
                     </div>
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 6 -->
-                
             </form>
         </div>
-
-        <!-- CONTENEDOR PARA MOOSTRAR LOS DATOS, CUADO SEA SEGURO LO QUITAMOS -->
-        <div class="flex justify-center mt-8">
-            <div class="w-full max-w-lg bg-gray-100 p-6 rounded-lg shadow-md" id="formDataDisplay" style="display: none;">
-                <h2 class="text-xl font-bold mb-4">Datos enviados:</h2>
-                <p><strong>Descripción:</strong> <span id="displayDesc"></span></p>
-                <p><strong>Código de estudiante:</strong> <span id="displayCodigo"></span></p>
-                <!-- Añadir otros campos según sea necesario -->
-            </div>
+        <div class="relative ml-20 -mt-28 z-10 bg-cianna-blue hover:bg-sky-900 text-white font-bold 
+                    w-32 h-8 px-2 py-1 rounded focus:outline-none focus:shadow-outline">
+            <form method="POST" action="{{ route('logout') }}" x-data>
+                @csrf
+                <a href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                    {{ __('Cerrar sesión') }}
+                </a>
+            </form>
         </div>
     </x-configuracion-cuenta-card>
 </x-guest-layout>

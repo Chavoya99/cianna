@@ -21,7 +21,7 @@
     <body>
         <div class="font-sans antialiased">
             <div class="flex pt-6 sm:pt-0 bg-cianna-white min-h-screen">
-                <div class="w-13/20 overflow-hidden flex flex-col items-center px-2 py-4 bg-cianna-gray">
+                <div class="w-3/20 overflow-hidden flex flex-col items-center px-2 py-4 bg-cianna-gray">
                     <div class="w-1/2">
                         {{ $logo }}
                     </div>
@@ -40,12 +40,8 @@
                     </div>
                 </div>
                 <div class="w-17/20 overflow-hidden py-6">
-                    <div class="w-full flex justify-between bg-white px-12">
-                        <div>INICIO</div>
-                        <div>Buscador</div>
-                        <div>Preferencias de busqueda</div>
-                        <div>Perfil</div>
-                    </div>
+                    <!-- NavBar -->
+                    @include('partials.navbar')
                     {{ $slot }}
                 </div>
             </div>
@@ -55,4 +51,6 @@
     </body>
     <!-- Footer -->
     @include('partials.footer')
+
+    
 </html>
