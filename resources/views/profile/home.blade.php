@@ -19,7 +19,7 @@
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
                             <a href="detalle-home-1"><img class="object-cover w-full h-full absolute top-0 left-0 border border-cianna-gray rounded-lg" 
-                            src="{{'storage/'. $imagen->ruta_archivo}}" alt="Imagen previa del hogar" /></a>
+                            src="{{asset('storage/'. $imagen->ruta_archivo)}}" alt="Imagen previa del hogar" /></a>
                         </div>
                     </div>
                     <!-- COLONIA -->
@@ -46,7 +46,7 @@
                     <div class="flex flex-col block">
                         <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
                             <a href="detalle-roommie-1"><img class="object-cover w-full h-full absolute top-0 left-0 border border-cianna-gray rounded-lg" 
-                            src="{{'storage/'. $imagen->ruta_archivo }}" alt="Imagen previa del hogar" /></a>
+                            src="{{asset('storage/'. $imagen->ruta_archivo)}}" alt="Imagen previa del hogar" /></a>
                         </div>
                     </div>
                     <!-- NOMBRE ROOMIE -->
