@@ -6,12 +6,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\ProfileUpdate;
 use App\Http\Middleware\ProfileUpdated;
+use App\Http\Controllers\CasaController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserAMiddleware;
 use App\Http\Middleware\UserBMiddleware;
+use App\Http\Controllers\UserAController;
+use App\Http\Controllers\UserBController;
 use App\Http\Middleware\ProfileNotUpdated;
 use App\Http\Controllers\Auth\LoginRegisterController;
-use App\Http\Controllers\CasaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,13 +43,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
         });
 
         Route::middleware(UserAMiddleware::class)->group(function(){
-            Route::get('/homeA', function(){
-                $user = UserA::find(Auth::id());
-                $usuarios = Auth::user();
-                $ruta = $user->user->archivos()->where('archivo_type', 'img_perf')->first();
-                
-                return view('userB.prueba_perfil', compact('ruta', 'usuarios'));
-            })->name('homeA');
+            Route::controller(UserAController::class)->group(function(){
+                Route::get('/homeA','homeA')->name('homeA');
+            });
 
             //Nota: cuando se establezcan las nuevas rutas relacionadas a la casa se deberá implementar un redireccionamiento
             //para evitar que el usuario pueda entrar a configuracion de hogar sin antes completar el registro del mismo.
@@ -57,12 +55,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
         });
 
         Route::middleware(UserBMiddleware::class)->group(function(){
-            Route::get('/homeB', function(){
-                $user = UserB::find(Auth::id());
-                $usuarios = Auth::user();
-                $ruta = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
-                return view('userB.prueba_perfil', compact('ruta', 'usuarios'));
-            })->name('homeB');
+            Route::controller(UserBController::class)->group(function(){
+                Route::get('/homeB','homeB')->name('homeB');
+            });
+            
         });
         
         

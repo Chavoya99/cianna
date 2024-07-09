@@ -4,10 +4,6 @@
 </head>
 @section('title') {{'Configura tu cuenta'}} @endsection
 <x-guest-layout>
-
-    
-    
-
     <!-- Authentication -->
     <x-configuracion-cuenta-card>
         @if ($errors->any())
@@ -21,9 +17,8 @@
                 </ul>
             </div>
         @endif
-
-    <!-- Authentication -->
-    <x-configuracion-cuenta-card>
+        
+        <!-- Authentication -->
 
         <!-- Reemplazar el sigueinte link por un elemento en navbar  -->
 
@@ -36,7 +31,7 @@
             <form class="w-full" id="configForm" action="{{route('guardar_configuracion_inicial_cuenta')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- TÍTULO -->
-                <div class="relative px-20 bg-cianna-white w-4/5"">
+                <div class="relative px-20 bg-cianna-white w-4/5">
                     <h1 class="text-cianna-orange text-6xl">Configuración de la cuenta</h1>
                 </div>
                 

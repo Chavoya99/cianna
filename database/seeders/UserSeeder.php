@@ -22,22 +22,6 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name' => 'UsuarioA',
-            'apellido' => 'A',
-            'email' => 'a@gmail.com',
-            'tipo' => 'A',
-            'profile_update' => now(),
-        ]);
-
-        User::factory()->create([
-            'name' => 'UsuarioB',
-            'apellido' => 'B',
-            'email' => 'b@gmail.com',
-            'tipo' => 'B',
-            'profile_update' => now(),
-        ]);
-
-        User::factory()->create([
             'name' => 'pruebaA',
             'apellido' => 'A',
             'email' => 'pruebaA@gmail.com',

@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Casa;
 use App\Models\UserB;
 use Illuminate\Http\Request;
 
 class UserBController extends Controller
 {
+    
+    public function homeB(){
+
+        $casas = Casa::limit(4)->get();
+        $roomies = UserB::limit(4)->get();
+        return view('profile.home', compact('casas', 'roomies'));
+    }
     /**
      * Display a listing of the resource.
      */
