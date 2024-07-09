@@ -1,4 +1,4 @@
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png'), 'name' => 'Usuario'])
+@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png'), 'name' => Auth::user()->name])
 <div class="w-full flex items-center justify-between bg-white px-20 py-3">
     <div>
         <a href="home" class="text-cianna-orange font-bold">INICIO</a>
@@ -20,8 +20,12 @@
     </div>
     <div class="relative" id="dropDownButton">
         <div class="flex items-center cursor-pointer" onclick="toggleDropDown()">
+            <?php
+
+            $imagen = Auth::user()->archivos()->where('archivo_type', 'img_perf')->get();
+            ?>
             {{$name}}
-            <img class="h-8 w-8 rounded-full border border-cianna-gray ml-2 mr-2" src="{{$defaultProfileImage}}" alt="Foto de perfil">
+            <img class="h-8 w-8 rounded-full border border-cianna-gray ml-2 mr-2" src="{{asset('storage/'. $imagen[0]->ruta_archivo)}}" alt="Foto de perfil">
             <i class="fa-solid fa-chevron-down text-cianna-gray"></i>
         </div>
         <div id="dropDown" class="absolute right-0 mt-2 w-48 bg-white bg-opacity-75 border-cianna-gray border-[1px] shadow-md py-2 px-2 rounded-md hidden z-10 transition-all duration-300 transform -translate-y-full opacity-0">
