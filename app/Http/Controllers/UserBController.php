@@ -12,7 +12,7 @@ class UserBController extends Controller
     public function homeB(){
 
         $casas = Casa::limit(4)->get();
-        $roomies = UserB::limit(4)->get();
+        $roomies = UserB::limit(5)->get();
         return view('profile.home', compact('casas', 'roomies'));
     }
     /**
