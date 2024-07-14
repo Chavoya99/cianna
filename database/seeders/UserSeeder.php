@@ -68,6 +68,12 @@ class UserSeeder extends Seeder
                 'profile_update' => now(),
                 'tipo' => $tipo,
             ]);
+
+            User::where('tipo', 'A')
+                ->whereNotNull('profile_update')
+                ->first()
+                ->update(['email' => 'example@gmail.com']);
+
             if($tipo == 'A'){
                 $user->user_a()->create([
                     'edad' => random_int(18,35),
@@ -133,15 +139,19 @@ class UserSeeder extends Seeder
             
 
         }
+
+        $cantidad_a = 10; //Cantidad de usuarios A
+        $cantidad_b = 10; //Cantidad de usuarios B
+
         //Usuarios tipo A
-        for($i = 0; $i<11; $i++){
+        for($i = 0; $i<=$cantidad_a; $i++){
             $tipo = 'A';
             generarUsuario($faker,$tipo,$sexo,$mascota,$padecimiento,$lifestyle,$carrera);
 
         }
 
         //Usuarios tipo B
-        for($i = 0; $i<11; $i++){
+        for($i = 0; $i<=$cantidad_b; $i++){
             $tipo = 'B';
             generarUsuario($faker,$tipo,$sexo,$mascota,$padecimiento,$lifestyle,$carrera);
         }

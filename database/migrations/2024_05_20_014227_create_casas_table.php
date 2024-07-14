@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('calle');
             $table->smallInteger('num_ext');
             $table->smallInteger('num_int')->nullable();
-            $table->mediumInteger('codigo_postal');
+            $table->bigInteger('codigo_postal');
             $table->string('ciudad');
             $table->string('colonia');
             $table->string('descripcion', length:300);
