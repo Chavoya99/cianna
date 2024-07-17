@@ -12,8 +12,8 @@ class UserAController extends Controller
 {   
     public function homeA(){
 
-        $casas = Casa::all();
-        $roomies = UserB::limit(5)->get();
+        $casas = Casa::where('user_a_id', '!=', Auth::id())->limit(4)->get();
+        $roomies = UserB::where('user_id', '!=', Auth::id())->limit(5)->get();
         return view('profile.home', compact('casas','roomies'));
     }
     /**
