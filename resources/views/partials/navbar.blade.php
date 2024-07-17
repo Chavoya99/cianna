@@ -1,7 +1,7 @@
 @props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
 <div class="w-full flex items-center justify-between bg-white px-20 py-3">
     <div>
-        <a href="home" class="text-cianna-orange font-bold">INICIO</a>
+        <a href="homeA" class="text-cianna-orange font-bold">INICIO</a>
     </div>
     <div>
         <form>  

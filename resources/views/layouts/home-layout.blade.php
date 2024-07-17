@@ -25,8 +25,8 @@
                     <div class="w-1/2">
                         {{ $logo }}
                     </div>
-                    <div class=" w-full flex flex-col mt-8">
-                    <x-home-buttons href="home">
+                    <div class=" w-full flex flex-col mt-8 ">
+                    <x-home-buttons href="homeA">
                         <i class="fa-solid fa-house mr-2"></i>
                         Inicio
                     </x-home-buttons>
