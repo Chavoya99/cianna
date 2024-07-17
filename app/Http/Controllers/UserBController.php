@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Casa;
+use App\Models\UserA;
 use App\Models\UserB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class UserBController extends Controller
     public function homeB(){
 
         $casas = Casa::limit(4)->get();
-        $roomies = UserB::where('user_id', '!=', Auth::id())->limit(6)->get();
+        $roomies = UserA::limit(6)->get();
         return view('profile.home', compact('casas', 'roomies'));
     }
     /**
