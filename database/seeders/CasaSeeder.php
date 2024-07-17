@@ -49,7 +49,9 @@ class CasaSeeder extends Seeder
                     'precio' => random_int(1500, 5000),
                 ]
                 );
-            
+            //Actualizar campo de registro_completo para el usuario relacionado con la casa
+            $usuario->update(['registro_completo' => now()]);
+
             //Imagenes para casas
             $clasificaciones = ['img_cuarto','img_banio','img_sala','img_cocina','img_fachada'];
 
