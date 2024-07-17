@@ -1,4 +1,4 @@
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png'), 'name' => Auth::user()->name])
+@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
 <div class="w-full flex items-center justify-between bg-white px-20 py-3">
     <div>
         <a href="home" class="text-cianna-orange font-bold">INICIO</a>
@@ -20,28 +20,39 @@
     </div>
     <div class="relative" id="dropDownButton">
         <div class="flex items-center cursor-pointer" onclick="toggleDropDown()">
-            <?php
+            @if (Auth::check())
+                <?php
 
-            $imagen = Auth::user()->archivos()->where('archivo_type', 'img_perf')->get();
-            ?>
-            {{$name}}
-            <img class="h-8 w-8 rounded-full border border-cianna-gray ml-2 mr-2" src="{{asset('storage/'. $imagen[0]->ruta_archivo)}}" alt="Foto de perfil">
-            <i class="fa-solid fa-chevron-down text-cianna-gray"></i>
+                $imagen = Auth::user()->archivos()->where('archivo_type', 'img_perf')->get();
+                ?>
+                {{Auth::user()->name}}
+                <img class="h-8 w-8 rounded-full border border-cianna-gray ml-2 mr-2" src="{{asset('storage/'. $imagen[0]->ruta_archivo)}}" alt="Foto de perfil">
+                <i class="fa-solid fa-chevron-down text-cianna-gray"></i>
+            @else
+                Invitado
+                <img class="h-8 w-8 rounded-full border border-cianna-gray ml-2 mr-2" src="{{$defaultProfileImage}}" alt="Foto de perfil">
+                <i class="fa-solid fa-chevron-down text-cianna-gray"></i>
+            @endif
+            
         </div>
         <div id="dropDown" class="absolute right-0 mt-2 w-48 bg-white bg-opacity-75 border-cianna-gray border-[1px] shadow-md py-2 px-2 rounded-md hidden z-10 transition-all duration-300 transform -translate-y-full opacity-0">
             <!-- SOLO MOSTRAR SI NO SE HA INICIADO SESIÓN -->
-            <a href="login"><div class="flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Iniciar sesión</div></a>
-            <a href="my-profile"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Perfil</div></a>
-            <a href="configuracion_inicial_cuenta"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Configuración</div></a>
-            <!-- SOLO MOSTRAR SI YA SE HA INICIADO SESIÓN -->
-            <div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                @csrf
-                <a href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                    {{ __('Cerrar sesión') }}
-                </a>
-                </form>
-            </div>
+            @if(!Auth::check())
+                <a href="login"><div class="flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Iniciar sesión</div></a>
+            @else
+                <a href="my-profile"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Perfil</div></a>
+                <a href="configuracion_inicial_cuenta"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Configuración</div></a>
+                <!-- SOLO MOSTRAR SI YA SE HA INICIADO SESIÓN -->
+                <div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                    @csrf
+                    <a href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                        {{ __('Cerrar sesión') }}
+                    </a>
+                    </form>
+                </div>
+            @endif
+            
         </div>
     </div>
 </div>

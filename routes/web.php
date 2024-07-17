@@ -14,6 +14,7 @@ use App\Http\Controllers\UserAController;
 use App\Http\Controllers\UserBController;
 use App\Http\Middleware\ProfileNotUpdated;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ use App\Http\Controllers\Auth\LoginRegisterController;
 Route::get('/', function () {
     return redirect(route('login'));
 });
+
+Route::get('/home_guest', [HomeController::class, 'home_invitado'])->middleware('guest')->name('home_guest');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
     'verified',])->group(function () {
