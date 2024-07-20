@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class UserAController extends Controller
 {   
     public function homeA(){
-
+        if(!Auth::user()->user_a->registro_completo){
+            return redirect(route('config_hogar'));
+        }
         $casas = Casa::where('user_a_id', '!=', Auth::id())->limit(4)->get();
         $roomies = UserB::limit(6)->get();
         return view('profile.home', compact('casas','roomies'));
