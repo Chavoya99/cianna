@@ -77,8 +77,7 @@ class LoginRegisterController extends Controller
             $num_mascotas = $request->input('num-mascotas');
             
         }
-
-        if($request->has('nom-padecimiento')){
+        if($request->input('nom-padecimiento') != null){
             $nom_padecimiento = $request->input('nom-padecimiento');
         }else{
             $nom_padecimiento = 'N/A';  //Si no hay nombre de padecimiento

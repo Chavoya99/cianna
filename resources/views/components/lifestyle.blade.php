@@ -15,7 +15,7 @@
                 Tranquilo, prefiero no salir mucho.
             </label>
             <label>
-                <input type="radio" name="lifestyle" value="a" id="lifestyle-a" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" checked @if(old('lifestyle') == 'a') checked @endif>
+                <input type="radio" name="lifestyle" value="a" id="lifestyle-a" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" @if(old('lifestyle') == 'a' || !old('lifestyle')) checked @endif>
                 Ambos, está bien tener equilibrio.
             </label>
         </div>
