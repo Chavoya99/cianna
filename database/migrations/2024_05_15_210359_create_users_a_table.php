@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('nom_padecimiento')->default('N/A');
             $table->string('lifestyle');
             $table->string('carrera');
-            $table->string('codigo');
+            $table->string('codigo', length: 10);
             $table->timestamps();
 
             $table->primary('user_id');

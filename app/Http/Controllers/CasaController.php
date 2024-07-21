@@ -155,7 +155,7 @@ class CasaController extends Controller
         for($i=0; $i<5; $i++){
 
             $imagen = $request->file($clasificaciones[$i]);
-            $ubicacion = $imagen->store('archivos_casas', 'public');
+            $ubicacion = $imagen->store('archivos_casas/img_casas', 'public');
 
             if($request->hasFile($clasificaciones[$i])){
                 $casa->archivos()->create([
@@ -168,7 +168,7 @@ class CasaController extends Controller
 
         if($request->hasFile('img_extra')){
             $imagen = $request->file('img_extra');
-            $ubicacion = $imagen->store('archivos_casas', 'public');
+            $ubicacion = $imagen->store('archivos_casas/img_casas', 'public');
 
             $casa->archivos()->create([
                 'clasificacion_archivo' => 'img_extra',
@@ -180,7 +180,7 @@ class CasaController extends Controller
         //Registro de comprobantes de domicilio
         if($request->hasFile('compDom1')){
             $imagen = $request->file('compDom1');
-            $ubicacion = $imagen->store('archivos_casas', 'public');
+            $ubicacion = $imagen->store('archivos_casas/comprobantes_domicilio', 'public');
 
             $casa->archivos()->create([
                 'clasificacion_archivo' => 'compDom1',
