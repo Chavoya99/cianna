@@ -27,9 +27,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'apellido',
         'email',
         'password',
         'tipo',
+        'profile_update',
     ];
 
     /**
@@ -62,10 +64,6 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function admin(){
-        return $this->hasOne(Admin::class);
-    }
-
     public function user_a(){
         return $this->hasOne(UserA::class);
     }
@@ -75,7 +73,7 @@ class User extends Authenticatable
     }
 
     public function archivos(){
-        return $this->morphMany(Archivo::class, 'archivable');
+        return $this->hasMany(Archivo::class);
     }
 
     

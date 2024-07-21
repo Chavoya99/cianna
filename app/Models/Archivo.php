@@ -9,7 +9,10 @@ class Archivo extends Model
 {
     use HasFactory;
 
-    public function archivable(){
-        return $this->morphTo();//__FUNCTION__,'archivable_id', 'archivable_type');
+    protected $fillable = ['user_id',
+    'archivo_type','MIME', 'ruta_archivo'];
+
+    public function archivo(){
+        return $this->belongsTo(User::class);
     }
 }

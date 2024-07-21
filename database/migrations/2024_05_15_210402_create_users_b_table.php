@@ -15,11 +15,17 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->smallInteger('edad');
             $table->string('sexo');
-            $table->string('descripcion');
-            $table->string('gustos_intereses');
+            $table->string('descripcion', length:300);
+            $table->string('mascota');
+            $table->smallInteger('num_mascotas');
+            $table->string('padecimiento');
+            $table->string('nom_padecimiento')->default('N/A');
+            $table->string('lifestyle');
             $table->string('carrera');
             $table->string('codigo');
             $table->timestamps();
+
+            $table->primary('user_id');
         });
     }
 

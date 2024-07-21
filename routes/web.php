@@ -1,14 +1,20 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginRegisterController;
-use App\Http\Middleware\AdminMiddleware;
+use App\Models\UserA;
+use App\Models\UserB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\ProfileUpdate;
 use App\Http\Middleware\ProfileUpdated;
-use App\Http\Middleware\ProfileNotUpdated;
+use App\Http\Controllers\CasaController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserAMiddleware;
 use App\Http\Middleware\UserBMiddleware;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserAController;
+use App\Http\Controllers\UserBController;
+use App\Http\Middleware\ProfileNotUpdated;
+use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +32,8 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
+Route::get('/home_guest', [HomeController::class, 'home_invitado'])->middleware('guest')->name('home_guest');
+
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
     'verified',])->group(function () {
 
@@ -38,30 +46,34 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
         });
 
         Route::middleware(UserAMiddleware::class)->group(function(){
-            Route::get('/homeA', function(){
-                return 'homeA';
-            })->name('homeA');
+            Route::controller(UserAController::class)->group(function(){
+                Route::get('/homeA','homeA')->name('homeA');
+            });
+
+            //Nota: cuando se establezcan las nuevas rutas relacionadas a la casa se deberá implementar un redireccionamiento
+            //para evitar que el usuario pueda entrar a configuracion de hogar sin antes completar el registro del mismo.
+            Route::get('/configuracion_inicial_casa', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
+            Route::post('/guardar_configuracion_inicial_casa', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
+
         });
 
         Route::middleware(UserBMiddleware::class)->group(function(){
-            Route::get('/homeB', function(){
-                return 'homeB';
-            })->name('homeB');
+            Route::controller(UserBController::class)->group(function(){
+                Route::get('/homeB','homeB')->name('homeB');
+            });
+            
         });
         
         
     });
 
 
-    Route::get('/formularioRegistroA', function(){
-        return 'formA';
-    })->middleware(UserAMiddleware::class,ProfileNotUpdated::class);
+    Route::get('/configuracion_inicial_cuenta', [LoginRegisterController::class, 
+    'ver_configuracion_inicial_cuenta'])->name('ver_configuracion_inicial_cuenta')->middleware(ProfileNotUpdated::class);
     
-    Route::get('/formularioRegistroB', function(){
-        return 'FormB';
-    })->middleware(UserBMiddleware::class, ProfileNotUpdated::class);
-        
-
+    Route::post('/configuracion_inicial_cuenta', [LoginRegisterController::class, 
+    'guardar_configuracion_inicial_cuenta'])->name('guardar_configuracion_inicial_cuenta')->middleware(ProfileNotUpdated::class);
+    
     Route::get('/dashboard', function () {
         return view('dashboard');})->name('dashboard');
 
@@ -74,3 +86,10 @@ Route::get('/usuarioA', function(){
     return view('userA.usera');
 });
 
+Route::get('/configuracion_hogar', function(){
+    return view('userA.config-hogar');
+});
+
+Route::get('/home', function(){
+    return view('profile.home');
+});

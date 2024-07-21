@@ -1,7 +1,7 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
+@section('title') {{'Regístrate'}} @endsection
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo" >
@@ -18,19 +18,19 @@
             @csrf
 
             <div class="font-sans">
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Nombre" />
+                <x-custom-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Nombre" />
             </div>
 
             <div class="mt-4 font-sans">
-                <x-input id="apellido" class="block mt-1 w-full" type="text" name="apellido" :value="old('apellido')" required autofocus autocomplete="name" placeholder="Apellido" />
+                <x-custom-input id="apellido" class="block mt-1 w-full" type="text" name="apellido" :value="old('apellido')" required autofocus autocomplete="name" placeholder="Apellido" />
             </div>
 
             <div class="mt-4 font-sans">
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Correo" />
+                <x-custom-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Correo" />
             </div>
 
             <div class="mt-4 relative font-sans">
-                <input id="password" class="block mt-1 w-full pr-12 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" type="password" name="password" required autocomplete="new-password" placeholder="Contraseña" />
+                <x-custom-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" placeholder="Contraseña" />
                 <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 px-3 py-2 text-gray-500">
                     <!-- Icono para mostrar la contraseña -->
                     <i id="show-icon" class="fas fa-eye"></i>
@@ -40,7 +40,7 @@
             </div>
 
             <div class="mt-4 relative font-sans">
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar contraseña" />
+                <x-custom-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar contraseña" />
                 <button type="button" onclick="togglePasswordConfirmationVisibility()" class="absolute inset-y-0 right-0 px-3 py-2 text-gray-500">
                     <!-- Icono para mostrar la contraseña -->
                     <i id="show-icon-1" class="fas fa-eye"></i>
@@ -50,10 +50,10 @@
             </div>
 
             <div class="mt-4">
-            <select name="tipo" class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 text-gray-500 font-sans">
+            <x-custom-select name="tipo" class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 text-gray-500 font-sans">
                 <option value="A" class="text-gray-500">Ya tengo casa, busco compañeros</option>
                 <option value="B" class="text-gray-500">Busco dónde quedarme</option>
-            </select>
+            </x-custom-select>
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -85,19 +85,9 @@
         </form>
         
     </x-authentication-card>
-    <footer class="text-gray-600 bg-gray-300 py-10 font-bold flex justify-between">
-        <div>
-            © {{ date('Y') }} Cianna. Todos los derechos reservados.
-        </div>
-        <div>
-            <a href="https://facebook.com/cianna" class="hover:text-blue-700 mx-2">Facebook</a>
-            <a href="https://twitter.com/cianna" class="hover:text-blue-700 mx-2">Twitter</a>
-            <a href="https://instagram.com/cianna" class="hover:text-blue-700 mx-2">Instagram</a>
-            <a href="https://linkedin.com/cianna" class="hover:text-blue-700 mx-2">LinkedIn</a>
-            <a href="https://youtube.com/cianna" class="hover:text-blue-700 mx-2">YouTube</a>
-        </div>
-    </footer>
 </x-guest-layout>
+<!-- Footer -->
+@include('partials.footer')
 
 <script>
 function togglePasswordVisibility() {

@@ -16,8 +16,33 @@ export default {
             fontFamily: {
                 sans: ['Century Gothic', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'cianna-gray': '#BFBEBA',
+                'cianna-white': '#F1EFE7',
+                'cianna-orange': '#D47814',
+                'cianna-green': '#2B7B2C',
+                'cianna-blue': '#272D45',
+            },
+            width: {
+                '1/10': '10%',
+                '3/20': '15%',
+                '17/20': '85%',
+                '9/10': '90%',
+            },
         },
     },
 
-    plugins: [forms, typography],
+    fontWeight: {
+        thin: '100',
+        extralight: '200',
+        light: '300',
+        normal: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+        extrabold: '800',
+        black: '900',
+    },
+
+    plugins: [forms, typography,],
 };

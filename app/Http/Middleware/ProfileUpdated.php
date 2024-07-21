@@ -18,11 +18,7 @@ class ProfileUpdated
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::user()->profile_update){
-            if(Auth::user()->tipo == 'A'){
-                return redirect('/formularioRegistroA');
-            }else if(Auth::user()->tipo == 'B'){
-                return redirect('/formularioRegistroB');
-            }
+            return redirect(route('ver_configuracion_inicial_cuenta'));
         }
         
         return $next($request);
