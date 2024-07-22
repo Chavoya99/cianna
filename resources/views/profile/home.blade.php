@@ -11,7 +11,7 @@
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($casas as $casa)
                 @php
-                    $imagen = $casa->archivos()->where('clasificacion_archivo', 'img_fachada')->first();
+                    $imagen = $casa->archivos()->where('clasificacion_archivo', 'img_cuarto')->first();
                 @endphp
                 
                 <!-- IMAGEN CASA-->
