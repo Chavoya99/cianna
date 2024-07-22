@@ -11,7 +11,7 @@
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($casas as $casa)
                 @php
-                    $imagen = $casa->archivos()->where('clasificacion_archivo', 'img_cuarto')->first();
+                    $imagen = $casa->archivos->first();
                 @endphp
                 
                 <!-- IMAGEN CASA-->
@@ -43,7 +43,7 @@
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($roomies as $roomie)
                 @php
-                    $imagen = $roomie->user->archivos()->where('archivo_type', 'img_perf')->first();
+                    $imagen = $roomie->user->archivos->first();
                 @endphp
                 <div class="w-1/6 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                     <div class="flex flex-col block">

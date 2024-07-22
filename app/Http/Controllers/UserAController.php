@@ -14,8 +14,14 @@ class UserAController extends Controller
         if(!Auth::user()->user_a->registro_completo){
             return redirect(route('config_hogar'));
         }
-        $casas = Casa::where('user_a_id', '!=', Auth::id())->limit(4)->get();
-        $roomies = UserB::limit(6)->get();
+        $casas = Casa::with(['archivos' => function ($query) {
+            $query->where('clasificacion_archivo', 'img_cuarto');
+        }])->where('user_a_id', '!=', Auth::id())->limit(4)->get();
+
+        $roomies = UserB::with(['user.archivos' => function($query){
+            $query->where('archivo_type', 'img_perf');
+        }])->limit(6)->get();
+        
         return view('profile.home', compact('casas','roomies'));
     }
     /**
