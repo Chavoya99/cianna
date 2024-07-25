@@ -1,4 +1,4 @@
-<!-- resources/views/home.blade.php -->
+<!-- resources/views/profile/home.blade.php -->
 @props(['defaultHomeImage' => asset('img/home-add-svgrepo-com.png'), 'defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
 @section('title') {{ 'Inicio' }} @endsection
 <x-home-layout>
