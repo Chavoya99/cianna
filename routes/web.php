@@ -93,3 +93,7 @@ Route::get('/configuracion_hogar', function(){
 Route::get('/home', function(){
     return view('profile.home');
 });
+
+Route::get('/account-settings', function(){
+    return view('profile.account-settings');
+});

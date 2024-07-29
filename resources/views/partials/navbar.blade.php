@@ -1,7 +1,7 @@
 @props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
 <div class="w-full flex items-center justify-between bg-white px-20 py-3">
     <div>
-        <a href="homeA" class="text-cianna-orange font-bold">INICIO</a>
+        <a href="homeA" class="text-cianna-orange font-bold hover:text-orange-700">INICIO</a>
     </div>
     <div>
         <form>  
@@ -9,7 +9,7 @@
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <input type="search" id="busqueda" class="block w-full h-full ps-10 text-sm text-gray-900 border border-cianna-gray rounded-lg bg-gray-50 focus:ring-cianna-orange focus:border-cianna-orange " placeholder="Buscador" required />
+                <input type="search" id="busqueda" class="block w-full h-full ps-10 text-sm text-gray-900 border border-cianna-gray rounded-lg bg-gray-50 focus:ring-cianna-orange focus:border-cianna-orange" placeholder="Buscador" required />
                 <button type="submit" class="text-white bg-cianna-blue absolute end-0.5 bottom-0.5 hover:bg-sky-900 focus:ring-4 focus:outline-none focus:ring-sky-400 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
             </div>
         </form>
@@ -27,11 +27,11 @@
                 ?>
                 {{Auth::user()->name}}
                 <img class="h-8 w-8 rounded-full border border-cianna-gray ml-2 mr-2" src="{{asset('storage/'. $imagen[0]->ruta_archivo)}}" alt="Foto de perfil">
-                <i class="fa-solid fa-chevron-down text-cianna-gray"></i>
+                <i id="dropDownIcon" class="fa-solid fa-chevron-down text-cianna-gray"></i>
             @else
                 Invitado
                 <img class="h-8 w-8 rounded-full border border-cianna-gray ml-2 mr-2" src="{{$defaultProfileImage}}" alt="Foto de perfil">
-                <i class="fa-solid fa-chevron-down text-cianna-gray"></i>
+                <i id="dropDownIcon" class="fa-solid fa-chevron-down text-cianna-gray"></i>
             @endif
             
         </div>
@@ -41,7 +41,7 @@
                 <a href="login"><div class="flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Iniciar sesión</div></a>
             @else
                 <a href="my-profile"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Perfil</div></a>
-                <a href="configuracion_inicial_cuenta"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Configuración</div></a>
+                <a href="account-settings"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Configuración</div></a>
                 <!-- SOLO MOSTRAR SI YA SE HA INICIADO SESIÓN -->
                 <div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">
                     <form method="POST" action="{{ route('logout') }}" x-data>
@@ -60,28 +60,37 @@
 <script>
     function toggleDropDown(){
         let dropDown = document.getElementById('dropDown');
+        let dropDownIcon = document.getElementById('dropDownIcon');
         if (dropDown.classList.contains('hidden')) {
             dropDown.classList.remove('hidden');
             setTimeout(() => {
                 dropDown.classList.remove('opacity-0', '-translate-y-full');
                 dropDown.classList.add('opacity-100', 'translate-y-0');
+                dropDownIcon.classList.remove('fa-chevron-down');
+                dropDownIcon.classList.add('fa-chevron-up');
             }, 10);
         } else {
             dropDown.classList.add('opacity-0', '-translate-y-full');
             dropDown.classList.remove('opacity-100', 'translate-y-0');
+            dropDownIcon.classList.remove('fa-chevron-up');
+            dropDownIcon.classList.add('fa-chevron-down');
             setTimeout(() => {
                 dropDown.classList.add('hidden');
             }, 300);
         }
     }
 
+
     // Cerrar el dropdown al hacer clic fuera de él
     document.addEventListener('click', (event) => {
         let dropDown = document.getElementById('dropDown');
         let dropDownButton = document.getElementById('dropDownButton');
+        let dropDownIcon = document.getElementById('dropDownIcon');
         if (!dropDownButton.contains(event.target) && !dropDown.contains(event.target)) {
             dropDown.classList.add('opacity-0', '-translate-y-full');
             dropDown.classList.remove('opacity-100', 'translate-y-0');
+            dropDownIcon.classList.remove('fa-chevron-up');
+            dropDownIcon.classList.add('fa-chevron-down');
             setTimeout(() => {
                 dropDown.classList.add('hidden');
             }, 300);
