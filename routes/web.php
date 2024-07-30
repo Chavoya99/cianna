@@ -63,6 +63,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             });
             
         });
+
+        Route::get('/configuracion_cuenta', [HomeController::class, 'configuracion_cuenta'])->name('config_cuenta');
         
         
     });

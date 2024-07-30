@@ -17,7 +17,7 @@
                     <!-- CONTENEDOR DESCRIPCIÓN -->
                     <div class="relative px-20 w-[57%]">
                         <x-custom-label for="desc">Cuéntanos sobre ti</x-custom-label>
-                        <x-about-you></x-about-you>
+                        <x-about-you :usuario="$usuario"></x-about-you>
                     </div>
                     <!-- CONTENEDOR SUP/DER FOTO DE PERFIL -->
                     <div class="px-24 w-[43%]">
@@ -30,11 +30,11 @@
                 <div class="flex w-full mt-3">
                     <!-- CONTENEDOR IZQ MASCOTAS -->
                     <div class="relative px-20 w-[57%]">
-                        <x-has-pets></x-has-pets>
+                        <x-has-pets :usuario="$usuario"></x-has-pets>
                     </div>
                     <!-- CONTENEDOR DER EDAD Y SEXO-->
                     <div class="px-24 w-[43%]" >
-                        <x-age-sex></x-age-sex>
+                        <x-age-sex :usuario="$usuario"></x-age-sex>
                     </div>
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 2 -->
@@ -43,12 +43,23 @@
                 <div class="flex w-full mt-3">
                     <!-- CONTENEDOR IZQ PADECIMIENTOS -->
                     <div class="relative px-20 w-[57%]">
-                        <x-medical-conditions></x-medical-conditions>
+                        <x-medical-conditions :usuario="$usuario"></x-medical-conditions>
                     </div>
                     <!-- CONTENEDOR DEL CODIGO-->
                     <div class="px-24 w-[43%]">
                         <x-custom-label>Código de estudiante</x-custom-label>
-                        <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full h-8 text-sm" type="text" minlength="9" maxlength="9" value="{{old('codigo')}}" pattern="[0-9]{9}" required autocomplete="codigo" placeholder="El mismo con el que ingresas a SIIAU" />
+                        <?php 
+                            $value = null;
+                            if(old('codigo')){
+                                $value = old('codigo');
+                            }else if(isset($usuario)){
+                                $value = $usuario->codigo;
+                            }
+                        
+                        ?>
+                        <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full h-8 text-sm" type="text" 
+                        minlength="9" maxlength="9" pattern="[0-9]{9}" required autocomplete="codigo" 
+                        placeholder="El mismo con el que ingresas a SIIAU" value="{{$value}}"/>
                     </div>
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 3 -->
@@ -57,11 +68,11 @@
                 <div class="flex w-full mt-3">
                     <!-- CONTENEDOR IZQ LIFESTYLE -->
                     <div class="relative px-20 w-[57%]">
-                        <x-lifestyle></x-lifestyle>
+                        <x-lifestyle :usuario="$usuario"></x-lifestyle>
                     </div>
                     <!-- CONTENEDOR DER CARRERA -->
                     <div class="px-24 w-[43%]">
-                        <x-career></x-career>
+                        <x-career :usuario="$usuario"></x-career>
                     </div>
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 4 -->

@@ -6,6 +6,7 @@ use App\Models\Casa;
 use App\Models\UserA;
 use App\Models\UserB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,5 +24,19 @@ class HomeController extends Controller
         $userB = UserB::limit(3)->get();
         $roomies = $userA->concat($userB);
         return view('profile.home', compact('casas', 'roomies'));
+    }
+
+    public function configuracion_cuenta(){
+        if(Auth::user()->tipo == 'A'){
+            $usuario = Auth::user()->user_a;
+        }else if(Auth::user()->tipo == 'B')
+        {
+            $usuario = Auth::user()->user_b;
+        }else{
+            $usuario = Auth::user();
+        }
+
+        //dd($usuario->descripcion);
+        return view('profile.account-settings', compact('usuario'));
     }
 }

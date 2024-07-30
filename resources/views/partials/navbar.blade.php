@@ -41,7 +41,7 @@
                 <a href="login"><div class="flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Iniciar sesión</div></a>
             @else
                 <a href="my-profile"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Perfil</div></a>
-                <a href="account-settings"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Configuración</div></a>
+                <a href="{{route('config_cuenta')}}"><div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">Configuración</div></a>
                 <!-- SOLO MOSTRAR SI YA SE HA INICIADO SESIÓN -->
                 <div class="mt-1 flex bg-cianna-gray justify-center px-1 py-1 rounded-md w-full hover:bg-cianna-orange cursor-pointer">
                     <form method="POST" action="{{ route('logout') }}" x-data>
