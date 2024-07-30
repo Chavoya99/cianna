@@ -53,13 +53,13 @@
                     </div>
                 </a>
             @else
-                <a href="my-profile">
+                <a href="{{route('mi_perfil')}}">
                     <div class="mt-1 flex bg-cianna-gray items-center px-1 py-1 
                         rounded-md w-full hover:bg-cianna-orange cursor-pointer">
                         <i class="fa-solid fa-user ml-2 mr-2"></i>Perfil
                     </div>
                 </a>
-                <a href="account-settings">
+                <a href="{{route('config_cuenta')}}">
                     <div class="mt-1 flex bg-cianna-gray items-center px-1 py-1 
                         rounded-md w-full hover:bg-cianna-orange cursor-pointer">
                         <i class="fa-solid fa-gear ml-2 mr-2"></i>Configuración

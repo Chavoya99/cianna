@@ -36,7 +36,19 @@ class HomeController extends Controller
             $usuario = Auth::user();
         }
 
-        //dd($usuario->descripcion);
         return view('profile.account-settings', compact('usuario'));
+    }
+
+    public function ver_perfil_usuario(){
+        if(Auth::user()->tipo == 'A'){
+            $usuario = Auth::user()->user_a;
+        }else if(Auth::user()->tipo == 'B')
+        {
+            $usuario = Auth::user()->user_b;
+        }else{
+            $usuario = Auth::user();
+        }
+
+        return view('profile.my-profile', compact('usuario'));
     }
 }
