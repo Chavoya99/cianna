@@ -1,4 +1,5 @@
 <!-- resources/views/profile/account-settings.blade.php -->
+@props(['defaultImage' => asset('img/avatar-default-svgrepo-com.png')])
 @section('title') {{ 'Configuración de tu cuenta' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
@@ -11,6 +12,24 @@
             <div class="relative mt-8 ml-20 w-4/5">
                     <h1 class="text-cianna-orange text-5xl">Configuración de la cuenta</h1>
                 </div>
+                <!-- CONTENEDOR SUP/DER FOTO DE PERFIL -->
+                <div class="px-24 w-[43%]">
+                    <div class="flex flex-col items-center py-3">
+                        <div class="flex flex-col items-center block w-full">
+                            <div id="imageContainer" class="inline-block h-40 w-40 overflow-hidden 
+                                rounded-md bg-gray-100 mb-2">
+                                <img id="preview" class="object-cover border border-cianna-gray 
+                                rounded-lg" src="{{ $defaultImage }}" alt="Imagen previa" />
+                            </div>
+                            <input id="img_perf" name="img_perf" type="file" 
+                            accept=".png,.jpg,.jpeg" class="block w-full file:bg-cianna-blue 
+                            file:text-white file:cursor-pointer text-sm rounded-md cursor-pointer 
+                            bg-cianna-gray border border-cianna-gray focus:border-cianna-orange 
+                            focus:outline-none focus:ring-1 focus:ring-cianna-orange" 
+                            onchange="previewImage(this)">
+                        </div>
+                        <label for="img_perf">(Máx. 4 MB)</label>
+                    </div>
                 
                 <!-- CONTENEDOR HORIZONTAL 1 -->
                 <div class="flex w-full mt-8">
@@ -77,6 +96,23 @@
                 </div>
                 <!-- CONTENEDOR HORIZONTAL 4 -->
 
+            <!-- CONTENEDOR HORIZONTAL 5 -->
+            <div class="flex w-full mt-3">
+                <!-- CONTENEDOR IZQ  -->
+                <div class="relative px-20 w-[57%]"></div>
+                <!-- CONTENEDOR DER KARDEX -->
+                <div class="px-24 w-[43%]">
+                    <x-custom-label for="kardex">Sube aquí tu kárdex</x-custom-label>
+                    <div class="flex flex-col items-center">
+                        <div class="mt-1 flex">
+                            <input id="kardex" name="kardex" type="file" accept="application/pdf" 
+                            class="block w-full file:bg-cianna-blue file:text-white 
+                            file:cursor-pointer text-sm rounded-md cursor-pointer bg-cianna-gray 
+                            border border-cianna-gray focus:border-cianna-orange focus:outline-none 
+                            focus:ring-1 focus:ring-cianna-orange">
+                        </div>
+                        <label for="kardex">(Máx. 4 MB)</label>
+                    </div>
                 <!-- CONTENEDOR HORIZONTAL 5 -->
                 <div class="flex w-full mt-3">
                     <!-- CONTENEDOR IZQ  -->
