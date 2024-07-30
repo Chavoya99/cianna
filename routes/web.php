@@ -97,3 +97,7 @@ Route::get('/home', function(){
 Route::get('/account-settings', function(){
     return view('profile.account-settings');
 });
+
+Route::get('/my-profile', function(){
+    return view('profile.my-profile');
+});
