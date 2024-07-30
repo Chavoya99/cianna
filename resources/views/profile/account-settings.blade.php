@@ -10,13 +10,6 @@
             <!-- TÍTULO -->
             <div class="relative mt-8 ml-20 w-4/5">
                     <h1 class="text-cianna-orange text-5xl">Configuración de la cuenta</h1>
-            </div>
-            
-            <!-- CONTENEDOR HORIZONTAL 1 -->
-            <div class="flex w-full mt-8">
-                <!-- CONTEN">
-                    <x-custom-label for="desc">Cuéntanos sobre ti</x-custom-label>
-                    <x-about-you></x-about-you>
                 </div>
                 
                 <!-- CONTENEDOR HORIZONTAL 1 -->
@@ -31,8 +24,7 @@
                         <x-foto-perfil></x-foto-perfil>
                     </div>
                 </div>
-            </div>
-            <!-- CONTENEDOR HORIZONTAL 1 -->
+                <!-- CONTENEDOR HORIZONTAL 1 -->
 
                 <!-- CONTENEDOR HORIZONTAL 2 -->
                 <div class="flex w-full mt-3">
@@ -45,12 +37,7 @@
                         <x-age-sex :usuario="$usuario"></x-age-sex>
                     </div>
                 </div>
-                <!-- CONTENEDOR DER EDAD Y SEXO-->
-                <div class="px-24 w-[43%]" >
-                    <x-age-sex></x-age-sex>
-                </div>
-            </div>
-            <!-- CONTENEDOR HORIZONTAL 2 -->
+                <!-- CONTENEDOR HORIZONTAL 2 -->
 
                 <!-- CONTENEDOR HORIZONTAL 3 -->
                 <div class="flex w-full mt-3">
@@ -75,16 +62,7 @@
                         placeholder="El mismo con el que ingresas a SIIAU" value="{{$value}}"/>
                     </div>
                 </div>
-                <!-- CONTENEDOR DEL CODIGO-->
-                <div class="px-24 w-[43%]">
-                    <x-custom-label>Código de estudiante</x-custom-label>
-                    <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full h-8 text-sm" 
-                    type="text" minlength="9" maxlength="9" value="{{old('codigo')}}" 
-                    pattern="[0-9]{9}" required autocomplete="codigo" 
-                    placeholder="El mismo con el que ingresas a SIIAU" />
-                </div>
-            </div>
-            <!-- CONTENEDOR HORIZONTAL 3 -->
+                <!-- CONTENEDOR HORIZONTAL 3 -->
 
                 <!-- CONTENEDOR HORIZONTAL 4 -->
                 <div class="flex w-full mt-3">
@@ -97,43 +75,31 @@
                         <x-career :usuario="$usuario"></x-career>
                     </div>
                 </div>
-                <!-- CONTENEDOR DER CARRERA -->
-                <div class="px-24 w-[43%]">
-                    <x-career></x-career>
-                </div>
-            </div>
-            <!-- CONTENEDOR HORIZONTAL 4 -->
+                <!-- CONTENEDOR HORIZONTAL 4 -->
 
-            <!-- CONTENEDOR HORIZONTAL 5 -->
-            <div class="flex w-full mt-3">
-                <!-- CONTENEDOR IZQ  -->
-                <div class="relative px-20 w-[57%]"></div>
-                <!-- CONTENEDOR DER KARDEX -->
-                <div class="px-24 w-[43%]">
-                    <x-subir-kardex><label>Sube aquí tu kárdex</label></x-subir-kardex>
+                <!-- CONTENEDOR HORIZONTAL 5 -->
+                <div class="flex w-full mt-3">
+                    <!-- CONTENEDOR IZQ  -->
+                    <div class="relative px-20 w-[57%]"></div>
+                    <!-- CONTENEDOR DER KARDEX -->
+                    <div class="px-24 w-[43%]">
+                        <x-subir-kardex><label>Sube aquí tu kárdex</label></x-subir-kardex>
+                    </div>
                 </div>
-            </div>
-            <!-- CONTENEDOR HORIZONTAL 5 -->
-            
-            <!-- CONTENEDOR HORIZONTAL 6 -->
-            <div class="flex w-full mt-3">
-                <!-- CONTENEDOR IZQ  -->
-                <div class="relative px-20 w-[57%]">
-                    <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
-                    rounded focus:outline-none focus:shadow-outline" 
-                    onclick="window.history.back()">
-                    <i class="fa-solid fa-left-long mr-2"></i>Regresar
-                    </button>
+                <!-- CONTENEDOR HORIZONTAL 5 -->
+                
+                <!-- CONTENEDOR HORIZONTAL 6 -->
+                <div class="flex w-full mt-3">
+                    <!-- CONTENEDOR IZQ  -->
+                    <div class="relative px-20 w-[57%]"></div>
+                    <!-- CONTENEDOR DER BOTÓN ACEPTAR -->
+                    <div class="px-24 w-[43%]">
+                        <button class="block w-full bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Guardar
+                        </button>
+                    </div>
                 </div>
-                <!-- CONTENEDOR DER BOTÓN ACEPTAR -->
-                <div class="px-24 w-[43%]">
-                    <button class="block w-full bg-cianna-blue hover:bg-sky-900 text-white font-bold
-                        py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                        <i class="fa-solid fa-floppy-disk mr-2"></i>Guardar
-                    </button>
-                </div>
-            </div>
-            <!-- CONTENEDOR HORIZONTAL 6 -->
+                <!-- CONTENEDOR HORIZONTAL 6 -->
         </form>
     </div>
 </x-home-layout>
