@@ -14,7 +14,7 @@
         <option @selected(old('carrera') == 'ing_indu' || (isset($usuario) && $usuario->carrera == 'ing_indu')) value="ing_indu">Ing. Industrial</option>
         <option @selected(old('carrera') == 'ing_info' || (isset($usuario) && $usuario->carrera == 'ing_info')) value="ing_info">Ing. Informática</option>
         <option @selected(old('carrera') == 'ing_meca' || (isset($usuario) && $usuario->carrera == 'ing_meca')) value="ing_meca">Ing. Mecánica Eléctrica</option>
-        <option @selected(old('carrera') == 'iing_quim' || (isset($usuario) && $usuario->carrera == 'ing_quim')) value="ing_quim">Ing. Química</option>
+        <option @selected(old('carrera') == 'ing_quim' || (isset($usuario) && $usuario->carrera == 'ing_quim')) value="ing_quim">Ing. Química</option>
         <option @selected(old('carrera') == 'ing_robo' || (isset($usuario) && $usuario->carrera == 'ing_robo')) value="ing_robo">Ing. Robótica</option>
         <option @selected(old('carrera') == 'lic_cien_mate' || (isset($usuario) && $usuario->carrera == 'lic_cien_mate')) value="lic_cien_mate">Lic. en Ciencia de Materiales</option>
         <option @selected(old('carrera') == 'lic_fis' || (isset($usuario) && $usuario->carrera == 'lic_fis')) value="lic_fis">Lic. en Física</option>

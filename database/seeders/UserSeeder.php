@@ -106,14 +106,18 @@ class UserSeeder extends Seeder
 
             if($user->tipo == 'A'){
                 if($user->user_a->sexo == 'masculino'){
+                    $user->update(['name' => $faker->firstNameMale]);
                     $rutaImagen = public_path('img/masculino.jpg');
                 }else{
+                    $user->update(['name' => $faker->firstNameFemale]);
                     $rutaImagen = public_path('img/femenino.jpg');
                 } 
             }else{
                 if($user->user_b->sexo == 'masculino'){
+                    $user->update(['name' => $faker->firstNameMale]);
                     $rutaImagen = public_path('img/masculino.jpg');
                 }else{
+                    $user->update(['name' => $faker->firstNameFemale]);
                     $rutaImagen = public_path('img/femenino.jpg');
                 } 
             }   
