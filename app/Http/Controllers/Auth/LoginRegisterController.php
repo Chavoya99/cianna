@@ -53,7 +53,6 @@ class LoginRegisterController extends Controller
             'edad' => 'required|integer|min:18|max:35',
             'sexo' => 'required',
             'padecimiento' => 'required',
-            'codigo' => 'required|regex:/^[a-zA-Z0-9_-]+$/|unique:users_b',
             'lifestyle' => 'required',
             'carrera' => 'required',
             'kardex' => 'required|mimes:pdf|max:4096',
@@ -84,6 +83,7 @@ class LoginRegisterController extends Controller
         }
 
         if(Auth::user()->tipo == 'A'){
+            $request->validate(['codigo' => 'required|regex:/^[a-zA-Z0-9_-]+$/|unique:users_a']);
             $user = UserA::create([
                 'user_id' => Auth::id(),
                 'descripcion' => $request->desc,
@@ -101,6 +101,7 @@ class LoginRegisterController extends Controller
             $ruta = 'config_hogar';
 
         }else if(Auth::user()->tipo == 'B'){
+            $request->validate(['codigo' => 'required|regex:/^[a-zA-Z0-9_-]+$/|unique:users_b']);
             $user = UserB::create([
                 'user_id' => Auth::id(),
                 'descripcion' => $request->desc,

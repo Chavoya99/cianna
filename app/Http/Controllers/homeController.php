@@ -6,6 +6,7 @@ use App\Models\Casa;
 use App\Models\UserA;
 use App\Models\UserB;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -80,7 +81,6 @@ class HomeController extends Controller
             'edad' => 'required|integer|min:18|max:35',
             'sexo' => 'required',
             'padecimiento' => 'required',
-            'codigo' => 'required|regex:/^[a-zA-Z0-9_-]+$/|unique:users_b',
             'lifestyle' => 'required',
             'carrera' => 'required',
             'kardex' => 'nullable|mimes:pdf|max:4096',
@@ -111,10 +111,15 @@ class HomeController extends Controller
             $nom_padecimiento = 'N/A';  //Si no hay nombre de padecimiento
         }
 
-
         if(Auth::user()->tipo == 'A'){
+            $request->validate([
+                'codigo' => ['required','regex:/^[a-zA-Z0-9_-]+$/', Rule::unique('users_a')->ignore(Auth::user()->user_a->codigo, 'codigo')]
+            ]);
             $user = Auth::user()->user_a;
         }else if( Auth::user()->tipo == 'B'){
+            $request->validate([
+                'codigo' => ['required','regex:/^[a-zA-Z0-9_-]+$/', Rule::unique('users_b')->ignore(Auth::user()->user_b->codigo, 'codigo')]
+            ]);
             $user = Auth::user()->user_b;
         }
 
