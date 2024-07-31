@@ -140,6 +140,28 @@ class UserSeeder extends Seeder
                     ]
                 );
             }
+
+            $rutaImagen = public_path('img/comprobantes_prueba/kardex_prueba.pdf');
+            if(File::exists($rutaImagen)){
+                
+                $archivoSimulado = new UploadedFile(
+                    $rutaImagen,
+                    'application/pdf',
+                );
+        
+                $ubicacion = $archivoSimulado->store('archivos_kardex', 'public');
+                $user->archivos()->create(
+                    [   
+                        'archivo_type' => 'kardex',
+                        'MIME' => $archivoSimulado->getClientMimeType(),
+                        'ruta_archivo' => $ubicacion,
+                    ]
+                );
+            }
+
+            
+
+
             
 
         }
