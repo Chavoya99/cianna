@@ -18,7 +18,8 @@
     <div class="flex justify-center w-full">
         
         <!-- FORMULARIO -->
-        <form class="w-full" id="configForm" action="{{route('actualizar_cuenta')}}" method="POST" enctype="multipart/form-data">
+        <form class="w-full" id="configForm" action="{{route('actualizar_cuenta')}}" method="POST" 
+            enctype="multipart/form-data">
             @csrf
             <!-- TÍTULO -->
             <div class="relative mt-8 ml-20 w-4/5">
@@ -42,7 +43,7 @@
                                     <img id="preview" class="object-cover border border-cianna-gray 
                                     rounded-lg" src="{{ $defaultImage }}" alt="Imagen previa" />
                                 </div>
-                                <x-custom-label for="kardex">Cambiar foto de perfil</x-custom-label>
+                                <x-custom-label for="img_perf">Cambiar foto de perfil</x-custom-label>
                                 <input id="img_perf" name="img_perf" type="file" 
                                 accept=".png,.jpg,.jpeg" class="block w-full file:bg-cianna-blue 
                                 file:text-white file:cursor-pointer text-sm rounded-md cursor-pointer 
@@ -87,8 +88,9 @@
                             }
                         
                         ?>
-                        <x-custom-input id="codigo" name="codigo" class="block mt-1 w-full h-8 text-sm" type="text" 
-                        minlength="9" maxlength="9" pattern="[0-9]{9}" required autocomplete="codigo" 
+                        <x-custom-input id="codigo" name="codigo" 
+                        class="block mt-1 w-full h-8 text-sm" type="text" minlength="9" maxlength="9" 
+                        pattern="[0-9]{9}" required autocomplete="codigo" 
                         placeholder="El mismo con el que ingresas a SIIAU" value="{{$value}}"/>
                     </div>
                 </div>
@@ -134,7 +136,9 @@
                     <div class="relative px-20 w-[57%]"></div>
                     <!-- CONTENEDOR DER BOTÓN ACEPTAR -->
                     <div class="px-24 w-[43%]">
-                        <button class="block w-full bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button class="block w-full bg-cianna-blue hover:bg-sky-900 text-white 
+                        font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                        type="submit">
                             Guardar
                         </button>
                     </div>

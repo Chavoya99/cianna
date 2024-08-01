@@ -9,8 +9,8 @@
     <div class="w-32">
         <x-custom-label for="sexo" class="text-center">Sexo</x-custom-label>
         <x-custom-select id="sexo" name="sexo" class="block w-36">
-            <option @selected(old('sexo') == 'masculino' || (isset($usuario) && $usuario->sexo == 'masculino')) value="masculino">Masculino</option>
-            <option @selected(old('sexo') == 'femenino' || (isset($usuario) && $usuario->sexo == 'femenino')) value="femenino">Femenino</option>
+            <option @selected(old('sexo') == 'masculino' || (isset($usuario) && $usuario->sexo == 'masculino')) value="Masculino">Masculino</option>
+            <option @selected(old('sexo') == 'femenino' || (isset($usuario) && $usuario->sexo == 'femenino')) value="Femenino">Femenino</option>
         </x-custom-select>
     </div>
 </div>
