@@ -239,7 +239,7 @@
         const carousel = document.getElementById('carousel');
         const prev = document.getElementById('prev');
         const next = document.getElementById('next');
-        const totalImages = {{ count($images) }};
+        const totalImages = {{ count($img_casa) }};
         const visibleImages = 3;
         const imageWidth = carousel.firstElementChild.offsetWidth;
         let currentIndex = 0;
