@@ -175,39 +175,41 @@
                 </div>
             </div>
             <!-- CONTENEDOR HORIZONTAL 5 -->
-
-            <!-- CONTENEDOR HORIZONTAL 6 -->
-            <div class="flex w-full mt-3">
-                <!-- CONTENEDOR IZQ IMG CASA -->
-                <div class="relative px-16 w-[60%]">
-                    <x-custom-label class="text-xl">Mi casa</x-custom-label>
-                    <div class="relative w-full overflow-hidden">
-                        <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
-                            @foreach ($images as $image)
-                                <div class="flex-none w-1/3 p-2">
-                                    <img src="{{ asset('img/img_prueba_casas/' . $image) }}" 
-                                    alt="Imagen {{ $loop->index + 1 }}" 
-                                    class="w-full h-[160px] rounded-lg shadow-md">
-                                </div>
-                            @endforeach
+            @if (Auth::user()->tipo == 'A')
+                <!-- CONTENEDOR HORIZONTAL 6 -->
+                <div class="flex w-full mt-3">
+                    <!-- CONTENEDOR IZQ IMG CASA -->
+                    <div class="relative px-16 w-[60%]">
+                        <x-custom-label class="text-xl">Mi casa</x-custom-label>
+                        <div class="relative w-full overflow-hidden">
+                            <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
+                                @foreach ($img_casa as $img)
+                                    <div class="flex-none w-1/3 p-2">
+                                        <img src="{{ asset('storage/'.$img->ruta_archivo)}}" 
+                                        alt="Imagen {{ $loop->index + 1 }}" 
+                                        class="w-full h-[160px] rounded-lg shadow-md">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 
+                                bg-cianna-blue text-white px-3 py-1 rounded-l-lg">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button id="next" class="absolute right-0 top-1/2 transform -translate-y-1/2
+                                bg-cianna-blue text-white px-3 py-1 rounded-r-lg">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
                         </div>
-                        <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 
-                            bg-cianna-blue text-white px-3 py-1 rounded-l-lg">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <button id="next" class="absolute right-0 top-1/2 transform -translate-y-1/2
-                            bg-cianna-blue text-white px-3 py-1 rounded-r-lg">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
+                            <a class="flex justify-end font-semibold text-cianna-green 
+                                hover:text-cianna-orange" href="home-details">Ver detalles
+                            </a>
                     </div>
-                        <a class="flex justify-end font-semibold text-cianna-green 
-                            hover:text-cianna-orange" href="home-details">Ver detalles
-                        </a>
+                    <!-- CONTENEDOR DER -->
+                    <div class="w-[40%] px-28"></div>
                 </div>
-                <!-- CONTENEDOR DER -->
-                <div class="w-[40%] px-28"></div>
-            </div>
-            <!-- CONTENEDOR HORIZONTAL 6 -->
+                <!-- CONTENEDOR HORIZONTAL 6 -->
+            @endif
+            
 
             <!-- CONTENEDOR HORIZONTAL 7 -->
             <div class="flex w-full mt-3">

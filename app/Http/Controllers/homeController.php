@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ArchivoCasa;
 use App\Models\Casa;
 use App\Models\User;
 use App\Models\UserA;
@@ -81,8 +82,13 @@ class HomeController extends Controller
         'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
 
         $img_perfil = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
+        
+        $img_casa = null;
+        if(Auth::user()->tipo == 'A'){
+            $img_casa = Auth::user()->user_a->casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
+        }
 
-        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $carreras[$usuario->carrera]]);
+        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $carreras[$usuario->carrera], 'img_casa' => $img_casa]);
     }
 
     public function actualizar_cuenta(Request $request){
