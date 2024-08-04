@@ -1,5 +1,12 @@
 <!-- resources/views/profile/my-profile.blade.php -->
-
+@props($images = [
+        'img_banio.jpg',
+        'img_cocina.jpg',
+        'img_cuarto.jpg',
+        'img_fachada.jpg',
+        'img_sala.jpg',
+        'img_banio.jpg',
+    ])
 @section('title') {{ 'Mi perfil' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
@@ -28,7 +35,8 @@
                             <div id="imageContainer" class="inline-block h-40 w-40 overflow-hidden 
                                 rounded-md bg-gray-100 mb-2">
                                 <img id="preview" class="object-cover border border-cianna-gray 
-                                rounded-lg" src="{{asset('storage/'.$img_perfil->ruta_archivo)}}" alt="Imagen previa" />
+                                rounded-lg" src="{{asset('storage/'.$img_perfil->ruta_archivo)}}" 
+                                alt="Imagen de perfil" />
                             </div>
                         </div>
                     </div>
@@ -94,7 +102,8 @@
                 <div class="w-[40%] px-28">
                     <x-custom-label class="text-center">Código de estudiante</x-custom-label>
                     <input id="codigo" name="codigo" class="block w-full text-gray-500 text-center 
-                    border border-cianna-gray rounded-md" type="text" value="{{$usuario->codigo}}" disabled>
+                    border border-cianna-gray rounded-md" type="text" value="{{$usuario->codigo}}" 
+                    disabled>
                 </div>
             </div>
             <!-- CONTENEDOR HORIZONTAL 3 -->
@@ -169,22 +178,82 @@
 
             <!-- CONTENEDOR HORIZONTAL 6 -->
             <div class="flex w-full mt-3">
+                <!-- CONTENEDOR IZQ IMG CASA -->
+                <div class="relative px-16 w-[60%]">
+                    <x-custom-label class="text-xl">Mi casa</x-custom-label>
+                    <div class="relative w-full overflow-hidden">
+                        <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
+                            @foreach ($images as $image)
+                                <div class="flex-none w-1/3 p-2">
+                                    <img src="{{ asset('img/img_prueba_casas/' . $image) }}" 
+                                    alt="Imagen {{ $loop->index + 1 }}" 
+                                    class="w-full h-[160px] rounded-lg shadow-md">
+                                </div>
+                            @endforeach
+                        </div>
+                        <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 
+                            bg-cianna-blue text-white px-3 py-1 rounded-l-lg">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button id="next" class="absolute right-0 top-1/2 transform -translate-y-1/2
+                            bg-cianna-blue text-white px-3 py-1 rounded-r-lg">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                        <a class="flex justify-end font-semibold text-cianna-green 
+                            hover:text-cianna-orange" href="home-details">Ver detalles
+                        </a>
+                </div>
+                <!-- CONTENEDOR DER -->
+                <div class="w-[40%] px-28"></div>
+            </div>
+            <!-- CONTENEDOR HORIZONTAL 6 -->
+
+            <!-- CONTENEDOR HORIZONTAL 7 -->
+            <div class="flex w-full mt-3">
                 <!-- CONTENEDOR IZQ BOTÓN REGRESAR -->
                 <div class="relative px-16 w-[60%]">
                     <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
-                    rounded focus:outline-none focus:shadow-outline" 
-                    onclick="window.history.back()">
-                    <i class="fa-solid fa-left-long"></i> Regresar
+                        rounded focus:outline-none focus:shadow-outline" 
+                        onclick="window.history.back()">
+                        <i class="fa-solid fa-left-long mr-2"></i>Regresar
                     </button>
                 </div>
                 <!-- CONTENEDOR DER BOTÓN AJUSTES -->
                 <div class="w-[40%] px-28">
-                    <a href="{{route('config_cuenta')}}" class="block w-full bg-cianna-blue hover:bg-sky-900 
-                    text-white text-center font-bold py-2 px-4 rounded focus:outline-none 
-                    focus:shadow-outline">
-                    <i class="fa-solid fa-gear"></i> Ajustes</a>
+                    <a href="{{route('config_cuenta')}}" class="block w-full bg-cianna-blue 
+                        hover:bg-sky-900  text-white text-center font-bold py-2 px-4 rounded 
+                        focus:outline-none focus:shadow-outline">
+                        <i class="fa-solid fa-gear mr-2"></i>Ajustes
+                    </a>
                 </div>
             </div>
-            <!-- CONTENEDOR HORIZONTAL 6 -->
+            <!-- CONTENEDOR HORIZONTAL 7 -->
     </div>
 </x-home-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carousel = document.getElementById('carousel');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+        const totalImages = {{ count($images) }};
+        const visibleImages = 3;
+        const imageWidth = carousel.firstElementChild.offsetWidth;
+        let currentIndex = 0;
+
+        prev.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                carousel.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+            }
+        });
+
+        next.addEventListener('click', () => {
+            if (currentIndex < totalImages - visibleImages) {
+                currentIndex++;
+                carousel.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+            }
+        });
+    });
+</script>

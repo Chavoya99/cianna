@@ -63,8 +63,10 @@
                 </div>
             @endforeach
         </div>
-        <div class="text-right mr-20 mt-2"><a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-        href="see-rommies">Ver más...</a></div>
+        <div class="text-right mr-20 mt-2">
+            <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+            href="see-rommies">Ver más...</a>
+        </div>
     </div>
 </x-home-layout>
 
