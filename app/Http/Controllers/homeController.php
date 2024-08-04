@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Casa;
+use App\Models\User;
 use App\Models\UserA;
 use App\Models\UserB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -159,5 +161,28 @@ class HomeController extends Controller
         }
 
         return redirect()->route('mi_perfil')->with('success', 'Perfil actualizado');
+    }
+
+    public function descargar_kardex(User $usuario){
+        $archivo = $usuario->archivos()->where('archivo_type', 'kardex')->first();
+        $this->authorize('descargar_archivo', [$archivo, $usuario]);
+
+        if (Storage::disk('public')->exists($archivo->ruta_archivo)) {
+            return response()->download(storage_path('app/public/'.$archivo->ruta_archivo), 'Kardex.pdf');
+        }else{
+            return back()->withErrors(['kardex' => 'El archivo no existe']);
+        }
+    }
+
+    public function ver_kardex(User $usuario){
+        $archivo = $usuario->archivos()->where('archivo_type', 'kardex')->first();
+        $this->authorize('descargar_archivo', [$archivo, $usuario]);
+
+        if (Storage::disk('public')->exists($archivo->ruta_archivo)) {
+            return response()->file(storage_path('app/public/'.$archivo->ruta_archivo));
+        }else{
+            return back()->withErrors(['kardex' => 'El archivo no existe']);
+        }
+
     }
 }

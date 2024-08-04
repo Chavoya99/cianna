@@ -5,6 +5,9 @@
     <x-slot name="logo">
         <x-authentication-card-logo/>
     </x-slot>
+    <!--MENSAJES DE ERROR -->
+    <x-validation-errors/>
+
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
         <!-- TÍTULO -->
@@ -142,10 +145,24 @@
                 </div>
                 <!-- CONTENEDOR DER KARDEX -->
                 <div class="w-[40%] px-28">
-                    <button class="block w-full bg-cianna-orange hover:bg-orange-300 text-white 
-                        py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:font-bold">
-                        <i class="fa-solid fa-download"></i> Haz clic aquí para ver tu kárdex
-                    </button>
+                    <form action="{{route('ver_kardex', Auth::user())}}" method="POST" target='_blank'>
+                        @csrf
+                        <button type="submit" class="block w-full bg-cianna-orange hover:bg-orange-300 text-white 
+                             py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:font-bold">
+                            <i class="fa-solid fa-file"></i> Haz clic aquí para ver tu kárdex
+                        </button>
+                    </form>
+                    <br>
+                    <form action="{{route('descargar_kardex', Auth::user())}}" method="POST">
+                        @csrf
+                        <button type="submit" class="block w-full bg-cianna-orange hover:bg-orange-300 text-white 
+                             py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:font-bold">
+                            <i class="fa-solid fa-download"></i> Descargar Kardex
+                        </button>
+                    </form>
+                    
+                    
+                    
                 </div>
             </div>
             <!-- CONTENEDOR HORIZONTAL 5 -->
