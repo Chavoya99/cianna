@@ -1,12 +1,4 @@
 <!-- resources/views/profile/my-profile.blade.php -->
-@props($images = [
-        'img_banio.jpg',
-        'img_cocina.jpg',
-        'img_cuarto.jpg',
-        'img_fachada.jpg',
-        'img_sala.jpg',
-        'img_banio.jpg',
-    ])
 @section('title') {{ 'Mi perfil' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
@@ -233,13 +225,14 @@
             <!-- CONTENEDOR HORIZONTAL 7 -->
     </div>
 </x-home-layout>
-
+@if(Auth::user()->tipo  == 'A')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const carousel = document.getElementById('carousel');
         const prev = document.getElementById('prev');
-        const next = document.getElementById('next');
+        const next = document.getElementById('next')
         const totalImages = {{ count($img_casa) }};
+        
         const visibleImages = 3;
         const imageWidth = carousel.firstElementChild.offsetWidth;
         let currentIndex = 0;
@@ -259,3 +252,4 @@
         });
     });
 </script>
+@endif
