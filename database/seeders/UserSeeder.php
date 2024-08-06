@@ -69,11 +69,6 @@ class UserSeeder extends Seeder
                 'tipo' => $tipo,
             ]);
 
-            User::where('tipo', 'A')
-                ->whereNotNull('profile_update')
-                ->first()
-                ->update(['email' => 'example@gmail.com']);
-
             if($tipo == 'A'){
                 $user->user_a()->create([
                     'edad' => random_int(18,35),
@@ -121,8 +116,6 @@ class UserSeeder extends Seeder
                     $rutaImagen = public_path('img/femenino.jpg');
                 } 
             }   
-              
-            
 
             if(File::exists($rutaImagen)){
                 
@@ -157,12 +150,7 @@ class UserSeeder extends Seeder
                         'ruta_archivo' => $ubicacion,
                     ]
                 );
-            }
-
-            
-
-
-            
+            }     
 
         }
 
@@ -181,6 +169,16 @@ class UserSeeder extends Seeder
             $tipo = 'B';
             generarUsuario($faker,$tipo,$sexo,$mascota,$padecimiento,$lifestyle,$carrera);
         }
+
+        User::where('tipo', 'A')
+            ->whereNotNull('profile_update')
+            ->first()
+            ->update(['email' => 'example@gmail.com']);
+
+        User::where('tipo', 'B')
+            ->whereNotNull('profile_update')
+            ->first()
+            ->update(['email' => 'exampleB@gmail.com']);
 
         
 
