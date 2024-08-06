@@ -109,3 +109,7 @@ Route::get('/account-settings', function(){
 Route::get('/my-profile', function(){
     return view('profile.my-profile');
 });
+
+Route::get('/detalles_hogar', function(){
+    return view('profile.room-details');
+});
