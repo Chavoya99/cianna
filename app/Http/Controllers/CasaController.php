@@ -92,7 +92,7 @@ class CasaController extends Controller
 
                 //Requisitos-precio-comprobante
                 'reqsts' => 'required|min:1|max:300',
-                'precio' => 'required|min:1',
+                'precio' => 'required|min:1|max:30000',
                 'compDom1' => 'required|mimes:pdf|max:4096',
                 'compDom2' => 'required|mimes:pdf|max:4096',
 
