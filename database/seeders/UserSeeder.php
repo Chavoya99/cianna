@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
         $mascota = ['si','no'];
         $padecimiento = ['si', 'no'];
         $lifestyle = ['d','t','a'];
-        $carrera = ['Ingeniería en computación', 'Ingeniería en informática'];
+        $carrera = ['ing_comp', 'ing_info'];
     
 
         $faker = Faker::create();
@@ -68,11 +68,6 @@ class UserSeeder extends Seeder
                 'profile_update' => now(),
                 'tipo' => $tipo,
             ]);
-
-            User::where('tipo', 'A')
-                ->whereNotNull('profile_update')
-                ->first()
-                ->update(['email' => 'example@gmail.com']);
 
             if($tipo == 'A'){
                 $user->user_a()->create([
@@ -106,19 +101,21 @@ class UserSeeder extends Seeder
 
             if($user->tipo == 'A'){
                 if($user->user_a->sexo == 'masculino'){
+                    $user->update(['name' => $faker->firstNameMale]);
                     $rutaImagen = public_path('img/masculino.jpg');
                 }else{
+                    $user->update(['name' => $faker->firstNameFemale]);
                     $rutaImagen = public_path('img/femenino.jpg');
                 } 
             }else{
                 if($user->user_b->sexo == 'masculino'){
+                    $user->update(['name' => $faker->firstNameMale]);
                     $rutaImagen = public_path('img/masculino.jpg');
                 }else{
+                    $user->update(['name' => $faker->firstNameFemale]);
                     $rutaImagen = public_path('img/femenino.jpg');
                 } 
             }   
-              
-            
 
             if(File::exists($rutaImagen)){
                 
@@ -136,7 +133,24 @@ class UserSeeder extends Seeder
                     ]
                 );
             }
-            
+
+            $rutaImagen = public_path('img/comprobantes_prueba/kardex_prueba.pdf');
+            if(File::exists($rutaImagen)){
+                
+                $archivoSimulado = new UploadedFile(
+                    $rutaImagen,
+                    'application/pdf',
+                );
+        
+                $ubicacion = $archivoSimulado->store('archivos_kardex', 'public');
+                $user->archivos()->create(
+                    [   
+                        'archivo_type' => 'kardex',
+                        'MIME' => $archivoSimulado->getClientMimeType(),
+                        'ruta_archivo' => $ubicacion,
+                    ]
+                );
+            }     
 
         }
 
@@ -155,6 +169,16 @@ class UserSeeder extends Seeder
             $tipo = 'B';
             generarUsuario($faker,$tipo,$sexo,$mascota,$padecimiento,$lifestyle,$carrera);
         }
+
+        User::where('tipo', 'A')
+            ->whereNotNull('profile_update')
+            ->first()
+            ->update(['email' => 'example@gmail.com']);
+
+        User::where('tipo', 'B')
+            ->whereNotNull('profile_update')
+            ->first()
+            ->update(['email' => 'exampleB@gmail.com']);
 
         
 

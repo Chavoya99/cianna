@@ -11,9 +11,12 @@ class AboutYou extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+
+    public $usuario;
+    
+    public function __construct($usuario = null)
     {
-        //
+        $this->usuario = $usuario;
     }
 
     /**

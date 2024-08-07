@@ -13,9 +13,15 @@ class UserBController extends Controller
     
     public function homeB(){
 
-        $casas = Casa::limit(4)->get();
-        $roomies = UserA::limit(6)->get();
-        return view('profile.home', compact('casas', 'roomies'));
+        $casas = Casa::with(['archivos' => function ($query) {
+            $query->where('clasificacion_archivo', 'img_cuarto');
+        }])->limit(4)->get();
+
+        $roomies = UserA::with(['user.archivos' => function($query){
+            $query->where('archivo_type', 'img_perf');
+        }])->limit(6)->get();
+        
+        return view('profile.home', compact('casas','roomies'));
     }
     /**
      * Display a listing of the resource.

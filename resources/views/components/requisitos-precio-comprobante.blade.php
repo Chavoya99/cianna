@@ -10,9 +10,9 @@
     </div>
 </div>
 <div class="mt-4">
-    <x-custom-label>Precio (MXN)</x-custom-label>
+    <x-custom-label>Precio (MXN)/MES</x-custom-label>
     <div class="flex items-center">
-        <span>$</span><x-custom-input id="precio" name="precio" type="number" value="{{old('precio')}}" class="ml-2 w-1/4 h-8" min="0" required></x-custom-input>
+        <span>$</span><x-custom-input id="precio" name="precio" type="number" value="{{old('precio')}}" class="ml-2 w-1/4 h-8" min="0"  max="30000" required></x-custom-input>
     </div>
 </div>
 <div class="mt-4">
