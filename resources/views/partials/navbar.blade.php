@@ -1,7 +1,16 @@
 @props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
 <div class="w-full flex items-center justify-between bg-white px-20 py-3">
     <div>
-        <a href="homeA" class="text-cianna-orange font-bold hover:text-orange-700">INICIO</a>
+        <?php 
+            if(Illuminate\Support\Facades\Auth::user()->tipo == 'A'){
+                $ruta_home=route('homeA');
+            }else if(Illuminate\Support\Facades\Auth::user()->tipo == 'B'){
+                $ruta_home = route('homeB');
+            }else{
+                $ruta_home = route('dashboard');
+            } 
+        ?>
+        <a href="{{$ruta_home}}" class="text-cianna-orange font-bold hover:text-orange-700">INICIO</a>
     </div>
     <div>
         <form>  
