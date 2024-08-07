@@ -66,9 +66,12 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
         Route::controller(HomeController::class)->group(function(){
             Route::get('/configuracion_cuenta', 'configuracion_cuenta')->name('config_cuenta');
             Route::post('/configuracion_cuenta',  'actualizar_cuenta')->name('actualizar_cuenta');
+
             Route::get('/mi_perfil', 'ver_perfil_usuario')->name('mi_perfil');
             Route::post('descargar_kardex/usuario_{usuario}', 'descargar_kardex')->name('descargar_kardex');
             Route::post('ver_kardex/usuario_{usuario}', 'ver_kardex')->name('ver_kardex');
+
+            Route::get('/ver_detalles_casa/{casa}', 'ver_detalles_casa')->name('detalles_casa');        
         });
         
         

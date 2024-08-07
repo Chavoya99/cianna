@@ -18,7 +18,7 @@
                 <div class="w-1/4 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                            <a href="detalles_hogar">
+                            <a href="{{route('detalles_casa', $casa)}}">
                                 <img class="object-cover w-full h-full absolute top-0 
                                 left-0 border border-cianna-gray rounded-lg" 
                                      src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
@@ -27,9 +27,9 @@
                         </div>
                     </div>
                     <!-- COLONIA -->
-                    <a href="detalles_hogar" class="mt-2 text-lg font-semibold line-clamp-1">{{ $casa->colonia }}</a>
+                    <a href="{{route('detalles_casa', $casa)}}" class="mt-2 text-lg font-semibold line-clamp-1">{{ $casa->colonia }}</a>
                     <!-- DESCRIPCIÓN -->
-                    <a href="detalles_hogar" class="text-sm line-clamp-3">{{ $casa->descripcion }}</a>
+                    <a href="{{route('detalles_casa', $casa)}}" class="text-sm line-clamp-3">{{ $casa->descripcion }}</a>
                 </div>
             @endforeach
         </div>

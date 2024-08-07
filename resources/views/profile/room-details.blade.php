@@ -1,16 +1,4 @@
 <!-- resources/views/profile/room-details.blade.php -->
-@props([
-    'images' => [
-        'img_banio.jpg',
-        'img_cocina.jpg',
-        'img_cuarto.jpg',
-        'img_fachada.jpg',
-        'img_sala.jpg',
-        'img_banio.jpg',
-    ],
-    'defaultImage' => asset('img/img_prueba_casas/img_sala.jpg'),
-    'reglaXtra' => 'No se permiten visitantes después de las 12 AM'
-    ])
 @section('title') {{ 'Detalles del hogar' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
@@ -27,14 +15,14 @@
             <!-- CONTENEDOR IZQUIERDO -->
             <div class="relative w-1/2 pl-16 pr-4 overflow-hidden">
                 <div id="carousel" class="transition-transform duration-500">
-                    @foreach (array_chunk($images, 3) as $chunkIndex => $chunk)
+                    @foreach (array_chunk($img_casa, 3) as $chunkIndex => $chunk) 
                     <div class="flex flex-col items-center mt-3 carousel-item" 
                         data-index="{{ $chunkIndex }}">
                         <div class="flex flex-col items-center block w-full">
                             <div class="inline-block relative h-64 w-full overflow-hidden 
                             rounded-md bg-gray-100">
                                 <img class="w-full h-full object-fill border-2 border-cianna-gray 
-                                rounded-lg" src="{{ asset('img/img_prueba_casas/' . $chunk[0]) }}" 
+                                rounded-lg" src="{{ asset('storage/' . $chunk[0]['ruta_archivo']) }}" 
                                 alt="Imagen previa" />
                             </div>
                         </div>
@@ -44,16 +32,19 @@
                                 bg-gray-100 mr-1">
                                 <img class="w-full h-full object-fill border-2 border-cianna-gray 
                                 rounded-lg" 
-                                src="{{ asset('img/img_prueba_casas/' . $chunk[1]) }}" 
+                                src="{{ asset('storage/' . $chunk[1]['ruta_archivo']) }}" 
                                 alt="Imagen previa" />
                             </div>
-                            <div class="inline-block relative h-64 w-1/2 overflow-hidden rounded-md 
-                                bg-gray-100 ml-1">
-                                <img class="w-full h-full object-fill border-2 border-cianna-gray 
-                                rounded-lg" 
-                                src="{{ asset('img/img_prueba_casas/' . $chunk[2]) }}" 
-                                alt="Imagen previa" />
-                            </div>
+                            @if(count($chunk) == 3)
+                                <div class="inline-block relative h-64 w-1/2 overflow-hidden rounded-md 
+                                    bg-gray-100 ml-1">
+                                    <img class="w-full h-full object-fill border-2 border-cianna-gray 
+                                    rounded-lg" 
+                                    src="{{ asset('storage/' . $chunk[2]['ruta_archivo']) }}" 
+                                    alt="Imagen previa" />
+                                </div>
+                            @endif
+                            
                         </div>
                     </div>
                     @endforeach
@@ -84,21 +75,21 @@
                             <x-custom-label>Calle</x-custom-label>
                             <div class="bg-white rounded-md text-center py-1 border 
                                 border-cianna-gray">
-                                <p>Boulevard Fernández de Lizardi</p>
+                                <p>{{$casa->calle}}</p>
                             </div>
                         </div>
                         <div class="w-1/6 px-2">
                             <x-custom-label>N° ext.</x-custom-label>
                             <div class="bg-white rounded-md text-center py-1 border 
                                 border-cianna-gray">
-                                <p>1523</p>
+                                <p>{{$casa->num_ext}}</p>
                             </div>
                         </div>
                         <div class="w-1/6 px-2">
                             <x-custom-label>N° int.</x-custom-label>
                             <div class="bg-white rounded-md text-center py-1 border 
                                 border-cianna-gray">
-                                <p>3</p>
+                                <p>@if(!$casa->num_int) N/A @else $casa->num_int @endif</p>
                         </div>
                         </div>
                     </div>
@@ -108,21 +99,21 @@
                             <x-custom-label>C.P.</x-custom-label>
                             <div class="bg-white rounded-md text-center py-1 border 
                                 border-cianna-gray">
-                                <p>45128</p>
+                                <p>{{$casa->codigo_postal}}</p>
                             </div>
                         </div>
                         <div class="w-2/5 px-2">
                             <x-custom-label>Ciudad</x-custom-label>
                             <div class="bg-white rounded-md text-center py-1 border 
                                 border-cianna-gray">
-                                <p>Zapopan</p>
+                                <p>{{$casa->ciudad}}</p>
                             </div>
                         </div>
                         <div class="w-2/5 px-2">
                             <x-custom-label>Colonia</x-custom-label>
                             <div class="bg-white rounded-md text-center py-1 border 
                                 border-cianna-gray">
-                                <p>Seattle</p>
+                                <p>{{$casa->colonia}}</p>
                             </div>
                         </div>
                     </div>
@@ -132,12 +123,7 @@
                         <div class="bg-white rounded-md justify-evenly border border-cianna-gray 
                             w-full px-4 py-2">
                             <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Vivamus lorem ligula, egestas eget egestas id, interdum quis purus. 
-                            Cras ut sapien leo. Nam sagittis neque ut cursus placerat. 
-                            Morbi lacinia aliquam purus at varius. 
-                            Proin a auctor diam, ac dignissim leo. 
-                            Proin fringilla nisi ut ligula tellus.
+                            {{$casa->descripcion}}
                             </p>
                         </div>
                     </div>
@@ -148,19 +134,19 @@
                             <div class="bg-white rounded-md px-1 py-1 border border-cianna-gray 
                                 flex items-center">
                                 <input type="checkbox" name="reglas[]" id="mascota" 
-                                class="h-5 w-5 text-cianna-orange rounded-md" checked disabled>
+                                class="h-5 w-5 text-cianna-orange rounded-md" @if ($casa->acepta_mascotas == 'si') checked @endif>
                                 <label class="ml-2 text-sm">Se aceptan mascotas</label>
                             </div>
                             <div class="mt-2 bg-white rounded-md px-1 py-1 border border-cianna-gray 
                                 flex items-center">
                                 <input type="checkbox" name="reglas[]" id="visitas" 
-                                class="h-5 w-5 text-cianna-orange rounded-md" checked disabled>
+                                class="h-5 w-5 text-cianna-orange rounded-md" @if ($casa->acepta_visitas == 'si') checked @endif disabled>
                                 <label class="ml-2 text-sm">Se aceptan visitas</label>
                             </div>
                             <div class="mt-2 bg-white rounded-md px-1 py-1 border border-cianna-gray 
                                 flex items-center">
                                 <input type="checkbox" name="reglas[]" id="limpieza" 
-                                class="h-5 w-5 text-cianna-orange rounded-md" disabled>
+                                class="h-5 w-5 text-cianna-orange rounded-md" @if ($casa->riguroza_limpieza == 'si') checked @endif disabled>
                                 <label class="ml-2 text-sm">Rigurosa limpieza</label>
                             </div>
                         </div>
@@ -169,10 +155,10 @@
                             <div class="mt-2 bg-white rounded-md px-1 py-1 text-sm border border-cianna-gray 
                                 flex items-center">
                                 <p>
-                                    @if($reglaXtra=='')
+                                    @if(!$casa->regla_adicional)
                                     <p>No se especificaron reglas adicionales</p>
                                     @else
-                                    <p>{{$reglaXtra}}</p>
+                                    <p>{{$casa->regla_adicional}}</p>
                                     @endif
                                 </p>
                             </div>
@@ -182,12 +168,12 @@
                                     <div class="flex items-center justify-between">
                                         <label>
                                             <input type="radio" name="muebles" id="muebles-s" 
-                                            class="w-4 h-4 text-cianna-orange" checked disabled>
+                                            class="w-4 h-4 text-cianna-orange" @if ($casa->muebles == 'si') checked @endif disabled>
                                             Sí.
                                         </label>
                                         <label>
                                             <input type="radio" name="muebles" id="muebles-n" 
-                                            class="w-4 h-4 text-cianna-orange" disabled>
+                                            class="w-4 h-4 text-cianna-orange" @if ($casa->muebles == 'no') checked @endif disabled>
                                             No.
                                         </label>
                                     </div>
@@ -197,12 +183,12 @@
                                     <div class="flex items-center justify-between">
                                         <label>
                                             <input type="radio" name="servicios" id="servicios-s" 
-                                            class="w-4 h-4 text-cianna-orange" checked disabled>
+                                            class="w-4 h-4 text-cianna-orange" @if ($casa->servicios == 'si') checked @endif disabled>
                                             Sí.
                                         </label>
                                         <label class="">
                                             <input type="radio" name="servicios" id="servicios-n" 
-                                            class="w-4 h-4 text-cianna-orange" disabled>
+                                            class="w-4 h-4 text-cianna-orange" @if ($casa->servicios == 'no') checked @endif disabled>
                                             No.
                                         </label>
                                     </div>
@@ -216,12 +202,7 @@
                         <div class="bg-white rounded-md justify-evenly border border-cianna-gray 
                             w-full px-4 py-2">
                             <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Vivamus lorem ligula, egestas eget egestas id, interdum quis purus. 
-                            Cras ut sapien leo. Nam sagittis neque ut cursus placerat. 
-                            Morbi lacinia aliquam purus at varius. 
-                            Proin a auctor diam, ac dignissim leo. 
-                            Proin fringilla nisi ut ligula tellus.
+                            {{$casa->requisitos}}
                             </p>
                         </div>
                     </div>
@@ -238,7 +219,7 @@
                             </div>
                             <div class="flex bg-white px-2 text-center
                                 border border-cianna-gray">
-                                <p class="text-gray-700">3,400.00</p>
+                                <p class="text-gray-700">{{number_format($casa->precio, 2, '.', ',')}}</p>
                             </div>
                             <div class="bg-gray-300 px-1 text-center rounded-tr-md rounded-br-md h-full
                                 border border-cianna-gray">

@@ -201,4 +201,12 @@ class HomeController extends Controller
         }
 
     }
+
+    public function ver_detalles_casa(Casa $casa){
+        $img_casa = $casa->archivos()
+        ->where('clasificacion_archivo', '!=', 'compDom1')
+        ->where('clasificacion_archivo', '!=', 'compDom2')
+        ->get()->toArray();
+        return view('profile.room-details', compact('casa', 'img_casa'));
+    }
 }
