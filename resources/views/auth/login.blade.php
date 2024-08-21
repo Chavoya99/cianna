@@ -27,9 +27,9 @@
                 <x-custom-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Contraseña" />
                 <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 px-3 py-2 text-gray-500">
                     <!-- Icono para mostrar la contraseña -->
-                    <i id="show-icon" class="fas fa-eye"></i>
+                    <i id="show-icon" class="fas fa-eye bg-white"></i>
                     <!-- Icono para ocultar la contraseña -->
-                    <i id="hide-icon" class="fas fa-eye-slash hidden"></i>
+                    <i id="hide-icon" class="fas fa-eye-slash bg-white hidden"></i>
                 </button>
             </div>
 

@@ -113,3 +113,11 @@ Route::get('/my-profile', function(){
 Route::get('/detalles_hogar', function(){
     return view('profile.room-details');
 });
+
+Route::get('/ver_mas_hogar', function(){
+    return view('profile.about-room');
+});
+
+Route::get('/detalles_roomie', function(){
+    return view('profile.roomie-details');
+});
