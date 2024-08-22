@@ -209,4 +209,9 @@ class HomeController extends Controller
         ->get()->toArray();
         return view('profile.room-details', compact('casa', 'img_casa'));
     }
+
+    public function vista_previa_casa(Casa $casa){
+        $img_casa = $casa->archivos()->where('clasificacion_archivo', 'img_cuarto')->first();
+        return view('profile.about-room', compact('casa', 'img_casa'));
+    }
 }

@@ -19,38 +19,37 @@
                     <div class="inline-block relative h-72 w-[85%] overflow-hidden 
                         rounded-md bg-gray-100">
                         <img class="w-full h-full object-fill border-2 border-cianna-gray 
-                        rounded-lg" src="{{ $defaultImage }}" 
+                        rounded-lg" src="{{ asset('storage/'.$img_casa->ruta_archivo) }}" 
                         alt="Imagen previa del hogar" />
                     </div>
                 </div>
             </div>
             <!-- INFORMACIÓN DEL HOGAR -->
             <div class="w-1/2 py-5 flex flex-col">
-                <h1 class="font-bold text-3xl line-clamp-1">Colonia Seattle</h1>
+                <h1 class="font-bold text-3xl line-clamp-1">{{$casa->colonia}}</h1>
                 <p class="mt-2 text-justify text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Suspendisse at magna faucibus, maximus mi id, malesuada urna. 
-                Nullam laoreet vestibulum cursus. Aenean iaculis felis sit amet dapibus ultrices. 
-                Ut ut molestie ligula. 
-                Donec auctor libero tortor, vitae scelerisque sapien laoreet lacinia sapien
+                {{$casa->descripcion}}
                 </p>
                 <p class="font-bold mt-4 mb-4 text-justify text-xl">
-                    $4,800.00
+                $ {{number_format($casa->precio, 2, '.', ',')}}
                 </p>
-                <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="detalles_hogar">Ver detalles...</a>
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="{{route('detalles_casa', $casa)}}">Ver detalles...</a>
                 <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->
-                <button class="mt-4 w-1/2 bg-cianna-gray hover:bg-gray-600 text-white font-bold py-2 px-4
-                    rounded focus:outline-none focus:shadow-outline" 
-                    onclick="">
-                    <i class="mr-2 fa-regular fa-star"></i>
-                    Agregar a favoritos
-                </button>
-                <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
-                    rounded focus:outline-none focus:shadow-outline" 
-                    onclick="">
-                    <i class="mr-2 fa-solid fa-envelope-open-text"></i>
-                    Postularse
-                </button>
+                @if(Auth::user()->tipo == 'B')
+                    <button class="mt-4 w-1/2 bg-cianna-gray hover:bg-gray-600 text-white font-bold py-2 px-4
+                        rounded focus:outline-none focus:shadow-outline" 
+                        onclick="">
+                        <i class="mr-2 fa-regular fa-star"></i>
+                        Agregar a favoritos
+                    </button>
+                    <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
+                        rounded focus:outline-none focus:shadow-outline" 
+                        onclick="">
+                        <i class="mr-2 fa-solid fa-envelope-open-text"></i>
+                        Postularse
+                    </button>
+                @endif
+                
                 <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->
             </div>
         </div>

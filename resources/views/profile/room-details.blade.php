@@ -220,37 +220,35 @@
                                 </div>
                                 <div class="flex bg-white px-2 text-center
                                     border border-cianna-gray">
-                                    <p class="text-gray-700">3,400.00</p>
+                                    <p class="text-gray-700">{{number_format($casa->precio, 2, '.', ',')}}</p>
                                 </div>
                                 <div class="bg-gray-300 px-1 text-center rounded-tr-md rounded-br-md h-full
                                     border border-cianna-gray">
                                     <p class="font-bold">/MES</p>
                                 </div>
                             </div>
-                            <div class="flex bg-white px-2 text-center
-                                border border-cianna-gray">
-                                <p class="text-gray-700">{{number_format($casa->precio, 2, '.', ',')}}</p>
-                            </div>
-                            <div class="bg-gray-300 px-1 text-center rounded-tr-md rounded-br-md h-full
-                                border border-cianna-gray">
-                                <p class="font-bold">/MES</p>
-                            </div>
                         </div>
-                        <button class="h-3/4 bg-cianna-gray hover:bg-gray-600 text-white font-bold py-2 px-4
-                            rounded focus:outline-none focus:shadow-outline"
-                            onclick="">
-                            <i class="mr-2 fa-regular fa-star"></i>
-                            Agregar a favoritos
-                        </button>
+                        @if (Auth::user()->tipo == 'B')
+                            <button class="h-3/4 bg-cianna-gray hover:bg-gray-600 text-white font-bold py-2 px-4
+                                rounded focus:outline-none focus:shadow-outline"
+                                onclick="">
+                                <i class="mr-2 fa-regular fa-star"></i>
+                                Agregar a favoritos
+                            </button>
+                        @endif
+                        
                     </div>
-                    <div class="w-full mt-4 px-2 flex justify-center">
-                        <button class="w-1/2 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
-                            rounded focus:outline-none focus:shadow-outline" 
-                            onclick="">
-                            <i class="mr-2 fa-solid fa-envelope-open-text"></i>
-                            Postularse
-                        </button>
-                    </div>
+                    @if (Auth::user()->tipo == 'B')
+                        <div class="w-full mt-4 px-2 flex justify-center">
+                            <button class="w-1/2 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
+                                rounded focus:outline-none focus:shadow-outline" 
+                                onclick="">
+                                <i class="mr-2 fa-solid fa-envelope-open-text"></i>
+                                Postularse
+                            </button>
+                        </div>
+                    @endif
+                    
                 </div>
             </div>
         </div>

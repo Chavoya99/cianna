@@ -71,6 +71,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::post('descargar_kardex/usuario_{usuario}', 'descargar_kardex')->name('descargar_kardex');
             Route::post('ver_kardex/usuario_{usuario}', 'ver_kardex')->name('ver_kardex');
 
+            Route::get('vista_previa_casa/{casa}', 'vista_previa_casa')->name('vista_previa_casa');
             Route::get('/ver_detalles_casa/{casa}', 'ver_detalles_casa')->name('detalles_casa');        
         });
         
