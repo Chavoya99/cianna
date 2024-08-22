@@ -192,9 +192,14 @@
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
+                        <div class="flex justify-between px-16">
                             <a class="flex justify-end font-semibold text-cianna-green 
-                                hover:text-cianna-orange" href="home-details">Ver detalles
+                                hover:text-cianna-orange" href="configuracion_hogar_2">Configurar
                             </a>
+                            <a class="flex justify-end font-semibold text-cianna-green 
+                                hover:text-cianna-orange" href="detalles_hogar">Ver detalles
+                            </a>
+                        </div>
                     </div>
                     <!-- CONTENEDOR DER -->
                     <div class="w-[40%] px-28"></div>
@@ -206,7 +211,7 @@
             <!-- CONTENEDOR HORIZONTAL 7 -->
             <div class="flex w-full mt-3">
                 <!-- CONTENEDOR IZQ BOTÓN REGRESAR -->
-                <div class="relative px-16 w-[60%]">
+                <div class="relative ml-16 w-[60%]">
                     <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                         rounded focus:outline-none focus:shadow-outline" 
                         onclick="window.history.back()">
@@ -225,6 +230,7 @@
             <!-- CONTENEDOR HORIZONTAL 7 -->
     </div>
 </x-home-layout>
+
 @if(Auth::user()->tipo  == 'A')
 <script>
     document.addEventListener('DOMContentLoaded', () => {

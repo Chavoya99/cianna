@@ -33,8 +33,11 @@
                             <div class="flex flex-col items-center block w-full">
                                 <div id="imageContainer" class="inline-block h-40 w-40 overflow-hidden 
                                     rounded-md bg-gray-100 mb-2">
-                                    <img id="preview" class="object-cover border border-cianna-gray 
-                                    rounded-lg" src="{{ $defaultImage }}" alt="Imagen previa" />
+                                    <?php
+                                        $imagen = Auth::user()->archivos()->where('archivo_type', 'img_perf')->get();
+                                    ?>
+                                    <img id="preview" class="h-full w-full object-cover border border-cianna-gray 
+                                    rounded-lg" src="{{asset('storage/'. $imagen[0]->ruta_archivo)}}" alt="Imagen previa" />
                                 </div>
                                 <x-custom-label for="img_perf">Cambiar foto de perfil</x-custom-label>
                                 <input id="img_perf" name="img_perf" type="file" 

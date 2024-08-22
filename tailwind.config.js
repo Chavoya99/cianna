@@ -44,5 +44,8 @@ export default {
         black: '900',
     },
 
-    plugins: [forms, typography,],
+    plugins: [
+        forms,
+        typography,
+    ],
 };

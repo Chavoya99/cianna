@@ -48,7 +48,6 @@
                 src="{{$defaultProfileImage}}" alt="Foto de perfil">
                 <i id="dropDownIcon" class="fa-solid fa-chevron-down text-cianna-gray"></i>
             @endif
-            
         </div>
         <div id="dropDown" class="absolute right-0 mt-2 w-48 bg-white bg-opacity-75 
             border-cianna-gray border-[1px] shadow-md py-2 px-2 rounded-md hidden z-10 

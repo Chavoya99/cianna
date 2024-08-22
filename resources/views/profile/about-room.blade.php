@@ -1,0 +1,127 @@
+<!-- resources/views/profile/roomie-details.blade.php -->
+@props(['defaultImage' => asset('img/img_prueba_casas/img_fachada.jpg')])
+@section('title') {{ 'Ver más | Hogar' }} @endsection
+<x-home-layout>
+    <x-slot name="logo">
+        <x-authentication-card-logo/>
+    </x-slot>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="w-full">
+        <!-- TÍTULO -->
+        <div class="mt-8 px-20 w-4/5">
+            <h1 class="text-cianna-orange text-3xl">Hogar</h1>
+        </div>
+        <!-- CONTENEDOR HORIZONTAL 1 -->
+        <div class="flex mt-8 px-20">
+            <!-- IMAGEN DEL HOGAR -->
+            <div class="w-1/2">
+                <div class="flex flex-col block w-full">
+                    <div class="inline-block relative h-72 w-[85%] overflow-hidden 
+                        rounded-md bg-gray-100">
+                        <img class="w-full h-full object-fill border-2 border-cianna-gray 
+                        rounded-lg" src="{{ $defaultImage }}" 
+                        alt="Imagen previa del hogar" />
+                    </div>
+                </div>
+            </div>
+            <!-- INFORMACIÓN DEL HOGAR -->
+            <div class="w-1/2 py-5 flex flex-col">
+                <h1 class="font-bold text-3xl line-clamp-1">Colonia Seattle</h1>
+                <p class="mt-2 text-justify text-lg">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Suspendisse at magna faucibus, maximus mi id, malesuada urna. 
+                Nullam laoreet vestibulum cursus. Aenean iaculis felis sit amet dapibus ultrices. 
+                Ut ut molestie ligula. 
+                Donec auctor libero tortor, vitae scelerisque sapien laoreet lacinia sapien
+                </p>
+                <p class="font-bold mt-4 mb-4 text-justify text-xl">
+                    $4,800.00
+                </p>
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="detalles_hogar">Ver detalles...</a>
+                <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->
+                <button class="mt-4 w-1/2 bg-cianna-gray hover:bg-gray-600 text-white font-bold py-2 px-4
+                    rounded focus:outline-none focus:shadow-outline" 
+                    onclick="">
+                    <i class="mr-2 fa-regular fa-star"></i>
+                    Agregar a favoritos
+                </button>
+                <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
+                    rounded focus:outline-none focus:shadow-outline" 
+                    onclick="">
+                    <i class="mr-2 fa-solid fa-envelope-open-text"></i>
+                    Postularse
+                </button>
+                <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->
+            </div>
+        </div>
+        <!-- CONTENEDOR HORIZONTAL TITULO 2 -->
+        <div class="flex mt-8 px-20 font-bold">
+            <p>Lugares que creemos te pueden gustar</p>
+        </div>
+        <!-- CONTENEDOR HORIZONTAL CASAS RECOMENDADAS -->
+        <div class="flex mt-4 px-20">
+            <div class="w-1/3 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
+                <div class="flex flex-col block">
+                    <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                        <a href="ver_mas_hogar">
+                            <img class="object-cover w-full h-full absolute top-0 
+                            left-0 border border-cianna-gray rounded-lg" 
+                                    src="{{ $defaultImage }}" 
+                                    alt="Imagen previa del hogar" />
+                        </a>
+                    </div>
+                </div>
+                <!-- COLONIA -->
+                <a href="ver_mas_hogar" class="mt-2 text-lg font-semibold line-clamp-1">Valle de los molinos</a>
+                <!-- DESCRIPCIÓN -->
+                <a href="ver_mas_hogar" class="text-sm line-clamp-2">Casa en fraccionamiento privado</a>
+                <!-- PRECIO -->
+                <a class="font-bold" href="ver_mas_hogar">$1,500.00</a>
+            </div>
+            <div class="w-1/3 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
+                <div class="flex flex-col block">
+                    <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                        <a href="ver_mas_hogar">
+                            <img class="object-cover w-full h-full absolute top-0 
+                            left-0 border border-cianna-gray rounded-lg" 
+                                    src="{{ $defaultImage }}" 
+                                    alt="Imagen previa del hogar" />
+                        </a>
+                    </div>
+                </div>
+                <!-- COLONIA -->
+                <a href="ver_mas_hogar" class="mt-2 text-lg font-semibold line-clamp-1">Colonia Americana</a>
+                <!-- DESCRIPCIÓN -->
+                <a href="ver_mas_hogar" class="text-sm line-clamp-2">Departamento compartido, una habitación con dos camas</a>
+                <!-- PRECIO -->
+                <a class="font-bold" href="ver_mas_hogar">$6,000.00</a>
+            </div>
+            <div class="w-1/3 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
+                <div class="flex flex-col block">
+                    <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                        <a href="ver_mas_hogar">
+                            <img class="object-cover w-full h-full absolute top-0 
+                            left-0 border border-cianna-gray rounded-lg" 
+                                    src="{{ $defaultImage }}" 
+                                    alt="Imagen previa del hogar" />
+                        </a>
+                    </div>
+                </div>
+                <!-- COLONIA -->
+                <a href="ver_mas_hogar" class="mt-2 text-lg font-semibold line-clamp-1">Puerta de Hierro</a>
+                <!-- DESCRIPCIÓN -->
+                <a href="ver_mas_hogar" class="line-clamp-2">Habitación privada con baño y clóset incluido</a>
+                <!-- PRECIO -->
+                <a class="font-bold" href="ver_mas_hogar">$10,500.00</a>
+            </div>
+        </div>
+        <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
+        <div class="relative px-20 mt-4">
+            <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
+                rounded focus:outline-none focus:shadow-outline" 
+                onclick="window.history.back()">
+                <i class="fa-solid fa-left-long mr-2"></i>Regresar
+            </button>
+        </div>
+    </div>
+</x-home-layout>

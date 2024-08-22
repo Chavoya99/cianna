@@ -34,7 +34,7 @@
             @endforeach
         </div>
         <div class="text-right mr-20 mt-2"><a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-        href="see-homes">Ver más...</a></div>
+        href="see-homes">Más hogares...</a></div>
     </div>
     <!-- ROOMIES -->
     <div class="w-full">
@@ -48,7 +48,7 @@
                 <div class="w-1/6 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                     <div class="flex flex-col block">
                         <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                            <a href="detalle-roommie-1">
+                            <a href="detalles_roomie">
                                 <img class="object-cover w-full h-full absolute top-0 
                                 left-0 border border-cianna-gray rounded-lg" 
                                      src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
@@ -65,7 +65,7 @@
         </div>
         <div class="text-right mr-20 mt-2">
             <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-            href="see-rommies">Ver más...</a>
+            href="see-rommies">Más compañeros...</a>
         </div>
     </div>
 </x-home-layout>

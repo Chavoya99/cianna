@@ -207,15 +207,25 @@
                         </div>
                     </div>
                     <!-- PRECIO -->
-                    <div class="w-2/5 mt-4 px-2">
-                        <x-custom-label>Precio</x-custom-label>
-                        <div class="flex flex-row">
-                            <div class="bg-gray-300 rounded-tl-md rounded-bl-md h-full 
-                                border border-cianna-gray">
-                                <i class="fa-solid fa-m ml-2 mt-1"></i>
-                                <i class="fa-solid fa-x mt-1"></i>
-                                <i class="fa-solid fa-n mt-1"></i>
-                                <i class="fa-solid fa-dollar-sign mt-1 mr-2"></i>
+                    <div class="w-full mt-4 px-2 flex justify-between items-end">
+                        <div>
+                            <x-custom-label>Precio</x-custom-label>
+                            <div class="flex flex-row">
+                                <div class="bg-gray-300 rounded-tl-md rounded-bl-md h-full 
+                                    border border-cianna-gray">
+                                    <i class="fa-solid fa-m ml-2 mt-1"></i>
+                                    <i class="fa-solid fa-x mt-1"></i>
+                                    <i class="fa-solid fa-n mt-1"></i>
+                                    <i class="fa-solid fa-dollar-sign mt-1 mr-2"></i>
+                                </div>
+                                <div class="flex bg-white px-2 text-center
+                                    border border-cianna-gray">
+                                    <p class="text-gray-700">3,400.00</p>
+                                </div>
+                                <div class="bg-gray-300 px-1 text-center rounded-tr-md rounded-br-md h-full
+                                    border border-cianna-gray">
+                                    <p class="font-bold">/MES</p>
+                                </div>
                             </div>
                             <div class="flex bg-white px-2 text-center
                                 border border-cianna-gray">
@@ -226,6 +236,20 @@
                                 <p class="font-bold">/MES</p>
                             </div>
                         </div>
+                        <button class="h-3/4 bg-cianna-gray hover:bg-gray-600 text-white font-bold py-2 px-4
+                            rounded focus:outline-none focus:shadow-outline"
+                            onclick="">
+                            <i class="mr-2 fa-regular fa-star"></i>
+                            Agregar a favoritos
+                        </button>
+                    </div>
+                    <div class="w-full mt-4 px-2 flex justify-center">
+                        <button class="w-1/2 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
+                            rounded focus:outline-none focus:shadow-outline" 
+                            onclick="">
+                            <i class="mr-2 fa-solid fa-envelope-open-text"></i>
+                            Postularse
+                        </button>
                     </div>
                 </div>
             </div>
