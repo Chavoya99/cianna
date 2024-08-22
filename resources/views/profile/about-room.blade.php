@@ -25,9 +25,9 @@
                 </div>
             </div>
             <!-- INFORMACIÓN DEL HOGAR -->
-            <div class="w-1/2 py-5">
+            <div class="w-1/2 py-5 flex flex-col">
                 <h1 class="font-bold text-3xl line-clamp-1">Colonia Seattle</h1>
-                <p class="mt-2 line-clamp-4 text-justify text-lg">
+                <p class="mt-2 text-justify text-lg">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                 Suspendisse at magna faucibus, maximus mi id, malesuada urna. 
                 Nullam laoreet vestibulum cursus. Aenean iaculis felis sit amet dapibus ultrices. 
@@ -38,11 +38,25 @@
                     $4,800.00
                 </p>
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="detalles_hogar">Ver detalles...</a>
+                <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->
+                <button class="mt-4 w-1/2 bg-cianna-gray hover:bg-gray-600 text-white font-bold py-2 px-4
+                    rounded focus:outline-none focus:shadow-outline" 
+                    onclick="">
+                    <i class="mr-2 fa-regular fa-star"></i>
+                    Agregar a favoritos
+                </button>
+                <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
+                    rounded focus:outline-none focus:shadow-outline" 
+                    onclick="">
+                    <i class="mr-2 fa-solid fa-envelope-open-text"></i>
+                    Postularse
+                </button>
+                <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->
             </div>
         </div>
         <!-- CONTENEDOR HORIZONTAL TITULO 2 -->
         <div class="flex mt-8 px-20 font-bold">
-            <p>Lugares que creemos que te pueden gustar</p>
+            <p>Lugares que creemos te pueden gustar</p>
         </div>
         <!-- CONTENEDOR HORIZONTAL CASAS RECOMENDADAS -->
         <div class="flex mt-4 px-20">
