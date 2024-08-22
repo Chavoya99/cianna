@@ -134,7 +134,7 @@
                             <div class="bg-white rounded-md px-1 py-1 border border-cianna-gray 
                                 flex items-center">
                                 <input type="checkbox" name="reglas[]" id="mascota" 
-                                class="h-5 w-5 text-cianna-orange rounded-md" @if ($casa->acepta_mascotas == 'si') checked @endif>
+                                class="h-5 w-5 text-cianna-orange rounded-md" @if ($casa->acepta_mascotas == 'si') checked @endif disabled>
                                 <label class="ml-2 text-sm">Se aceptan mascotas</label>
                             </div>
                             <div class="mt-2 bg-white rounded-md px-1 py-1 border border-cianna-gray 
