@@ -63,6 +63,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             });
             
         });//Final Middleware UserB
+
         Route::controller(HomeController::class)->group(function(){
             Route::get('/configuracion_cuenta', 'configuracion_cuenta')->name('config_cuenta');
             Route::post('/configuracion_cuenta',  'actualizar_cuenta')->name('actualizar_cuenta');
@@ -72,7 +73,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::post('ver_kardex/usuario_{usuario}', 'ver_kardex')->name('ver_kardex');
 
             Route::get('vista_previa_casa/{casa}', 'vista_previa_casa')->name('vista_previa_casa');
-            Route::get('/ver_detalles_casa/{casa}', 'ver_detalles_casa')->name('detalles_casa');        
+            Route::get('/ver_detalles_casa/{casa}', 'ver_detalles_casa')->name('detalles_casa');
+            
+            Route::get('listado_casas', 'listado_casas')->name('listado_casas');
         });
         
         

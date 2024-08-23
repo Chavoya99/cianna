@@ -10,9 +10,6 @@
         <div class="mt-2 ml-16">Lo recomendado para ti</div>
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($casas as $casa)
-                @php
-                    $imagen = $casa->archivos->first();
-                @endphp
                 
                 <!-- IMAGEN CASA-->
                 <div class="w-1/4 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
@@ -21,7 +18,7 @@
                             <a href="{{route('vista_previa_casa', $casa)}}">
                                 <img class="object-cover w-full h-full absolute top-0 
                                 left-0 border border-cianna-gray rounded-lg" 
-                                     src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
+                                     src="{{ asset('storage/'. $casa->archivos->first()->ruta_archivo) }}" 
                                      alt="Imagen previa del hogar" />
                             </a>
                         </div>
@@ -34,7 +31,7 @@
             @endforeach
         </div>
         <div class="text-right mr-20 mt-2"><a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-        href="otros_hogares">Más hogares...</a></div>
+        href="{{route('listado_casas')}}">Más hogares...</a></div>
     </div>
     <!-- ROOMIES -->
     <div class="w-full">

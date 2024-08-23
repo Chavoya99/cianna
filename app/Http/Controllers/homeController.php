@@ -214,4 +214,18 @@ class HomeController extends Controller
         $img_casa = $casa->archivos()->where('clasificacion_archivo', 'img_cuarto')->first();
         return view('profile.about-room', compact('casa', 'img_casa'));
     }
+
+    public function listado_casas(){
+        if(Auth::user()->tipo == 'A'){
+            $casas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('user_a_id', '!=', Auth::id())->get();
+        }else if(Auth::user()->tipo == 'B'){
+            $casas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->get();
+        }
+        
+        return view('profile.homes-list', compact('casas'));
+    }
 }
