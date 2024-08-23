@@ -26,4 +26,8 @@ class UserA extends Model
         return $this->hasOne(Casa::class, 'user_a_id');
     }
 
+    public function favoritos_roomies(){
+        return $this->hasMany(UserB::class, 'favoritos_roomies');
+    }
+
 }

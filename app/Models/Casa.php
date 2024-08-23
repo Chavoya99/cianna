@@ -27,4 +27,8 @@ class Casa extends Model
     public function postulaciones(){
         return $this->hasMany(Postulacion::class, 'casa_id');
     }
+
+    public function favoritos_casas(){
+        return $this->belongsToMany(UserB::class, 'favoritos_casas');
+    }
 }

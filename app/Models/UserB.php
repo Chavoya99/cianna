@@ -22,4 +22,12 @@ class UserB extends Model
         return $this->hasMany(Postulacion::class, 'user_b_id');
     }
 
+    public function favoritos_casas(){
+        return $this->hasMany(Casa::class, 'favoritos_casas');
+    }
+
+    public function favoritos_roomies(){
+        return $this->belongsToMany(UserA::class, 'favoritos_roomies');
+    }
+
 }
