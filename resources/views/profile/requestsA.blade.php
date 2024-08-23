@@ -29,7 +29,7 @@
                             </a>
                         </div>
                     </div>
-                    <!-- COLONIA -->
+                    <!-- NOMBRE -->
                     <a href="" class="mt-2 text-lg font-semibold line-clamp-1">Roomie {{$i}}</a>
                     <!-- DESCRIPCIÓN -->
                     <a href="" class="text-sm line-clamp-3">
@@ -50,7 +50,7 @@
         <div class="text-right mr-20 mt-2">
             <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="ver_mas_roomies">Ver más...</a>
         </div>
-        <!-- ROOMIES -->
+        <!-- RECOMENDACIONES -->
         <div class="w-full">
             <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">Recomendado para ti</div>
             <div class="mt-2 ml-16">Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo</div>
@@ -59,7 +59,7 @@
                     <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                         <div class="flex flex-col block">
                             <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                                <a href="detalles_roomie">
+                                <a href="">
                                     <img class="object-contain w-full h-full absolute top-0 
                                     left-0 border border-cianna-gray rounded-lg" 
                                         src="{{ $defaultProfileImage }}" 
@@ -68,9 +68,9 @@
                             </div>
                         </div>
                         <!-- NOMBRE ROOMIE -->
-                        <a href="detalle-roommie-1" class="mt-2 text-lg font-semibold line-clamp-1">Nombre</a>
+                        <a href="" class="mt-2 text-lg font-semibold line-clamp-1">Nombre</a>
                         <!-- DESCRIPCIÓN ROOMIE -->
-                        <a href="detalle-roommie-1" class="text-sm line-clamp-3">
+                        <a href="" class="text-sm line-clamp-3">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Curabitur sed justo nec tortor laoreet porttitor et ut massa.
                         Nam eget orci vestibulum velit tristique gravida ut eget massa. 
