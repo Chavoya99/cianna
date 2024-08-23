@@ -34,7 +34,7 @@
             @endforeach
         </div>
         <div class="text-right mr-20 mt-2"><a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-        href="see-homes">Más hogares...</a></div>
+        href="otros_hogares">Más hogares...</a></div>
     </div>
     <!-- ROOMIES -->
     <div class="w-full">

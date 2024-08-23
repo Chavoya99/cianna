@@ -125,3 +125,15 @@ Route::get('/ver_mas_hogar', function(){
 Route::get('/detalles_roomie', function(){
     return view('profile.roomie-details');
 });
+
+Route::get('otros_hogares', function(){
+    return view('profile.homes-list');
+});
+
+Route::get('postulacionesA', function(){
+    return view('profile.requestsA');
+});
+
+Route::get('favsA', function(){
+    return view('profile.favsA');
+});
