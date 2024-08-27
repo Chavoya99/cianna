@@ -29,6 +29,6 @@ class Casa extends Model
     }
 
     public function favoritos_casas(){
-        return $this->belongsToMany(UserB::class, 'favoritos_casas');
+        return $this->belongsToMany(UserB::class, 'favoritos_casas', 'user_b_id', 'casa_id');
     }
 }

@@ -18,7 +18,7 @@ class Postulacion extends Model
 
     public function habitacion(){
 
-        return $this->belongsTo(Habitacion::class, 'habitacion_id');
+        return $this->belongsTo(Casa::class, 'casa_id');
         
     }
 }

@@ -23,7 +23,7 @@ class UserB extends Model
     }
 
     public function favoritos_casas(){
-        return $this->hasMany(Casa::class, 'favoritos_casas');
+        return $this->belongsToMany(Casa::class, 'favoritos_casas', 'user_b_id', 'casa_id');
     }
 
     public function favoritos_roomies(){
