@@ -36,12 +36,7 @@
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="{{route('detalles_casa', $casa)}}">Ver detalles...</a>
                 <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->
                 @if(Auth::user()->tipo == 'B')
-                    <button class="mt-4 w-1/2 bg-cianna-gray hover:bg-gray-600 text-white font-bold py-2 px-4
-                        rounded focus:outline-none focus:shadow-outline" 
-                        onclick="">
-                        <i class="mr-2 fa-regular fa-star"></i>
-                        Agregar a favoritos
-                    </button>
+                    <livewire:favorite-button2 :casaId="$casa->id"/>
                     <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                         rounded focus:outline-none focus:shadow-outline" 
                         onclick="">
