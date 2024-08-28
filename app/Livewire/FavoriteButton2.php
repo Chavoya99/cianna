@@ -19,10 +19,10 @@ class FavoriteButton2 extends Component
     public function favorito()
     {
         if ($this->isFavorited) {
-            Auth::user()->user_b->favorites()->detach($this->itemId);
+            Auth::user()->user_b->favoritos_casas()->detach($this->itemId);
             $this->isFavorited = false;
         } else {
-            Auth::user()->user_b->favorites()->attach($this->itemId);
+            Auth::user()->user_b->favoritos_casas()->attach($this->itemId);
             $this->isFavorited = true;
         }
     }
