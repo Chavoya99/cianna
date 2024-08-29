@@ -229,7 +229,7 @@
                             </div>
                         </div>
                         @if (Auth::user()->tipo == 'B')
-                            <livewire:favorite-button />
+                            <livewire:favorite-button :casaId="$casa->id"/>
                         @endif
                         
                     </div>
