@@ -25,7 +25,11 @@ class CasaSeeder extends Seeder
         }
 
         function selecciona_colonia(){
-            $colonias = ['Colonia X', 'Colonia Y', 'Colonia Z'];
+            $colonias = ['Puerta de hierro', 'Miravalle', 'El Sauz',
+            'Jardines de la Cruz 1° Sección','Jardines de San José',
+            'Residencial La Cruz', 'Oblatos', 'Colonia del Sur',
+            'Colonia Americana', 'Jardines del Bosque', 'Del Fresno',
+            ];
             return $colonias[array_rand($colonias, 1)];
         }
 

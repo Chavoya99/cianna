@@ -54,60 +54,28 @@
         </div>
         <!-- CONTENEDOR HORIZONTAL CASAS RECOMENDADAS -->
         <div class="flex mt-4 px-20">
-            <div class="w-1/3 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
-                <div class="flex flex-col block">
-                    <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                        <a href="ver_mas_hogar">
-                            <img class="object-cover w-full h-full absolute top-0 
-                            left-0 border border-cianna-gray rounded-lg" 
-                                    src="{{ $defaultImage }}" 
-                                    alt="Imagen previa del hogar" />
-                        </a>
+            @foreach ($casasRecomendadas as $casa)
+                <div class="w-1/3 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
+                    <div class="flex flex-col block">
+                        <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                            <a href="{{route('vista_previa_casa', $casa)}}">
+                                <img class="object-cover w-full h-full absolute top-0 
+                                left-0 border border-cianna-gray rounded-lg" 
+                                        src="{{ asset('storage/'. $casa->archivos->first()->ruta_archivo)}}"
+                                        alt="Imagen previa del hogar" />
+                            </a>
+                        </div>
                     </div>
+                    <!-- COLONIA -->
+                    <a href="{{route('vista_previa_casa', $casa)}}"class="mt-2 text-lg font-semibold line-clamp-1">{{$casa->colonia}}</a>
+                    <!-- DESCRIPCIÓN -->
+                    <a href="{{route('vista_previa_casa', $casa)}}" class="text-sm line-clamp-2">{{$casa->descripcion}}</a>
+                    <!-- PRECIO -->
+                    <a class="font-bold" href="{{route('vista_previa_casa', $casa)}}">$ {{number_format($casa->precio, 2, '.', ',')}}</a>
                 </div>
-                <!-- COLONIA -->
-                <a href="ver_mas_hogar" class="mt-2 text-lg font-semibold line-clamp-1">Valle de los molinos</a>
-                <!-- DESCRIPCIÓN -->
-                <a href="ver_mas_hogar" class="text-sm line-clamp-2">Casa en fraccionamiento privado</a>
-                <!-- PRECIO -->
-                <a class="font-bold" href="ver_mas_hogar">$1,500.00</a>
-            </div>
-            <div class="w-1/3 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
-                <div class="flex flex-col block">
-                    <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                        <a href="ver_mas_hogar">
-                            <img class="object-cover w-full h-full absolute top-0 
-                            left-0 border border-cianna-gray rounded-lg" 
-                                    src="{{ $defaultImage }}" 
-                                    alt="Imagen previa del hogar" />
-                        </a>
-                    </div>
-                </div>
-                <!-- COLONIA -->
-                <a href="ver_mas_hogar" class="mt-2 text-lg font-semibold line-clamp-1">Colonia Americana</a>
-                <!-- DESCRIPCIÓN -->
-                <a href="ver_mas_hogar" class="text-sm line-clamp-2">Departamento compartido, una habitación con dos camas</a>
-                <!-- PRECIO -->
-                <a class="font-bold" href="ver_mas_hogar">$6,000.00</a>
-            </div>
-            <div class="w-1/3 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
-                <div class="flex flex-col block">
-                    <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                        <a href="ver_mas_hogar">
-                            <img class="object-cover w-full h-full absolute top-0 
-                            left-0 border border-cianna-gray rounded-lg" 
-                                    src="{{ $defaultImage }}" 
-                                    alt="Imagen previa del hogar" />
-                        </a>
-                    </div>
-                </div>
-                <!-- COLONIA -->
-                <a href="ver_mas_hogar" class="mt-2 text-lg font-semibold line-clamp-1">Puerta de Hierro</a>
-                <!-- DESCRIPCIÓN -->
-                <a href="ver_mas_hogar" class="line-clamp-2">Habitación privada con baño y clóset incluido</a>
-                <!-- PRECIO -->
-                <a class="font-bold" href="ver_mas_hogar">$10,500.00</a>
-            </div>
+            @endforeach
+            
+            
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
         <div class="relative px-20 mt-4">

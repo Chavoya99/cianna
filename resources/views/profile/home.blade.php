@@ -10,7 +10,6 @@
         <div class="mt-2 ml-16">Lo recomendado para ti</div>
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($casas as $casa)
-                
                 <!-- IMAGEN CASA-->
                 <div class="w-1/4 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                     <div class="flex flex-col block">
@@ -27,6 +26,8 @@
                     <a href="{{route('vista_previa_casa', $casa)}}" class="mt-2 text-lg font-semibold line-clamp-1">{{ $casa->colonia }}</a>
                     <!-- DESCRIPCIÓN -->
                     <a href="{{route('vista_previa_casa', $casa)}}" class="text-sm line-clamp-3">{{ $casa->descripcion }}</a>
+                    <!-- PRECIO -->
+                    <a class="font-bold" href="{{route('vista_previa_casa', $casa)}}">$ {{number_format($casa->precio, 2, '.', ',')}}</a>
                 </div>
             @endforeach
         </div>

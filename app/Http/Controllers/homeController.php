@@ -211,8 +211,19 @@ class HomeController extends Controller
     }
 
     public function vista_previa_casa(Casa $casa){
+        if(Auth::user()->tipo == 'A'){
+            $casasRecomendadas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('user_a_id', '!=', Auth::id())->where('id', '!=', $casa->id)->limit(3)->get();
+        }else if (Auth::user()->tipo == 'B'){
+            $casasRecomendadas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('id', '!=', $casa->id)->limit(3)->get();
+        }
+        
+
         $img_casa = $casa->archivos()->where('clasificacion_archivo', 'img_cuarto')->first();
-        return view('profile.about-room', compact('casa', 'img_casa'));
+        return view('profile.about-room', compact('casa', 'img_casa', 'casasRecomendadas'));
     }
 
     public function listado_casas(){
