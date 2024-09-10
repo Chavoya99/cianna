@@ -125,6 +125,10 @@ Route::get('/ver_mas_hogar', function(){
     return view('profile.about-room');
 });
 
+Route::get('/vista_previa_roomie', function(){
+    return view('profile.about-roomie');
+});
+
 Route::get('/detalles_roomie', function(){
     return view('profile.roomie-details');
 });

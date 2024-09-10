@@ -1,4 +1,4 @@
-<!-- resources/views/profile/roomie-details.blade.php -->
+<!-- resources/views/profile/about-room.blade.php -->
 @props(['defaultImage' => asset('img/img_prueba_casas/img_fachada.jpg')])
 @section('title') {{ 'Ver más | Hogar' }} @endsection
 <x-home-layout>
