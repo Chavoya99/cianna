@@ -62,24 +62,7 @@ class HomeController extends Controller
         }else{
             $usuario = Auth::user();
         }
-        $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
-        'ing_biom' => 'Ing. Biómedica',
-        'ing_civi' => 'Ing. Civil',
-        'ing_comp' => 'Ing. Computación',
-        'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
-        'ing_log_trans' => 'Ing. en Logística y Transporte',
-        'ing_topo' => 'Ing. en Topografía Geomática',
-        'ing_foto' => 'Ing. Fotónica',
-        'ing_indu' => 'Ing. Industrial',
-        'ing_info' => 'Ing. Informática',
-        'ing_meca' => 'Ing. Mecánica Eléctrica',
-        'ing_quim' => 'Ing. Química',
-        'ing_robo' => 'Ing. Robótica',
-        'lic_cien_mate' => 'Lic. en Ciencia de Materiales',
-        'lic_fis' => 'Lic. en Física',
-        'lic_mate' => 'Lic. en Matemáticas',
-        'lic_quim' => 'Lic. en Química',
-        'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
+        
 
         $img_perfil = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
         
@@ -88,7 +71,7 @@ class HomeController extends Controller
             $img_casa = Auth::user()->user_a->casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
         }
 
-        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $carreras[$usuario->carrera], 'img_casa' => $img_casa]);
+        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $this->obtener_nombre_carrera($usuario->carrera), 'img_casa' => $img_casa]);
     }
 
     public function actualizar_cuenta(Request $request){
@@ -203,6 +186,11 @@ class HomeController extends Controller
     }
 
     public function ver_detalles_casa(Casa $casa){
+
+        if($casa->user_a->id == Auth::user()->id){
+            //Configurar para redireccionar si se accede a la casa de mismo usuario autenticado
+        }
+
         $img_casa = $casa->archivos()
         ->where('clasificacion_archivo', '!=', 'compDom1')
         ->where('clasificacion_archivo', '!=', 'compDom2')
@@ -238,5 +226,46 @@ class HomeController extends Controller
         }
         
         return view('profile.homes-list', compact('casas'));
+    }
+
+    public function vista_previa_roomie($roomie){
+        if($roomie == Auth::id()){
+            return redirect(route('mi_perfil'));
+        }
+
+        $user = User::where('id', $roomie)->first();
+
+        if($user->tipo == 'A'){
+            $roomie_v = $user->user_a;
+        }else if($user->tipo == 'B'){
+            $roomie_v = $user->user_b;
+        }
+
+        $carrera = $this->obtener_nombre_carrera($roomie_v->carrera);
+        
+        return view('profile.about-roomie', compact('roomie_v', 'carrera'));
+    }
+
+    public function obtener_nombre_carrera($llave){
+        $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
+        'ing_biom' => 'Ing. Biómedica',
+        'ing_civi' => 'Ing. Civil',
+        'ing_comp' => 'Ing. Computación',
+        'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
+        'ing_log_trans' => 'Ing. en Logística y Transporte',
+        'ing_topo' => 'Ing. en Topografía Geomática',
+        'ing_foto' => 'Ing. Fotónica',
+        'ing_indu' => 'Ing. Industrial',
+        'ing_info' => 'Ing. Informática',
+        'ing_meca' => 'Ing. Mecánica Eléctrica',
+        'ing_quim' => 'Ing. Química',
+        'ing_robo' => 'Ing. Robótica',
+        'lic_cien_mate' => 'Lic. en Ciencia de Materiales',
+        'lic_fis' => 'Lic. en Física',
+        'lic_mate' => 'Lic. en Matemáticas',
+        'lic_quim' => 'Lic. en Química',
+        'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
+
+        return $carreras[$llave];
     }
 }
