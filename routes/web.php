@@ -76,6 +76,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('/ver_detalles_casa/{casa}', 'ver_detalles_casa')->name('detalles_casa');
             
             Route::get('listado_casas', 'listado_casas')->name('listado_casas');
+
+            Route::get('vista_previa_roomie/{roomie}', 'vista_previa_roomie')->name('vista_previa_roomie');
         });
         
         

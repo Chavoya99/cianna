@@ -62,7 +62,7 @@
                     <div class="flex flex-col block">
                         <div class="inline-block h-36 w-full overflow-hidden rounded-md 
                             bg-gray-100 relative">
-                            <a href="vista_previa_roomie">
+                            <a href="{{route('vista_previa_roomie', $roomie)}}">
                                 <img class="object-cover w-full h-full absolute top-0 left-0 
                                 border border-cianna-gray rounded-lg" 
                                 src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
@@ -71,12 +71,12 @@
                         </div>
                     </div>
                     <!-- NOMBRE ROOMIE -->
-                    <a href="vista_previa_roomie" 
+                    <a href="{{route('vista_previa_roomie', $roomie)}}"
                         class="mt-2 text-lg font-semibold line-clamp-1">
                         {{ $roomie->user->name }}
                     </a>
                     <!-- DESCRIPCIÓN ROOMIE -->
-                    <a href="vista_previa_roomie" class="text-sm line-clamp-3">
+                    <a href="{{route('vista_previa_roomie', $roomie)}}" class="text-sm line-clamp-3">
                         {{ $roomie->descripcion }}
                     </a>
                 </div>
