@@ -1,4 +1,4 @@
-<!-- resources/views/profile/roomie-details.blade.php -->
+<!-- resources/views/profile/about-room.blade.php -->
 @props(['defaultImage' => asset('img/img_prueba_casas/img_fachada.jpg')])
 @section('title') {{ 'Ver más | Hogar' }} @endsection
 <x-home-layout>
@@ -74,8 +74,6 @@
                     <a class="font-bold" href="{{route('vista_previa_casa', $casa)}}">$ {{number_format($casa->precio, 2, '.', ',')}}</a>
                 </div>
             @endforeach
-            
-            
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
         <div class="relative px-20 mt-4">
