@@ -234,6 +234,8 @@ class HomeController extends Controller
         }
 
         $user = User::where('id', $roomie)->first();
+        
+        $rutaImagenPerfil = $user->archivos()->where('archivo_type', 'img_perf')->first()->ruta_archivo;
 
         if($user->tipo == 'A'){
             $roomie_v = $user->user_a;
@@ -242,11 +244,27 @@ class HomeController extends Controller
         }
 
         $carrera = $this->obtener_nombre_carrera($roomie_v->carrera);
+
+        if(Auth::user()->tipo == 'A'){
+            $roomiesRecomendados = UserB::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }])->limit(4)->get();
+        }else if(Auth::user()->tipo == 'B'){
+            $roomiesRecomendados = UserA::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }])->limit(4)->get();
+        }
         
-        return view('profile.about-roomie', compact('roomie_v', 'carrera'));
+        $listaCarreras = $this->lista_carreras();
+        return view('profile.about-roomie', compact('roomie_v', 'carrera', 'rutaImagenPerfil', 'roomiesRecomendados', 'listaCarreras'));
     }
 
     public function obtener_nombre_carrera($llave){
+        $carreras = $this->lista_carreras();
+        return $carreras[$llave];
+    }
+
+    public function lista_carreras(){
         $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
         'ing_biom' => 'Ing. Biómedica',
         'ing_civi' => 'Ing. Civil',
@@ -266,6 +284,6 @@ class HomeController extends Controller
         'lic_quim' => 'Lic. en Química',
         'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
 
-        return $carreras[$llave];
+        return $carreras;
     }
 }
