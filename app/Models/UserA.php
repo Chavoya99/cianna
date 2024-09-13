@@ -27,7 +27,7 @@ class UserA extends Model
     }
 
     public function favoritos_roomies(){
-        return $this->hasMany(UserB::class, 'favoritos_roomies');
+        return $this->belongsToMany(UserB::class, 'favoritos_roomies', 'user_a_id', 'user_b_id');
     }
 
 }

@@ -36,12 +36,7 @@
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="detalles_roomie">Ver detalles...</a>
                 <!-- OCULTAR BOTONES PARA USUARIO TIPO B -->
                 @if(Auth::user()->tipo == 'A')
-                    <button class="mt-4 w-3/4 bg-cianna-orange hover:bg-orange-300 text-white font-bold py-2 px-4
-                        rounded focus:outline-none focus:shadow-outline" 
-                        onclick="">
-                        <i class="fa-regular fa-star"></i>
-                        Agregar a favoritos
-                    </button>
+                    <livewire:favorito-roomie-button :roomieId="$roomie_v->user_id" />
                     <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                         rounded focus:outline-none focus:shadow-outline" 
                         onclick="">
@@ -63,7 +58,7 @@
                 <div class="w-1/4 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                            <a href="vista_previa_roomie">
+                            <a href="{{route('vista_previa_roomie', $roomie)}}">
                                 <img class="object-fill w-full h-full absolute top-0 
                                 left-0 border border-cianna-gray rounded-lg" 
                                 src="{{asset('storage/'.$roomie->user->archivos->first()->ruta_archivo)}}"
@@ -72,15 +67,15 @@
                         </div>
                     </div>
                     <!-- Nombre -->
-                    <a href="vista_previa_roomie" class="mt-2 text-lg font-semibold line-clamp-1">
+                    <a href="{{route('vista_previa_roomie', $roomie)}}" class="mt-2 text-lg font-semibold line-clamp-1">
                         {{$roomie->user->name}}
                     </a>
                     <!-- DESCRIPCIÓN -->
-                    <a href="vista_previa_roomie" class="text-sm line-clamp-2">
+                    <a href="{{route('vista_previa_roomie', $roomie)}}" class="text-sm line-clamp-2">
                         {{$roomie->descripcion}}
                     </a>
                     <!-- CARRERA -->
-                    <a href="vista_previa_roomie" class="font-bold">
+                    <a href="{{route('vista_previa_roomie', $roomie)}}" class="font-bold">
                         {{$listaCarreras[$roomie->carrera]}}
                     </a>
                 </div>

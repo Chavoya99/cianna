@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('user_b_id')->references('user_id')->on('users_b')->onDelete('cascade');
             $table->timestamps();
 
-            $table->primary('user_a_id', 'user_b_id');
+            $table->primary(['user_a_id', 'user_b_id']);
         });
     }
 
