@@ -248,11 +248,11 @@ class HomeController extends Controller
         if(Auth::user()->tipo == 'A'){
             $roomiesRecomendados = UserB::with(['user.archivos' => function($query){
                 $query->where('archivo_type', 'img_perf');
-            }])->limit(4)->get();
+            }])->where('user_id', '!=', $roomie)->limit(4)->get();
         }else if(Auth::user()->tipo == 'B'){
             $roomiesRecomendados = UserA::with(['user.archivos' => function($query){
                 $query->where('archivo_type', 'img_perf');
-            }])->limit(4)->get();
+            }])->where('user_id', '!=', $roomie)->limit(4)->get();
         }
         
         $listaCarreras = $this->lista_carreras();
