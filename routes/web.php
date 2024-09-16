@@ -52,8 +52,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
 
             //Nota: cuando se establezcan las nuevas rutas relacionadas a la casa se deberá implementar un redireccionamiento
             //para evitar que el usuario pueda entrar a configuracion de hogar sin antes completar el registro del mismo.
-            Route::get('/configuracion_inicial_casa', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
-            Route::post('/guardar_configuracion_inicial_casa', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
+            Route::get('/configuracion_inicial_habitacion', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
+            Route::post('/guardar_configuracion_inicial_habitacion', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
 
         });
 
@@ -72,10 +72,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::post('descargar_kardex/usuario_{usuario}', 'descargar_kardex')->name('descargar_kardex');
             Route::post('ver_kardex/usuario_{usuario}', 'ver_kardex')->name('ver_kardex');
 
-            Route::get('vista_previa_casa/{casa}', 'vista_previa_casa')->name('vista_previa_casa');
-            Route::get('/ver_detalles_casa/{casa}', 'ver_detalles_casa')->name('detalles_casa');
+            Route::get('vista_previa_habitacion/{casa}', 'vista_previa_casa')->name('vista_previa_casa');
+            Route::get('/ver_detalles_habitacion/{casa}', 'ver_detalles_casa')->name('detalles_casa');
             
-            Route::get('listado_casas', 'listado_casas')->name('listado_casas');
+            Route::get('listado_habitaciones', 'listado_casas')->name('listado_casas');
 
             Route::get('vista_previa_roomie/{roomie}', 'vista_previa_roomie')->name('vista_previa_roomie');
         });
