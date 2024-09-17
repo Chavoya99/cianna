@@ -172,7 +172,7 @@
                 <div class="flex w-full mt-3">
                     <!-- CONTENEDOR IZQ IMG CASA -->
                     <div class="relative px-16 w-[60%]">
-                        <x-custom-label class="text-xl">Mi casa</x-custom-label>
+                        <x-custom-label class="text-xl">Habitación que estás ofreciendo</x-custom-label>
                         <div class="relative w-full overflow-hidden">
                             <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
                                 @foreach ($img_casa as $img)
@@ -194,7 +194,7 @@
                         </div>
                         <div class="flex justify-between px-16">
                             <a class="flex justify-end font-semibold text-cianna-green 
-                                hover:text-cianna-orange" href="configuracion_hogar_2">Configurar
+                                hover:text-cianna-orange" href="configuracion_hogar">Configurar
                             </a>
                             <a class="flex justify-end font-semibold text-cianna-green 
                                 hover:text-cianna-orange" href="detalles_hogar">Ver detalles

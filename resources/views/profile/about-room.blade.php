@@ -9,7 +9,7 @@
     <div class="w-full">
         <!-- TÍTULO -->
         <div class="mt-8 px-20 w-4/5">
-            <h1 class="text-cianna-orange text-3xl">Hogar</h1>
+            <h1 class="text-cianna-orange text-3xl">Habitación</h1>
         </div>
         <!-- CONTENEDOR HORIZONTAL 1 -->
         <div class="flex mt-8 px-20">

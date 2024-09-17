@@ -8,7 +8,7 @@
     <div class="w-full">
         <!-- TITULO -->
         <div class="mt-8 ml-16 mr-16 w-4/5">
-            <h1 class="text-cianna-orange text-3xl">Detalle de hogar</h1>
+            <h1 class="text-cianna-orange text-3xl">Detalle de habitación</h1>
         </div>
         <!-- DETALLES -->
         <div class="flex w-full mt-8">

@@ -5,7 +5,7 @@
         <x-authentication-card-logo/>
     </x-slot>
     <div class="w-full">
-        <div class="font-bold text-3xl mt-8 ml-16 mr-16">¿Buscas un hogar?</div>
+        <div class="font-bold text-3xl mt-8 ml-16 mr-16">¿Buscas una habitación?</div>
         <div class="mt-2 ml-16">Lo recomendado para ti</div>
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($casas as $casa)
@@ -44,7 +44,7 @@
         <div class="text-right mr-20 mt-2">
             <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
                 href="{{route('listado_casas')}}">
-                Más hogares...
+                Más habitaciones...
             </a>
         </div>
     </div>
