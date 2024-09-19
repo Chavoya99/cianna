@@ -108,14 +108,13 @@
                         ¿Cual dirías que es tu estilo de vida?
                     </x-custom-label>
                     <div class="flex items-center flex-wrap">
-                            @if($usuario->lifestyle == 'd')
-                                <p>Divertido, me gusta la fiesta.</p>
-                            @elseif($usuario->lifestyle == 't')
-                                <p>Tranquilo, prefiero no salir mucho.</p>
-                            @elseif($usuario->lifestyle == 'a')
-                                <p>Ni tan fiestero ni tan tranquilo, está bien tener un equilibrio.
-                                </p>
-                            @endif
+                        @if($usuario->lifestyle == 'd')
+                            <p>Divertido, me gusta la fiesta.</p>
+                        @elseif($usuario->lifestyle == 't')
+                            <p>Tranquilo, prefiero no salir mucho.</p>
+                        @elseif($usuario->lifestyle == 'a')
+                            <p>Ni tan fiestero ni tan tranquilo, está bien tener un equilibrio.</p>
+                        @endif
                     </div>
                 </div>
                 <!-- CONTENEDOR DER CARRERA -->

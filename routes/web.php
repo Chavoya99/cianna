@@ -133,7 +133,7 @@ Route::get('/vista_previa_roomie', function(){
 
 Route::get('/detalles_roomie', function(){
     return view('profile.roomie-details');
-});
+})->name('detalles_roomie');
 
 Route::get('otros_hogares', function(){
     return view('profile.homes-list');
