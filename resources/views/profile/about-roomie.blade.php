@@ -33,7 +33,7 @@
                 <p class="font-bold mt-4 mb-4 text-justify text-xl"> <!-- CARRERA -->
                     {{$carrera}}
                 </p>
-                <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="detalles_roomie">Ver detalles...</a>
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="{{ route('detalles_roomie') }}">Ver detalles...</a>
                 <!-- OCULTAR BOTONES PARA USUARIO TIPO B -->
                 @if(Auth::user()->tipo == 'A')
                     <livewire:favorito-roomie-button :roomieId="$roomie_v->user_id" />
@@ -57,7 +57,7 @@
             @foreach ($roomiesRecomendados as $roomie)
                 <div class="w-1/4 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                     <div class="flex flex-col block">
-                        <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                        <div class="inline-block h-60 w-full overflow-hidden rounded-md bg-gray-100 relative">
                             <a href="{{route('vista_previa_roomie', $roomie)}}">
                                 <img class="object-fill w-full h-full absolute top-0 
                                 left-0 border border-cianna-gray rounded-lg" 
