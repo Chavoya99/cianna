@@ -26,26 +26,45 @@
             </div>
             <!-- INFORMACIÓN DEL ROOMIE -->
             <div class="w-1/2 py-5 flex flex-col">
-                <h1 class="font-bold text-3xl line-clamp-1">{{$roomie_v->user->name.' '.$roomie_v->user->apellido}}</h1> <!-- NOMBRE -->
+                <h1 class="font-bold text-3xl line-clamp-1">
+                    {{$roomie_v->user->name.' '.$roomie_v->user->apellido}}
+                </h1> <!-- NOMBRE -->
                 <p class="mt-2 text-justify text-lg"> <!-- DESCRIPCIÓN -->
                     {{$roomie_v->descripcion}}
                 </p>
                 <p class="font-bold mt-4 mb-4 text-justify text-xl"> <!-- CARRERA -->
                     {{$carrera}}
                 </p>
-                <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="{{ route('detalles_roomie') }}">Ver detalles...</a>
-                <!-- OCULTAR BOTONES PARA USUARIO TIPO B -->
-                @if(Auth::user()->tipo == 'A')
-                    <livewire:favorito-roomie-button :roomieId="$roomie_v->user_id" />
-                    <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
-                        rounded focus:outline-none focus:shadow-outline" 
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                    href="{{ route('detalles_roomie') }}">
+                    <i class="fa-solid fa-circle-info mr-2"></i>Ver detalles
+                </a>
+                <!-- OCULTAR LINK VER HABITACIÓN PARA USUARIOS TIPO A -->
+                @if (Auth::user()->tipo == 'B')
+                    <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                        href="">
+                        <i class="fa-solid fa-bed mt-4 mr-2"></i>Ver habitación ofertada
+                    </a>
+                @endif
+                <!-- OCULTAR LINK PARA USUARIOS TIPO A -->
+                
+                <button class="mt-4 w-1/2 bg-cianna-orange hover:bg-orange-300 text-white font-bold 
+                    py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                    wire:click="favorito">
+                    <i class="mr-2 fa-regular fa-star"></i>
+                    Agregar a favoritos
+                </button>
+                
+                <!-- OCULTAR BOTÓN POSTULACIÓN PARA USUARIOS TIPO A -->
+                @if (Auth::user()->tipo == 'B')
+                    <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold 
+                        py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
                         onclick="">
                         <i class="mr-2 fa-solid fa-envelope-open-text"></i>
-                        Postular
+                        Postularse
                     </button>
                 @endif
-                
-                <!-- OCULTAR BOTONES PARA USUARIO TIPO B -->
+                <!-- OCULTAR BOTÓN PARA USUARIOS TIPO A -->
             </div>
         </div>
         <!-- CONTENEDOR HORIZONTAL TITULO 2 -->
@@ -55,9 +74,11 @@
         <!-- CONTENEDOR HORIZONTAL DE OTROS COMPAÑEROS -->
         <div class="flex mt-4 px-20">
             @foreach ($roomiesRecomendados as $roomie)
-                <div class="w-1/4 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
+                <div class="w-1/4 flex flex-col py-3 pl-3 pr-3 transition-transform transform 
+                    hover:scale-110">
                     <div class="flex flex-col block">
-                        <div class="inline-block h-60 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                        <div class="inline-block h-60 w-full overflow-hidden rounded-md bg-gray-100 
+                            relative">
                             <a href="{{route('vista_previa_roomie', $roomie)}}">
                                 <img class="object-fill w-full h-full absolute top-0 
                                 left-0 border border-cianna-gray rounded-lg" 
@@ -67,7 +88,8 @@
                         </div>
                     </div>
                     <!-- Nombre -->
-                    <a href="{{route('vista_previa_roomie', $roomie)}}" class="mt-2 text-lg font-semibold line-clamp-1">
+                    <a href="{{route('vista_previa_roomie', $roomie)}}" class="mt-2 text-lg 
+                        font-semibold line-clamp-1">
                         {{$roomie->user->name}}
                     </a>
                     <!-- DESCRIPCIÓN -->
