@@ -147,16 +147,18 @@
                 <div class="w-[40%] px-28">
                     <form action="{{route('ver_kardex', Auth::user())}}" method="POST" target='_blank'>
                         @csrf
-                        <button type="submit" class="block w-full bg-cianna-orange hover:bg-orange-300 text-white 
-                             py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:font-bold">
+                        <button type="submit" class="block w-full bg-cianna-orange 
+                            hover:bg-orange-300 text-white py-2 px-4 rounded focus:outline-none 
+                            focus:shadow-outline hover:font-bold">
                             <i class="fa-solid fa-file"></i> Haz clic aquí para ver tu kárdex
                         </button>
                     </form>
                     <br>
                     <form action="{{route('descargar_kardex', Auth::user())}}" method="POST">
                         @csrf
-                        <button type="submit" class="block w-full bg-cianna-orange hover:bg-orange-300 text-white 
-                             py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:font-bold">
+                        <button type="submit" class="block w-full bg-cianna-orange 
+                            hover:bg-orange-300 text-white py-2 px-4 rounded focus:outline-none 
+                            focus:shadow-outline hover:font-bold">
                             <i class="fa-solid fa-download"></i> Descargar Kardex
                         </button>
                     </form>
@@ -192,11 +194,13 @@
                             </button>
                         </div>
                         <div class="flex justify-between px-16">
-                            <a class="flex justify-end font-semibold text-cianna-green 
-                                hover:text-cianna-orange" href="configuracion_hogar">Configurar
+                            <a class="flex items-center justify-end font-semibold text-cianna-green 
+                                hover:text-cianna-orange" href="configuracion_hogar">
+                                <i class="fa-solid fa-gear mr-2"></i>Configurar
                             </a>
-                            <a class="flex justify-end font-semibold text-cianna-green 
-                                hover:text-cianna-orange" href="detalles_hogar">Ver detalles
+                            <a class="flex items-center justify-end font-semibold text-cianna-green 
+                                hover:text-cianna-orange" href="detalles_hogar">
+                                <i class="fa-solid fa-circle-info mr-2"></i>Ver detalles
                             </a>
                         </div>
                     </div>

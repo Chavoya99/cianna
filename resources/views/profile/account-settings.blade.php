@@ -36,8 +36,10 @@
                                     <?php
                                         $imagen = Auth::user()->archivos()->where('archivo_type', 'img_perf')->get();
                                     ?>
-                                    <img id="preview" class="h-full w-full object-cover border border-cianna-gray 
-                                    rounded-lg" src="{{asset('storage/'. $imagen[0]->ruta_archivo)}}" alt="Imagen previa" />
+                                    <img id="preview" class="h-full w-full object-cover 
+                                    border border-cianna-gray rounded-lg" 
+                                    src="{{asset('storage/'. $imagen[0]->ruta_archivo)}}" 
+                                    alt="Imagen previa" />
                                 </div>
                                 <x-custom-label for="img_perf">Cambiar foto de perfil</x-custom-label>
                                 <input id="img_perf" name="img_perf" type="file" 
@@ -133,9 +135,9 @@
                     <!-- CONTENEDOR DER BOTÓN ACEPTAR -->
                     <div class="px-24 w-[43%]">
                         <button class="block w-full bg-cianna-blue hover:bg-sky-900 text-white 
-                        font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-                        type="submit">
-                            Guardar
+                            font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                            type="submit">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i>Guardar
                         </button>
                     </div>
                 </div>

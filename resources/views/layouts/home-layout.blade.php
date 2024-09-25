@@ -40,7 +40,7 @@
                         Inicio
                     </x-home-buttons>
                     <x-home-buttons href="postulacionesA">
-                        <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                        <i class="fa-solid fa-envelopes-bulk mr-2"></i>
                         Postulaciones</x-home-buttons>
                     <x-home-buttons href="favsA">
                         <i class="fa-solid fa-star mr-2"></i>

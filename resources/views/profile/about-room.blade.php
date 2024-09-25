@@ -33,12 +33,19 @@
                 <p class="font-bold mt-4 mb-4 text-justify text-xl">
                 $ {{number_format($casa->precio, 2, '.', ',')}}
                 </p>
-                <a class="text-cianna-green font-semibold hover:text-cianna-orange" href="{{route('detalles_casa', $casa)}}">Ver detalles...</a>
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                    href="{{route('detalles_casa', $casa)}}">
+                    <i class="fa-solid fa-circle-info mr-2"></i>Ver detalles
+                </a>
                 <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->
                 @if(Auth::user()->tipo == 'B')
+                    <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                        href="{{ route('detalles_roomie') }}">
+                        <i class="fa-solid fa-address-card mt-4 mr-2"></i>Ver perfil del compañero
+                    </a>
                     <livewire:favorite-button2 :casaId="$casa->id"/>
-                    <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
-                        rounded focus:outline-none focus:shadow-outline" 
+                    <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold 
+                        py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
                         onclick="">
                         <i class="mr-2 fa-solid fa-envelope-open-text"></i>
                         Postularse
@@ -67,11 +74,19 @@
                         </div>
                     </div>
                     <!-- COLONIA -->
-                    <a href="{{route('vista_previa_casa', $casa)}}"class="mt-2 text-lg font-semibold line-clamp-1">{{$casa->colonia}}</a>
+                    <a href="{{route('vista_previa_casa', $casa)}}"
+                        class="mt-2 text-lg font-semibold line-clamp-1">
+                        {{$casa->colonia}}
+                    </a>
                     <!-- DESCRIPCIÓN -->
-                    <a href="{{route('vista_previa_casa', $casa)}}" class="text-sm line-clamp-2">{{$casa->descripcion}}</a>
+                    <a href="{{route('vista_previa_casa', $casa)}}" 
+                        class="text-sm line-clamp-2">
+                        {{$casa->descripcion}}
+                    </a>
                     <!-- PRECIO -->
-                    <a class="font-bold" href="{{route('vista_previa_casa', $casa)}}">$ {{number_format($casa->precio, 2, '.', ',')}}</a>
+                    <a class="font-bold" href="{{route('vista_previa_casa', $casa)}}">
+                        $ {{number_format($casa->precio, 2, '.', ',')}}
+                    </a>
                 </div>
             @endforeach
         </div>

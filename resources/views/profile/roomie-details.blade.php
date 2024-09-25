@@ -1,6 +1,7 @@
 <!-- resources/views/profile/roomie-details.blade.php -->
 @props(['defaultImage' => asset('img/avatar-default-svgrepo-com.png'), 'num_mascotas' => 4,
-        'padecimiento' => 'si', 'nom_padecimiento' => 'diabetes', 'lifestyle' => 'a'])
+        'padecimiento' => 'si', 'nom_padecimiento' => 'diabetes', 'lifestyle' => 'a',
+        'tipoUsuario' => 'B'])
 @section('title') {{ 'Detalles del roomie' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
@@ -68,8 +69,17 @@
                     <h1 class="font-bold text-3xl line-clamp-1 text-center tracking-wide mt-6">
                         María Rebollar
                     </h1>
-                    <p class="text-center text-xs text-cianna-gray">Está buscando compañero</p> <!-- <--- HABILITAR PARA QUE ESTO VEA USUARIO A -->
-                    <p class="text-center text-xs text-cianna-gray">Está ofreciendo una habitación</p> <!-- <--- HABILITAR PARA QUE ESTO VEA USUARIO B -->
+                    @if($tipoUsuario == 'A')
+                        <!-- <--- HABILITAR PARA QUE ESTO VEA USUARIO A -->
+                        <p class="text-center text-xs font-bold text-cianna-gray">
+                            Está buscando habitación
+                        </p>
+                    @else
+                        <!-- <--- HABILITAR PARA QUE ESTO VEA USUARIO B -->
+                        <p class="text-center text-xs font-bold text-cianna-gray">
+                            Está ofreciendo una habitación
+                        </p>
+                    @endif
                 </div>
                 <!-- DESRIPCIÓN -->
                 <div class="text-justify tracking-wide leading-loose mt-4">
@@ -116,6 +126,39 @@
                     @elseif($lifestyle == 'a')
                         <p>Ni tan fiestero ni tan tranquilo, está bien tener un equilibrio.</p>
                     @endif
+                </div>
+                <!-- HABITACIÒN OFERTADA POR EL USUARIO A, OCULTAR LINK PARA ESTE MISMO -->
+                @if($tipoUsuario == 'B')
+                    <div>
+                        <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                            href="">
+                            <i class="fa-solid fa-bed mt-4 mr-2"></i>Ver habitación ofertada
+                        </a>
+                    </div>
+                @endif
+                <!-- HABITACIÒN OFERTADA POR EL USUARIO A, OCULTAR LINK PARA ESTE MISMO -->
+                <!-- BOTONES FAVORITOS Y POSTULACIÓN -->
+                <div class="flex justify-between py-4">
+                    <div class="w-1/2 pr-1">
+                        <button class="w-full bg-cianna-orange hover:bg-orange-300 text-white 
+                            font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                            wire:click="favorito">
+                            <i class="mr-2 fa-regular fa-star"></i>
+                            Agregar a favoritos
+                        </button>
+                    </div>
+                    <!-- OCULTAR BOTÓN POSTULACIÓN PARA USUARIOS TIPO A -->
+                    @if($tipoUsuario == 'B')
+                        <div class="w-1/2 pl-1">
+                            <button class="w-full bg-cianna-blue hover:bg-sky-900 text-white 
+                                font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                                onclick="">
+                                <i class="mr-2 fa-solid fa-envelope-open-text"></i>
+                                Postularse
+                            </button>
+                        </div>
+                    @endif
+                    <!-- OCULTAR BOTÓN POSTULACIÓN PARA USUARIOS TIPO A -->
                 </div>
             </div>
         </div>
