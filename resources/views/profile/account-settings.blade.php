@@ -42,6 +42,11 @@
                                     alt="Imagen previa" />
                                 </div>
                                 <x-custom-label for="img_perf">Cambiar foto de perfil</x-custom-label>
+                                <label class="text-xs mb-4 text-center text-gray-600">
+                                    Para que los demás visualicen mejor tu foto de perfil
+                                    recomendamos subir una foto con el mismo ancho y largo.
+                                    <br>Ej. 1000x1000
+                                </label>
                                 <input id="img_perf" name="img_perf" type="file" 
                                 accept=".png,.jpg,.jpeg" class="block w-full file:bg-cianna-blue 
                                 file:text-white file:cursor-pointer text-sm rounded-md cursor-pointer 
