@@ -1,5 +1,5 @@
-<!-- resources/views/profile/requestsA.blade.php -->
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
+<!-- resources/views/profile/requestsB.blade.php -->
+@props(['defaultRoomImage' => asset('img/img_prueba_casas/img_cuarto.jpg')])
 @section('title') {{ 'Postulaciones' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
@@ -7,8 +7,8 @@
     </x-slot>
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
-        <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones recibidas</div>
-        <div class="mt-2 ml-16">Todas las postulaciones que has recibido</div>
+        <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones enviadas</div>
+        <div class="mt-2 ml-16">Todas las postulaciones que has enviado</div>
         <!-- Contenedor principal del carrusel -->
         <div class="relative overflow-hidden mt-2 ml-16 mr-16">
             <!-- Botón de flecha izquierda -->
@@ -23,14 +23,14 @@
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
                             <a href="detalle">
-                                <img class="object-contain w-full h-full absolute top-0 left-0 border border-cianna-gray rounded-lg" 
-                                    src="{{ $defaultProfileImage }}" 
+                                <img class="object-cover w-full h-full absolute top-0 left-0 border border-cianna-gray rounded-lg" 
+                                    src="{{ $defaultRoomImage }}" 
                                     alt="Imagen previa del hogar" />
                             </a>
                         </div>
                     </div>
-                    <!-- NOMBRE -->
-                    <a href="detalle" class="mt-2 text-lg font-semibold line-clamp-1">Roomie {{$i}}</a>
+                    <!-- COLONIA -->
+                    <a href="detalle" class="mt-2 text-lg font-semibold line-clamp-1">Colonia</a>
                     <!-- DESCRIPCIÓN -->
                     <a href="detalle" class="text-sm line-clamp-3">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -39,6 +39,8 @@
                     Aenean ultrices in tellus vel dapibus. 
                     Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
                     </a>
+                    <!-- PRECIO  -->
+                    <a href="detalle" class="mt-2 font-semibold">$9,999.00</a>
                 </div>
                 @endfor
             </div>
@@ -49,28 +51,28 @@
         </div>
         <div class="text-right mr-20 mt-2">
             <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                href="listado_requestsA">Ver más...
+                href="listado_requestsB">Ver más...
             </a>
         </div>
         <!-- RECOMENDACIONES -->
         <div class="w-full">
             <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">Recomendado para ti</div>
-            <div class="mt-2 ml-16">Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo</div>
+            <div class="mt-2 ml-16">Te has postulado y basado en tus intereses creemos que podrían ser mejor para ti</div>
             <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
                 @for ($i = 0; $i < 5; $i++)
                     <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                         <div class="flex flex-col block">
                             <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
                                 <a href="detalle">
-                                    <img class="object-contain w-full h-full absolute top-0 
+                                    <img class="object-cover w-full h-full absolute top-0 
                                     left-0 border border-cianna-gray rounded-lg" 
-                                        src="{{ $defaultProfileImage }}" 
+                                        src="{{ $defaultRoomImage }}" 
                                         alt="Imagen previa roomie" />
                                 </a>
                             </div>
                         </div>
-                        <!-- NOMBRE ROOMIE -->
-                        <a href="detalle" class="mt-2 text-lg font-semibold line-clamp-1">Nombre</a>
+                        <!-- COLONIA -->
+                        <a href="detalle" class="mt-2 text-lg font-semibold line-clamp-1">Colonia</a>
                         <!-- DESCRIPCIÓN ROOMIE -->
                         <a href="detalle" class="text-sm line-clamp-3">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -79,12 +81,14 @@
                         Aenean ultrices in tellus vel dapibus. 
                         Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
                         </a>
+                        <!-- PRECIO  -->
+                        <a href="detalle" class="mt-2 font-semibold">$9,999.00</a>
                     </div>
                 @endfor
             </div>
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                href="listado_suggestsA">Ver más...</a>
+                href="listado_suggestsB">Ver más...</a>
             </div>
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->

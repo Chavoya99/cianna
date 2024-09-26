@@ -143,6 +143,10 @@ Route::get('postulacionesA', function(){
     return view('profile.requestsA');
 });
 
+Route::get('postulacionesB', function(){
+    return view('profile.requestsB');
+});
+
 Route::get('favsA', function(){
     return view('profile.favsA');
 });
