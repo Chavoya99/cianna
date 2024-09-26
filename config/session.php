@@ -211,4 +211,7 @@ return [
 
     'partitioned' => false,
 
+
+    'remember_me_duration' => 43200, // 1 año en minutos
+
 ];

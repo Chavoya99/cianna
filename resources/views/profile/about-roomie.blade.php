@@ -53,14 +53,14 @@
                 @endif
                 
                 <!-- OCULTAR BOTÓN POSTULACIÓN PARA USUARIOS TIPO A -->
-                {{--@if (Auth::user()->tipo == 'B')
+                @if (Auth::user()->tipo == 'B')
                     <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold 
                         py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
                         onclick="">
                         <i class="mr-2 fa-solid fa-envelope-open-text"></i>
                         Postularse
                     </button>
-                @endif--}}
+                @endif
                 <!-- OCULTAR BOTÓN PARA USUARIOS TIPO A -->
             </div>
         </div>
