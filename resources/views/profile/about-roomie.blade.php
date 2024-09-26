@@ -1,5 +1,4 @@
 <!-- resources/views/profile/about-roomie.blade.php -->
-@props(['defaultImage' => asset('img/avatar-default-svgrepo-com.png')])
 @section('title') {{ 'Ver más | Roomie' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
@@ -36,34 +35,32 @@
                     {{$carrera}}
                 </p>
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="{{ route('detalles_roomie') }}">
+                    href="{{ route('detalles_roomie', $roomie_v) }}">
                     <i class="fa-solid fa-circle-info mr-2"></i>Ver detalles
                 </a>
                 <!-- OCULTAR LINK VER HABITACIÓN PARA USUARIOS TIPO A -->
                 @if (Auth::user()->tipo == 'B')
                     <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                        href="">
+                        href="{{route('detalles_casa', $roomie_v->casa)}}">
                         <i class="fa-solid fa-bed mt-4 mr-2"></i>Ver habitación ofertada
                     </a>
                 @endif
                 <!-- OCULTAR LINK PARA USUARIOS TIPO A -->
-                
-                <button class="mt-4 w-1/2 bg-cianna-orange hover:bg-orange-300 text-white font-bold 
-                    py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-                    wire:click="favorito">
-                    <i class="mr-2 fa-regular fa-star"></i>
-                    Agregar a favoritos
-                </button>
+                 
+                <!-- Ocultar boton de favoritos para usuarios tipo B -->
+                @if (Auth::user()->tipo == 'A')
+                    <livewire:favorito-roomie-button :roomieId="$roomie_v->user_id" />
+                @endif
                 
                 <!-- OCULTAR BOTÓN POSTULACIÓN PARA USUARIOS TIPO A -->
-                @if (Auth::user()->tipo == 'B')
+                {{--@if (Auth::user()->tipo == 'B')
                     <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold 
                         py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
                         onclick="">
                         <i class="mr-2 fa-solid fa-envelope-open-text"></i>
                         Postularse
                     </button>
-                @endif
+                @endif--}}
                 <!-- OCULTAR BOTÓN PARA USUARIOS TIPO A -->
             </div>
         </div>

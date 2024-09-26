@@ -259,6 +259,25 @@ class HomeController extends Controller
         return view('profile.about-roomie', compact('roomie_v', 'carrera', 'rutaImagenPerfil', 'roomiesRecomendados', 'listaCarreras'));
     }
 
+    public function ver_detalles_roomie($roomie){
+        if($roomie == Auth::id()){
+            return redirect(route('mi_perfil'));
+        }
+
+        $user = User::where('id', $roomie)->first();
+        $rutaImagenPerfil = $user->archivos()->where('archivo_type', 'img_perf')->first()->ruta_archivo;
+        
+        if($user->tipo == 'A'){
+            $roomie_detalle = $user->user_a;
+        }else if($user->tipo == 'B'){
+            $roomie_detalle = $user->user_b;
+        }
+
+        $carrera = $this->obtener_nombre_carrera($roomie_detalle->carrera);
+
+        return view('profile.roomie-details', compact('roomie_detalle', 'carrera', 'rutaImagenPerfil'));
+    }
+
     public function obtener_nombre_carrera($llave){
         $carreras = $this->lista_carreras();
         return $carreras[$llave];
@@ -268,7 +287,7 @@ class HomeController extends Controller
         $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
         'ing_biom' => 'Ing. Biómedica',
         'ing_civi' => 'Ing. Civil',
-        'ing_comp' => 'Ing. Computación',
+        'ing_comp' => 'Ing. en Computación',
         'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
         'ing_log_trans' => 'Ing. en Logística y Transporte',
         'ing_topo' => 'Ing. en Topografía Geomática',

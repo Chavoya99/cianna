@@ -240,7 +240,7 @@
                         @if (Auth::user()->tipo == 'B')
                             <div>
                                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                                    href="{{ route('detalles_roomie') }}">
+                                    href="{{ route('detalles_roomie', $casa->user_a) }}">
                                     <i class="fa-solid fa-address-card mt-4 mr-2"></i>
                                     Ver perfil del compañero
                                 </a>
