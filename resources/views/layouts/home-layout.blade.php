@@ -39,7 +39,7 @@
                         <i class="fa-solid fa-house mr-2"></i>
                         Inicio
                     </x-home-buttons>
-                    <x-home-buttons href="postulacionesA">
+                    <x-home-buttons href="{{route('ver_postulaciones')}}">
                         <i class="fa-solid fa-envelopes-bulk mr-2"></i>
                         Postulaciones</x-home-buttons>
                     <x-home-buttons href="favsA">

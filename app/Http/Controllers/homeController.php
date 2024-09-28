@@ -305,4 +305,12 @@ class HomeController extends Controller
 
         return $carreras;
     }
+
+    public function ver_postulaciones(){
+        if (Auth::user()->tipo == 'A'){
+            return view('profile.requestsA');
+        }else if(Auth::user()->tipo == 'B'){
+            return view('profile.requestsB');
+        }
+    }
 }

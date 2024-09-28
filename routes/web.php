@@ -79,6 +79,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
 
             Route::get('vista_previa_roomie/{roomie}', 'vista_previa_roomie')->name('vista_previa_roomie');
             Route::get('ver_detalles_roomie/{roomie}', 'ver_detalles_roomie')->name('detalles_roomie');
+
+            Route::get('ver_postulaciones', 'ver_postulaciones')->name('ver_postulaciones');
         });
         
         
