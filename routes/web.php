@@ -48,18 +48,20 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
         Route::middleware(UserAMiddleware::class)->group(function(){
             Route::controller(UserAController::class)->group(function(){
                 Route::get('/homeA','homeA')->name('homeA');
+                Route::get('favoritos_roomies', 'ver_favoritos_roomies')->name('favoritos_roomies');
             });
 
             //Nota: cuando se establezcan las nuevas rutas relacionadas a la casa se deberá implementar un redireccionamiento
             //para evitar que el usuario pueda entrar a configuracion de hogar sin antes completar el registro del mismo.
             Route::get('/configuracion_inicial_habitacion', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
             Route::post('/guardar_configuracion_inicial_habitacion', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
-
+            
         });
 
         Route::middleware(UserBMiddleware::class)->group(function(){
             Route::controller(UserBController::class)->group(function(){
                 Route::get('/homeB','homeB')->name('homeB');
+                Route::get('favoritos_casas', 'ver_favoritos_casas')->name('favoritos_casas');
             });
             
         });//Final Middleware UserB

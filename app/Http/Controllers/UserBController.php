@@ -23,6 +23,10 @@ class UserBController extends Controller
         
         return view('profile.home', compact('casas','roomies'));
     }
+
+    public function ver_favoritos_casas(){
+        return view('profile.favsA'); //Cambiar por vista de favsB
+    }
     /**
      * Display a listing of the resource.
      */
