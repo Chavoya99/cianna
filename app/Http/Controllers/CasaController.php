@@ -200,7 +200,7 @@ class CasaController extends Controller
             ]);
         }
         
-        Auth::user()->user_a->update(['registro_completo' => now()]);
+        Auth::user()->user_a->update(['registro_completo' => now('America/Belize')]);
 
         return redirect()->route('homeA')->with('success', '¡Registro completado con éxito!');
     

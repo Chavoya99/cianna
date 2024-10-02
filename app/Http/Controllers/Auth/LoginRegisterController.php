@@ -155,7 +155,7 @@ class LoginRegisterController extends Controller
             return back()->withErrors(['user' => 'El usuario no está autenticado.']);
         }
 
-        $user->update(['profile_update' => now()]);
+        $user->update(['profile_update' => now('America/Belize')]);
 
         return redirect()->route($ruta)->with('success', 'Configuración de cuenta terminada');
 

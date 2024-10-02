@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'apellido' => 'Dios',
             'email' => 'admin@admin.com',
             'tipo' => 'admin',
-            'profile_update' => now(),
+            'profile_update' => now('America/Belize'),
         ]);
 
         User::factory()->create([
@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
             $padecimiento = seleccionarPadecimiento();
 
             $user = User::factory()->create([
-                'profile_update' => now(),
+                'profile_update' => now('America/Belize'),
                 'tipo' => $tipo,
             ]);
 

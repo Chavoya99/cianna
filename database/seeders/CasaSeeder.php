@@ -54,7 +54,7 @@ class CasaSeeder extends Seeder
                 ]
                 );
             //Actualizar campo de registro_completo para el usuario relacionado con la casa
-            $usuario->update(['registro_completo' => now()]);
+            $usuario->update(['registro_completo' => now('America/Belize')]);
 
             //Imagenes para casas
             $clasificaciones = ['img_cuarto','img_banio','img_sala','img_cocina','img_fachada'];
