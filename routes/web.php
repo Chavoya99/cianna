@@ -150,3 +150,7 @@ Route::get('postulacionesB', function(){
 Route::get('favsA', function(){
     return view('profile.favsA');
 });
+
+Route::get('favsB', function(){
+    return view('profile.favsB');
+});
