@@ -135,6 +135,10 @@ Route::get('/detalles_roomie', function(){
     return view('profile.roomie-details');
 })->name('detalles_roomie');
 
+Route::get('/listado_roomies', function(){
+    return view('profile.roomies-list');
+});
+
 Route::get('otros_hogares', function(){
     return view('profile.homes-list');
 });

@@ -19,7 +19,7 @@
                     <div class="h-44 w-full overflow-hidden rounded-md flex relative 
                         transition-transform transform hover:scale-105">
                         <!-- IMAGEN -->
-                        <a href="" class="w-1/2">
+                        <a href="ver_detalles_habitacion" class="w-1/2">
                             <img class="object-cover w-full h-full border border-cianna-gray 
                                 bg-white rounded-lg" src="{{ $defaultRoomImage }}" 
                                 alt="Imagen previa de la habitación" />
@@ -31,11 +31,11 @@
                                 Favoritos
                             </p>
                             <!-- NOMBRE -->
-                            <a href="" class="text-lg font-semibold line-clamp-1">
+                            <a href="ver_detalles_habitacion" class="text-lg font-semibold line-clamp-1">
                                 Colonia
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="" class="text-sm text-justify line-clamp-3">
+                            <a href="ver_detalles_habitacion" class="text-sm text-justify line-clamp-3">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                                 Curabitur sed justo nec tortor laoreet porttitor et ut massa. 
                                 Nam eget orci vestibulum velit tristique gravida ut eget massa. 
@@ -43,7 +43,7 @@
                                 Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
                             </a>
                             <!-- PRECIO -->
-                            <a href="" class="text-md font-semibold mt-2">
+                            <a href="ver_detalles_habitacion" class="text-md font-semibold mt-2">
                                 $ 9,999.00 
                             </a>
                         </div>
@@ -52,7 +52,7 @@
             @endfor
             <div class="text-right mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange absolute right-0 px-20" 
-                    href="">Ver más...
+                    href="listado_favsB">Ver más...
                 </a>
             </div>
         </div>

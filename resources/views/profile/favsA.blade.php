@@ -19,7 +19,7 @@
                     <div class="h-44 w-full overflow-hidden rounded-md flex relative 
                         transition-transform transform hover:scale-105">
                         <!-- IMAGEN -->
-                        <a href="" class="w-1/2">
+                        <a href="detalles_roomie" class="w-1/2">
                             <img class="object-contain w-full h-full border border-cianna-gray 
                                 bg-white rounded-lg" src="{{ $defaultProfileImage }}" 
                                 alt="Imagen previa del roomie" />
@@ -31,19 +31,19 @@
                                 Favoritos
                             </p>
                             <!-- NOMBRE -->
-                            <a href="" class="text-lg font-semibold line-clamp-1">
+                            <a href="detalles_roomie" class="text-lg font-semibold line-clamp-1">
                                 Roomie {{ $i }}
                             </a>
                             <!-- CARRERA -->
-                            <a href="" class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
+                            <a href="detalles_roomie" class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
                                 Ingeniería informática
                             </a>
                             <!-- EDAD -->
-                            <a href="" class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
+                            <a href="detalles_roomie" class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
                                 22 años de edad
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="" class="text-sm text-justify line-clamp-3 mt-1">
+                            <a href="detalles_roomie" class="text-sm text-justify line-clamp-3 mt-1">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                                 Curabitur sed justo nec tortor laoreet porttitor et ut massa. 
                                 Nam eget orci vestibulum velit tristique gravida ut eget massa. 
@@ -57,7 +57,7 @@
             @endfor
             <div class="text-right mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange absolute right-0 px-20" 
-                    href="">Ver más...
+                    href="listado_favsA">Ver más...
                 </a>
             </div>
         </div>

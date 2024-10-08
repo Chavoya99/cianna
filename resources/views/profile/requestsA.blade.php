@@ -22,7 +22,7 @@
                 <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform transform hover:scale-110">
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                            <a href="detalle">
+                            <a href="detalles_roomie">
                                 <img class="object-contain w-full h-full absolute top-0 left-0 border border-cianna-gray rounded-lg" 
                                     src="{{ $defaultProfileImage }}" 
                                     alt="Imagen previa del hogar" />
@@ -30,9 +30,9 @@
                         </div>
                     </div>
                     <!-- NOMBRE -->
-                    <a href="detalle" class="mt-2 text-lg font-semibold line-clamp-1">Roomie {{$i}}</a>
+                    <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">Roomie {{$i}}</a>
                     <!-- DESCRIPCIÓN -->
-                    <a href="detalle" class="text-sm text-justify line-clamp-3">
+                    <a href="detalles_roomie" class="text-sm text-justify line-clamp-3">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Curabitur sed justo nec tortor laoreet porttitor et ut massa.
                     Nam eget orci vestibulum velit tristique gravida ut eget massa. 
@@ -40,7 +40,7 @@
                     Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
                     </a>
                     <!-- CARRERA -->
-                    <a href="detalle" class="mt-2 text-lg font-semibold line-clamp-1">
+                    <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">
                         Ingeniería informática
                     </a>
                 </div>
@@ -65,7 +65,7 @@
                     <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
                         <div class="flex flex-col block">
                             <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                                <a href="detalle">
+                                <a href="detalles_roomie">
                                     <img class="object-contain w-full h-full absolute top-0 
                                     left-0 border border-cianna-gray rounded-lg" 
                                         src="{{ $defaultProfileImage }}" 
@@ -74,9 +74,9 @@
                             </div>
                         </div>
                         <!-- NOMBRE ROOMIE -->
-                        <a href="detalle" class="mt-2 text-lg font-semibold line-clamp-1">Nombre</a>
+                        <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">Nombre</a>
                         <!-- DESCRIPCIÓN ROOMIE -->
-                        <a href="detalle" class="text-sm text-justify line-clamp-1">
+                        <a href="detalles_roomie" class="text-sm text-justify line-clamp-1">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Curabitur sed justo nec tortor laoreet porttitor et ut massa.
                         Nam eget orci vestibulum velit tristique gravida ut eget massa. 
