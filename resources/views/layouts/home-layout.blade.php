@@ -22,10 +22,10 @@
         <div class="font-sans antialiased">
             <div class="flex pt-6 sm:pt-0 bg-cianna-white min-h-screen">
                 <div class="w-3/20 overflow-hidden flex flex-col items-center px-2 py-4 bg-cianna-gray">
-                    <div class="w-1/2">
+                    <div class="w-1/2 mt-6">
                         {{ $logo }}
                     </div>
-                    <div class=" w-full flex flex-col mt-8 ">
+                    <div class=" w-full flex flex-col mt-5">
                     <?php 
                         if(Illuminate\Support\Facades\Auth::user()->tipo == 'A'){
                             $ruta_home=route('homeA');
@@ -37,7 +37,7 @@
                             $ruta_home = route('dashboard');
                         } 
                     ?>
-                    <x-home-buttons href="{{$ruta_home}}">
+                    <x-home-buttons class="" href="{{$ruta_home}}">
                         <i class="fa-solid fa-house mr-2"></i>
                         Inicio
                     </x-home-buttons>

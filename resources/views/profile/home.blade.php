@@ -42,7 +42,13 @@
             @endforeach
         </div>
         <div class="text-right mr-20 mt-2">
-            <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+            @if (Auth::user()->tipo == 'B')
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                    href="">
+                    Habitaciones recomendadas...
+                </a>
+            @endif
+            <a class="ml-10 text-cianna-green font-semibold hover:text-cianna-orange" 
                 href="{{route('listado_casas')}}">
                 Más habitaciones...
             </a>
@@ -83,7 +89,13 @@
             @endforeach
         </div>
         <div class="text-right mr-20 mt-2">
-            <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+            @if (Auth::user()->tipo == 'A')
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                    href="">
+                    Compañeros recomendados...
+                </a>
+            @endif
+            <a class="ml-10 text-cianna-green font-semibold hover:text-cianna-orange" 
                 href="listado_roomies">
                 Más compañeros...
             </a>

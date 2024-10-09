@@ -140,6 +140,10 @@ Route::get('/detalles_roomie', function(){
     return view('profile.roomie-details');
 });
 
+Route::get('/listado_roomies', function(){
+    return view('profile.roomies-list');
+});
+
 Route::get('otros_hogares', function(){
     return view('profile.homes-list');
 });
@@ -154,4 +158,8 @@ Route::get('postulacionesB', function(){
 
 Route::get('favsA', function(){
     return view('profile.favsA');
+});
+
+Route::get('favsB', function(){
+    return view('profile.favsB');
 });
