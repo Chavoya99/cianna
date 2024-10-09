@@ -48,7 +48,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
         Route::middleware(UserAMiddleware::class)->group(function(){
             Route::controller(UserAController::class)->group(function(){
                 Route::get('/homeA','homeA')->name('homeA');
-                Route::get('favoritos_roomies', 'ver_favoritos_roomies')->name('favoritos_roomies');
             });
 
             //Nota: cuando se establezcan las nuevas rutas relacionadas a la casa se deberá implementar un redireccionamiento
@@ -60,8 +59,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
 
         Route::middleware(UserBMiddleware::class)->group(function(){
             Route::controller(UserBController::class)->group(function(){
-                Route::get('/homeB','homeB')->name('homeB');
-                Route::get('favoritos_casas', 'ver_favoritos_casas')->name('favoritos_casas');
+                Route::get('/homeB','homeB')->name('homeB'); 
             });
             
         });//Final Middleware UserB
@@ -83,6 +81,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('ver_detalles_roomie/{roomie}', 'ver_detalles_roomie')->name('detalles_roomie');
 
             Route::get('ver_postulaciones', 'ver_postulaciones')->name('ver_postulaciones');
+            Route::get('mis_favoritos', 'ver_favoritos')->name( 'ver_favoritos');
         });
         
         

@@ -25,9 +25,6 @@ class UserAController extends Controller
         return view('profile.home', compact('casas','roomies'));
     }
 
-    public function ver_favoritos_roomies(){
-        return view('profile.favsA');
-    }
     /**
      * Display a listing of the resource.
      */

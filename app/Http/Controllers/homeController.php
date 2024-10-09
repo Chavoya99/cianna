@@ -313,4 +313,12 @@ class HomeController extends Controller
             return view('profile.requestsB');
         }
     }
+
+    public function ver_favoritos(){
+        if (Auth::user()->tipo == 'A'){
+            return view('profile.favsA');
+        }else if(Auth::user()->tipo == 'B'){
+            return view('profile.favsB');
+        }
+    }
 }

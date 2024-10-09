@@ -29,10 +29,8 @@
                     <?php 
                         if(Illuminate\Support\Facades\Auth::user()->tipo == 'A'){
                             $ruta_home=route('homeA');
-                            $ruta_favs=route('favoritos_roomies');
                         }else if(Illuminate\Support\Facades\Auth::user()->tipo == 'B'){
                             $ruta_home = route('homeB');
-                            $ruta_favs = route('favoritos_casas');
                         }else{
                             $ruta_home = route('dashboard');
                         } 
@@ -44,7 +42,7 @@
                     <x-home-buttons href="{{route('ver_postulaciones')}}">
                         <i class="fa-solid fa-envelopes-bulk mr-2"></i>
                         Postulaciones</x-home-buttons>
-                    <x-home-buttons href="{{$ruta_favs}}">
+                    <x-home-buttons href="{{route('ver_favoritos')}}">
                         <i class="fa-solid fa-star mr-2"></i>
                         Tus favoritos
                     </x-home-buttons>
