@@ -76,6 +76,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('/ver_detalles_habitacion/{casa}', 'ver_detalles_casa')->name('detalles_casa');
             
             Route::get('listado_habitaciones', 'listado_casas')->name('listado_casas');
+            Route::get('listado_roomies', 'listado_roomies')->name('listado_roomies');
 
             Route::get('vista_previa_roomie/{roomie}', 'vista_previa_roomie')->name('vista_previa_roomie');
             Route::get('ver_detalles_roomie/{roomie}', 'ver_detalles_roomie')->name('detalles_roomie');
@@ -137,10 +138,6 @@ Route::get('/vista_previa_roomie', function(){
 
 Route::get('/detalles_roomie', function(){
     return view('profile.roomie-details');
-});
-
-Route::get('/listado_roomies', function(){
-    return view('profile.roomies-list');
 });
 
 Route::get('otros_hogares', function(){

@@ -96,7 +96,7 @@
                 </a>
             @endif
             <a class="ml-10 text-cianna-green font-semibold hover:text-cianna-orange" 
-                href="listado_roomies">
+                href="{{route('listado_roomies')}}">
                 Más compañeros...
             </a>
         </div>
