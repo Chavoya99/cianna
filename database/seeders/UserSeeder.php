@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
         $mascota = ['si','no'];
         $padecimiento = ['si', 'no'];
         $lifestyle = ['d','t','a'];
-        $carrera = ['ing_comp', 'ing_info'];
+        $carrera = ['ing_comp', 'ing_info', 'ing_civi', 'ing_robo'];
     
 
         $faker = Faker::create();

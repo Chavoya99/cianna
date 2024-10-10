@@ -306,6 +306,22 @@ class HomeController extends Controller
         return $carreras;
     }
 
+    public function ver_favoritos(){
+        if (Auth::user()->tipo == 'A'){
+            $favoritos = Auth::user()->user_a->favoritos_roomies()->with(['user.archivos' => function ($query) {
+                $query->where('archivo_type', 'img_perf');}])->get();
+
+            $carreras = $this->lista_carreras();
+
+            return view('profile.favsA', compact('favoritos', 'carreras'));
+        }else if(Auth::user()->tipo == 'B'){
+            $favoritos = Auth::user()->user_b->favoritos_casas()->with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
+
+            return view('profile.favsB', compact('favoritos'));
+        }
+    }
+
     public function ver_postulaciones(){
         if (Auth::user()->tipo == 'A'){
             return view('profile.requestsA');
@@ -314,11 +330,5 @@ class HomeController extends Controller
         }
     }
 
-    public function ver_favoritos(){
-        if (Auth::user()->tipo == 'A'){
-            return view('profile.favsA');
-        }else if(Auth::user()->tipo == 'B'){
-            return view('profile.favsB');
-        }
-    }
+    
 }
