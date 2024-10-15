@@ -9,7 +9,7 @@
     <div class="w-full">
         <!-- TITULO -->
         <div class="mt-8 ml-16 mr-16 w-4/5">
-            <h1 class="text-cianna-orange text-3xl">Más hogares recomendados</h1>
+            <h1 class="text-cianna-orange text-3xl">Más habitaciones disponibles</h1>
         </div>
         <!-- MUESTRA DE HOGARES -->
         <div class="mt-8 px-16 grid grid-cols-2 gap-6"> <!-- Añadir clases de grid para 2 columnas y espacio entre elementos -->

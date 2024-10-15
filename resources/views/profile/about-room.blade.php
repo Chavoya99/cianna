@@ -57,7 +57,7 @@
         </div>
         <!-- CONTENEDOR HORIZONTAL TITULO 2 -->
         <div class="flex mt-8 px-20 font-bold">
-            <p>Lugares que creemos te pueden gustar</p>
+            <p>Otras habitaciones disponibles</p>
         </div>
         <!-- CONTENEDOR HORIZONTAL CASAS RECOMENDADAS -->
         <div class="flex mt-4 px-20">
