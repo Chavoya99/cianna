@@ -54,12 +54,12 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             //para evitar que el usuario pueda entrar a configuracion de hogar sin antes completar el registro del mismo.
             Route::get('/configuracion_inicial_habitacion', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
             Route::post('/guardar_configuracion_inicial_habitacion', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
-
+            
         });
 
         Route::middleware(UserBMiddleware::class)->group(function(){
             Route::controller(UserBController::class)->group(function(){
-                Route::get('/homeB','homeB')->name('homeB');
+                Route::get('/homeB','homeB')->name('homeB'); 
             });
             
         });//Final Middleware UserB
@@ -76,8 +76,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('/ver_detalles_habitacion/{casa}', 'ver_detalles_casa')->name('detalles_casa');
             
             Route::get('listado_habitaciones', 'listado_casas')->name('listado_casas');
+            Route::get('listado_roomies', 'listado_roomies')->name('listado_roomies');
 
             Route::get('vista_previa_roomie/{roomie}', 'vista_previa_roomie')->name('vista_previa_roomie');
+            Route::get('ver_detalles_roomie/{roomie}', 'ver_detalles_roomie')->name('detalles_roomie');
+
+            Route::get('ver_postulaciones', 'ver_postulaciones')->name('ver_postulaciones');
+            Route::get('mis_favoritos', 'ver_favoritos')->name( 'ver_favoritos');
         });
         
         
@@ -133,10 +138,6 @@ Route::get('/vista_previa_roomie', function(){
 
 Route::get('/detalles_roomie', function(){
     return view('profile.roomie-details');
-})->name('detalles_roomie');
-
-Route::get('/listado_roomies', function(){
-    return view('profile.roomies-list');
 });
 
 Route::get('otros_hogares', function(){

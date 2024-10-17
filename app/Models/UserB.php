@@ -19,7 +19,7 @@ class UserB extends Model
     }
 
     public function postulaciones(){
-        return $this->hasMany(Postulacion::class, 'user_b_id');
+        return $this->belongsToMany(Casa::class, 'postulaciones', 'user_b_id', 'casa_id')->withPivot('fecha');
     }
 
     public function favoritos_casas(){

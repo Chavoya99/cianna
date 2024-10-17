@@ -259,6 +259,40 @@ class HomeController extends Controller
         return view('profile.about-roomie', compact('roomie_v', 'carrera', 'rutaImagenPerfil', 'roomiesRecomendados', 'listaCarreras'));
     }
 
+    public function ver_detalles_roomie($roomie){
+        if($roomie == Auth::id()){
+            return redirect(route('mi_perfil'));
+        }
+
+        $user = User::where('id', $roomie)->first();
+        $rutaImagenPerfil = $user->archivos()->where('archivo_type', 'img_perf')->first()->ruta_archivo;
+        
+        if($user->tipo == 'A'){
+            $roomie_detalle = $user->user_a;
+        }else if($user->tipo == 'B'){
+            $roomie_detalle = $user->user_b;
+        }
+
+        $carrera = $this->obtener_nombre_carrera($roomie_detalle->carrera);
+
+        return view('profile.roomie-details', compact('roomie_detalle', 'carrera', 'rutaImagenPerfil'));
+    }
+
+    public function listado_roomies(){
+        if(Auth::user()->tipo == 'A'){
+            $roomies = UserB::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }])->get();
+        }else if(Auth::user()->tipo == 'B'){
+            $roomies = UserA::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }])->get();
+        }
+        
+
+        return view('profile.roomies-list', compact('roomies'));
+    }
+
     public function obtener_nombre_carrera($llave){
         $carreras = $this->lista_carreras();
         return $carreras[$llave];
@@ -268,7 +302,7 @@ class HomeController extends Controller
         $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
         'ing_biom' => 'Ing. Biómedica',
         'ing_civi' => 'Ing. Civil',
-        'ing_comp' => 'Ing. Computación',
+        'ing_comp' => 'Ing. en Computación',
         'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
         'ing_log_trans' => 'Ing. en Logística y Transporte',
         'ing_topo' => 'Ing. en Topografía Geomática',
@@ -286,4 +320,38 @@ class HomeController extends Controller
 
         return $carreras;
     }
+
+    public function ver_favoritos(){
+        if (Auth::user()->tipo == 'A'){
+            $favoritos = Auth::user()->user_a->favoritos_roomies()->with(['user.archivos' => function ($query) {
+                $query->where('archivo_type', 'img_perf');}])->get();
+
+            $carreras = $this->lista_carreras();
+
+            return view('profile.favsA', compact('favoritos', 'carreras'));
+        }else if(Auth::user()->tipo == 'B'){
+            $favoritos = Auth::user()->user_b->favoritos_casas()->with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
+
+            return view('profile.favsB', compact('favoritos'));
+        }
+    }
+
+    public function ver_postulaciones(){
+        if (Auth::user()->tipo == 'A'){
+            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
+                $query->where('archivo_type', 'img_perf');}])->get();
+
+            $carreras = $this->lista_carreras();
+
+            return view('profile.requestsA', compact('postulaciones','carreras'));
+        }else if(Auth::user()->tipo == 'B'){
+            $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();;
+            
+            return view('profile.requestsB', compact('postulaciones'));
+        }
+    }
+
+    
 }

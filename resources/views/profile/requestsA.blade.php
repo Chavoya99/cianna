@@ -11,45 +11,45 @@
         <div class="mt-2 ml-16">Todas las postulaciones que has recibido</div>
         <!-- Contenedor principal del carrusel -->
         <div class="relative overflow-hidden mt-2 ml-16 mr-16">
-            <!-- Botón de flecha izquierda -->
-            <button id="prevBtn" class="absolute left-0 top-[35%] transform -translate-y-1/2 bg-cianna-gray rounded-full p-2 z-10">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <!-- Contenedor de imágenes del carrusel con ancho fijo para contener exactamente 4 imágenes -->
+            @if(count($postulaciones) > 4)
+                <!-- Botón de flecha izquierda -->
+                <button id="prevBtn" class="absolute left-0 top-[35%] transform -translate-y-1/2 bg-cianna-gray rounded-full p-2 z-10">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            @endif
+                <!-- Contenedor de imágenes del carrusel con ancho fijo para contener exactamente 4 imágenes -->
             <div class="flex transition-transform duration-300 w-full" id="carousel-container" style="transform: translateX(0);">
                 <!-- Imágenes del carrusel -->
-                @for ($i = 0; $i < 8; $i++)
+                @foreach ($postulaciones as $postulacion)
                 <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform transform hover:scale-110">
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                            <a href="detalles_roomie">
+                            <a href="{{route('detalles_roomie', $postulacion)}}">
                                 <img class="object-contain w-full h-full absolute top-0 left-0 border border-cianna-gray rounded-lg" 
-                                    src="{{ $defaultProfileImage }}" 
+                                    src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}" 
                                     alt="Imagen previa del hogar" />
                             </a>
                         </div>
                     </div>
                     <!-- NOMBRE -->
-                    <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">Roomie {{$i}}</a>
+                    <a href="{{route('detalles_roomie', $postulacion)}}" class="mt-2 text-lg font-semibold line-clamp-1">{{$postulacion->user->name.' '.$postulacion->user->apellido}}</a>
                     <!-- DESCRIPCIÓN -->
-                    <a href="detalles_roomie" class="text-sm text-justify line-clamp-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur sed justo nec tortor laoreet porttitor et ut massa.
-                    Nam eget orci vestibulum velit tristique gravida ut eget massa. 
-                    Aenean ultrices in tellus vel dapibus. 
-                    Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
+                    <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify line-clamp-3">
+                    {{$postulacion->descripcion}}
                     </a>
                     <!-- CARRERA -->
-                    <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">
-                        Ingeniería informática
+                    <a href="{{route('detalles_roomie', $postulacion)}}" class="mt-2 text-lg font-semibold line-clamp-1">
+                        {{$carreras[$postulacion->carrera]}}
                     </a>
                 </div>
-                @endfor
+                @endforeach
             </div>
-            <!-- Botón de flecha derecha -->
-            <button id="nextBtn" class="absolute right-0 top-[35%] transform -translate-y-1/2 bg-cianna-gray rounded-full p-2 z-10">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+            @if(count($postulaciones) > 4)
+                <!-- Botón de flecha derecha -->
+                <button id="nextBtn" class="absolute right-0 top-[35%] transform -translate-y-1/2 bg-cianna-gray rounded-full p-2 z-10">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            @endif
         </div>
         <div class="text-right mr-20 mt-2">
             <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
@@ -110,7 +110,8 @@
 
     let currentIndex = 0;
     const itemsToShow = 4;
-    const totalItems = 8; // Total de imágenes en el carrusel
+    const totalItems = {{count($postulaciones)}}; // Total de imágenes en el carrusel
+    //totalItems se ajusta con el número de postulaciones del usuario
 
     // Función para actualizar la posición del carrusel
     function updateCarousel() {
