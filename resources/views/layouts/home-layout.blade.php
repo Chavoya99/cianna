@@ -35,16 +35,17 @@
                             $ruta_home = route('dashboard');
                         } 
                     ?>
-                    <x-home-buttons class="" href="{{$ruta_home}}">
+                    <x-home-buttons href="{{$ruta_home}}">
                         <i class="fa-solid fa-house mr-2"></i>
                         Inicio
                     </x-home-buttons>
                     <x-home-buttons href="{{route('ver_postulaciones')}}">
                         <i class="fa-solid fa-envelopes-bulk mr-2"></i>
-                        Postulaciones</x-home-buttons>
+                        Postulaciones
+                    </x-home-buttons>
                     <x-home-buttons href="{{route('ver_favoritos')}}">
-                        <i class="fa-solid fa-star mr-2"></i>
-                        Tus favoritos
+                        <i class="fa-solid fa-heart mr-2"></i>
+                        Favoritos
                     </x-home-buttons>
                     </div>
                 </div>

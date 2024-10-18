@@ -11,9 +11,27 @@
             <h1 class="font-bold text-3xl">Mis favoritos</h1>
         </div>
         <!-- MUESTRA DE ROOMIES -->
-        <div class="mt-8 px-16 grid grid-cols-2 gap-6"> <!-- Añadir clases de grid para 2 columnas y espacio entre elementos -->
+        <div class="mt-8 px-16 @if(count($favoritos) == 0) grid grid-cols-1 
+            @else grid grid-cols-2 gap-6 @endif"> <!-- Grid de 1 columna si no hay favoritos, 2 columnas y espacio de 6 si los hay -->
             @if(count($favoritos) == 0)
-                No tienes favoritos agregados
+                <div class="w-full text-2xl">
+                    <p class="mb-4 text-justify">
+                        ¡Hola, {{Auth::user()->name}}!
+                    </p>
+                    <p class="mb-4 text-justify"><i class="fa-solid fa-heart-circle-xmark mr-2"></i>
+                        Parece que por ahora no has añadido ninguna persona a tus favoritos.
+                    </p>
+                    <p class="mb-4 text-justify">
+                        ¡No te preocupes! Tarde o temprano encontrarás a la persona adecuada para
+                        compartir el lugar que estás ofreciendo.
+                    </p>
+                    <p class="text-justify"><i class="fa-solid fa-magnifying-glass mr-2"></i>
+                        Continúa explorando los perfiles de los compañeros disponibles y agrega a 
+                        tus favoritos <i class="fa-solid fa-heart-circle-plus"></i> para que podamos 
+                        ayudarte a decidir quién puede ser más compatible contigo dándote mejores 
+                        recomendaciones.
+                    </p>
+                </div>
             @else
                 @foreach($favoritos as $favorito) <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
                     <div class="flex flex-col py-3 px-3 rounded-lg">
@@ -22,14 +40,14 @@
                             transition-transform transform hover:scale-105">
                             <!-- IMAGEN -->
                             <a href="{{route('detalles_roomie', $favorito)}}" class="w-1/2">
-                                <img class="object-contain w-full h-full border border-cianna-gray 
+                                <img class="object-cover w-full h-full border border-cianna-gray 
                                     bg-white rounded-lg" src="{{ asset('storage/'.$favorito->user->archivos->first()->ruta_archivo) }}" 
                                     alt="Imagen previa del roomie" />
                             </a>
                             <!-- ENLACES -->
                             <div class="flex flex-col justify-center px-3 py-3 w-1/2">
                                 <p class="absolute right-0 top-0 text-cianna-orange">
-                                    <i class="fa-solid fa-star mt-1 mr-2"></i>
+                                    <i class="fa-solid fa-heart mt-1 mr-2"></i>
                                     Favoritos
                                 </p>
                                 <!-- NOMBRE -->
@@ -62,7 +80,7 @@
             @endif
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-20 mt-4">
+        <div class="relative px-16 mt-40">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">

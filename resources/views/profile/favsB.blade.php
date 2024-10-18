@@ -11,9 +11,25 @@
             <h1 class="font-bold text-3xl">Mis favoritos</h1>
         </div>
         <!-- MUESTRA DE HABITACIONES -->
-        <div class="mt-8 px-16 grid grid-cols-2 gap-6"> <!-- Añadir clases de grid para 2 columnas y espacio entre elementos -->
+        <div class="mt-8 px-16 @if(count($favoritos) == 0) grid grid-cols-1 
+            @else grid grid-cols-2 gap-6 @endif"> <!-- Grid de 1 columna si no hay favoritos, 2 columnas y espacio de 6 si los hay -->
             @if(count($favoritos) == 0)
-                No tienes favoritos agregados
+                <div class="w-3/4 text-2xl">
+                    <p class="mb-4 text-justify">
+                        ¡Hola, {{Auth::user()->name}}!
+                    </p>
+                    <p class="mb-4 text-justify"><i class="fa-solid fa-heart-circle-xmark mr-2"></i>
+                        Parece que por ahora no has añadido ninguna habitación a tus favoritos.
+                    </p>
+                    <p class="mb-4 text-justify">
+                        ¡No te preocupes! Tarde o temprano encontrarás algo que se adapte a tus necesidades.
+                    </p>
+                    <p class="text-justify"><i class="fa-solid fa-magnifying-glass mr-2"></i>
+                        Continúa explorando las habitaciones disponibles y agrega a tus favoritos 
+                        <i class="fa-solid fa-heart-circle-plus"></i> para que podamos ayudarte
+                        a encontrar lo que necesitas dándote mejores recomendaciones.
+                    </p>
+                </div>
             @else
                 @foreach ($favoritos as $favorito) 
                     <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
@@ -30,7 +46,7 @@
                             <!-- ENLACES -->
                             <div class="flex flex-col justify-center px-3 py-3 w-1/2">
                                 <p class="absolute right-0 top-0 text-cianna-orange">
-                                    <i class="fa-solid fa-star mt-1 mr-2"></i>
+                                    <i class="fa-solid fa-heart mt-1 mr-2"></i>
                                     Favoritos
                                 </p>
                                 <!-- NOMBRE -->
@@ -59,7 +75,7 @@
             
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-20 mt-4">
+        <div class="relative px-16 mt-40">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">
