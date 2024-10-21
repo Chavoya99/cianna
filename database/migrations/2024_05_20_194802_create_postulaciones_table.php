@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('casa_id');
             $table->foreign('casa_id')->references('id')->on('casas')->onDelete('cascade');
             $table->timestamp('fecha');
+            $table->string('estado');
 
             $table->primary(['user_b_id', 'casa_id']);
         });
