@@ -289,8 +289,9 @@ class HomeController extends Controller
             }])->get();
         }
         
+        $carreras = $this->lista_carreras();
 
-        return view('profile.roomies-list', compact('roomies'));
+        return view('profile.roomies-list', compact('roomies', 'carreras'));
     }
 
     public function obtener_nombre_carrera($llave){

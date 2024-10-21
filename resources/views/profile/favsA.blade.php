@@ -72,11 +72,11 @@
                     </div>
                 @endforeach
                 <br>
-                <div class="text-right mt-2">
+                {{--<div class="text-right mt-2">
                     <a class="text-cianna-green font-semibold hover:text-cianna-orange absolute right-0 px-20" 
                         href="listado_favsA">Ver más...
                     </a>
-                </div>
+                </div>--}}
             @endif
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
