@@ -8,11 +8,32 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones enviadas</div>
-        <div class="mt-2 ml-16">Todas las postulaciones que has enviado</div>
+        @if(count($postulaciones) > 0)
+            <div class="mt-2 ml-16">Todas las postulaciones que has enviado</div>
+        @endif
         <!-- Contenedor principal del carrusel -->
         <div class="relative overflow-hidden mt-2 ml-16 mr-16">
+            @if (count($postulaciones) == 0)
+                <div class="w-full text-2xl mt-4">
+                    <p class="mb-4 text-justify">
+                        ¡Hola, {{Auth::user()->name}}!
+                    </p>
+                    <p class="mb-4 text-justify"><i class="fa-solid fa-circle-xmark mr-2"></i>
+                        Parece que por ahora no has enviado ninguna postulación.
+                    </p>
+                    <p class="mb-4 text-justify">
+                        ¡No te preocupes! Tarde o temprano encontrarás el lugar más adecuado para 
+                        tus necesidades actuales.                    
+                    </p>
+                    <p class="text-justify"><i class="fa-solid fa-magnifying-glass mr-2"></i>
+                        Continúa explorando las habitaciones disponibles y agrega a tus favoritos 
+                        <i class="fa-solid fa-heart-circle-plus"></i> para que podamos ayudarte
+                        dándote mejores recomendaciones y finalmente puedas postularte a alguna.
+                    </p>
+                </div>
+            @endif
             @if (count($postulaciones) > 4)
-               <!-- Botón de flecha izquierda -->
+                <!-- Botón de flecha izquierda -->
                 <button id="prevBtn" class="absolute left-0 top-[35%] transform -translate-y-1/2 bg-cianna-gray rounded-full p-2 z-10">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button> 
@@ -48,52 +69,55 @@
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             @endif
-            
         </div>
-        <div class="text-right mr-20 mt-2">
-            <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                href="listado_requestsB">Ver más...
-            </a>
-        </div>
-        <!-- RECOMENDACIONES -->
-        <div class="w-full">
-            <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">Recomendado para ti</div>
-            <div class="mt-2 ml-16">Te has postulado y basado en tus intereses creemos que podrían ser mejor para ti</div>
-            <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="w-1/5 flex flex-col mb-3 mt-5 px-5 transition-transform transform hover:scale-110">
-                        <div class="flex flex-col block">
-                            <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                                <a href="ver_detalles_habitacion">
-                                    <img class="object-cover w-full h-full absolute top-0 
-                                    left-0 border border-cianna-gray rounded-lg" 
-                                        src="{{ $defaultRoomImage }}" 
-                                        alt="Imagen previa roomie" />
-                                </a>
-                            </div>
-                        </div>
-                        <!-- COLONIA -->
-                        <a href="ver_detalles_habitacion" class="mt-2 text-lg font-semibold line-clamp-1">Colonia</a>
-                        <!-- DESCRIPCIÓN ROOMIE -->
-                        <a href="ver_detalles_habitacion" class="text-sm text-justify line-clamp-1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur sed justo nec tortor laoreet porttitor et ut massa.
-                        Nam eget orci vestibulum velit tristique gravida ut eget massa. 
-                        Aenean ultrices in tellus vel dapibus. 
-                        Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
-                        </a>
-                        <!-- PRECIO  -->
-                        <a href="ver_detalles_habitacion" class="mt-2 font-semibold">$9,999.00</a>
-                    </div>
-                @endfor
-            </div>
+        @if (count($postulaciones) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                href="listado_suggestsB">Ver más...</a>
+                    href="listado_requestsB">Ver más...
+                </a>
             </div>
-        </div>
+        @endif
+        @if(count($postulaciones) > 0)
+            <!-- RECOMENDACIONES -->
+            <div class="w-full">
+                <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">Recomendado para ti</div>
+                <div class="mt-2 ml-16">Te has postulado y basado en tus intereses creemos que podrían ser mejor para ti</div>
+                <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
+                    @for ($i = 0; $i < 5; $i++)
+                        <div class="w-1/5 flex flex-col mb-3 mt-5 px-5 transition-transform transform hover:scale-110">
+                            <div class="flex flex-col block">
+                                <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                                    <a href="ver_detalles_habitacion">
+                                        <img class="object-cover w-full h-full absolute top-0 
+                                        left-0 border border-cianna-gray rounded-lg" 
+                                            src="{{ $defaultRoomImage }}" 
+                                            alt="Imagen previa roomie" />
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- COLONIA -->
+                            <a href="ver_detalles_habitacion" class="mt-2 text-lg font-semibold line-clamp-1">Colonia</a>
+                            <!-- DESCRIPCIÓN ROOMIE -->
+                            <a href="ver_detalles_habitacion" class="text-sm text-justify line-clamp-1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Curabitur sed justo nec tortor laoreet porttitor et ut massa.
+                            Nam eget orci vestibulum velit tristique gravida ut eget massa. 
+                            Aenean ultrices in tellus vel dapibus. 
+                            Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
+                            </a>
+                            <!-- PRECIO  -->
+                            <a href="ver_detalles_habitacion" class="mt-2 font-semibold">$9,999.00</a>
+                        </div>
+                    @endfor
+                </div>
+                <div class="text-right mr-20 mt-2">
+                    <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                    href="listado_suggestsB">Ver más...</a>
+                </div>
+            </div>
+        @endif
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-20 mt-4">
+        <div class="relative px-16 @if(count($postulaciones) == 0) mt-40 @else mt-4 @endif">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">

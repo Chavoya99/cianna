@@ -8,16 +8,38 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones recibidas</div>
-        <div class="mt-2 ml-16">Todas las postulaciones que has recibido</div>
-        <!-- Contenedor principal del carrusel -->
+        @if(count($postulaciones) > 0)
+            <div class="mt-2 ml-16">Todas las postulaciones que has recibido</div>
+        @endif
+            <!-- Contenedor principal del carrusel -->
         <div class="relative overflow-hidden mt-2 ml-16 mr-16">
+            @if (count($postulaciones) == 0)
+                <div class="w-full text-2xl mt-4">
+                    <p class="mb-4 text-justify">
+                        ¡Hola, {{Auth::user()->name}}!
+                    </p>
+                    <p class="mb-4 text-justify"><i class="fa-solid fa-circle-xmark mr-2"></i>
+                        Parece que por ahora no has recibido ninguna postulación.
+                    </p>
+                    <p class="mb-4 text-justify">
+                        ¡No te preocupes! Tarde o temprano llegará la persona adecuada para 
+                        compartir el lugar que estás ofreciendo.                    
+                    </p>
+                    <p class="text-justify"><i class="fa-solid fa-magnifying-glass mr-2"></i>
+                        Mientras tanto, continúa explorando los perfiles de los compañeros disponibles  
+                        y agregalos a tus favoritos <i class="fa-solid fa-heart-circle-plus"></i>  
+                        para que proximamente podamos ayudarte a decidir quién puede ser más compatible  
+                        contigo dándote mejores recomendaciones.
+                    </p>
+                </div>
+            @endif
             @if(count($postulaciones) > 4)
                 <!-- Botón de flecha izquierda -->
                 <button id="prevBtn" class="absolute left-0 top-[35%] transform -translate-y-1/2 bg-cianna-gray rounded-full p-2 z-10">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
             @endif
-                <!-- Contenedor de imágenes del carrusel con ancho fijo para contener exactamente 4 imágenes -->
+            <!-- Contenedor de imágenes del carrusel con ancho fijo para contener exactamente 4 imágenes -->
             <div class="flex transition-transform duration-300 w-full" id="carousel-container" style="transform: translateX(0);">
                 <!-- Imágenes del carrusel -->
                 @foreach ($postulaciones as $postulacion)
@@ -51,48 +73,52 @@
                 </button>
             @endif
         </div>
-        <div class="text-right mr-20 mt-2">
-            <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                href="listado_requestsA">Ver más...
-            </a>
-        </div>
-        <!-- RECOMENDACIONES -->
-        <div class="w-full">
-            <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">Recomendado para ti</div>
-            <div class="mt-2 ml-16">Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo</div>
-            <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
-                        <div class="flex flex-col block">
-                            <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
-                                <a href="detalles_roomie">
-                                    <img class="object-contain w-full h-full absolute top-0 
-                                    left-0 border border-cianna-gray rounded-lg" 
-                                        src="{{ $defaultProfileImage }}" 
-                                        alt="Imagen previa roomie" />
-                                </a>
-                            </div>
-                        </div>
-                        <!-- NOMBRE ROOMIE -->
-                        <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">Nombre</a>
-                        <!-- DESCRIPCIÓN ROOMIE -->
-                        <a href="detalles_roomie" class="text-sm text-justify line-clamp-1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur sed justo nec tortor laoreet porttitor et ut massa.
-                        Nam eget orci vestibulum velit tristique gravida ut eget massa. 
-                        Aenean ultrices in tellus vel dapibus. 
-                        Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
-                        </a>
-                    </div>
-                @endfor
-            </div>
+        @if (count($postulaciones) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                href="listado_suggestsA">Ver más...</a>
+                    href="listado_requestsA">Ver más...
+                </a>
             </div>
-        </div>
+        @endif
+        @if(count($postulaciones) > 0)
+            <!-- RECOMENDACIONES -->
+            <div class="w-full">
+                <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">Recomendado para ti</div>
+                <div class="mt-2 ml-16">Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo</div>
+                <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
+                    @for ($i = 0; $i < 5; $i++)
+                        <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
+                            <div class="flex flex-col block">
+                                <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                                    <a href="detalles_roomie">
+                                        <img class="object-contain w-full h-full absolute top-0 
+                                        left-0 border border-cianna-gray rounded-lg" 
+                                            src="{{ $defaultProfileImage }}" 
+                                            alt="Imagen previa roomie" />
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- NOMBRE ROOMIE -->
+                            <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">Nombre</a>
+                            <!-- DESCRIPCIÓN ROOMIE -->
+                            <a href="detalles_roomie" class="text-sm text-justify line-clamp-1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Curabitur sed justo nec tortor laoreet porttitor et ut massa.
+                            Nam eget orci vestibulum velit tristique gravida ut eget massa. 
+                            Aenean ultrices in tellus vel dapibus. 
+                            Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
+                            </a>
+                        </div>
+                    @endfor
+                </div>
+                <div class="text-right mr-20 mt-2">
+                    <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                    href="listado_suggestsA">Ver más...</a>
+                </div>
+            </div>
+        @endif
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-20 mt-4">
+        <div class="relative px-16 @if(count($postulaciones) == 0) mt-40 @else mt-4 @endif">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">

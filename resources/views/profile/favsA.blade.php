@@ -26,10 +26,10 @@
                         compartir el lugar que estás ofreciendo.
                     </p>
                     <p class="text-justify"><i class="fa-solid fa-magnifying-glass mr-2"></i>
-                        Continúa explorando los perfiles de los compañeros disponibles y agrega a 
-                        tus favoritos <i class="fa-solid fa-heart-circle-plus"></i> para que podamos 
-                        ayudarte a decidir quién puede ser más compatible contigo dándote mejores 
-                        recomendaciones.
+                        Mientras tanto, continúa explorando los perfiles de los compañeros disponibles 
+                        y agrega a tus favoritos <i class="fa-solid fa-heart-circle-plus"></i> para 
+                        que podamos ayudarte a decidir quién puede ser más compatible contigo dándote 
+                        mejores recomendaciones.
                     </p>
                 </div>
             @else
@@ -80,7 +80,7 @@
             @endif
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-16 mt-40">
+        <div class="relative px-16 @if(count($favoritos) == 0) mt-40 @else mt-4 @endif">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">
