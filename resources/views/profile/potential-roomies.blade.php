@@ -1,6 +1,6 @@
 <!-- resources/views/profile/requestsA.blade.php -->
 @props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
-@section('title') {{ 'Ver más | Postulaciones recomendadas' }} @endsection
+@section('title') {{ 'Ver más | Compañeros recomendados' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -12,7 +12,7 @@
             Recomendado para ti
         </div>
         <div class="mt-2 ml-16">
-            Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo
+            Con base en tus favoritos creemos que estas personas podrían ser más compatibles contigo
         </div>
         <!-- MUESTRA DE POSTULACIONES-->
         <div class="mt-8 px-16 grid grid-cols-2 gap-6"> <!-- Añadir clases de grid para 2 columnas y espacio entre elementos -->
@@ -22,7 +22,7 @@
                     <div class="h-44 w-full overflow-hidden rounded-md flex relative 
                         transition-transform transform hover:scale-105">
                         <!-- IMAGEN -->
-                        <a href="ver_detalles_roomie" class="w-1/2">
+                        <a href="vista_previa_roomie" class="w-1/2">
                             <img class="object-contain w-full h-full border border-cianna-gray 
                                 bg-white rounded-lg" src="{{ $defaultProfileImage }}" 
                                 alt="Imagen previa del roomie" />
@@ -30,19 +30,19 @@
                         <!-- ENLACES -->
                         <div class="flex flex-col justify-center px-3 py-3 w-1/2">
                             <!-- NOMBRE -->
-                            <a href="ver_detalles_roomie" class="text-lg font-semibold line-clamp-1">
+                            <a href="vista_previa_roomie" class="text-lg font-semibold line-clamp-1">
                                 Roomie {{ $i }}
                             </a>
                             <!-- CARRERA -->
-                            <a href="ver_detalles_roomie" class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
+                            <a href="vista_previa_roomie" class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
                                 Ingeniería informática
                             </a>
                             <!-- EDAD -->
-                            <a href="ver_detalles_roomie" class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
+                            <a href="vista_previa_roomie" class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
                                 22 años de edad
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="ver_detalles_roomie" class="text-sm text-justify line-clamp-3 mt-1">
+                            <a href="vista_previa_roomie" class="text-sm text-justify line-clamp-3 mt-1">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                                 Curabitur sed justo nec tortor laoreet porttitor et ut massa. 
                                 Nam eget orci vestibulum velit tristique gravida ut eget massa. 
