@@ -35,32 +35,42 @@
             @endif
             @if(count($postulaciones) > 4)
                 <!-- Botón de flecha izquierda -->
-                <button id="prevBtn" class="absolute left-0 top-[35%] transform -translate-y-1/2 bg-cianna-gray rounded-full p-2 z-10">
+                <button id="prevBtn" class="absolute left-0 top-[35%] transform -translate-y-1/2 
+                    bg-cianna-gray rounded-full p-2 z-10">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
             @endif
             <!-- Contenedor de imágenes del carrusel con ancho fijo para contener exactamente 4 imágenes -->
-            <div class="flex transition-transform duration-300 w-full" id="carousel-container" style="transform: translateX(0);">
+            <div class="flex transition-transform duration-300 w-full" id="carousel-container" 
+                style="transform: translateX(0);">
                 <!-- Imágenes del carrusel -->
                 @foreach ($postulaciones as $postulacion)
-                <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform transform hover:scale-110">
+                <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform 
+                    transform hover:scale-110">
                     <div class="flex flex-col block">
-                        <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                        <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 
+                            relative">
                             <a href="{{route('detalles_roomie', $postulacion)}}">
-                                <img class="object-contain w-full h-full absolute top-0 left-0 border border-cianna-gray rounded-lg" 
+                                <img class="object-contain w-full h-full absolute top-0 left-0 
+                                    border border-cianna-gray rounded-lg" 
                                     src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}" 
                                     alt="Imagen previa del hogar" />
                             </a>
                         </div>
                     </div>
                     <!-- NOMBRE -->
-                    <a href="{{route('detalles_roomie', $postulacion)}}" class="mt-2 text-lg font-semibold line-clamp-1">{{$postulacion->user->name.' '.$postulacion->user->apellido}}</a>
+                    <a href="{{route('detalles_roomie', $postulacion)}}" class="mt-2 text-lg 
+                        font-semibold line-clamp-1">
+                        {{$postulacion->user->name.' '.$postulacion->user->apellido}}
+                    </a>
                     <!-- DESCRIPCIÓN -->
-                    <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify line-clamp-3">
-                    {{$postulacion->descripcion}}
+                    <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify 
+                        line-clamp-3">
+                        {{$postulacion->descripcion}}
                     </a>
                     <!-- CARRERA -->
-                    <a href="{{route('detalles_roomie', $postulacion)}}" class="mt-2 text-lg font-semibold line-clamp-1">
+                    <a href="{{route('detalles_roomie', $postulacion)}}" class="mt-2 text-lg 
+                        font-semibold line-clamp-1">
                         {{$carreras[$postulacion->carrera]}}
                     </a>
                 </div>
@@ -68,28 +78,35 @@
             </div>
             @if(count($postulaciones) > 4)
                 <!-- Botón de flecha derecha -->
-                <button id="nextBtn" class="absolute right-0 top-[35%] transform -translate-y-1/2 bg-cianna-gray rounded-full p-2 z-10">
+                <button id="nextBtn" class="absolute right-0 top-[35%] transform -translate-y-1/2
+                    bg-cianna-gray rounded-full p-2 z-10">
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             @endif
         </div>
-        @if (count($postulaciones) > 4)
+        {{-- if (count($postulaciones) > 4)--}}
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="listado_requestsA">Ver más...
+                    href="listado_postulacionesA">Ver más...
                 </a>
             </div>
-        @endif
+        {{--endif--}}
         @if(count($postulaciones) > 0)
             <!-- RECOMENDACIONES -->
             <div class="w-full">
-                <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">Recomendado para ti</div>
-                <div class="mt-2 ml-16">Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo</div>
+                <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">
+                    Recomendado para ti
+                </div>
+                <div class="mt-2 ml-16">
+                    Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo
+                </div>
                 <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
                     @for ($i = 0; $i < 5; $i++)
-                        <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform transform hover:scale-110">
+                        <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform 
+                            transform hover:scale-110">
                             <div class="flex flex-col block">
-                                <div class="inline-block h-36 w-full overflow-hidden rounded-md bg-gray-100 relative">
+                                <div class="inline-block h-36 w-full overflow-hidden rounded-md
+                                    bg-gray-100 relative">
                                     <a href="detalles_roomie">
                                         <img class="object-contain w-full h-full absolute top-0 
                                         left-0 border border-cianna-gray rounded-lg" 
@@ -99,7 +116,9 @@
                                 </div>
                             </div>
                             <!-- NOMBRE ROOMIE -->
-                            <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">Nombre</a>
+                            <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">
+                                Nombre
+                            </a>
                             <!-- DESCRIPCIÓN ROOMIE -->
                             <a href="detalles_roomie" class="text-sm text-justify line-clamp-1">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -113,7 +132,7 @@
                 </div>
                 <div class="text-right mr-20 mt-2">
                     <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="listado_suggestsA">Ver más...</a>
+                    href="listado_recomendacionesA">Ver más...</a>
                 </div>
             </div>
         @endif
