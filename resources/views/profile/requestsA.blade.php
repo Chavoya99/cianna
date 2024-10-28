@@ -84,13 +84,13 @@
                 </button>
             @endif
         </div>
-        {{-- if (count($postulaciones) > 4)--}}
+        @if (count($postulaciones) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="listado_postulacionesA">Ver más...
+                    href="{{route('lista_postulaciones')}}">Ver más...
                 </a>
             </div>
-        {{--endif--}}
+        @endif
         @if(count($postulaciones) > 0)
             <!-- RECOMENDACIONES -->
             <div class="w-full">

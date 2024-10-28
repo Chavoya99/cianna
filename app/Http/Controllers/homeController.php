@@ -348,9 +348,25 @@ class HomeController extends Controller
             return view('profile.requestsA', compact('postulaciones','carreras'));
         }else if(Auth::user()->tipo == 'B'){
             $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
-                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();;
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
             
             return view('profile.requestsB', compact('postulaciones'));
+        }
+    }
+
+    public function ver_lista_completa_postulaciones(){
+        if (Auth::user()->tipo == 'A'){
+            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
+                $query->where('archivo_type', 'img_perf');}])->get();
+
+            $carreras = $this->lista_carreras();
+
+            return view('profile.list-requestsA', compact('postulaciones','carreras'));
+        }else if(Auth::user()->tipo == 'B'){
+            $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
+            
+            return view('profile.list-requestsA', compact('postulaciones'));
         }
     }
 
