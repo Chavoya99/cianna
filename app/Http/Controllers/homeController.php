@@ -361,12 +361,20 @@ class HomeController extends Controller
 
             $carreras = $this->lista_carreras();
 
+            if(count($postulaciones) == 0){
+                return redirect(route('ver_postulaciones'));
+            }
+
             return view('profile.list-requestsA', compact('postulaciones','carreras'));
         }else if(Auth::user()->tipo == 'B'){
             $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
             
-            return view('profile.list-requestsA', compact('postulaciones'));
+            if(count($postulaciones) == 0){
+                return redirect(route('ver_postulaciones'));
+            }
+
+            return view('profile.list-requestsB', compact('postulaciones'));
         }
     }
 

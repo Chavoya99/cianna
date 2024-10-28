@@ -44,12 +44,7 @@
                         <i class="fa-solid fa-address-card mt-4 mr-2"></i>Ver perfil del compañero
                     </a>
                     <livewire:favorite-button2 :casaId="$casa->id"/>
-                    <button class="mt-4 w-3/4 bg-cianna-blue hover:bg-sky-900 text-white font-bold 
-                        py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-                        onclick="">
-                        <i class="mr-2 fa-solid fa-envelope-open-text"></i>
-                        Postularse
-                    </button>
+                    <livewire:request-button :casaId="$casa->id"/>
                 @endif
                 
                 <!-- OCULTAR BOTONES PARA USUARIO TIPO A -->

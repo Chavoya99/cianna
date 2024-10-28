@@ -248,20 +248,15 @@
                         @endif
                         
                     </div>
+                    
                     @if (Auth::user()->tipo == 'B')
                         <div class="flex justify-between mt-4">
                             <div class="w-1/2 px-2">
                                 <livewire:favorite-button :casaId="$casa->id"/>
                             </div>
-                            <div class="w-1/2 px-2 flex justify-center">
-                                <button class="w-full bg-cianna-blue hover:bg-sky-900 text-white 
-                                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-                                    onclick="">
-                                    <i class="mr-2 fa-solid fa-envelope-open-text"></i>
-                                    Postularse
-                                </button>
-                            </div>
+                            <livewire:request-button2 :casaId="$casa->id"/>
                         </div>
+                        
                     @endif
                     
                 </div>
