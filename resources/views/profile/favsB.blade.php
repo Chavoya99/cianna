@@ -14,7 +14,7 @@
         <div class="mt-8 px-16 @if(count($favoritos) == 0) grid grid-cols-1 
             @else grid grid-cols-2 gap-6 @endif"> <!-- Grid de 1 columna si no hay favoritos, 2 columnas y espacio de 6 si los hay -->
             @if(count($favoritos) == 0)
-                <div class="w-3/4 text-2xl">
+                <div class="w-full text-2xl">
                     <p class="mb-4 text-justify">
                         ¡Hola, {{Auth::user()->name}}!
                     </p>
@@ -22,7 +22,8 @@
                         Parece que por ahora no has añadido ninguna habitación a tus favoritos.
                     </p>
                     <p class="mb-4 text-justify">
-                        ¡No te preocupes! Tarde o temprano encontrarás algo que se adapte a tus necesidades.
+                        ¡No te preocupes! Tarde o temprano encontrarás el lugar más adecuado para 
+                        tus necesidades actuales.                    
                     </p>
                     <p class="text-justify"><i class="fa-solid fa-magnifying-glass mr-2"></i>
                         Continúa explorando las habitaciones disponibles y agrega a tus favoritos 
@@ -75,7 +76,7 @@
             
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-16 mt-40">
+        <div class="relative px-16 @if(count($favoritos) == 0) mt-40 @else mt-4 @endif">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">

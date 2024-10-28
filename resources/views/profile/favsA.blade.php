@@ -11,6 +11,15 @@
             <h1 class="font-bold text-3xl">Mis favoritos</h1>
         </div>
         <!-- MUESTRA DE ROOMIES -->
+        @if(count($favoritos) > 0)
+            <div class="mt-4 px-16">
+                <p class="mb-4 text-justify">
+                    <b>¡Excelente!</b> ¡Ya has agregado compañeros a tus favoritos! <br>
+                    No olvides seguir añadiendo más personas para que podamos darte mejores 
+                    recomendaciones
+                </p>
+            </div>
+        @endif
         <div class="mt-8 px-16 @if(count($favoritos) == 0) grid grid-cols-1 
             @else grid grid-cols-2 gap-6 @endif"> <!-- Grid de 1 columna si no hay favoritos, 2 columnas y espacio de 6 si los hay -->
             @if(count($favoritos) == 0)
@@ -26,10 +35,10 @@
                         compartir el lugar que estás ofreciendo.
                     </p>
                     <p class="text-justify"><i class="fa-solid fa-magnifying-glass mr-2"></i>
-                        Continúa explorando los perfiles de los compañeros disponibles y agrega a 
-                        tus favoritos <i class="fa-solid fa-heart-circle-plus"></i> para que podamos 
-                        ayudarte a decidir quién puede ser más compatible contigo dándote mejores 
-                        recomendaciones.
+                        Mientras tanto, continúa explorando los perfiles de los compañeros disponibles 
+                        y agrega a tus favoritos <i class="fa-solid fa-heart-circle-plus"></i> para 
+                        que podamos ayudarte a decidir quién puede ser más compatible contigo dándote 
+                        mejores recomendaciones.
                     </p>
                 </div>
             @else
@@ -80,7 +89,7 @@
             @endif
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-16 mt-40">
+        <div class="relative px-16 @if(count($favoritos) == 0) mt-40 @else mt-4 @endif">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">

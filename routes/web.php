@@ -159,3 +159,15 @@ Route::get('favsA', function(){
 Route::get('favsB', function(){
     return view('profile.favsB');
 });
+
+Route::get('listado_postulacionesA', function(){
+    return view('profile.list-requestsA');
+});
+
+Route::get('listado_recomendacionesA', function(){
+    return view('profile.list-suggestsA');
+});
+
+Route::get('roomies_potenciales', function(){
+    return view('profile.potential-roomies');
+});

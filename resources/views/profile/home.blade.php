@@ -6,7 +6,7 @@
     </x-slot>
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">¿Buscas una habitación?</div>
-        <div class="mt-2 ml-16">Lo recomendado para ti</div>
+        <div class="mt-2 ml-16">Habitaciones ofertadas</div>
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($casas as $casa)
                 <!-- IMAGEN CASA-->
@@ -57,7 +57,7 @@
     <!-- ROOMIES -->
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">¿Buscas un compañero de cuarto?</div>
-        <div class="mt-2 ml-16">Lo recomendado para ti</div>
+        <div class="mt-2 ml-16">Compañeros buscando habitación</div>
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($roomies as $roomie)
                 @php
@@ -90,8 +90,9 @@
         </div>
         <div class="text-right mr-20 mt-2">
             @if (Auth::user()->tipo == 'A')
+            <!-- NOTA PARA EL BACK: También ocultar si el usuario no tiene favoritos agregados -->
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="">
+                    href="roomies_potenciales">
                     Compañeros recomendados...
                 </a>
             @endif
