@@ -172,3 +172,7 @@ Route::get('listado_recomendacionesA', function(){
 Route::get('roomies_potenciales', function(){
     return view('profile.potential-roomies');
 });
+
+Route::get('chat', function(){
+    return view('chat');
+});
