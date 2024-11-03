@@ -24,6 +24,7 @@ class UserAController extends Controller
         
         return view('profile.home', compact('casas','roomies'));
     }
+
     /**
      * Display a listing of the resource.
      */

@@ -33,10 +33,20 @@
                             <div class="flex flex-col items-center block w-full">
                                 <div id="imageContainer" class="inline-block h-40 w-40 overflow-hidden 
                                     rounded-md bg-gray-100 mb-2">
-                                    <img id="preview" class="object-cover border border-cianna-gray 
-                                    rounded-lg" src="{{ $defaultImage }}" alt="Imagen previa" />
+                                    <?php
+                                        $imagen = Auth::user()->archivos()->where('archivo_type', 'img_perf')->get();
+                                    ?>
+                                    <img id="preview" class="h-full w-full object-cover 
+                                    border border-cianna-gray rounded-lg" 
+                                    src="{{asset('storage/'. $imagen[0]->ruta_archivo)}}" 
+                                    alt="Imagen previa" />
                                 </div>
                                 <x-custom-label for="img_perf">Cambiar foto de perfil</x-custom-label>
+                                <label class="text-xs mb-4 text-center text-gray-600">
+                                    Para que los demás visualicen mejor tu foto de perfil
+                                    recomendamos subir una foto con el mismo ancho y largo.
+                                    <br>Ej. 1000x1000
+                                </label>
                                 <input id="img_perf" name="img_perf" type="file" 
                                 accept=".png,.jpg,.jpeg" class="block w-full file:bg-cianna-blue 
                                 file:text-white file:cursor-pointer text-sm rounded-md cursor-pointer 
@@ -130,9 +140,9 @@
                     <!-- CONTENEDOR DER BOTÓN ACEPTAR -->
                     <div class="px-24 w-[43%]">
                         <button class="block w-full bg-cianna-blue hover:bg-sky-900 text-white 
-                        font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-                        type="submit">
-                            Guardar
+                            font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                            type="submit">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i>Guardar
                         </button>
                     </div>
                 </div>

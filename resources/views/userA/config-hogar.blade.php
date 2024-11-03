@@ -16,7 +16,7 @@
                 @csrf
                 <!-- TITULO -->
                 <div class="relative px-20 bg-cianna-white w-4/5">
-                    <h1 class="text-cianna-orange text-6xl">Configuración del hogar</h1>
+                    <h1 class="text-cianna-orange text-6xl">Configuración de la habitación</h1>
                 </div>
 
                 <!-- CONTENEDOR HORIZONTAL 1 -->

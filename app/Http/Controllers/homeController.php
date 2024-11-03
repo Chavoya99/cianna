@@ -62,24 +62,7 @@ class HomeController extends Controller
         }else{
             $usuario = Auth::user();
         }
-        $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
-        'ing_biom' => 'Ing. Biómedica',
-        'ing_civi' => 'Ing. Civil',
-        'ing_comp' => 'Ing. Computación',
-        'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
-        'ing_log_trans' => 'Ing. en Logística y Transporte',
-        'ing_topo' => 'Ing. en Topografía Geomática',
-        'ing_foto' => 'Ing. Fotónica',
-        'ing_indu' => 'Ing. Industrial',
-        'ing_info' => 'Ing. Informática',
-        'ing_meca' => 'Ing. Mecánica Eléctrica',
-        'ing_quim' => 'Ing. Química',
-        'ing_robo' => 'Ing. Robótica',
-        'lic_cien_mate' => 'Lic. en Ciencia de Materiales',
-        'lic_fis' => 'Lic. en Física',
-        'lic_mate' => 'Lic. en Matemáticas',
-        'lic_quim' => 'Lic. en Química',
-        'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
+        
 
         $img_perfil = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
         
@@ -88,7 +71,7 @@ class HomeController extends Controller
             $img_casa = Auth::user()->user_a->casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
         }
 
-        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $carreras[$usuario->carrera], 'img_casa' => $img_casa]);
+        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $this->obtener_nombre_carrera($usuario->carrera), 'img_casa' => $img_casa]);
     }
 
     public function actualizar_cuenta(Request $request){
@@ -203,10 +186,197 @@ class HomeController extends Controller
     }
 
     public function ver_detalles_casa(Casa $casa){
+
+        if($casa->user_a->id == Auth::user()->id){
+            //Configurar para redireccionar si se accede a la casa de mismo usuario autenticado
+        }
+
         $img_casa = $casa->archivos()
         ->where('clasificacion_archivo', '!=', 'compDom1')
         ->where('clasificacion_archivo', '!=', 'compDom2')
         ->get()->toArray();
         return view('profile.room-details', compact('casa', 'img_casa'));
     }
+
+    public function vista_previa_casa(Casa $casa){
+        if(Auth::user()->tipo == 'A'){
+            $casasRecomendadas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('user_a_id', '!=', Auth::id())->where('id', '!=', $casa->id)->limit(3)->get();
+        }else if (Auth::user()->tipo == 'B'){
+            $casasRecomendadas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('id', '!=', $casa->id)->limit(3)->get();
+        }
+        
+
+        $img_casa = $casa->archivos()->where('clasificacion_archivo', 'img_cuarto')->first();
+        return view('profile.about-room', compact('casa', 'img_casa', 'casasRecomendadas'));
+    }
+
+    public function listado_casas(){
+        if(Auth::user()->tipo == 'A'){
+            $casas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('user_a_id', '!=', Auth::id())->get();
+        }else if(Auth::user()->tipo == 'B'){
+            $casas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->get();
+        }
+        
+        return view('profile.homes-list', compact('casas'));
+    }
+
+    public function vista_previa_roomie($roomie){
+        if($roomie == Auth::id()){
+            return redirect(route('mi_perfil'));
+        }
+
+        $user = User::where('id', $roomie)->first();
+        
+        $rutaImagenPerfil = $user->archivos()->where('archivo_type', 'img_perf')->first()->ruta_archivo;
+
+        if($user->tipo == 'A'){
+            $roomie_v = $user->user_a;
+        }else if($user->tipo == 'B'){
+            $roomie_v = $user->user_b;
+        }
+
+        $carrera = $this->obtener_nombre_carrera($roomie_v->carrera);
+
+        if(Auth::user()->tipo == 'A'){
+            $roomiesRecomendados = UserB::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }])->where('user_id', '!=', $roomie)->limit(4)->get();
+        }else if(Auth::user()->tipo == 'B'){
+            $roomiesRecomendados = UserA::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }])->where('user_id', '!=', $roomie)->limit(4)->get();
+        }
+        
+        $listaCarreras = $this->lista_carreras();
+        return view('profile.about-roomie', compact('roomie_v', 'carrera', 'rutaImagenPerfil', 'roomiesRecomendados', 'listaCarreras'));
+    }
+
+    public function ver_detalles_roomie($roomie){
+        if($roomie == Auth::id()){
+            return redirect(route('mi_perfil'));
+        }
+
+        $user = User::where('id', $roomie)->first();
+        $rutaImagenPerfil = $user->archivos()->where('archivo_type', 'img_perf')->first()->ruta_archivo;
+        
+        if($user->tipo == 'A'){
+            $roomie_detalle = $user->user_a;
+        }else if($user->tipo == 'B'){
+            $roomie_detalle = $user->user_b;
+        }
+
+        $carrera = $this->obtener_nombre_carrera($roomie_detalle->carrera);
+
+        return view('profile.roomie-details', compact('roomie_detalle', 'carrera', 'rutaImagenPerfil'));
+    }
+
+    public function listado_roomies(){
+        if(Auth::user()->tipo == 'A'){
+            $roomies = UserB::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }])->get();
+        }else if(Auth::user()->tipo == 'B'){
+            $roomies = UserA::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }])->get();
+        }
+        
+        $carreras = $this->lista_carreras();
+
+        return view('profile.roomies-list', compact('roomies', 'carreras'));
+    }
+
+    public function obtener_nombre_carrera($llave){
+        $carreras = $this->lista_carreras();
+        return $carreras[$llave];
+    }
+
+    public function lista_carreras(){
+        $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
+        'ing_biom' => 'Ing. Biómedica',
+        'ing_civi' => 'Ing. Civil',
+        'ing_comp' => 'Ing. en Computación',
+        'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
+        'ing_log_trans' => 'Ing. en Logística y Transporte',
+        'ing_topo' => 'Ing. en Topografía Geomática',
+        'ing_foto' => 'Ing. Fotónica',
+        'ing_indu' => 'Ing. Industrial',
+        'ing_info' => 'Ing. Informática',
+        'ing_meca' => 'Ing. Mecánica Eléctrica',
+        'ing_quim' => 'Ing. Química',
+        'ing_robo' => 'Ing. Robótica',
+        'lic_cien_mate' => 'Lic. en Ciencia de Materiales',
+        'lic_fis' => 'Lic. en Física',
+        'lic_mate' => 'Lic. en Matemáticas',
+        'lic_quim' => 'Lic. en Química',
+        'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
+
+        return $carreras;
+    }
+
+    public function ver_favoritos(){
+        if (Auth::user()->tipo == 'A'){
+            $favoritos = Auth::user()->user_a->favoritos_roomies()->with(['user.archivos' => function ($query) {
+                $query->where('archivo_type', 'img_perf');}])->get();
+
+            $carreras = $this->lista_carreras();
+
+            return view('profile.favsA', compact('favoritos', 'carreras'));
+        }else if(Auth::user()->tipo == 'B'){
+            $favoritos = Auth::user()->user_b->favoritos_casas()->with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
+
+            return view('profile.favsB', compact('favoritos'));
+        }
+    }
+
+    public function ver_postulaciones(){
+        if (Auth::user()->tipo == 'A'){
+            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
+                $query->where('archivo_type', 'img_perf');}])->get();
+
+            $carreras = $this->lista_carreras();
+
+            return view('profile.requestsA', compact('postulaciones','carreras'));
+        }else if(Auth::user()->tipo == 'B'){
+            $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
+            
+            return view('profile.requestsB', compact('postulaciones'));
+        }
+    }
+
+    public function ver_lista_completa_postulaciones(){
+        if (Auth::user()->tipo == 'A'){
+            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
+                $query->where('archivo_type', 'img_perf');}])->get();
+
+            $carreras = $this->lista_carreras();
+
+            if(count($postulaciones) == 0){
+                return redirect(route('ver_postulaciones'));
+            }
+
+            return view('profile.list-requestsA', compact('postulaciones','carreras'));
+        }else if(Auth::user()->tipo == 'B'){
+            $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
+            
+            if(count($postulaciones) == 0){
+                return redirect(route('ver_postulaciones'));
+            }
+
+            return view('profile.list-requestsB', compact('postulaciones'));
+        }
+    }
+
+    
 }

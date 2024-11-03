@@ -8,7 +8,7 @@
     <div class="w-full">
         <!-- TITULO -->
         <div class="mt-8 ml-16 mr-16 w-4/5">
-            <h1 class="text-cianna-orange text-3xl">Detalle de hogar</h1>
+            <h1 class="text-cianna-orange text-3xl">Detalle de habitación</h1>
         </div>
         <!-- DETALLES -->
         <div class="flex w-full mt-8">
@@ -36,10 +36,10 @@
                                 alt="Imagen previa" />
                             </div>
                             @if(count($chunk) == 3)
-                                <div class="inline-block relative h-64 w-1/2 overflow-hidden rounded-md 
-                                    bg-gray-100 ml-1">
-                                    <img class="w-full h-full object-fill border-2 border-cianna-gray 
-                                    rounded-lg" 
+                                <div class="inline-block relative h-64 w-1/2 overflow-hidden 
+                                    rounded-md bg-gray-100 ml-1">
+                                    <img class="w-full h-full object-fill border-2 
+                                    border-cianna-gray rounded-lg" 
                                     src="{{ asset('storage/' . $chunk[2]['ruta_archivo']) }}" 
                                     alt="Imagen previa" />
                                 </div>
@@ -51,12 +51,13 @@
                 </div>
                 <!-- BOTONES DE NAVEGACIÓN -->
                 <div class="flex justify-center mt-4">
-                    <button class="bg-cianna-orange hover:bg-orange-300 text-white font-bold py-2 px-4 
-                        mr-1 rounded focus:outline-none focus:shadow-outline" id="prevButton">
+                    <button class="bg-cianna-orange hover:bg-orange-300 text-white font-bold 
+                        py-2 px-4 mr-1 rounded focus:outline-none focus:shadow-outline" 
+                        id="prevButton">
                         <i class="fa-solid fa-chevron-left px-2"></i>
                     </button>
-                    <button class="bg-cianna-orange hover:bg-orange-300 text-white font-bold py-2 px-4 
-                        rounded focus:outline-none focus:shadow-outline" id="nextButton">
+                    <button class="bg-cianna-orange hover:bg-orange-300 text-white font-bold 
+                        py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="nextButton">
                         <i class="fa-solid fa-chevron-right px-2"></i>
                     </button>
                 </div>
@@ -134,26 +135,29 @@
                             <div class="bg-white rounded-md px-1 py-1 border border-cianna-gray 
                                 flex items-center">
                                 <input type="checkbox" name="reglas[]" id="mascota" 
-                                class="h-5 w-5 text-cianna-orange rounded-md" @if ($casa->acepta_mascotas == 'si') checked @endif>
+                                class="h-5 w-5 text-cianna-orange rounded-md" 
+                                @if ($casa->acepta_mascotas == 'si') checked @endif disabled>
                                 <label class="ml-2 text-sm">Se aceptan mascotas</label>
                             </div>
                             <div class="mt-2 bg-white rounded-md px-1 py-1 border border-cianna-gray 
                                 flex items-center">
                                 <input type="checkbox" name="reglas[]" id="visitas" 
-                                class="h-5 w-5 text-cianna-orange rounded-md" @if ($casa->acepta_visitas == 'si') checked @endif disabled>
+                                class="h-5 w-5 text-cianna-orange rounded-md" 
+                                @if ($casa->acepta_visitas == 'si') checked @endif disabled>
                                 <label class="ml-2 text-sm">Se aceptan visitas</label>
                             </div>
                             <div class="mt-2 bg-white rounded-md px-1 py-1 border border-cianna-gray 
                                 flex items-center">
                                 <input type="checkbox" name="reglas[]" id="limpieza" 
-                                class="h-5 w-5 text-cianna-orange rounded-md" @if ($casa->riguroza_limpieza == 'si') checked @endif disabled>
+                                class="h-5 w-5 text-cianna-orange rounded-md" 
+                                @if ($casa->riguroza_limpieza == 'si') checked @endif disabled>
                                 <label class="ml-2 text-sm">Rigurosa limpieza</label>
                             </div>
                         </div>
                         <div class="w-[61%] px-2">
                             <x-custom-label>Reglas extra</x-custom-label>
-                            <div class="mt-2 bg-white rounded-md px-1 py-1 text-sm border border-cianna-gray 
-                                flex items-center">
+                            <div class="mt-2 bg-white rounded-md px-1 py-1 text-sm border 
+                                border-cianna-gray flex items-center">
                                 <p>
                                     @if(!$casa->regla_adicional)
                                     <p>No se especificaron reglas adicionales</p>
@@ -168,12 +172,14 @@
                                     <div class="flex items-center justify-between">
                                         <label>
                                             <input type="radio" name="muebles" id="muebles-s" 
-                                            class="w-4 h-4 text-cianna-orange" @if ($casa->muebles == 'si') checked @endif disabled>
+                                            class="w-4 h-4 text-cianna-orange" 
+                                            @if ($casa->muebles == 'si') checked @endif disabled>
                                             Sí.
                                         </label>
                                         <label>
                                             <input type="radio" name="muebles" id="muebles-n" 
-                                            class="w-4 h-4 text-cianna-orange" @if ($casa->muebles == 'no') checked @endif disabled>
+                                            class="w-4 h-4 text-cianna-orange" 
+                                            @if ($casa->muebles == 'no') checked @endif disabled>
                                             No.
                                         </label>
                                     </div>
@@ -183,12 +189,14 @@
                                     <div class="flex items-center justify-between">
                                         <label>
                                             <input type="radio" name="servicios" id="servicios-s" 
-                                            class="w-4 h-4 text-cianna-orange" @if ($casa->servicios == 'si') checked @endif disabled>
+                                            class="w-4 h-4 text-cianna-orange" 
+                                            @if ($casa->servicios == 'si') checked @endif disabled>
                                             Sí.
                                         </label>
                                         <label class="">
                                             <input type="radio" name="servicios" id="servicios-n" 
-                                            class="w-4 h-4 text-cianna-orange" @if ($casa->servicios == 'no') checked @endif disabled>
+                                            class="w-4 h-4 text-cianna-orange" 
+                                            @if ($casa->servicios == 'no') checked @endif disabled>
                                             No.
                                         </label>
                                     </div>
@@ -207,26 +215,50 @@
                         </div>
                     </div>
                     <!-- PRECIO -->
-                    <div class="w-2/5 mt-4 px-2">
-                        <x-custom-label>Precio</x-custom-label>
-                        <div class="flex flex-row">
-                            <div class="bg-gray-300 rounded-tl-md rounded-bl-md h-full 
-                                border border-cianna-gray">
-                                <i class="fa-solid fa-m ml-2 mt-1"></i>
-                                <i class="fa-solid fa-x mt-1"></i>
-                                <i class="fa-solid fa-n mt-1"></i>
-                                <i class="fa-solid fa-dollar-sign mt-1 mr-2"></i>
-                            </div>
-                            <div class="flex bg-white px-2 text-center
-                                border border-cianna-gray">
-                                <p class="text-gray-700">{{number_format($casa->precio, 2, '.', ',')}}</p>
-                            </div>
-                            <div class="bg-gray-300 px-1 text-center rounded-tr-md rounded-br-md h-full
-                                border border-cianna-gray">
-                                <p class="font-bold">/MES</p>
+                    <div class="w-full mt-4 px-2 flex justify-between items-end">
+                        <div>
+                            <x-custom-label>Precio</x-custom-label>
+                            <div class="flex flex-row">
+                                <div class="bg-gray-300 rounded-tl-md rounded-bl-md h-full 
+                                    border border-cianna-gray">
+                                    <i class="fa-solid fa-m ml-2 mt-1"></i>
+                                    <i class="fa-solid fa-x mt-1"></i>
+                                    <i class="fa-solid fa-n mt-1"></i>
+                                    <i class="fa-solid fa-dollar-sign mt-1 mr-2"></i>
+                                </div>
+                                <div class="flex bg-white px-2 text-center
+                                    border border-cianna-gray">
+                                    <p class="text-gray-700">{{number_format($casa->precio, 2, '.', ',')}}</p>
+                                </div>
+                                <div class="bg-gray-300 px-1 text-center rounded-tr-md rounded-br-md h-full
+                                    border border-cianna-gray">
+                                    <p class="font-bold">/MES</p>
+                                </div>
                             </div>
                         </div>
+                        
+                        @if (Auth::user()->tipo == 'B')
+                            <div>
+                                <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                                    href="{{ route('detalles_roomie', $casa->user_a) }}">
+                                    <i class="fa-solid fa-address-card mt-4 mr-2"></i>
+                                    Ver perfil del compañero
+                                </a>
+                            </div>
+                        @endif
+                        
                     </div>
+                    
+                    @if (Auth::user()->tipo == 'B')
+                        <div class="flex justify-between mt-4">
+                            <div class="w-1/2 px-2">
+                                <livewire:favorite-button :casaId="$casa->id"/>
+                            </div>
+                            <livewire:request-button2 :casaId="$casa->id"/>
+                        </div>
+                        
+                    @endif
+                    
                 </div>
             </div>
         </div>

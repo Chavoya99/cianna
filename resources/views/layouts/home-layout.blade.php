@@ -22,10 +22,10 @@
         <div class="font-sans antialiased">
             <div class="flex pt-6 sm:pt-0 bg-cianna-white min-h-screen">
                 <div class="w-3/20 overflow-hidden flex flex-col items-center px-2 py-4 bg-cianna-gray">
-                    <div class="w-1/2">
+                    <div class="w-1/2 mt-6">
                         {{ $logo }}
                     </div>
-                    <div class=" w-full flex flex-col mt-8 ">
+                    <div class=" w-full flex flex-col mt-5">
                     <?php 
                         if(Illuminate\Support\Facades\Auth::user()->tipo == 'A'){
                             $ruta_home=route('homeA');
@@ -39,12 +39,13 @@
                         <i class="fa-solid fa-house mr-2"></i>
                         Inicio
                     </x-home-buttons>
-                    <x-home-buttons href="applications">
-                        <i class="fa-solid fa-magnifying-glass mr-2"></i>
-                        Postulaciones</x-home-buttons>
-                    <x-home-buttons href="favs">
-                        <i class="fa-solid fa-star mr-2"></i>
-                        Tus favoritos
+                    <x-home-buttons href="{{route('ver_postulaciones')}}">
+                        <i class="fa-solid fa-envelopes-bulk mr-2"></i>
+                        Postulaciones
+                    </x-home-buttons>
+                    <x-home-buttons href="{{route('ver_favoritos')}}">
+                        <i class="fa-solid fa-heart mr-2"></i>
+                        Favoritos
                     </x-home-buttons>
                     </div>
                 </div>

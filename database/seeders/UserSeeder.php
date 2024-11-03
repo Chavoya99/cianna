@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\UserA;
+use App\Models\UserB;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Http\UploadedFile;
@@ -21,7 +23,7 @@ class UserSeeder extends Seeder
             'apellido' => 'Dios',
             'email' => 'admin@admin.com',
             'tipo' => 'admin',
-            'profile_update' => now(),
+            'profile_update' => now('America/Belize'),
         ]);
 
         User::factory()->create([
@@ -39,11 +41,11 @@ class UserSeeder extends Seeder
         ]);
 
 
-        $sexo = ['masculino', 'femenino'];
+        $sexo = ['Masculino', 'Femenino'];
         $mascota = ['si','no'];
         $padecimiento = ['si', 'no'];
         $lifestyle = ['d','t','a'];
-        $carrera = ['ing_comp', 'ing_info'];
+        $carrera = ['ing_comp', 'ing_info', 'ing_civi', 'ing_robo'];
     
 
         $faker = Faker::create();
@@ -65,7 +67,7 @@ class UserSeeder extends Seeder
             $padecimiento = seleccionarPadecimiento();
 
             $user = User::factory()->create([
-                'profile_update' => now(),
+                'profile_update' => now('America/Belize'),
                 'tipo' => $tipo,
             ]);
 
@@ -100,7 +102,7 @@ class UserSeeder extends Seeder
             
 
             if($user->tipo == 'A'){
-                if($user->user_a->sexo == 'masculino'){
+                if($user->user_a->sexo == 'Masculino'){
                     $user->update(['name' => $faker->firstNameMale]);
                     $rutaImagen = public_path('img/masculino.jpg');
                 }else{
@@ -108,7 +110,7 @@ class UserSeeder extends Seeder
                     $rutaImagen = public_path('img/femenino.jpg');
                 } 
             }else{
-                if($user->user_b->sexo == 'masculino'){
+                if($user->user_b->sexo == 'Masculino'){
                     $user->update(['name' => $faker->firstNameMale]);
                     $rutaImagen = public_path('img/masculino.jpg');
                 }else{
@@ -180,8 +182,13 @@ class UserSeeder extends Seeder
             ->first()
             ->update(['email' => 'exampleB@gmail.com']);
 
-        
+        UserA::where('mascota', 'no')
+        ->update(['num_mascotas' => 0]);
 
+        UserB::where('mascota', 'no')
+        ->update(['num_mascotas' => 0]);
+
+        
     }
 
     

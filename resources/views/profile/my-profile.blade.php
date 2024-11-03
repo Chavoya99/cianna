@@ -108,14 +108,13 @@
                         ¿Cual dirías que es tu estilo de vida?
                     </x-custom-label>
                     <div class="flex items-center flex-wrap">
-                            @if($usuario->lifestyle == 'd')
-                                <p>Divertido, me gusta la fiesta.</p>
-                            @elseif($usuario->lifestyle == 't')
-                                <p>Tranquilo, prefiero no salir mucho.</p>
-                            @elseif($usuario->lifestyle == 'a')
-                                <p>Ni tan fiestero ni tan tranquilo, está bien tener un equilibrio.
-                                </p>
-                            @endif
+                        @if($usuario->lifestyle == 'd')
+                            <p>Divertido, me gusta la fiesta.</p>
+                        @elseif($usuario->lifestyle == 't')
+                            <p>Tranquilo, prefiero no salir mucho.</p>
+                        @elseif($usuario->lifestyle == 'a')
+                            <p>Ni tan fiestero ni tan tranquilo, está bien tener un equilibrio.</p>
+                        @endif
                     </div>
                 </div>
                 <!-- CONTENEDOR DER CARRERA -->
@@ -148,16 +147,18 @@
                 <div class="w-[40%] px-28">
                     <form action="{{route('ver_kardex', Auth::user())}}" method="POST" target='_blank'>
                         @csrf
-                        <button type="submit" class="block w-full bg-cianna-orange hover:bg-orange-300 text-white 
-                             py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:font-bold">
+                        <button type="submit" class="block w-full bg-cianna-orange 
+                            hover:bg-orange-300 text-white py-2 px-4 rounded focus:outline-none 
+                            focus:shadow-outline hover:font-bold">
                             <i class="fa-solid fa-file"></i> Haz clic aquí para ver tu kárdex
                         </button>
                     </form>
                     <br>
                     <form action="{{route('descargar_kardex', Auth::user())}}" method="POST">
                         @csrf
-                        <button type="submit" class="block w-full bg-cianna-orange hover:bg-orange-300 text-white 
-                             py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:font-bold">
+                        <button type="submit" class="block w-full bg-cianna-orange 
+                            hover:bg-orange-300 text-white py-2 px-4 rounded focus:outline-none 
+                            focus:shadow-outline hover:font-bold">
                             <i class="fa-solid fa-download"></i> Descargar Kardex
                         </button>
                     </form>
@@ -172,7 +173,7 @@
                 <div class="flex w-full mt-3">
                     <!-- CONTENEDOR IZQ IMG CASA -->
                     <div class="relative px-16 w-[60%]">
-                        <x-custom-label class="text-xl">Mi casa</x-custom-label>
+                        <x-custom-label class="text-xl">Habitación que estás ofreciendo</x-custom-label>
                         <div class="relative w-full overflow-hidden">
                             <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
                                 @foreach ($img_casa as $img)
@@ -192,9 +193,16 @@
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
-                            <a class="flex justify-end font-semibold text-cianna-green 
-                                hover:text-cianna-orange" href="home-details">Ver detalles
+                        <div class="flex justify-between px-16">
+                            <a class="flex items-center justify-end font-semibold text-cianna-green 
+                                hover:text-cianna-orange" href="configuracion_hogar">
+                                <i class="fa-solid fa-gear mr-2"></i>Configurar
                             </a>
+                            <a class="flex items-center justify-end font-semibold text-cianna-green 
+                                hover:text-cianna-orange" href="detalles_hogar">
+                                <i class="fa-solid fa-circle-info mr-2"></i>Ver detalles
+                            </a>
+                        </div>
                     </div>
                     <!-- CONTENEDOR DER -->
                     <div class="w-[40%] px-28"></div>
@@ -206,7 +214,7 @@
             <!-- CONTENEDOR HORIZONTAL 7 -->
             <div class="flex w-full mt-3">
                 <!-- CONTENEDOR IZQ BOTÓN REGRESAR -->
-                <div class="relative px-16 w-[60%]">
+                <div class="relative ml-16 w-[60%]">
                     <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                         rounded focus:outline-none focus:shadow-outline" 
                         onclick="window.history.back()">
@@ -225,6 +233,7 @@
             <!-- CONTENEDOR HORIZONTAL 7 -->
     </div>
 </x-home-layout>
+
 @if(Auth::user()->tipo  == 'A')
 <script>
     document.addEventListener('DOMContentLoaded', () => {

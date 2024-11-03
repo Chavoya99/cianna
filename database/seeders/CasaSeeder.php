@@ -25,7 +25,11 @@ class CasaSeeder extends Seeder
         }
 
         function selecciona_colonia(){
-            $colonias = ['Colonia X', 'Colonia Y', 'Colonia Z'];
+            $colonias = ['Puerta de hierro', 'Miravalle', 'El Sauz',
+            'Jardines de la Cruz 1° Sección','Jardines de San José',
+            'Residencial La Cruz', 'Oblatos', 'Colonia del Sur',
+            'Colonia Americana', 'Jardines del Bosque', 'Del Fresno',
+            ];
             return $colonias[array_rand($colonias, 1)];
         }
 
@@ -50,7 +54,7 @@ class CasaSeeder extends Seeder
                 ]
                 );
             //Actualizar campo de registro_completo para el usuario relacionado con la casa
-            $usuario->update(['registro_completo' => now()]);
+            $usuario->update(['registro_completo' => now('America/Belize')]);
 
             //Imagenes para casas
             $clasificaciones = ['img_cuarto','img_banio','img_sala','img_cocina','img_fachada'];
