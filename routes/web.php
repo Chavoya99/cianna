@@ -176,3 +176,7 @@ Route::get('roomies_potenciales', function(){
 Route::get('chat', function(){
     return view('chat');
 });
+
+Route::get('chatPrivado', function(){
+    return view('chatPrivado');
+});
