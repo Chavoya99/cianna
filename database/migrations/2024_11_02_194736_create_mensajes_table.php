@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('mensajes', function (Blueprint $table) {
             $table->id();
             $table->string('room_id');
+            $table->foreignId('chat_id');
             $table->unsignedBigInteger('user_id_emisor');
             $table->foreign('user_id_emisor')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('user_id_receptor');
             $table->foreign('user_id_receptor')->references('id')->on('users')->onDelete('cascade');
             $table->string('username');
             $table->longText('contenido');
-            $table->timestamp('fecha')->default(now());
+            $table->timestamp('fecha_hora')->default(now());
         });
     }
 

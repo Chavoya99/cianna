@@ -30,4 +30,9 @@ class UserB extends Model
         return $this->belongsToMany(UserA::class, 'favoritos_roomies');
     }
 
+    public function chats(){
+        return $this->belongsToMany(UserA::class, 'chats', 'user_b_id', 'user_a_id');
+    }
+
+
 }

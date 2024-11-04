@@ -18,16 +18,16 @@ class UserA extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function habitacion(){
-    //     return $this->hasOne(Habitacion::class, 'user_a_id');
-    // }
-
     public function casa(){
         return $this->hasOne(Casa::class, 'user_a_id');
     }
 
     public function favoritos_roomies(){
         return $this->belongsToMany(UserB::class, 'favoritos_roomies', 'user_a_id', 'user_b_id');
+    }
+
+    public function chats(){
+        return $this->belongsToMany(UserB::class, 'chats', 'user_a_id', 'user_b_id');
     }
 
 }
