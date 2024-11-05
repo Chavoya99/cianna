@@ -31,7 +31,7 @@ class UserB extends Model
     }
 
     public function chats(){
-        return $this->belongsToMany(UserA::class, 'chats', 'user_b_id', 'user_a_id');
+        return $this->belongsToMany(UserA::class, 'chats', 'user_b_id', 'user_a_id')->withPivot('room_id', 'fecha_hora_creacion');
     }
 
 
