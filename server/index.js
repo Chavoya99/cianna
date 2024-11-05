@@ -52,7 +52,7 @@ io.on('connection', async (socket) => {
 
 
         fecha = formatoFecha(fecha)
-        io.emit('chat message', msg, result[0].insertId.toString(), username, user_id, fecha)
+        io.emit('chat message', msg, result[0].insertId.toString(), username, fecha)
     })
 
     if(!socket.recovered){

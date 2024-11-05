@@ -51,9 +51,10 @@ io.on('connection', async (socket) => {
                 );
 
                 results[0].forEach(row => {
-                    const fecha = formatoFecha(row.fecha);
-                    socket.emit('chat message', row.contenido, row.id.toString(), row.username, row.user_id_emisor, fecha);
+                    const fecha = formatoFecha(row.fecha_hora);
+                    socket.emit('chat message', row.contenido, row.id.toString(), row.username, fecha);
                 });
+                
             } catch (e) {
                 console.error(e);
                 return;
@@ -61,17 +62,17 @@ io.on('connection', async (socket) => {
         }
     });
     // Evento para enviar mensaje privado a otro usuario
-    socket.on('chat message', async (msg, userId, otherUserId, fecha) => {
-        const roomId = createRoomId(userId, otherUserId);
-        
+    socket.on('chat message', async (msg, userId, otherUserId, room_id, chat_id, fecha) => {
+        const roomId = room_id//createRoomId(userId, otherUserId);
         const username = socket.handshake.auth.username ?? 'anonymous';
         const fechaTimeStamp = formatoTimestamp(fecha);
+        const chatId = chat_id;
 
         let result;
         try {
             result = await connection.execute(
-                'INSERT INTO mensajes (room_id, contenido, username, user_id_emisor, user_id_receptor, fecha) VALUES (?, ?, ?, ?, ?, ?)',
-                [roomId, msg.toString(), username.toString(), userId, otherUserId, fechaTimeStamp]
+                'INSERT INTO mensajes (room_id, chat_id, contenido, username, user_id_emisor, user_id_receptor, fecha_hora) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                [roomId, chatId, msg.toString(), username.toString(), userId, otherUserId, fechaTimeStamp]
             );
         } catch (e) {
             console.error(e);
@@ -81,7 +82,7 @@ io.on('connection', async (socket) => {
         fecha = formatoFecha(fecha);
 
         // Emite el mensaje solo a la sala privada
-        io.to(roomId).emit('chat message', msg, result[0].insertId.toString(), username, userId, fecha);
+        io.to(roomId).emit('chat message', msg, result[0].insertId.toString(), username, fecha);
     });
 
     

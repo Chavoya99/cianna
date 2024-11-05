@@ -7,14 +7,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\ProfileUpdate;
 use App\Http\Middleware\ProfileUpdated;
 use App\Http\Controllers\CasaController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\HomeController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserAMiddleware;
 use App\Http\Middleware\UserBMiddleware;
 use App\Http\Controllers\UserAController;
 use App\Http\Controllers\UserBController;
 use App\Http\Middleware\ProfileNotUpdated;
+use App\Http\Controllers\PostulacionController;
 use App\Http\Controllers\Auth\LoginRegisterController;
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,9 +83,22 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('vista_previa_roomie/{roomie}', 'vista_previa_roomie')->name('vista_previa_roomie');
             Route::get('ver_detalles_roomie/{roomie}', 'ver_detalles_roomie')->name('detalles_roomie');
 
+            
+            Route::get('mis_favoritos', 'ver_favoritos')->name( 'ver_favoritos');
+
+            
+        });
+
+        Route::controller(ChatController::class)->group(function(){
+            Route::post('crear_chat', 'crear_chat')->name('crear_chat');
+            Route::get('chat_privado/{chat_id}/{room_id}/{otherUserId}', 'mostrar_chat')->name('chat_privado');
+            Route::get('lista_chats', 'lista_chats')->name('lista_chats');
+        });
+
+        Route::controller(PostulacionController::class)->group(function(){
             Route::get('ver_postulaciones', 'ver_postulaciones')->name('ver_postulaciones');
             Route::get('lista_postulaciones', 'ver_lista_completa_postulaciones')->name('lista_postulaciones');
-            Route::get('mis_favoritos', 'ver_favoritos')->name( 'ver_favoritos');
+            Route::post('aceptar_postulacion/{postulacion}', 'aceptar_postulacion')->name('aceptar_postulacion');
         });
         
         
@@ -177,6 +192,3 @@ Route::get('chat', function(){
     return view('chat');
 });
 
-Route::get('chatPrivado', function(){
-    return view('chatPrivado');
-});
