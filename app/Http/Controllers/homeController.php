@@ -305,7 +305,7 @@ class HomeController extends Controller
 
     public function lista_carreras(){
         $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
-        'ing_biom' => 'Ing. Biómedica',|
+        'ing_biom' => 'Ing. Biómedica',
         'ing_civi' => 'Ing. Civil',
         'ing_comp' => 'Ing. en Computación',
         'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
