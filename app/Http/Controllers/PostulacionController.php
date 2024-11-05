@@ -67,10 +67,12 @@ class PostulacionController extends Controller
         $users_id = [Auth::id(), intval($postulacion)];
         rsort($users_id);
 
+        $roomId = $users_id[0]."_".$users_id[1];
+        
         $request = new Request([
-            'postulacion' => $postulacion,
-            'user_1_id' => $users_id[0],
-            'user_2_id' => $users_id[1]
+            'user_1_id' => Auth::id(),
+            'user_2_id' => $postulacion,
+            'room_id' => $roomId
         ]);
 
         return app(ChatController::class)->crear_chat($request);
