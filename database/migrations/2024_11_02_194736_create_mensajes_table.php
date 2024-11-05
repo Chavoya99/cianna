@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('mensajes', function (Blueprint $table) {
             $table->id();
             $table->string('room_id');
-            $table->foreignId('chat_id');
+            $table->foreignUuid('chat_id');
             $table->unsignedBigInteger('user_id_emisor');
             $table->foreign('user_id_emisor')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('user_id_receptor');
