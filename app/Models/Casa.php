@@ -25,7 +25,7 @@ class Casa extends Model
     }
 
     public function postulaciones(){
-        return $this->belongsToMany(UserB::class, 'postulaciones', 'casa_id', 'user_b_id')->withPivot('fecha');
+        return $this->belongsToMany(UserB::class, 'postulaciones', 'casa_id', 'user_b_id')->withPivot('fecha', 'estado');
     }
 
     public function favoritos_casas(){

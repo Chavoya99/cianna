@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\ArchivoCasa;
 use App\Models\Casa;
+use App\Models\Postulacion;
 use App\Models\User;
 use App\Models\UserA;
 use App\Models\UserB;
+use DateTime;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -335,46 +339,6 @@ class HomeController extends Controller
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
 
             return view('profile.favsB', compact('favoritos'));
-        }
-    }
-
-    public function ver_postulaciones(){
-        if (Auth::user()->tipo == 'A'){
-            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
-                $query->where('archivo_type', 'img_perf');}])->get();
-
-            $carreras = $this->lista_carreras();
-
-            return view('profile.requestsA', compact('postulaciones','carreras'));
-        }else if(Auth::user()->tipo == 'B'){
-            $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
-                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
-            
-            return view('profile.requestsB', compact('postulaciones'));
-        }
-    }
-
-    public function ver_lista_completa_postulaciones(){
-        if (Auth::user()->tipo == 'A'){
-            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
-                $query->where('archivo_type', 'img_perf');}])->get();
-
-            $carreras = $this->lista_carreras();
-
-            if(count($postulaciones) == 0){
-                return redirect(route('ver_postulaciones'));
-            }
-
-            return view('profile.list-requestsA', compact('postulaciones','carreras'));
-        }else if(Auth::user()->tipo == 'B'){
-            $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
-                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
-            
-            if(count($postulaciones) == 0){
-                return redirect(route('ver_postulaciones'));
-            }
-
-            return view('profile.list-requestsB', compact('postulaciones'));
         }
     }
 
