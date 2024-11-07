@@ -84,7 +84,7 @@
             @if (count($postulaciones_pendientes) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="listado_pendientesB">Ver más pendientes...
+                    href="{{route('lista_postulaciones_pendientes')}}">Ver más pendientes...
                 </a>
             </div>
             @endif
