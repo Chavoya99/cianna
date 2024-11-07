@@ -1,6 +1,6 @@
 <!-- resources/views/profile/roomies-list.blade.php -->
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
-@section('title') {{ 'Ver más | Otros compañeros' }} @endsection
+@props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
+@section('title') {{ 'Compañeros disponibles' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo />
@@ -19,27 +19,34 @@
                     <div class="h-44 w-full overflow-hidden rounded-md flex relative 
                         transition-transform transform hover:scale-105">
                         <!-- IMAGEN -->
-                        <a href="vista_previa_roomie" class="w-1/2">
-                            <img class="object-contain w-full h-full border border-cianna-gray 
-                                bg-white rounded-lg" src="{{ asset('storage/'.$roomie->user->archivos->first()->ruta_archivo) }}" 
+                        <a href="{{route('vista_previa_roomie', $roomie)}}" class="w-1/2">
+                            <img class="object-cover w-full h-full border border-cianna-gray 
+                                bg-white rounded-lg" 
+                                src="{{ asset('storage/'.$roomie->user->archivos->first()->ruta_archivo) }}" 
                                 alt="Imagen previa del roomie" />
                         </a>
                         <!-- ENLACES -->
                         <div class="flex flex-col justify-center px-3 py-3 w-1/2">
                             <!-- NOMBRE -->
-                            <a href="vista_previa_roomie" class="text-lg font-semibold line-clamp-1">
+                            <a href="{{route('vista_previa_roomie', $roomie)}}" 
+                            class="text-lg font-semibold line-clamp-1">
                                 {{$roomie->user->name.' '.$roomie->user->apellido}}
                             </a>
                             <!-- CARRERA -->
-                            <a href="vista_previa_roomie" class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
+                            <a href="{{route('vista_previa_roomie', $roomie)}}" 
+                            class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green 
+                                font-semibold">
                                 {{$carreras[$roomie->carrera]}}
                             </a>
                             <!-- EDAD -->
-                            <a href="vista_previa_roomie" class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
+                            <a href="{{route('vista_previa_roomie', $roomie)}}" 
+                            class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 
+                                font-semibold">
                                 {{$roomie->edad}} años de edad
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="vista_previa_roomie" class="text-sm text-justify line-clamp-3 mt-1">
+                            <a href="{{route('vista_previa_roomie', $roomie)}}" 
+                            class="text-sm text-justify line-clamp-3 mt-1">
                                 {{$roomie->descripcion}}
                             </a>
                         </div>

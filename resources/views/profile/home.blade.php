@@ -1,5 +1,6 @@
 <!-- resources/views/profile/home.blade.php -->
 @section('title') {{ 'Inicio' }} @endsection
+@props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -44,7 +45,7 @@
         <div class="text-right mr-20 mt-2">
             @if (Auth::user()->tipo == 'B')
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="">
+                    href="habitaciones_potenciales">
                     Habitaciones recomendadas...
                 </a>
             @endif

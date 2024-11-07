@@ -1,6 +1,6 @@
 <!-- resources/views/profile/requestsA.blade.php -->
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
-@section('title') {{ 'Postulaciones recibidas' }} @endsection
+@props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
+@section('title') {{ 'Postulaciones' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -9,7 +9,7 @@
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones recibidas</div>
         @if(count($postulaciones) > 0)
-            <div class="mt-2 ml-16">Todas las postulaciones que has recibido</div>
+            <div class="mt-2 ml-16">Postulaciones que has recibido y están pendientes</div>
         @endif
             <!-- Contenedor principal del carrusel -->
         <div class="relative overflow-hidden mt-2 ml-16 mr-16">
@@ -31,6 +31,7 @@
                         para que proximamente podamos ayudarte a decidir quién puede ser más compatible  
                         contigo dándote mejores recomendaciones.
                     </p>
+                    
                 </div>
             @endif
             @if(count($postulaciones) > 4)
@@ -48,10 +49,9 @@
                 <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform 
                     transform hover:scale-110">
                     <div class="flex flex-col block">
-                        <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 
-                            relative">
+                        <div class="inline-block h-44 w-full overflow-hidden rounded-md relative">
                             <a href="{{route('detalles_roomie', $postulacion)}}">
-                                <img class="object-contain w-full h-full absolute top-0 left-0 
+                                <img class="object-cover w-full h-full absolute top-0 left-0 
                                     border border-cianna-gray rounded-lg" 
                                     src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}" 
                                     alt="Imagen previa del hogar" />
@@ -73,7 +73,14 @@
                         font-semibold line-clamp-1">
                         {{$carreras[$postulacion->carrera]}}
                     </a>
+                    <p>Fecha: {{date_format($postulacion->pivot->fecha, 'd-m-Y')}}</p>
+                    <p>Estado: {{$postulacion->pivot->estado}}</p>
+                    <form action="{{route('aceptar_postulacion', $postulacion)}}" method="POST">
+                        @csrf
+                        <button type="submit">Aceptar</a>
+                    </form>
                 </div>
+                
                 @endforeach
             </div>
             @if(count($postulaciones) > 4)
@@ -84,13 +91,22 @@
                 </button>
             @endif
         </div>
-        @if (count($postulaciones) > 4)
+        <div class="flex justify-between ml-20">
+            {{-- @if (count($postulaciones) > 4)--}}
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="{{route('lista_postulaciones')}}">Ver más...
+                    href="listado_pendientesA">Ver más pendientes...
                 </a>
             </div>
-        @endif
+            {{-- @endif --}}
+            @if (count($postulaciones) > 0)
+                <div class="text-right mr-20 mt-2">
+                    <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                        href="{{route('lista_postulaciones')}}">Ver todo...
+                    </a>
+                </div>
+            @endif
+        </div>
         @if(count($postulaciones) > 0)
             <!-- RECOMENDACIONES -->
             <div class="w-full">
@@ -104,17 +120,14 @@
                     @for ($i = 0; $i < 5; $i++)
                         <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform 
                             transform hover:scale-110">
-                            <div class="flex flex-col block">
-                                <div class="inline-block h-36 w-full overflow-hidden rounded-md
-                                    bg-gray-100 relative">
+                                <div class="inline-block h-36 w-full overflow-hidden
+                                    bg-cianna-gray border border-cianna-gray rounded-md relative">
                                     <a href="detalles_roomie">
-                                        <img class="object-contain w-full h-full absolute top-0 
-                                        left-0 border border-cianna-gray rounded-lg" 
+                                        <img class="object-cover w-full h-full" 
                                             src="{{ $defaultProfileImage }}" 
-                                            alt="Imagen previa roomie" />
+                                            alt="Imagen previa del roomie" />
                                     </a>
                                 </div>
-                            </div>
                             <!-- NOMBRE ROOMIE -->
                             <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">
                                 Nombre

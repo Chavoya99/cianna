@@ -19,7 +19,7 @@ class UserB extends Model
     }
 
     public function postulaciones(){
-        return $this->belongsToMany(Casa::class, 'postulaciones', 'user_b_id', 'casa_id')->withPivot('fecha');
+        return $this->belongsToMany(Casa::class, 'postulaciones', 'user_b_id', 'casa_id')->withPivot('fecha', 'estado');
     }
 
     public function favoritos_casas(){
@@ -29,5 +29,10 @@ class UserB extends Model
     public function favoritos_roomies(){
         return $this->belongsToMany(UserA::class, 'favoritos_roomies');
     }
+
+    public function chats_b(){
+        return $this->belongsToMany(UserA::class, 'chats', 'user_b_id', 'user_a_id')->withPivot('id', 'room_id', 'fecha_hora_creacion');
+    }
+
 
 }
