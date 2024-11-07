@@ -44,7 +44,7 @@
         <div class="text-right mr-20 mt-2">
             @if (Auth::user()->tipo == 'B')
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="">
+                    href="habitaciones_potenciales">
                     Habitaciones recomendadas...
                 </a>
             @endif

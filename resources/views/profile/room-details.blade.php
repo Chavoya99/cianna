@@ -1,5 +1,5 @@
 <!-- resources/views/profile/room-details.blade.php -->
-@section('title') {{ 'Detalles del hogar' }} @endsection
+@section('title') {{ 'Habitación | Detalles' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>

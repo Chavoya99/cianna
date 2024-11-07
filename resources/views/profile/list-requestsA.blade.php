@@ -1,5 +1,5 @@
-<!-- resources/views/profile/requestsA.blade.php -->
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
+<!-- resources/views/profile/list-requestsA.blade.php -->
+@props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
 @section('title') {{ 'Ver más | Postulaciones recibidas' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
@@ -11,17 +11,18 @@
         <div class="mt-8 ml-16 mr-16 w-4/5">
             <h1 class="text-cianna-orange text-3xl font-bold">Todas las postulaciones recibidas</h1>
         </div>
+        <div class="mt-2 ml-16">Aquí están todas las postulaciones que has recibido</div>
         <!-- MUESTRA DE POSTULACIONES-->
         <div class="mt-8 px-16 grid grid-cols-2 gap-6"> <!-- Añadir clases de grid para 2 columnas y espacio entre elementos -->
             @foreach ($postulaciones as $postulacion) <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
                 <div class="flex flex-col py-3 px-3 rounded-lg">
                     <!-- CONTENEDOR DE IMAGEN Y ENLACES -->
-                    <div class="h-44 w-full overflow-hidden rounded-md flex relative 
+                    <div class="inline-block h-44 w-full overflow-hidden flex relative 
                         transition-transform transform hover:scale-105">
                         <!-- IMAGEN -->
                         <a href="{{route('detalles_roomie', $postulacion)}}" class="w-1/2">
-                            <img class="object-contain w-full h-full border border-cianna-gray 
-                                bg-white rounded-lg" src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}"
+                            <img class="object-cover w-full h-full border border-cianna-gray rounded-md" 
+                                src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}"
                                 alt="Imagen previa del roomie" />
                         </a>
                         <!-- ENLACES -->
