@@ -31,6 +31,7 @@
                         para que proximamente podamos ayudarte a decidir quién puede ser más compatible  
                         contigo dándote mejores recomendaciones.
                     </p>
+                    
                 </div>
             @endif
             @if(count($postulaciones) > 4)
@@ -72,7 +73,14 @@
                         font-semibold line-clamp-1">
                         {{$carreras[$postulacion->carrera]}}
                     </a>
+                    <p>Fecha: {{date_format($postulacion->pivot->fecha, 'd-m-Y')}}</p>
+                    <p>Estado: {{$postulacion->pivot->estado}}</p>
+                    <form action="{{route('aceptar_postulacion', $postulacion)}}" method="POST">
+                        @csrf
+                        <button type="submit">Aceptar</a>
+                    </form>
                 </div>
+                
                 @endforeach
             </div>
             @if(count($postulaciones) > 4)
