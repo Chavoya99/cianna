@@ -98,6 +98,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
         Route::controller(PostulacionController::class)->group(function(){
             Route::get('ver_postulaciones', 'ver_postulaciones')->name('ver_postulaciones');
             Route::get('lista_postulaciones', 'ver_lista_completa_postulaciones')->name('lista_postulaciones');
+            Route::get('lista_postulaciones_pendientes', 'lista_postulaciones_pendientes')->name('lista_postulaciones_pendientes');
             Route::post('aceptar_postulacion/{postulacion}', 'aceptar_postulacion')->name('aceptar_postulacion');
         });
         
