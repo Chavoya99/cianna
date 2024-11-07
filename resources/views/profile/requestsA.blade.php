@@ -8,12 +8,12 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones recibidas</div>
-        @if(count($postulaciones) > 0)
+        @if(count($postulaciones_pendientes) > 0)
             <div class="mt-2 ml-16">Postulaciones que has recibido y están pendientes</div>
         @endif
             <!-- Contenedor principal del carrusel -->
         <div class="relative overflow-hidden mt-2 ml-16 mr-16">
-            @if (count($postulaciones) == 0)
+            @if (count($postulaciones_pendientes) == 0)
                 <div class="w-full text-2xl mt-4">
                     <p class="mb-4 text-justify">
                         ¡Hola, {{Auth::user()->name}}!
@@ -34,7 +34,7 @@
                     
                 </div>
             @endif
-            @if(count($postulaciones) > 4)
+            @if(count($postulaciones_pendientes) > 4)
                 <!-- Botón de flecha izquierda -->
                 <button id="prevBtn" class="absolute left-0 top-[35%] transform -translate-y-1/2 
                     bg-cianna-gray rounded-full p-2 z-10">
@@ -45,7 +45,7 @@
             <div class="flex transition-transform duration-300 w-full" id="carousel-container" 
                 style="transform: translateX(0);">
                 <!-- Imágenes del carrusel -->
-                @foreach ($postulaciones as $postulacion)
+                @foreach ($postulaciones_pendientes as $postulacion)
                 <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform 
                     transform hover:scale-110">
                     <div class="flex flex-col block">
@@ -83,7 +83,7 @@
                 
                 @endforeach
             </div>
-            @if(count($postulaciones) > 4)
+            @if(count($postulaciones_pendientes) > 4)
                 <!-- Botón de flecha derecha -->
                 <button id="nextBtn" class="absolute right-0 top-[35%] transform -translate-y-1/2
                     bg-cianna-gray rounded-full p-2 z-10">
@@ -92,14 +92,14 @@
             @endif
         </div>
         <div class="flex justify-between ml-20">
-            {{-- @if (count($postulaciones) > 4)--}}
+            @if (count($postulaciones_pendientes) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
                     href="listado_pendientesA">Ver más pendientes...
                 </a>
             </div>
-            {{-- @endif --}}
-            @if (count($postulaciones) > 0)
+            @endif
+            @if ($total_postulaciones > 0)
                 <div class="text-right mr-20 mt-2">
                     <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
                         href="{{route('lista_postulaciones')}}">Ver todo...
@@ -107,7 +107,7 @@
                 </div>
             @endif
         </div>
-        @if(count($postulaciones) > 0)
+        @if($total_postulaciones > 0)
             <!-- RECOMENDACIONES -->
             <div class="w-full">
                 <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">
@@ -150,7 +150,7 @@
             </div>
         @endif
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-16 @if(count($postulaciones) == 0) mt-40 @else mt-4 @endif">
+        <div class="relative px-16 @if(count($postulaciones_pendientes) == 0) mt-40 @else mt-4 @endif">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">
@@ -168,7 +168,7 @@
 
     let currentIndex = 0;
     const itemsToShow = 4;
-    const totalItems = {{count($postulaciones)}}; // Total de imágenes en el carrusel
+    const totalItems = {{count($postulaciones_pendientes)}}; // Total de imágenes en el carrusel
     //totalItems se ajusta con el número de postulaciones del usuario
 
     // Función para actualizar la posición del carrusel

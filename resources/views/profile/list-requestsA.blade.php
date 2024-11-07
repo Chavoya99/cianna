@@ -47,6 +47,8 @@
                                 class="text-sm text-justify line-clamp-3 mt-1">
                                 {{$postulacion->descripcion}}
                             </a>
+                            <p>Fecha: {{date_format($postulacion->pivot->fecha, 'd-m-Y')}}</p>
+                            <p>Estado: {{$postulacion->pivot->estado}}</p>
                         </div>
                         
                     </div>
