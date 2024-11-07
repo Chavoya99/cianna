@@ -9,7 +9,7 @@
     <div class="w-full">
         <!-- TITULO -->
         <div class="mt-8 ml-16 mr-16 w-4/5">
-            <h1 class="text-cianna-orange text-3xl font-bold">Todas las postulaciones recibidas</h1>
+            <h1 class="text-cianna-orange text-3xl font-bold">Postulaciones recibidas</h1>
         </div>
         <div class="mt-2 ml-16">Aquí están todas las postulaciones que has recibido</div>
         <!-- MUESTRA DE POSTULACIONES-->

@@ -83,11 +83,11 @@
                 </button>
             @endif
         </div>
-        <div class="flex justify-between ml-16">
+        <div class="flex justify-between ml-20">
             {{-- @if (count($postulaciones) > 4)--}}
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="postulaciones_pendientesA">Ver más pendientes...
+                    href="listado_pendientesA">Ver más pendientes...
                 </a>
             </div>
             {{-- @endif --}}

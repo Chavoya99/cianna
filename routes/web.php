@@ -169,6 +169,10 @@ Route::get('listado_postulacionesB', function(){
     return view('profile.list-requestsB');
 });
 
+Route::get('listado_pendientesA', function(){
+    return view('profile.list-pending-requestsA');
+});
+
 Route::get('listado_pendientesB', function(){
     return view('profile.list-pending-requestsB');
 });
