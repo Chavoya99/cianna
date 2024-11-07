@@ -207,6 +207,7 @@ Route::get('roomies_potenciales', function(){
 Route::get('habitaciones_potenciales', function(){
     return view('profile.potential-rooms');
 });
+
 Route::get('chat', function(){
     return view('chat');
 });
