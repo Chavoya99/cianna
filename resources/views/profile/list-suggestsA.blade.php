@@ -1,6 +1,6 @@
 <!-- resources/views/profile/suggestsA.blade.php -->
 @props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
-@section('title') {{ 'Ver más | Postulaciones recomendadas' }} @endsection
+@section('title') {{ 'Postulaciones | Recomendaciones' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>

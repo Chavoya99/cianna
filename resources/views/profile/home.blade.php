@@ -1,5 +1,6 @@
 <!-- resources/views/profile/home.blade.php -->
 @section('title') {{ 'Inicio' }} @endsection
+@props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>

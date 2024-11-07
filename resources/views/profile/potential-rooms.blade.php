@@ -1,6 +1,6 @@
 <!-- resources/views/profile/potential-rooms.blade.php -->
 @props(['defaultRoomImage' => asset('img/img_prueba_casas/img_cuarto.jpg')])
-@section('title') {{ 'Ver más | Habitaciones recomendadas' }} @endsection
+@section('title') {{ 'Habitaciones | Recomendaciones' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>

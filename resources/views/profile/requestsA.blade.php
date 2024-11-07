@@ -1,6 +1,6 @@
 <!-- resources/views/profile/requestsA.blade.php -->
 @props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
-@section('title') {{ 'Postulaciones recibidas' }} @endsection
+@section('title') {{ 'Postulaciones' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>

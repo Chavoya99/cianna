@@ -1,6 +1,6 @@
 <!-- resources/views/profile/list-requestsA.blade.php -->
 @props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
-@section('title') {{ 'Ver más | Postulaciones recibidas' }} @endsection
+@section('title') {{ 'Postulaciones | Todo' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -28,19 +28,23 @@
                         <!-- ENLACES -->
                         <div class="flex flex-col justify-center px-3 py-3 w-1/2">
                             <!-- NOMBRE -->
-                            <a href="{{route('detalles_roomie', $postulacion)}}" class="text-lg font-semibold line-clamp-1">
+                            <a href="{{route('detalles_roomie', $postulacion)}}" 
+                                class="text-lg font-semibold line-clamp-1">
                                 {{$postulacion->user->name.' '.$postulacion->user->apellido}}
                             </a>
                             <!-- CARRERA -->
-                            <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
+                            <a href="{{route('detalles_roomie', $postulacion)}}" 
+                            class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
                                 {{$carreras[$postulacion->carrera]}}
                             </a>
                             <!-- EDAD -->
-                            <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
+                            <a href="{{route('detalles_roomie', $postulacion)}}" 
+                                class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
                                 {{$postulacion->edad}} años de edad
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify line-clamp-3 mt-1">
+                            <a href="{{route('detalles_roomie', $postulacion)}}" 
+                                class="text-sm text-justify line-clamp-3 mt-1">
                                 {{$postulacion->descripcion}}
                             </a>
                         </div>
