@@ -14,7 +14,7 @@
         <div class="mt-2 ml-16">Aquí están todas las postulaciones que has recibido</div>
         <!-- MUESTRA DE POSTULACIONES-->
         <div class="mt-8 px-16 grid grid-cols-2 gap-6"> <!-- Añadir clases de grid para 2 columnas y espacio entre elementos -->
-            @foreach ($postulaciones as $postulacion) <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
+            @foreach ($postulaciones as $postulacion)
                 <div class="flex flex-col py-3 px-3 rounded-lg">
                     <!-- CONTENEDOR DE IMAGEN Y ENLACES -->
                     <div class="inline-block h-44 w-full overflow-hidden flex relative 
