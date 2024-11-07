@@ -180,12 +180,32 @@ Route::get('listado_postulacionesA', function(){
     return view('profile.list-requestsA');
 });
 
+Route::get('listado_postulacionesB', function(){
+    return view('profile.list-requestsB');
+});
+
+Route::get('listado_pendientesA', function(){
+    return view('profile.list-pending-requestsA');
+});
+
+Route::get('listado_pendientesB', function(){
+    return view('profile.list-pending-requestsB');
+});
+
 Route::get('listado_recomendacionesA', function(){
     return view('profile.list-suggestsA');
 });
 
+Route::get('listado_recomendacionesB', function(){
+    return view('profile.list-suggestsB');
+});
+
 Route::get('roomies_potenciales', function(){
     return view('profile.potential-roomies');
+});
+
+Route::get('habitaciones_potenciales', function(){
+    return view('profile.potential-rooms');
 });
 
 Route::get('chat', function(){

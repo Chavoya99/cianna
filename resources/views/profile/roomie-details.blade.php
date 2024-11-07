@@ -1,5 +1,5 @@
 <!-- resources/views/profile/roomie-details.blade.php -->
-@section('title') {{ 'Detalles del roomie' }} @endsection
+@section('title') {{ 'Compañero | Detalles' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>

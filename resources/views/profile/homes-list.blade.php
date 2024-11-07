@@ -1,6 +1,6 @@
 <!-- resources/views/profile/homes-list.blade.php -->
 @props(['defaultImage' => asset('img/img_prueba_casas/img_fachada.jpg')])
-@section('title') {{ 'Ver más | Otros hogares' }} @endsection
+@section('title') {{ 'Habitaciones disponibles' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo />
@@ -31,8 +31,12 @@
                                 {{$casa->colonia}}
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="{{route('vista_previa_casa', $casa)}}" class="text-sm text-justify line-clamp-5">
+                            <a href="{{route('vista_previa_casa', $casa)}}" class="text-sm text-justify line-clamp-3">
                                 {{$casa->descripcion}}
+                            </a>
+                            <!-- PRECIO -->
+                            <a href="{{route('vista_previa_casa', $casa)}}" class="text-md font-semibold line-clamp-1">
+                                $ {{number_format($casa->precio, 2, '.', ',')}}
                             </a>
                         </div>
                     </div>
