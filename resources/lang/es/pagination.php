@@ -15,5 +15,12 @@ return [
 
     'previous' => '&laquo; Anterior',
     'next'     => 'Siguiente &raquo;',
+    'first'    => 'Primero',
+    'last'     => 'Último',
+    'page'     => 'Página',
+    'of'       => 'de',
+    'results'  => 'resultados',
+    'showing'  => 'Mostrando',
+    'to'       => 'a',
 
 ];
