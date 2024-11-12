@@ -283,19 +283,7 @@ class HomeController extends Controller
     }
 
     public function listado_roomies(){
-        if(Auth::user()->tipo == 'A'){
-            $roomies = UserB::with(['user.archivos' => function($query){
-                $query->where('archivo_type', 'img_perf');
-            }])->get();
-        }else if(Auth::user()->tipo == 'B'){
-            $roomies = UserA::with(['user.archivos' => function($query){
-                $query->where('archivo_type', 'img_perf');
-            }])->get();
-        }
-        
-        $carreras = $this->lista_carreras();
-
-        return view('profile.roomies-list', compact('roomies', 'carreras'));
+        return view('profile.roomies-list');
     }
 
     public function obtener_nombre_carrera($llave){
