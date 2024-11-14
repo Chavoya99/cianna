@@ -219,17 +219,7 @@ class HomeController extends Controller
     }
 
     public function listado_casas(){
-        if(Auth::user()->tipo == 'A'){
-            $casas = Casa::with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');
-            }])->where('user_a_id', '!=', Auth::id())->get();
-        }else if(Auth::user()->tipo == 'B'){
-            $casas = Casa::with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');
-            }])->get();
-        }
-        
-        return view('profile.homes-list', compact('casas'));
+        return view('profile.homes-list');
     }
 
     public function vista_previa_roomie($roomie){
@@ -283,19 +273,9 @@ class HomeController extends Controller
     }
 
     public function listado_roomies(){
-        if(Auth::user()->tipo == 'A'){
-            $roomies = UserB::with(['user.archivos' => function($query){
-                $query->where('archivo_type', 'img_perf');
-            }])->get();
-        }else if(Auth::user()->tipo == 'B'){
-            $roomies = UserA::with(['user.archivos' => function($query){
-                $query->where('archivo_type', 'img_perf');
-            }])->get();
-        }
         
-        $carreras = $this->lista_carreras();
 
-        return view('profile.roomies-list', compact('roomies', 'carreras'));
+        return view('profile.roomies-list');
     }
 
     public function obtener_nombre_carrera($llave){
