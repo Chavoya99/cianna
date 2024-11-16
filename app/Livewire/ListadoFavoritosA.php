@@ -6,11 +6,11 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
-class ListadoFavoritosB extends Component
+class ListadoFavoritosA extends Component
 {
     //Hay que indicar que se debe usar la librería
     use WithPagination;
-
+    
     // Hay que agregar la función para que reconozca las carreras
     public function lista_carreras(){
         $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
@@ -35,14 +35,16 @@ class ListadoFavoritosB extends Component
         return $carreras;
     }
 
-    // Casi el mismo código original 
+    // Casi el mismo código original
     public function render()
     {
-        if(Auth::user()->tipo == 'B'){
-            $favoritos = Auth::user()->user_b->favoritos_casas()->with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');}])->paginate(10);
+        if (Auth::user()->tipo == 'A'){
+            $favoritos = Auth::user()->user_a->favoritos_roomies()->with(['user.archivos' => function ($query) {
+                $query->where('archivo_type', 'img_perf');}])->paginate(10);
             
-            return view('livewire.listado-favoritos-b', compact('favoritos'));
+            $carreras = $this->lista_carreras();
+
+            return view('livewire.listado-favoritos-a', compact('favoritos', 'carreras'));
         }
     }
 }

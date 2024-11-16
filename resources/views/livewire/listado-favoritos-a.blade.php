@@ -1,8 +1,16 @@
 <!-- resources/livewire/listado-favoritos-b.blade.php -->
 
-<!-- Aquí solo pasamos la vista del for y el paginador -->
 <div>
     <!-- MUESTRA DE FAVORITOS -->
+    @if(count($favoritos) > 0)
+    <div class="mt-4 px-16">
+        <p class="mb-4 text-justify">
+            <b>¡Excelente!</b> ¡Ya has agregado compañeros a tus favoritos! <br>
+            No olvides seguir añadiendo más personas para que podamos darte mejores 
+            recomendaciones
+        </p>
+    </div>
+    @endif
     <div class="mt-8 px-16 @if(count($favoritos) == 0) grid grid-cols-1 
         @else grid grid-cols-2 gap-6 @endif"> <!-- Grid de 1 columna si no hay favoritos, 2 columnas y espacio de 6 si los hay -->
         @if(count($favoritos) == 0)
@@ -11,30 +19,30 @@
                     ¡Hola, {{Auth::user()->name}}!
                 </p>
                 <p class="mb-4 text-justify"><i class="fa-solid fa-heart-circle-xmark mr-2"></i>
-                    Parece que por ahora no has añadido ninguna habitación a tus favoritos.
+                    Parece que por ahora no has añadido ninguna persona a tus favoritos.
                 </p>
                 <p class="mb-4 text-justify">
-                    ¡No te preocupes! Tarde o temprano encontrarás el lugar más adecuado para 
-                    tus necesidades actuales.                    
+                    ¡No te preocupes! Tarde o temprano encontrarás a la persona adecuada para
+                    compartir el lugar que estás ofreciendo.
                 </p>
                 <p class="text-justify"><i class="fa-solid fa-magnifying-glass mr-2"></i>
-                    Continúa explorando las habitaciones disponibles y agrega a tus favoritos 
-                    <i class="fa-solid fa-heart-circle-plus"></i> para que podamos ayudarte
-                    a encontrar lo que necesitas dándote mejores recomendaciones.
+                    Mientras tanto, continúa explorando los perfiles de los compañeros disponibles 
+                    y agrega a tus favoritos <i class="fa-solid fa-heart-circle-plus"></i> para 
+                    que podamos ayudarte a decidir quién puede ser más compatible contigo dándote 
+                    mejores recomendaciones.
                 </p>
             </div>
         @else
-            @foreach ($favoritos as $favorito) 
-                <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
+            @foreach($favoritos as $favorito) <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
                 <div class="flex flex-col py-3 px-3 rounded-lg">
                     <!-- CONTENEDOR DE IMAGEN Y ENLACES -->
                     <div class="h-44 w-full overflow-hidden rounded-md flex relative 
                         transition-transform transform hover:scale-105">
                         <!-- IMAGEN -->
-                        <a href="{{route('detalles_casa', $favorito)}}" class="w-1/2">
+                        <a href="{{route('detalles_roomie', $favorito)}}" class="w-1/2">
                             <img class="object-cover w-full h-full border border-cianna-gray 
-                                bg-white rounded-lg" src="{{ asset('storage/'.$favorito->archivos->first()->ruta_archivo) }}" 
-                                alt="Imagen previa de la habitación" />
+                                bg-white rounded-lg" src="{{ asset('storage/'.$favorito->user->archivos->first()->ruta_archivo) }}" 
+                                alt="Imagen previa del roomie" />
                         </a>
                         <!-- ENLACES -->
                         <div class="flex flex-col justify-center px-3 py-3 w-1/2">
@@ -43,25 +51,30 @@
                                 Favoritos
                             </p>
                             <!-- NOMBRE -->
-                            <a href="{{route('detalles_casa', $favorito)}}" class="text-lg font-semibold line-clamp-1">
-                                {{$favorito->colonia}}
+                            <a href="{{route('detalles_roomie', $favorito)}}" class="text-lg font-semibold line-clamp-1">
+                                {{$favorito->user->name.' '.$favorito->user->apellido}}
+                            </a>
+                            <!-- CARRERA -->
+                            <a href="{{route('detalles_roomie', $favorito)}}" class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
+                                {{$carreras[$favorito->carrera]}}
+                            </a>
+                            <!-- EDAD -->
+                            <a href="{{route('detalles_roomie', $favorito)}}" class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
+                                {{$favorito->edad}} años de edad
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="{{route('detalles_casa', $favorito)}}" class="text-sm text-justify line-clamp-3">
+                            <a href="{{route('detalles_roomie', $favorito)}}" class="text-sm text-justify line-clamp-3 mt-1">
                                 {{$favorito->descripcion}}
                             </a>
-                            <!-- PRECIO -->
-                            <a href="{{route('detalles_casa', $favorito)}}" class="text-md font-semibold mt-2">
-                                $ {{number_format($favorito->precio, 2, '.', ',')}}
-                            </a>
                         </div>
+                        
                     </div>
                 </div>
             @endforeach
             <br>
             {{--<div class="text-right mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange absolute right-0 px-20" 
-                    href="listado_favsB">Ver más...
+                    href="listado_favsA">Ver más...
                 </a>
             </div>--}}
         @endif
