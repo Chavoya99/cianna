@@ -47,6 +47,10 @@
                         <i class="fa-solid fa-heart mr-2"></i>
                         Favoritos
                     </x-home-buttons>
+                    <x-home-buttons href="{{route('lista_chats')}}">
+                        <i class="fa-solid fa-comments mr-2"></i>
+                        Chats
+                    </x-home-buttons>
                     </div>
                 </div>
                 <div class="w-17/20 overflow-hidden py-6">
