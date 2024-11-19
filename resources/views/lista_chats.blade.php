@@ -1,4 +1,4 @@
-@section('title') {{ 'Lista Chats' }} @endsection
+@section('title') {{ 'Chats | Todos' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
