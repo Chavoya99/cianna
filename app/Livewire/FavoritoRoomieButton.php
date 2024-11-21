@@ -21,9 +21,13 @@ class FavoritoRoomieButton extends Component
         if ($this->isFavorited) {
             Auth::user()->user_a->favoritos_roomies()->detach($this->roomieId);
             $this->isFavorited = false;
+            // Notificación
+            toastr()->success('¡Compañero eliminado de tus favoritos exitosamente!', 'Notificación');
         } else {
             Auth::user()->user_a->favoritos_roomies()->attach($this->roomieId);
             $this->isFavorited = true;
+            // Notificación
+            toastr()->success('¡Agregaste al compañero a tus favoritos exitosamente!', 'Notificación');
         }
     }
 
