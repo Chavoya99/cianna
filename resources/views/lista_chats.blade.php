@@ -32,12 +32,12 @@
                 <!-- Contenedor del chat -->
                 <div class="@if($loop->odd) bg-white @else bg-gray-100 @endif flex items-center 
                     gap-4 p-4 rounded-lg shadow-sm hover:bg-cianna-orange hover:shadow-md transition
-                    hover:cursor-pointer" 
+                    hover:cursor-pointer group" 
                     onclick="window.location.href='{{route('chat_privado', 
                     [$chat->pivot->id, $chat->pivot->room_id, $chat])}}'">
                     
                     <!-- Imagen de perfil -->
-                    <div class="h-16 w-16 overflow-hidden rounded-full bg-cianna-orange">
+                    <div class="h-20 w-20 overflow-hidden rounded-full bg-cianna-orange">
                         <img class="object-cover w-full h-full" 
                             src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
                             alt="Vista previa de la imagen de perfil del roomie" />
@@ -45,29 +45,30 @@
                     
                     <!-- Información del chat -->
                     <div>
-                        <p class="text-cianna-blue text-lg font-bold">
+                        <p class="text-cianna-blue text-xl font-bold group-hover:text-white">
                             <!-- Nombre del compañero -->
                             {{$chat->user->name}}
-                            {{--$idAuth--}}
                         </p>
                         <!-- Mostrar el último mensaje -->
                         @if ($ultimoMensaje)
-                            <div class="text-sm text-gray-500">
+                            <div class="text-md text-gray-500 group-hover:text-white">
                                 <div class="flex">
                                     @if($idAuth == $ultimoMensaje->user_id_emisor)
-                                        <p class="mr-1 font-bold"> Tú:</p>
+                                        <p class="mr-1 font-bold group-hover:text-white">Tú:</p>
                                     @endif
-                                    <!-- Muestra los primeros 30 caracteres -->
-                                    <p>{{ Str::limit($ultimoMensaje->contenido, 30) }}...</p> 
+                                    <!-- Muestra los primeros 40 caracteres -->
+                                    <p class="group-hover:text-white">
+                                        {{ Str::limit($ultimoMensaje->contenido, 40) }}
+                                    </p> 
                                 </div>
                                 <!-- Fecha en formato "hace X minutos/horas" -->
-                                <p class="text-xs">
-                                    {{ \Carbon\Carbon::parse($ultimoMensaje->fecha_hora)->diffForHumans() }}
+                                <p class="text-sm group-hover:text-white">
+                                    {{ ucfirst(\Carbon\Carbon::parse($ultimoMensaje->fecha_hora)->diffForHumans()) }}
                                 </p> 
                             </div>
                         @else
                             <!-- Si no hay mensajes -->
-                            <div class="text-sm text-gray-500">No hay mensajes aún</div> 
+                            <div class="text-sm text-gray-500 group-hover:text-white">No hay mensajes aún</div> 
                         @endif
                     </div>
                 </div>
