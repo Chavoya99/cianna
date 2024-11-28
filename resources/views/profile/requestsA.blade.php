@@ -46,8 +46,14 @@
                 style="transform: translateX(0);">
                 <!-- Imágenes del carrusel -->
                 @foreach ($postulaciones as $postulacion)
-                <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform 
+                <div class="w-1/4 flex-shrink-0 flex flex-col mb-6 mt-5 px-5 transition-transform 
                     transform hover:scale-110">
+                    <div class="mb-1">
+                        <p class="font-bold">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->diffForHumans()) }}
+                        </p>
+                    </div>
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md relative">
                             <a href="{{route('detalles_roomie', $postulacion)}}">
@@ -69,16 +75,46 @@
                         {{$postulacion->descripcion}}
                     </a>
                     <!-- CARRERA -->
-                    <a href="{{route('detalles_roomie', $postulacion)}}" class="mt-2 text-lg 
+                    <a href="{{route('detalles_roomie', $postulacion)}}" class="text-lg 
                         font-semibold line-clamp-1">
                         {{$carreras[$postulacion->carrera]}}
                     </a>
-                    <p>Fecha: {{date_format($postulacion->pivot->fecha, 'd-m-Y')}}</p>
-                    <p>Estado: {{$postulacion->pivot->estado}}</p>
-                    <form action="{{route('aceptar_postulacion', $postulacion)}}" method="POST">
-                        @csrf
-                        <button type="submit">Aceptar</a>
-                    </form>
+                    <div class="mt-2">
+                        <div class="flex">
+                            <p class="font-bold mr-1">Recibido: </p>
+                            {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->translatedFormat('d [\de ]M [\de ] Y')) }}
+                        </div>
+                        @php
+                            $estado_postulacion = $postulacion->pivot->estado;
+                        @endphp
+                        @if ($estado_postulacion == "pendiente")
+                            <div class="flex">
+                                <p class="font-bold">Estado:</p>
+                                <p class="ml-1 text-yellow-600 font-bold">Pendiente</p>
+                            </div>
+                            <div>
+                                <form action="{{route('aceptar_postulacion', $postulacion)}}" method="POST">
+                                    @csrf
+                                    <button class="px-2 py-1 mt-2 border rounded bg-cianna-green
+                                        text-white font-bold hover:bg-lime-600" type="submit">
+                                        <i class="fa-solid fa-circle-check mr-1"></i>Aceptar
+                                    </button>
+                                </form>
+                            </div>
+                        @elseif($estado_postulacion == "aceptada")
+                            <div class="flex">
+                                <p class="font-bold">Estado:</p>
+                                <p class="ml-1 text-cianna-green font-bold">Aceptada</p>
+                            </div>
+                            <div>
+                                <button class="px-2 py-1 mt-2 border rounded bg-cianna-blue 
+                                    text-white font-bold hover:bg-sky-900" 
+                                    onclick="">
+                                    <i class="fa-solid fa-message mr-1"></i>Chat
+                                </button>
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 
                 @endforeach
