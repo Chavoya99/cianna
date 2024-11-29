@@ -45,7 +45,7 @@
             <div class="flex transition-transform duration-300 w-full" id="carousel-container" 
                 style="transform: translateX(0);">
                 <!-- Imágenes del carrusel -->
-                @foreach ($postulaciones as $postulacion)
+                @foreach ($postulaciones_pendientes as $postulacion)
                 <div class="w-1/4 flex-shrink-0 flex flex-col mb-6 mt-5 px-5 transition-transform 
                     transform hover:scale-110">
                     <div class="mb-1">
