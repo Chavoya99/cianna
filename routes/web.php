@@ -93,6 +93,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::post('crear_chat', 'crear_chat')->name('crear_chat');
             Route::get('chat_privado/{chat_id}/{room_id}/{otherUserId}', 'mostrar_chat')->name('chat_privado');
             Route::get('lista_chats', 'lista_chats')->name('lista_chats');
+            Route::post('ver_chat/{user_id_2}', 'redireccionar_chat')->name('ver_chat');
         });
 
         Route::controller(PostulacionController::class)->group(function(){

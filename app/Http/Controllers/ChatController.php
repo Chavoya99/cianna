@@ -47,5 +47,16 @@ class ChatController extends Controller
         return view('lista_chats', compact('chats'));
     }
 
+    public function redireccionar_chat($user_id_2){
+        $user_id_1 = Auth::id();
+        $users = [$user_id_1, intval($user_id_2)];
+        rsort($users);
+        $room_id = $users[0].'_'.$users[1];
+        $chat_id = Chat::where('room_id', $room_id)->first('id');
+
+        return redirect()->route('chat_privado', [$chat_id->id, $room_id, $user_id_2]);
+
+    }
+
 
 }

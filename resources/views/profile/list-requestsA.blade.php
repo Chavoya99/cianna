@@ -75,11 +75,14 @@
                                         <p class="ml-1 text-cianna-green font-bold">Aceptada</p>
                                     </div>
                                     <div>
-                                        <button class="px-2 py-1 mt-2 border rounded bg-cianna-blue 
-                                            text-white font-bold hover:bg-sky-900" 
-                                            onclick="">
-                                            <i class="fa-solid fa-message mr-1"></i>Chat
-                                        </button>
+                                        <form action="{{route('ver_chat', $postulacion)}}" method="POST">
+                                            @csrf
+                                            <button class="px-2 py-1 mt-2 border rounded bg-cianna-blue 
+                                                text-white font-bold hover:bg-sky-900" 
+                                                type="submit">
+                                                <i class="fa-solid fa-message mr-1"></i>Chat
+                                            </button>
+                                        </form>
                                     </div>
                                 @endif
                             </div>
