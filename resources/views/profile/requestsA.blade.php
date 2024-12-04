@@ -19,7 +19,7 @@
                         ¡Hola, {{Auth::user()->name}}!
                     </p>
                     <p class="mb-4 text-justify"><i class="fa-solid fa-circle-xmark mr-2"></i>
-                        Parece que por ahora no has recibido ninguna postulación.
+                        Parece que por ahora no tienes ninguna postulacion pendiente por revisar.
                     </p>
                     <p class="mb-4 text-justify">
                         ¡No te preocupes! Tarde o temprano llegará la persona adecuada para 
@@ -127,7 +127,8 @@
                 </button>
             @endif
         </div>
-        <div class="flex justify-between ml-20">
+        <div class="flex justify-between @if (count($postulaciones_pendientes) > 4) ml-20 
+            @else ml-16 @endif">
             @if (count($postulaciones_pendientes) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
