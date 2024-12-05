@@ -47,7 +47,9 @@
                                 class="text-sm text-justify line-clamp-3 mt-1">
                                 {{$postulacion->descripcion}}
                             </a>
+                            <!-- ESTADO POSTULACIÓN -->
                             <div class="mt-2">
+                                <!-- FECHA DE POSTULACIÓN -->
                                 <div class="flex">
                                     <p class="font-bold mr-1">Recibido: </p>
                                     {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->translatedFormat('d [\de ]M [\de ] Y')) }}

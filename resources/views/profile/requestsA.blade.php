@@ -79,7 +79,9 @@
                         font-semibold line-clamp-1">
                         {{$carreras[$postulacion->carrera]}}
                     </a>
+                    <!-- ESTADO POSTULACIÓN -->
                     <div class="mt-2">
+                        <!-- FECHA DE POSTULACIÓN -->
                         <div class="flex">
                             <p class="font-bold mr-1">Recibido: </p>
                             {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->translatedFormat('d [\de ]M [\de ] Y')) }}
@@ -92,6 +94,7 @@
                                 <p class="font-bold">Estado:</p>
                                 <p class="ml-1 text-yellow-600 font-bold">Pendiente</p>
                             </div>
+                            <!-- BOTÓN ACEPTAR -->
                             <div>
                                 <form action="{{route('aceptar_postulacion', $postulacion)}}" method="POST">
                                     @csrf
