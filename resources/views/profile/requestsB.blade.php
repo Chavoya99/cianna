@@ -44,8 +44,14 @@
                 style="transform: translateX(0);">
                 <!-- Imágenes del carrusel -->
                 @foreach($postulaciones_pendientes as $postulacion)
-                <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform 
+                <div class="w-1/4 flex-shrink-0 flex flex-col mb-6 mt-5 px-5 transition-transform 
                     transform hover:scale-110">
+                    <div class="mb-1">
+                        <p class="font-bold">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->diffForHumans()) }}
+                        </p>
+                    </div>
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md 
                             bg-gray-100 relative">
@@ -67,8 +73,34 @@
                         class="text-sm text-justify line-clamp-3">
                     {{$postulacion->descripcion}}
                     </a>
-                    <p>Fecha: {{date_format($postulacion->pivot->fecha, 'd-m-Y')}}</p>
-                    <p>Estado: {{$postulacion->pivot->estado}}</p>
+                    <!-- ESTADO POSTULACIÓN -->
+                    <div>
+                        <div class="flex">
+                            <p class="font-bold mr-1">Recibido: </p>
+                            {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->translatedFormat('d [\de ]M [\de ] Y')) }}
+                        </div>
+                        @php
+                        $estado_postulacion = $postulacion->pivot->estado;
+                        @endphp
+                        @if ($estado_postulacion == "pendiente")
+                            <div class="flex">
+                                <p class="font-bold">Estado:</p>
+                                <p class="ml-1 text-yellow-600 font-bold">Pendiente</p>
+                            </div>
+                        @elseif($estado_postulacion == "aceptada")
+                            <div class="flex">
+                                <p class="font-bold">Estado:</p>
+                                <p class="ml-1 text-cianna-green font-bold">Aceptada</p>
+                            </div>
+                            <div>
+                                <button class="px-2 py-1 mt-2 border rounded bg-cianna-blue 
+                                    text-white font-bold hover:bg-sky-900" 
+                                    onclick="">
+                                    <i class="fa-solid fa-message mr-1"></i>Chat
+                                </button>
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 @endforeach
             </div>
@@ -80,7 +112,8 @@
                 </button>
             @endif
         </div>
-        <div class="flex justify-between ml-20">
+        <div class="flex justify-between @if (count($postulaciones_pendientes) > 4) ml-20 
+            @else ml-16 @endif">
             @if (count($postulaciones_pendientes) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 

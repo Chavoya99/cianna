@@ -19,7 +19,7 @@
                         ¡Hola, {{Auth::user()->name}}!
                     </p>
                     <p class="mb-4 text-justify"><i class="fa-solid fa-circle-xmark mr-2"></i>
-                        Parece que por ahora no has recibido ninguna postulación.
+                        Parece que por ahora no tienes ninguna postulacion pendiente por revisar.
                     </p>
                     <p class="mb-4 text-justify">
                         ¡No te preocupes! Tarde o temprano llegará la persona adecuada para 
@@ -79,7 +79,9 @@
                         font-semibold line-clamp-1">
                         {{$carreras[$postulacion->carrera]}}
                     </a>
+                    <!-- ESTADO POSTULACIÓN -->
                     <div class="mt-2">
+                        <!-- FECHA DE POSTULACIÓN -->
                         <div class="flex">
                             <p class="font-bold mr-1">Recibido: </p>
                             {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->translatedFormat('d [\de ]M [\de ] Y')) }}
@@ -92,6 +94,7 @@
                                 <p class="font-bold">Estado:</p>
                                 <p class="ml-1 text-yellow-600 font-bold">Pendiente</p>
                             </div>
+                            <!-- BOTÓN ACEPTAR -->
                             <div>
                                 <form action="{{route('aceptar_postulacion', $postulacion)}}" method="POST">
                                     @csrf
@@ -127,7 +130,8 @@
                 </button>
             @endif
         </div>
-        <div class="flex justify-between ml-20">
+        <div class="flex justify-between @if (count($postulaciones_pendientes) > 4) ml-20 
+            @else ml-16 @endif">
             @if (count($postulaciones_pendientes) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
