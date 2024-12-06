@@ -20,8 +20,6 @@
                     // Obtener la imagen del usuario
                     $imagen = $chat->user->archivos->first();
 
-                    $idAuth = Auth::user()->id;
-
                     // Consulta directa a la tabla 'mensajes' para obtener el último mensaje
                     $ultimoMensaje = \DB::table('mensajes')
                         ->where('chat_id', $chat->pivot->id)
@@ -53,7 +51,7 @@
                         @if ($ultimoMensaje)
                             <div class="text-md text-gray-500 group-hover:text-white">
                                 <div class="flex">
-                                    @if($idAuth == $ultimoMensaje->user_id_emisor)
+                                    @if(Auth::id() == $ultimoMensaje->user_id_emisor)
                                         <p class="mr-1 font-bold group-hover:text-white">Tú:</p>
                                     @endif
                                     <!-- Muestra los primeros 40 caracteres -->
