@@ -14,11 +14,13 @@ class PostulacionSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = UserB::first();
+        $users = UserB::get();
         $casas = Casa::limit(4)->get();
-
-        foreach($casas as $casa){
-            $user->postulaciones()->attach($casa->id, ['fecha' => now('America/Belize'), 'estado' => 'pendiente']);
+        foreach($users as $user){
+            foreach($casas as $casa){
+                $user->postulaciones()->attach($casa->id, ['fecha' => now('America/Belize'), 'estado' => 'pendiente']);
+            }
         }
+        
     }
 }
