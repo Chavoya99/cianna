@@ -40,22 +40,8 @@ class PostulacionController extends Controller
 
     public function ver_lista_completa_postulaciones(){
         if (Auth::user()->tipo == 'A'){
-            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
-                $query->where('archivo_type', 'img_perf');}])->orderByRaw("CASE WHEN estado = 'pendiente' THEN 1
-              WHEN estado = 'aceptada' THEN 2
-              WHEN estado = 'rechazada' THEN 3 END")->orderBy('fecha', 'desc')->get();
-            $carreras = $this->lista_carreras();
-
-            if(count($postulaciones) == 0){
-                return redirect(route('ver_postulaciones'));
-            }
             
-            foreach($postulaciones as $postulacion){
-                $postulacion->pivot->fecha = new DateTime($postulacion->pivot->fecha);              
-            }
-
-            return view('profile.list-requestsA', compact('postulaciones','carreras'));
-
+            return view('profile.list-requestsA');
         }else if(Auth::user()->tipo == 'B'){
             $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->orderByRaw("CASE WHEN estado = 'pendiente' THEN 1
