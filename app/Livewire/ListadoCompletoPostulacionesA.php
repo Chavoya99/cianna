@@ -55,7 +55,8 @@ class ListadoCompletoPostulacionesA extends Component
             foreach($postulaciones as $postulacion){
                 $postulacion->pivot->fecha = new DateTime($postulacion->pivot->fecha);              
             }
+            
+            return view('livewire.listado-completo-postulaciones-a', compact('postulaciones','carreras'));
         }
-        return view('livewire.listado-completo-postulaciones-a', compact('postulaciones','carreras'));
     }
 }
