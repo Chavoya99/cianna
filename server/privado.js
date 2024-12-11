@@ -74,6 +74,8 @@ io.on('connection', async (socket) => {
                 'INSERT INTO mensajes (room_id, chat_id, contenido, username, user_id_emisor, user_id_receptor, fecha_hora) VALUES (?, ?, ?, ?, ?, ?, ?)',
                 [roomId, chatId, msg.toString(), username.toString(), userId, otherUserId, fechaTimeStamp]
             );
+
+            let update = connection.execute("Update chats set fecha_ultimo_mensaje = ? where room_id = ? ", [fechaTimeStamp, roomId]);
         } catch (e) {
             console.error(e);
             return;

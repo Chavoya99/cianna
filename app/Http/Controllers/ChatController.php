@@ -22,7 +22,8 @@ class ChatController extends Controller
             'user_a_id' => $request->user_1_id,
             'user_b_id' => $request->user_2_id,
             'room_id' => $roomId,
-            'fecha_hora_creacion' => now()
+            'fecha_hora_creacion' => now('America/Belize'),
+            'fecha_ultimo_mensaje' => '2000-1-1 00:00:00'
         ]);
 
         return redirect(route('lista_chats'));
@@ -39,12 +40,28 @@ class ChatController extends Controller
 
     public function lista_chats(){
         if(Auth::user()->tipo == "A"){
-            $chats = Auth::user()->user_a->chats_a;
+            $chats = Auth::user()->user_a->chats_a()
+                ->with(['user.archivos' => function ($query){
+                $query->where('archivo_type', 'img_perf');}])->orderBy('fecha_ultimo_mensaje', 'desc')->get();
         }else if(Auth::user()->tipo == "B"){
-            $chats = Auth::user()->user_b->chats_b;
+            $chats = Auth::user()->user_b->chats_b()
+            ->with(['user.archivos' => function ($query){
+                $query->where('archivo_type', 'img_perf');}])->orderBy('fecha_ultimo_mensaje', 'desc')->get();
         }
+        //dd($chats);
         
         return view('lista_chats', compact('chats'));
+    }
+
+    public function redireccionar_chat($user_id_2){
+        $user_id_1 = Auth::id();
+        $users = [$user_id_1, intval($user_id_2)];
+        rsort($users);
+        $room_id = $users[0].'_'.$users[1];
+        $chat_id = Chat::where('room_id', $room_id)->first('id');
+
+        return redirect()->route('chat_privado', [$chat_id->id, $room_id, $user_id_2]);
+
     }
 
 
