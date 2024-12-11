@@ -30,9 +30,9 @@
                 @endphp
 
                 <!-- Contenedor del chat -->
-                <div class="@if($loop->odd) bg-white @else bg-gray-100 @endif flex items-center 
-                    gap-4 p-4 rounded-lg shadow-sm hover:bg-cianna-orange hover:shadow-md transition
-                    hover:cursor-pointer group" 
+                <div class="@if($loop->odd) bg-white @else bg-gray-100 @endif relative flex 
+                    items-center gap-4 p-4 rounded-lg shadow-sm hover:bg-cianna-orange
+                    hover:shadow-md transition hover:cursor-pointer group" 
                     onclick="window.location.href='{{route('chat_privado', 
                     [$chat->pivot->id, $chat->pivot->room_id, $chat])}}'">
                     
@@ -63,16 +63,27 @@
                                 </div>
                                 <!-- Fecha en formato "hace X minutos/horas" -->
                                 <p class="text-sm group-hover:text-white">
-                                    {{ ucfirst(\Carbon\Carbon::parse($ultimoMensaje->fecha_hora)->diffForHumans()) }}
+                                    {{ ucfirst(\Carbon\Carbon::parse($ultimoMensaje->fecha_hora)->
+                                    diffForHumans()) }}
                                 </p> 
                             </div>
                         @else
                             <!-- Si no hay mensajes -->
-                            <div class="text-sm text-gray-500 group-hover:text-white">No hay mensajes aún</div> 
+                            <div class="text-sm text-gray-500 group-hover:text-white">
+                                No hay mensajes aún
+                            </div> 
                         @endif
                     </div>
+                    <a href="{{route('detalles_roomie', $chat->user->id)}}" 
+                        class="absolute right-0 mr-4 rounded bg-cianna-orange group-hover:bg-white 
+                        group-hover:text-black">
+                        <div class="px-2 py-1 rounded hover:font-bold hover:bg-cianna-blue 
+                            hover:text-white transition-transform transform hover:scale-110">
+                            <i class="fa-solid fa-address-card mr-1"></i>
+                            VER PERFIL
+                        </div>
+                    </a>
                 </div>
-                
             @endforeach
         </div>
     </div>
