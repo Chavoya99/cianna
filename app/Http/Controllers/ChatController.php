@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Casa;
 use App\Models\Chat;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Access\Response;
@@ -53,14 +54,29 @@ class ChatController extends Controller
         return view('lista_chats', compact('chats'));
     }
 
-    public function redireccionar_chat($user_id_2){
-        $user_id_1 = Auth::id();
-        $users = [$user_id_1, intval($user_id_2)];
-        rsort($users);
-        $room_id = $users[0].'_'.$users[1];
-        $chat_id = Chat::where('room_id', $room_id)->first('id');
+    public function redireccionar_chat($id_aux){
+        if(Auth::user()->tipo == 'A'){
+            $user_id_1 = Auth::id();
+            $users = [$user_id_1, intval($id_aux)];
+            rsort($users);
+            $room_id = $users[0].'_'.$users[1];
+            $chat_id = Chat::where('room_id', $room_id)->first('id');
+        }elseif(Auth::user()->tipo == 'B'){
 
-        return redirect()->route('chat_privado', [$chat_id->id, $room_id, $user_id_2]);
+            $casa = Casa::where('id', $id_aux)->first();
+
+            $user_id_1 = $casa->user_a->user_id;
+            $user_id_2 = Auth::id();
+            $users = [$user_id_1, $user_id_2];
+            rsort($users);
+            $room_id = $users[0].'_'.$users[1];
+            $chat_id = Chat::where('room_id', $room_id)->first('id');
+
+            $id_aux = $user_id_1;
+        }
+        
+
+        return redirect()->route('chat_privado', [$chat_id->id, $room_id, $id_aux]);
 
     }
 
