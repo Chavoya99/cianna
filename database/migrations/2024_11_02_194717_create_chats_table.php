@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('user_b_id')->references('user_id')->on('users_b')->onDelete('cascade');
             $table->string('room_id')->unique();
             $table->timestamp('fecha_hora_creacion');
-            $table->timestamp('fecha_ultimo_mensaje');
+            $table->timestamp('fecha_ultimo_mensaje')->nullable();
         });
     }
 
