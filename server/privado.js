@@ -42,6 +42,48 @@ io.on('connection', async (socket) => {
         socket.join(roomId); // Une al usuario a la sala
         console.log(`User ${userId} joined room ${roomId}`);
 
+        try {
+            // Realiza la consulta para obtener el nombre de 'otherUserId'
+            const [rows] = await connection.execute(
+                'SELECT name, apellido FROM users WHERE id = ?', [otherUserId]
+            );
+    
+            if (rows.length > 0) {
+                const otherUserName = rows[0].name;
+                const otherUserApellido = rows[0].apellido;
+                //console.log(`El nombre de otherUserId (${otherUserId}) es ${otherUserName} ${otherUserApellido}`);
+    
+                // Puedes enviar el nombre al cliente si es necesario
+                socket.emit('other_user_name', { otherUserId, otherUserName, otherUserApellido });
+            } else {
+                console.log(`No se encontró un usuario con ID: ${otherUserId}`);
+            }
+        } catch (e) {
+            console.error('Error al obtener el nombre del usuario:', e);
+        }
+
+        
+        try {
+            // Realiza la consulta para obtener la imagen de 'otherUserId'
+            const [rows] = await connection.execute(
+                `SELECT ruta_archivo FROM archivos WHERE archivo_type = 'img_perf' AND user_id = ?`,
+                [otherUserId]
+            );
+        
+            if (rows.length > 0) {
+                const otherUserProfImg = rows[0].ruta_archivo;
+                //console.log(`La ruta de (${otherUserId}) es ${otherUserProfImg}`);
+                //console.log(socket);
+                // Envía la ruta de la imagen al cliente
+                socket.emit('other_user_prof_img', { otherUserProfImg });
+            } else {
+                console.log(`No se encontró un usuario con ID: ${otherUserId}`);
+            }
+        } catch (e) {
+            console.error('Error al obtener la ruta de la imagen del usuario:', e);
+        }
+        //const otherUserProfImg = socket.handshake.auth.otherUserProfImg;
+
         // Recupera mensajes anteriores solo para la sala privada
         if (!socket.recovered) {
             try {
@@ -61,6 +103,7 @@ io.on('connection', async (socket) => {
             }
         }
     });
+    
     // Evento para enviar mensaje privado a otro usuario
     socket.on('chat message', async (msg, userId, otherUserId, room_id, chat_id, fecha) => {
         const roomId = room_id//createRoomId(userId, otherUserId);

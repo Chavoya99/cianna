@@ -87,5 +87,13 @@
                 </div>
             @endforeach
         </div>
+        <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
+        <div class="relative mt-4">
+            <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
+                rounded focus:outline-none focus:shadow-outline" 
+                onclick="window.history.back()">
+                <i class="fa-solid fa-left-long mr-2"></i>Regresar
+            </button>
+        </div>
     </div>
 </x-home-layout>
