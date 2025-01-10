@@ -177,6 +177,8 @@
             lastDate = messageDate;  // Actualizar la última fecha
         }
 
+        userMessageName = isOwnMessage ? "Tú" : username;
+
         // Crear el mensaje
         const item = `
             ${dateElement}
