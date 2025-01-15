@@ -136,7 +136,16 @@
                 <!-- CONTENEDOR HORIZONTAL 6 -->
                 <div class="flex w-full mt-3">
                     <!-- CONTENEDOR IZQ  -->
-                    <div class="relative px-20 w-[57%]"></div>
+                    <div class="relative px-20 w-[57%]">
+                        <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
+                        <div>
+                            <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
+                                rounded focus:outline-none focus:shadow-outline" 
+                                onclick="window.history.back()">
+                                <i class="fa-solid fa-left-long mr-2"></i>Regresar
+                            </button>
+                        </div>
+                    </div>
                     <!-- CONTENEDOR DER BOTÓN ACEPTAR -->
                     <div class="px-24 w-[43%]">
                         <button class="block w-full bg-cianna-blue hover:bg-sky-900 text-white 

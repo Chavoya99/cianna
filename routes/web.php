@@ -210,6 +210,10 @@ Route::get('habitaciones_potenciales', function(){
     return view('profile.potential-rooms');
 });
 
+Route::get('configuracion_habitacion', function(){
+    return view('profile.room-settings');
+});
+
 Route::get('chat', function(){
     return view('chat');
 });

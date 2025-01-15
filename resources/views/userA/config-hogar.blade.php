@@ -1,7 +1,6 @@
 <!-- resources/views/config-hogar.blade.php -->
-@section('title') {{'Configuración del hogar'}} @endsection
+@section('title') {{'Configuración inicial de la habitación'}} @endsection
 <x-guest-layout>
-
     <!--MENSAJES DE ERROR -->
     <x-validation-errors/>
     
