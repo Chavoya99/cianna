@@ -180,7 +180,7 @@
                                     <div class="flex-none w-1/3 p-2">
                                         <img src="{{ asset('storage/'.$img->ruta_archivo)}}" 
                                         alt="Imagen {{ $loop->index + 1 }}" 
-                                        class="w-full h-[160px] rounded-lg shadow-md">
+                                        class="w-full h-[160px] rounded-lg shadow-md object-cover">
                                     </div>
                                 @endforeach
                             </div>
@@ -195,7 +195,7 @@
                         </div>
                         <div class="flex justify-between px-16">
                             <a class="flex items-center justify-end font-semibold text-cianna-green 
-                                hover:text-cianna-orange" href="configuracion_hogar">
+                                hover:text-cianna-orange" href="configuracion_habitacion">
                                 <i class="fa-solid fa-gear mr-2"></i>Configurar
                             </a>
                             <a class="flex items-center justify-end font-semibold text-cianna-green 
