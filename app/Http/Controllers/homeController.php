@@ -70,12 +70,14 @@ class HomeController extends Controller
 
         $img_perfil = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
         
+        $casa = null;
         $img_casa = null;
         if(Auth::user()->tipo == 'A'){
-            $img_casa = Auth::user()->user_a->casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
+            $casa = Auth::user()->user_a->casa;
+            $img_casa = $casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
         }
 
-        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $this->obtener_nombre_carrera($usuario->carrera), 'img_casa' => $img_casa]);
+        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $this->obtener_nombre_carrera($usuario->carrera), 'casa' => $casa, 'img_casa' => $img_casa]);
     }
 
     public function actualizar_cuenta(Request $request){
