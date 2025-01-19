@@ -167,6 +167,8 @@
         const textarea = document.getElementById('desc');
         const charCount = document.getElementById('char-count');
         const maxLength = textarea.getAttribute('maxlength');
+        
+        charCount.textContent = maxLength - textarea.value.length;
 
         textarea.addEventListener('input', () => {
             const remaining = maxLength - textarea.value.length;
