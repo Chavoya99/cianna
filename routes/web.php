@@ -57,6 +57,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('/configuracion_inicial_habitacion', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
             Route::post('/guardar_configuracion_inicial_habitacion', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
             Route::get('/configuracion_habitacion', [Casacontroller::class, 'configurar_casa_guardada'])->name('configurar_casa');
+            Route::post('/actualizar_informacion_habitacion', [CasaController::class, 'actualizar_informacion_casa'])->name('actualizar_informacion_casa');
             
         });
 
