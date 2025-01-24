@@ -57,7 +57,7 @@
     </div>
     <!-- ROOMIES -->
     <div class="w-full">
-        <div class="font-bold text-3xl mt-8 ml-16 mr-16">¿Buscas un compañero de cuarto?</div>
+        <div class="font-bold text-3xl mt-8 ml-16 mr-16">¿Buscas un compañero?</div>
         <div class="mt-2 ml-16">Compañeros buscando habitación</div>
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($roomies as $roomie)

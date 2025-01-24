@@ -216,3 +216,10 @@ Route::get('chat', function(){
     return view('chat');
 });
 
+Route::get('resultados_busqueda_A', function(){
+    return view('profile.search-resultsA');
+});
+
+Route::get('resultados_busqueda_B', function(){
+    return view('profile.search-resultsB');
+});
