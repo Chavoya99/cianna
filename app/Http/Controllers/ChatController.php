@@ -40,18 +40,7 @@ class ChatController extends Controller
     }
 
     public function lista_chats(){
-        if(Auth::user()->tipo == "A"){
-            $chats = Auth::user()->user_a->chats_a()
-                ->with(['user.archivos' => function ($query){
-                $query->where('archivo_type', 'img_perf');}])->orderBy('fecha_ultimo_mensaje', 'desc')->get();
-        }else if(Auth::user()->tipo == "B"){
-            $chats = Auth::user()->user_b->chats_b()
-            ->with(['user.archivos' => function ($query){
-                $query->where('archivo_type', 'img_perf');}])->orderBy('fecha_ultimo_mensaje', 'desc')->get();
-        }
-        //dd($chats);
-        
-        return view('lista_chats', compact('chats'));
+        return view('lista_chats');
     }
 
     public function redireccionar_chat($id_aux){

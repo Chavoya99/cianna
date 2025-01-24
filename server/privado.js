@@ -39,11 +39,11 @@ io.on('connection', async (socket) => {
     // Evento para unirse a una sala específica para una conversación privada
     socket.on('join room', async ({ userId, otherUserId }) => {
         const roomId = createRoomId(userId, otherUserId);
-        socket.join(roomId); // Une al usuario a la sala
+        socket.join(roomId);
         console.log(`User ${userId} joined room ${roomId}`);
 
         try {
-            // Realiza la consulta para obtener el nombre de 'otherUserId'
+            // Consulta para obtener el nombre de 'otherUserId'
             const [rows] = await connection.execute(
                 'SELECT name, apellido FROM users WHERE id = ?', [otherUserId]
             );
@@ -53,7 +53,7 @@ io.on('connection', async (socket) => {
                 const otherUserApellido = rows[0].apellido;
                 //console.log(`El nombre de otherUserId (${otherUserId}) es ${otherUserName} ${otherUserApellido}`);
     
-                // Puedes enviar el nombre al cliente si es necesario
+                // Enviar el nombre al cliente si es necesario
                 socket.emit('other_user_name', { otherUserId, otherUserName, otherUserApellido });
             } else {
                 console.log(`No se encontró un usuario con ID: ${otherUserId}`);
@@ -72,9 +72,6 @@ io.on('connection', async (socket) => {
         
             if (rows.length > 0) {
                 const otherUserProfImg = rows[0].ruta_archivo;
-                //console.log(`La ruta de (${otherUserId}) es ${otherUserProfImg}`);
-                //console.log(socket);
-                // Envía la ruta de la imagen al cliente
                 socket.emit('other_user_prof_img', { otherUserProfImg });
             } else {
                 console.log(`No se encontró un usuario con ID: ${otherUserId}`);
@@ -123,7 +120,7 @@ io.on('connection', async (socket) => {
             console.error(e);
             return;
         }
-
+        
         fecha = formatoFecha(fecha);
 
         // Emite el mensaje solo a la sala privada
@@ -171,6 +168,7 @@ function formatoTimestamp(fecha) {
 
     // Asegúrate de que la conversión fue exitosa
     if (isNaN(fecha)) {
+        console.log(fecha)
         throw new Error("Fecha inválida");
     }
 

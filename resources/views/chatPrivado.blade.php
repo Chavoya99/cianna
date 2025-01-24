@@ -54,13 +54,7 @@
                             oninput="adjustHeight(this)"
                             onkeydown="handleEnter(event)"
                         ></textarea>
-                        <button 
-                            type="submit"
-                            class="px-8 py-2 text-white bg-cianna-blue rounded-md hover:bg-sky-900
-                                focus:outline-none focus:ring-2 focus:ring-sky-900"
-                        >
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
+                        <livewire:boton-enviar-mensaje/>
                     </form>
                 </div>
             </div>
@@ -69,6 +63,7 @@
 </x-home-layout>
 
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+
 <script>
     // Inicialización de socket.io
     const socket = io('http://localhost:3000', {
@@ -151,10 +146,6 @@
     socket.on('chat message', (msg, serverOffset, username, fecha) => {
         // Verificar si el mensaje es del usuario actual o de otro usuario
         const isOwnMessage = username === socket.auth.username;
-        console.log(profileImage);
-        //console.log('Username:', socket.auth.username);
-        //const otherUserProfImg = socket.auth.otherUserProfImg;
-        //console.log('Imagen del perfil:', socket.auth.otherUserProfImg);
         
         // Clases para las burbujas
         const bubbleClass = isOwnMessage 
@@ -219,7 +210,8 @@
             const date = new Date(formattedDate);
             
             if (isNaN(date)) {
-                console.error('Fecha inválida:', fecha);
+                //console.log(fecha)
+                //console.error('Fecha inválida:', fecha);
                 return ''; // Si la fecha no es válida, retorna una cadena vacía o el valor predeterminado
             }
             
@@ -239,7 +231,11 @@
             messages.scrollTop = messages.scrollHeight;
 
             input.value = "";
+            Livewire.dispatch('messageSent');
         }
+        
+
+        
     });
 
     //Asigna las varibles del otro usuario desde el servidor
