@@ -31,7 +31,8 @@
             <!-- @ if (Auth::user()->tipo != 'B') -->
                 <div id="formulario-a" class="formulario form hidden">
                     <h3 class="font-bold">Compañeros</h3>
-                    <form id="form-a" action="" method="">
+                    <form id="form-a" action="{{route('busquedaRoomies')}}" method="POST">
+                        @csrf
                         <!-- DIV 1 -->
                         <div class="flex items-center space-x-6">
                             <!-- EDAD -->
@@ -93,7 +94,7 @@
                                             <input type="hidden" name="carreras[]" value="">
                                             <label class="px-2 py-1 flex items-center 
                                                 hover:cursor-pointer hover:bg-orange-200 text-sm">
-                                                <input type="checkbox" id="selectAll" 
+                                                <input type="checkbox" id="selectAll"
                                                 class="mr-2 text-cianna-orange hover:cursor-pointer
                                                 focus:ring-cianna-orange" />
                                                 Todas
@@ -555,7 +556,7 @@
 
 
 <!-- VERIFICAR DATOS EN CONSOLA ENVIADOS DESDE FORMULARIO A -->
-<script>
+<!-- <script>
     document.getElementById('form-a').addEventListener('submit', function(event) {
         // Evitar el envío del formulario (solo para depuración)
         event.preventDefault();
@@ -584,7 +585,7 @@
         // Si deseas continuar con el envío del formulario después de revisar los datos, puedes descomentar la siguiente línea:
         // this.submit();
     });
-</script>
+</script> -->
 
 <!-- VERIFICAR DATOS EN CONSOLA ENVIADOS DESDE FORMULARIO B -->
 <script>

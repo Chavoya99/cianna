@@ -88,6 +88,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             
             Route::get('mis_favoritos', 'ver_favoritos')->name( 'ver_favoritos');
 
+            Route::post('busqueda', 'busquedaRoomies')->name('busquedaRoomies');
+
             
         });
 

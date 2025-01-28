@@ -322,5 +322,63 @@ class HomeController extends Controller
             return view('profile.favsB');
         }
     }
+
+    public function busquedaRoomies(Request $request){
+        $users = UserB::with(['user.archivos' => function($query){
+            $query->where('archivo_type', 'img_perf');
+        }])->where('user_id', '!=', Auth::id());
+
+        //Filtro edad
+        if($request->has('edad_min') || $request->has('edad_max')){
+            $edad_min = ($request->edad_min != null ) ? $request->edad_min : 0;
+            $edad_max = ($request->edad_max != null ) ? $request->edad_max : 100;
+            $users = $users->whereBetween('edad', [$edad_min, $edad_max]);
+        }
+
+        //Filtro sexo
+        if($request->sexo){
+            $users = $users->where('sexo', $request->sexo);
+        }
+
+        //Filtro carrera
+        if(count($request->carreras) > 1){
+            
+            $carreras = array_slice($request->carreras, 1);
+            $users = $users->whereIn('carrera', $carreras);
+        }
+
+        //Filtro mascota
+        if($request->mascota){
+            $users = $users->where('mascota', $request->mascota);
+        }
+
+        if($request->padecimiento){
+            $users = $users->where('padecimiento', $request->padecimiento);
+        }
+
+        //Filtro carrera
+        if(count($request->lifestyle) > 1){
+            $lifestyle = array_slice($request->lifestyle, 1);
+            $users = $users->whereIn('lifestyle', $lifestyle);
+        }
+
+        $users = $users->get();
+        
+        echo "Resultados obtenidos (". count($users).")<br>";
+        foreach($users as $user){
+            echo 'id: '. $user->user_id. '<br>';
+            echo 'nombre: '. $user->user->name.  '<br>';
+            echo 'edad: '. $user->edad.  '<br>';
+            echo 'sexo: '. $user->sexo. '<br>';
+            echo 'carrera: '. $user->carrera. '<br>';
+            echo 'mascota: '. $user->mascota. '<br>';
+            echo 'padecimiento: '. $user->padecimiento. '<br>';
+            echo 'lifestyle: '.$user->lifestyle. '<br>';
+            echo  '<br>';
+        }
+
+        return "";
+
+    }
     
 }
