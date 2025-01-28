@@ -362,8 +362,8 @@
                                     text-gray-700">
                                         Calle
                                     </label>
-                                    <input id="calle" type="text" class="mt-1 text-sm w-full 
-                                    border border-gray-300 rounded-md shadow-sm 
+                                    <input id="calle" name="calle" type="text" class="mt-1 text-xs  
+                                    w-full border border-gray-300 rounded-md shadow-sm 
                                     focus:ring-cianna-orange focus:border-cianna-orange">
                                 </div>
                                 <div class="w-[32%]">
@@ -371,8 +371,8 @@
                                     text-gray-700">
                                         N° ext.
                                     </label>
-                                    <input id="num_ext" type="number" class="mt-1 text-sm w-full 
-                                        border border-gray-300 rounded-md shadow-sm 
+                                    <input id="num_ext" name="num_ext" type="number" class="mt-1  
+                                        text-xs w-full border border-gray-300 rounded-md shadow-sm 
                                         focus:ring-cianna-orange focus:border-cianna-orange">
                                 </div>
                                 <div class="w-[32%]">
@@ -380,18 +380,20 @@
                                     text-gray-700">
                                         N° int.
                                     </label>
-                                    <input id="num_int" type="number" class="mt-1 text-sm w-full 
-                                    border border-gray-300 rounded-md shadow-sm 
+                                    <input id="num_int" name="num_int" type="number" class="mt-1 
+                                    text-xs w-full border border-gray-300 rounded-md shadow-sm 
                                     focus:ring-cianna-orange focus:border-cianna-orange">
                                 </div>
                             </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="w-1/2">
+                            <div class="flex items-center space-x-2 mt-2">
+                                <div class="w-[60%]">
                                     <label for="ciudad" class="block text-xs font-medium 
                                     text-gray-700">
                                         Ciudad
                                     </label>
-                                    <select id="ciudad" class="w-full">
+                                    <select id="ciudad" name="ciudad" class="mt-1 text-xs w-full 
+                                    border border-gray-300 rounded-md shadow-sm 
+                                    focus:ring-cianna-orange focus:border-cianna-orange">
                                         <option value="">Cualquiera</option>
                                         <option value="">Guadalajara</option>
                                         <option value="">El Salto</option>
@@ -401,25 +403,49 @@
                                         <option value="">Zapopan</option>
                                     </select>
                                 </div>
-                                <div class="w-1/2">
+                                <div class="w-[45%]">
                                     <label for="colonia" class="block text-xs font-medium 
                                     text-gray-700">
                                         Colonia
                                     </label>
-                                    <input id="colonia" type="number" class="mt-1 text-sm w-full 
-                                        border border-gray-300 rounded-md shadow-sm 
+                                    <input id="colonia" name="colonia" type="text" class="mt-1  
+                                        text-xs w-full border border-gray-300 rounded-md shadow-sm 
                                         focus:ring-cianna-orange focus:border-cianna-orange">
                                 </div>
-                                <div class="w-[40%]">
+                                <div class="w-[25%]">
                                     <label for="cod_post" class="block text-xs font-medium 
                                     text-gray-700">
                                         CP
                                     </label>
-                                    <input id="cod_post" type="number" class="mt-1 text-sm w-full 
+                                    <input id="cod_post" name="cod_post" class="mt-1 text-xs w-full 
                                     border border-gray-300 rounded-md shadow-sm 
-                                    focus:ring-cianna-orange focus:border-cianna-orange">
+                                    focus:ring-cianna-orange focus:border-cianna-orange" 
+                                    minlength="5" maxlength="5" pattern="[0-9]{5}">
                                 </div>
                             </div>
+                        </div>
+                        <!-- DIV 2 -->
+                        <div>
+                            Reglas
+                        </div>
+                        <!-- DIV 3 -->
+                        <div>
+                            Muebles
+                        </div>
+                        <!-- DIV 4-->
+                        <div>
+                            Servicios
+                        </div>
+                        <!-- DIV 5-->
+                        <div>
+                            Precio
+                        </div>
+                        <!-- BOTÓN PARA ENVIAR -->
+                        <div class="mt-4 flex justify-end">
+                            <button type="submit" class="px-4 py-2 bg-cianna-blue text-white rounded-lg 
+                                hover:bg-sky-900 focus:ring-4 focus:outline-none focus:ring-sky-400">
+                                <i class="fa-solid fa-magnifying-glass mr-2"></i>Buscar
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -529,7 +555,7 @@
     // Obtener elementos
     const selectAllCheckbox = document.getElementById('selectAll');
     const childCheckboxes = document.querySelectorAll('.childCheckbox');
-    const form = document.getElementById('form-a'); // Selecciona el formulario que contiene los checkboxes
+    const form_a = document.getElementById('form-a'); // Selecciona el formulario que contiene los checkboxes
     const hiddenInput = document.querySelector('input[name="carreras"]'); // Input oculto para "carreras"
 
     // Evento para seleccionar/deseleccionar todos los checkboxes secundarios
@@ -554,7 +580,7 @@
     });
 
     // Evento antes de enviar el formulario
-    form.addEventListener('submit', function (e) {
+    form_a.addEventListener('submit', function (e) {
         // Si "Seleccionar todo" está marcado
         if (selectAllCheckbox.checked) {
             // Desmarcar todos los checkboxes secundarios antes de enviar el formulario
