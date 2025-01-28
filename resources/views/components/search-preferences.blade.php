@@ -352,36 +352,74 @@
                 <div id="formulario-b" class="formulario form hidden">
                     <h3 class="font-bold">Habitaciones</h3>
                     <form id="form-b" action="" method="">
-                        
-                        <label for="category" class="block text-sm font-medium text-gray-700">
-                            Categoría
-                        </label>
-                        <select id="category" name="category" class="mt-1 block w-full border 
-                            border-gray-300 rounded-md shadow-sm focus:ring-cianna-orange 
-                            focus:border-cianna-orange sm:text-sm">
-                            <option value="">Seleccione una categoría</option>
-                            <option value="option1">Opción 1</option>
-                            <option value="option2">Opción 2</option>
-                        </select>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">
-                                Opciones adicionales
-                            </label>
-                            <div class="flex items-start mt-2">
-                                <input type="checkbox" id="option1" name="option1" 
-                                class="h-4 w-4 text-cianna-orange border-gray-300 rounded">
-                                <label for="option1" class="ml-2 text-sm text-gray-700">Opción 1</label>
+                        <!-- DIV 1 -->
+                        <div class="items-center">
+                            <!-- DOMICILIO -->
+                            <label class="block text-sm font-medium text-gray-700">Domicilio</label>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-full">
+                                    <label for="calle" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        Calle
+                                    </label>
+                                    <input id="calle" type="text" class="mt-1 text-sm w-full 
+                                    border border-gray-300 rounded-md shadow-sm 
+                                    focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
+                                <div class="w-[32%]">
+                                    <label for="num_ext" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        N° ext.
+                                    </label>
+                                    <input id="num_ext" type="number" class="mt-1 text-sm w-full 
+                                        border border-gray-300 rounded-md shadow-sm 
+                                        focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
+                                <div class="w-[32%]">
+                                    <label for="num_int" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        N° int.
+                                    </label>
+                                    <input id="num_int" type="number" class="mt-1 text-sm w-full 
+                                    border border-gray-300 rounded-md shadow-sm 
+                                    focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
                             </div>
-                            <div class="flex items-start mt-2">
-                                <input type="checkbox" id="option2" name="option2" class="h-4 w-4 text-cianna-orange border-gray-300 rounded">
-                                <label for="option2" class="ml-2 text-sm text-gray-700">Opción 2</label>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-1/2">
+                                    <label for="ciudad" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        Ciudad
+                                    </label>
+                                    <select id="ciudad" class="w-full">
+                                        <option value="">Cualquiera</option>
+                                        <option value="">Guadalajara</option>
+                                        <option value="">El Salto</option>
+                                        <option value="">Tlajomulco de Zúñiga</option>
+                                        <option value="">San Pedro Tlaquepaque</option>
+                                        <option value="">Tonalá</option>
+                                        <option value="">Zapopan</option>
+                                    </select>
+                                </div>
+                                <div class="w-1/2">
+                                    <label for="colonia" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        Colonia
+                                    </label>
+                                    <input id="colonia" type="number" class="mt-1 text-sm w-full 
+                                        border border-gray-300 rounded-md shadow-sm 
+                                        focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
+                                <div class="w-[40%]">
+                                    <label for="cod_post" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        CP
+                                    </label>
+                                    <input id="cod_post" type="number" class="mt-1 text-sm w-full 
+                                    border border-gray-300 rounded-md shadow-sm 
+                                    focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
                             </div>
-                        </div>
-                        <div class="mt-4 flex justify-end">
-                            <button type="submit" class="px-4 py-2 bg-cianna-blue text-white rounded-lg 
-                                hover:bg-sky-900 focus:ring-4 focus:outline-none focus:ring-sky-400">
-                                <i class="fa-solid fa-magnifying-glass mr-2"></i>Buscar
-                            </button>
                         </div>
                     </form>
                 </div>
