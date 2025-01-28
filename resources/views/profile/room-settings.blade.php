@@ -27,7 +27,7 @@
                             <div class="flex flex-col items-center block w-full">
                                 <div id="imgContainerCuarto" class="inline-block h-40 w-40 
                                     overflow-hidden rounded-md bg-gray-100 mb-2">
-                                    <img id="previewCuarto" class="object-cover border 
+                                    <img id="previewCuarto" class="h-full w-full object-cover border 
                                     border-cianna-gray rounded-lg" src="{{asset('storage/'.$img_cuarto)}}" 
                                     alt="Imagen previa" />
                                 </div>
@@ -50,7 +50,7 @@
                             <div class="flex flex-col items-center block w-full">
                                 <div id="imgContainerBanio" class="inline-block h-40 w-40 
                                     overflow-hidden rounded-md bg-gray-100 mb-2">
-                                    <img id="previewBanio" class="object-cover border 
+                                    <img id="previewBanio" class="h-full w-full object-cover border 
                                     border-cianna-gray rounded-lg" src="{{ asset('storage/'.$img_banio) }}" 
                                     alt="Imagen previa" />
                                 </div>
@@ -128,7 +128,7 @@
                             <div class="flex flex-col items-center block w-full">
                                 <div id="imgContainerSala" class="inline-block h-40 w-40 
                                     overflow-hidden rounded-md bg-gray-100 mb-2">
-                                    <img id="previewSala" class="object-cover border 
+                                    <img id="previewSala" class="h-full w-full object-cover border 
                                     border-cianna-gray rounded-lg" src="{{ asset('storage/'.$img_sala)}}" 
                                     alt="Imagen previa" />
                                 </div>
@@ -151,7 +151,7 @@
                             <div class="flex flex-col items-center block w-full">
                                 <div id="imgContainerCocina" class="inline-block h-40 w-40 
                                 overflow-hidden rounded-md bg-gray-100 mb-2">
-                                    <img id="previewCocina" class="object-cover border 
+                                    <img id="previewCocina" class="h-full w-full object-cover border 
                                     border-cianna-gray rounded-lg" src="{{ asset('storage/'.$img_cocina) }}" 
                                     alt="Imagen previa" />
                                 </div>
@@ -271,7 +271,7 @@
                             <div class="flex flex-col items-center block w-full">
                                 <div id="imgContainerFachada" class="inline-block h-40 w-40 
                                     overflow-hidden rounded-md bg-gray-100 mb-2">
-                                    <img id="previewFachada" class="object-cover 
+                                    <img id="previewFachada" class="h-full w-full object-cover 
                                     border border-cianna-gray rounded-lg" src="{{ asset('storage/'.$img_fachada) }}" 
                                     alt="Imagen previa" />
                                 </div>
@@ -296,7 +296,7 @@
                             <div class="flex flex-col items-center block w-full">
                                 <div id="imgContainerExtra" class="inline-block h-40 w-40 
                                     overflow-hidden rounded-md bg-gray-100 mb-2">
-                                    <img id="previewExtra" class="object-cover border 
+                                    <img id="previewExtra" class="h-full w-full object-cover border 
                                     border-cianna-gray rounded-lg" src="@if($img_extra != null) {{ asset('storage/'.$img_extra)}} @else {{$defaultImage}} @endif" 
                                     alt="Imagen previa" />
                                 </div>
