@@ -425,20 +425,165 @@
                             </div>
                         </div>
                         <!-- DIV 2 -->
-                        <div>
-                            Reglas
+                        <div class="items-center mt-2">
+                            <!-- REGLAS -->
+                            <label class="block text-sm font-medium text-gray-700">Reglas</label>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700">
+                                    Mascotas
+                                </label>
+                                <div>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="mascotas" value="si" 
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange"> 
+                                        Sí
+                                    </label>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="mascotas" value="no"
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange">
+                                        No
+                                    </label>
+                                    <label class="text-xs hover:cursor-pointer">
+                                        <input type="radio" name="mascotas" value=""
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange" checked>
+                                        Cualquiera
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items-center mt-1">
+                                <label class="block text-xs font-medium text-gray-700">
+                                    Visitas
+                                </label>
+                                <div>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="visitas" value="si" 
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange"> 
+                                        Sí
+                                    </label>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="visitas" value="no"
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange">
+                                        No
+                                    </label>
+                                    <label class="text-xs hover:cursor-pointer">
+                                        <input type="radio" name="visitas" value=""
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange" checked>
+                                        Cualquiera
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items-center mt-1">
+                                <label class="block text-xs font-medium text-gray-700">
+                                    Limpieza rigurosa
+                                </label>
+                                <div>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="limpieza" value="si" 
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange"> 
+                                        Sí
+                                    </label>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="limpieza" value="no"
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange">
+                                        No
+                                    </label>
+                                    <label class="text-xs hover:cursor-pointer">
+                                        <input type="radio" name="limpieza" value=""
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange" checked>
+                                        Cualquiera
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <!-- DIV 3 -->
-                        <div>
-                            Muebles
+                        <div class="items-center mt-2">
+                            <!-- MUEBLES -->
+                            <label class="block text-sm font-medium text-gray-700">
+                                Incluye muebles
+                            </label>
+                            <div>
+                                <label class="text-xs mr-2 hover:cursor-pointer">
+                                    <input type="radio" name="muebles" value="si" 
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange"> 
+                                    Sí
+                                </label>
+                                <label class="text-xs mr-2 hover:cursor-pointer">
+                                    <input type="radio" name="muebles" value="no"
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange">
+                                    No
+                                </label>
+                                <label class="text-xs hover:cursor-pointer">
+                                    <input type="radio" name="muebles" value=""
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange" checked>
+                                    Cualquiera
+                                </label>
+                            </div>
                         </div>
                         <!-- DIV 4-->
-                        <div>
-                            Servicios
+                        <div class="items-center mt-2">
+                            <!-- SERVCIOS -->
+                            <label class="block text-sm font-medium text-gray-700">
+                                Incluye servicios
+                            </label>
+                            <div>
+                                <label class="text-xs mr-2 hover:cursor-pointer">
+                                    <input type="radio" name="servicios" value="si" 
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange"> 
+                                    Sí
+                                </label>
+                                <label class="text-xs mr-2 hover:cursor-pointer">
+                                    <input type="radio" name="servicios" value="no"
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange">
+                                    No
+                                </label>
+                                <label class="text-xs hover:cursor-pointer">
+                                    <input type="radio" name="servicios" value=""
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange" checked>
+                                    Cualquiera
+                                </label>
+                            </div>
                         </div>
                         <!-- DIV 5-->
-                        <div>
-                            Precio
+                        <div class="items-center mt-2">
+                            <!-- PRECIO -->
+                            <label class="block text-sm font-medium text-gray-700">Precio</label>
+                            <div>
+                                <!-- Valores dinámicos -->
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>Min: $<span id="minOutput" 
+                                        class="font-bold text-cianna-orange">0</span>
+                                    </span>
+                                    <span>Max: $<span id="maxOutput" 
+                                        class="font-bold text-cianna-orange">10000</span>
+                                    </span>
+                                </div>
+                                <!-- Slider de rango -->
+                                <div class="range-slider mt-4">
+                                    <div class="range-progress" id="rangeProgress"></div>
+                                    <input type="range" id="minSlider" min="0" max="10000" 
+                                    step="10" value="0">
+                                    <input type="range" id="maxSlider" min="0" max="10000" 
+                                    step="10" value="10000">
+                                </div>
+                                <!-- Campos ocultos -->
+                                <input type="hidden" name="minPrice" id="hiddenMinPrice" value="0">
+                                <input type="hidden" name="maxPrice" id="hiddenMaxPrice" value="10000">
+                            </div>
                         </div>
                         <!-- BOTÓN PARA ENVIAR -->
                         <div class="mt-4 flex justify-end">
@@ -701,4 +846,91 @@
 
     // Mostrar por defecto el Formulario A al cargar
     //toggleForm('formulario-a');
+</script>
+
+<style>
+    /* Estilo personalizado para el rango doble */
+    .range-slider {
+        position: relative;
+        width: 100%;
+        height: 2px;
+        background-color: #e5e7eb; /* bg-gray-300 */
+        border-radius: 5px;
+    }
+    .range-slider input[type="range"] {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: none;
+        pointer-events: none;
+        -webkit-appearance: none;
+    }
+    .range-slider input[type="range"]::-webkit-slider-thumb {
+        position: relative;
+        z-index: 2;
+        pointer-events: all;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background-color: #D47814; 
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .range-slider .range-progress {
+        position: absolute;
+        height: 100%;
+        background-color: #D47814; 
+        z-index: 1;
+        border-radius: 5px;
+    }
+</style>
+
+<!-- SCRIPT PARA MANIPULAR EL SLIDER DE PRECIO -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const minSlider = document.getElementById("minSlider");
+        const maxSlider = document.getElementById("maxSlider");
+        const minOutput = document.getElementById("minOutput");
+        const maxOutput = document.getElementById("maxOutput");
+        const rangeProgress = document.getElementById("rangeProgress");
+        const hiddenMinPrice = document.getElementById("hiddenMinPrice");
+        const hiddenMaxPrice = document.getElementById("hiddenMaxPrice");
+
+        // Función para actualizar el rango visual y sincronizar con los inputs ocultos
+        const updateRange = () => {
+            const minValue = parseInt(minSlider.value);
+            const maxValue = parseInt(maxSlider.value);
+
+            // Evitar que los sliders se crucen
+            if (minValue >= maxValue) {
+            minSlider.value = maxValue - 10;
+            }
+            if (maxValue <= minValue) {
+            maxSlider.value = minValue + 10;
+            }
+
+            // Actualizar los valores mostrados
+            minOutput.textContent = minSlider.value;
+            maxOutput.textContent = maxSlider.value;
+
+            // Actualizar la barra de progreso
+            const rangeWidth = maxSlider.max - maxSlider.min;
+            const minPosition = ((minSlider.value - minSlider.min) / rangeWidth) * 100;
+            const maxPosition = ((maxSlider.value - maxSlider.min) / rangeWidth) * 100;
+
+            rangeProgress.style.left = `${minPosition}%`;
+            rangeProgress.style.right = `${100 - maxPosition}%`;
+
+            // Sincronizar los valores con los inputs ocultos
+            hiddenMinPrice.value = minSlider.value;
+            hiddenMaxPrice.value = maxSlider.value;
+        };
+
+        // Actualizar rango al mover los sliders
+        minSlider.addEventListener("input", updateRange);
+        maxSlider.addEventListener("input", updateRange);
+
+        // Inicializar el rango
+        updateRange();
+    });
 </script>
