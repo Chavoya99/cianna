@@ -70,12 +70,14 @@ class HomeController extends Controller
 
         $img_perfil = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
         
+        $casa = null;
         $img_casa = null;
         if(Auth::user()->tipo == 'A'){
-            $img_casa = Auth::user()->user_a->casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
+            $casa = Auth::user()->user_a->casa;
+            $img_casa = $casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
         }
 
-        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $this->obtener_nombre_carrera($usuario->carrera), 'img_casa' => $img_casa]);
+        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $this->obtener_nombre_carrera($usuario->carrera), 'casa' => $casa, 'img_casa' => $img_casa]);
     }
 
     public function actualizar_cuenta(Request $request){
@@ -260,16 +262,25 @@ class HomeController extends Controller
 
         $user = User::where('id', $roomie)->first();
         $rutaImagenPerfil = $user->archivos()->where('archivo_type', 'img_perf')->first()->ruta_archivo;
+
+        $estado_postulacion = "default";
         
         if($user->tipo == 'A'){
             $roomie_detalle = $user->user_a;
         }else if($user->tipo == 'B'){
             $roomie_detalle = $user->user_b;
+
+            if(Auth::user()->tipo == 'A'){
+                $casa_id = Auth::user()->user_a->casa->id;
+                $consulta_estado = $roomie_detalle->postulaciones()->where('casa_id', $casa_id)->first();
+
+                $estado_postulacion = ($consulta_estado != null) ? $consulta_estado->pivot->estado : $consulta_estado;
+            }
         }
 
         $carrera = $this->obtener_nombre_carrera($roomie_detalle->carrera);
 
-        return view('profile.roomie-details', compact('roomie_detalle', 'carrera', 'rutaImagenPerfil'));
+        return view('profile.roomie-details', compact('roomie_detalle', 'carrera', 'rutaImagenPerfil', 'estado_postulacion'));
     }
 
     public function listado_roomies(){

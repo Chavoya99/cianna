@@ -133,16 +133,12 @@
                 <!-- BOTONES FAVORITOS Y POSTULACIÓN -->
                 <div class="flex justify-between py-4">
                     @if($roomie_detalle->user->tipo == 'B')
-                        @php
-                        // $estado_postulacion = $postulacion->pivot->estado;
-                        $estado_postulacion = "pendiente";
-                        @endphp
-                        <div class="@if($estado_postulacion == "pendiente") w-1/2 @else w-full @endif px-4">
+                        <div class="@if($estado_postulacion == "pendiente") w-1/2 @else w-full @endif px-4" >
                             <livewire:favorito-roomie-button :roomieId="$roomie_detalle->user_id" />
                         </div>
                         <div class="flex w-1/2 px-4 items-bottom">
                             @if ($estado_postulacion == "pendiente")
-                                <form action="" method="POST">
+                                <form action="{{route('aceptar_postulacion', $roomie_detalle)}}" method="POST">
                                     @csrf
                                     <button class="px-4 py-2 mt-4 border rounded bg-cianna-green
                                         text-white font-bold hover:bg-lime-600" type="submit">

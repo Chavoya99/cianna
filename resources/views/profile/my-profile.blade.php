@@ -195,11 +195,11 @@
                         </div>
                         <div class="flex justify-between px-16">
                             <a class="flex items-center justify-end font-semibold text-cianna-green 
-                                hover:text-cianna-orange" href="configuracion_habitacion">
+                                hover:text-cianna-orange" href="{{route('configurar_casa')}}">
                                 <i class="fa-solid fa-gear mr-2"></i>Configurar
                             </a>
                             <a class="flex items-center justify-end font-semibold text-cianna-green 
-                                hover:text-cianna-orange" href="detalles_hogar">
+                                hover:text-cianna-orange" href="{{route('detalles_casa', $casa)}}">
                                 <i class="fa-solid fa-circle-info mr-2"></i>Ver detalles
                             </a>
                         </div>

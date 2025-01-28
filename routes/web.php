@@ -56,6 +56,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             //para evitar que el usuario pueda entrar a configuracion de hogar sin antes completar el registro del mismo.
             Route::get('/configuracion_inicial_habitacion', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
             Route::post('/guardar_configuracion_inicial_habitacion', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
+            Route::get('/configuracion_habitacion', [Casacontroller::class, 'configurar_casa_guardada'])->name('configurar_casa');
+            Route::post('/actualizar_informacion_habitacion', [CasaController::class, 'actualizar_informacion_casa'])->name('actualizar_informacion_casa');
             
         });
 
@@ -208,10 +210,6 @@ Route::get('roomies_potenciales', function(){
 
 Route::get('habitaciones_potenciales', function(){
     return view('profile.potential-rooms');
-});
-
-Route::get('configuracion_habitacion', function(){
-    return view('profile.room-settings');
 });
 
 Route::get('chat', function(){

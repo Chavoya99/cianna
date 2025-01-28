@@ -5,6 +5,6 @@
     placeholder="Puedes hablar sobre tus gustos e intereses" maxlength="300" 
     required autofocus>@if(old('desc')){{old('desc')}}@elseif ($usuario){{$usuario->descripcion}}@endif</textarea>
     <div class="absolute bottom-0 right-0 mb-2 mr-5 text-gray-500">
-        <span id="char-count">@if($usuario) {{300 - strlen($usuario->descripcion)}}@else 300 @endif</span> caracteres restantes
+        <span id="char-count"></span> caracteres restantes
     </div>
 </div>

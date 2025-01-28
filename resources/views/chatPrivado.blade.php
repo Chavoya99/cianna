@@ -40,7 +40,7 @@
                     <!-- Aquí se agregarán los mensajes dinámicamente -->
                 </ul>
                 <div>
-                    <form id="form" class="flex items-center space-x-2">
+                    <form id="form_msg" class="flex items-center space-x-2">
                         <textarea 
                             name="message" 
                             id="input" 
@@ -86,7 +86,7 @@
     const username = socket.auth.username;
     const room_id = socket.auth.room_id;
     const chat_id = socket.auth.chat_id;
-    const form = document.getElementById('form');
+    const form_msg = document.getElementById('form_msg');
     const input = document.getElementById('input');
     const messages = document.getElementById('messages');
 
@@ -133,7 +133,7 @@
     }
 
     // Enviar mensaje con el formulario
-    form.addEventListener('submit', (e) => {
+    form_msg.addEventListener('submit', (e) => {
         e.preventDefault();
         sendMessage();
     });
@@ -151,7 +151,7 @@
     socket.on('chat message', (msg, serverOffset, username, fecha) => {
         // Verificar si el mensaje es del usuario actual o de otro usuario
         const isOwnMessage = username === socket.auth.username;
-        console.log(profileImage);
+        //console.log(profileImage);
         //console.log('Username:', socket.auth.username);
         //const otherUserProfImg = socket.auth.otherUserProfImg;
         //console.log('Imagen del perfil:', socket.auth.otherUserProfImg);
@@ -176,6 +176,8 @@
             `;
             lastDate = messageDate;  // Actualizar la última fecha
         }
+
+        userMessageName = isOwnMessage ? "Tú" : username;
 
         // Crear el mensaje
         const item = `
@@ -211,8 +213,7 @@
             const timeParts = parts[1].split(':');
             
             // Crear una nueva fecha en formato 'YYYY-MM-DDTHH:MM:SS'
-            const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${timeParts[0]}:
-            ${timeParts[1]}:${timeParts[2]}`;
+            const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]} ${timeParts[0]}:${timeParts[1]}:${timeParts[2]}`;
             
             const date = new Date(formattedDate);
             
@@ -227,7 +228,7 @@
     });
 
     // Enviar un mensaje privado
-    form.addEventListener('submit', (e) => {
+    form_msg.addEventListener('submit', (e) => {
         e.preventDefault();
         if (input.value) {
             const fecha = new Date();
@@ -255,7 +256,7 @@
         const roomieProfImg1 = document.getElementById('roomie-prof-img-1');
         profileImage = `/storage/${otherUserProfImg}`;  // Asignar el valor a la variable global
         //const roomieProfImg2 = document.getElementById('roomie-prof-img-2');
-        console.log('Imagen del perfil del otro usuario:', otherUserProfImg);
+        //console.log('Imagen del perfil del otro usuario:', otherUserProfImg);
         roomieProfImg1.src = `/storage/${otherUserProfImg}`;
         //roomieProfImg2.src = `/storage/${otherUserProfImg}`;
     });

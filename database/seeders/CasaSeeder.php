@@ -46,7 +46,7 @@ class CasaSeeder extends Seeder
                     'acepta_mascotas' => genera_si_no(),
                     'acepta_visitas' => genera_si_no(),
                     'riguroza_limpieza' => genera_si_no(),
-                    'regla_adicional' => 'Reglas Adicional',
+                    'regla_adicional' => 'Reglas Adicionales',
                     'muebles' => genera_si_no(),
                     'servicios' => genera_si_no(),
                     'requisitos' => 'Requisitos',
