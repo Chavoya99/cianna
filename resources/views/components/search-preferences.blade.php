@@ -352,7 +352,8 @@
             <!-- @ elseif(Auth::user()->tipo != 'A') -->
                 <div id="formulario-b" class="formulario form hidden">
                     <h3 class="font-bold">Habitaciones</h3>
-                    <form id="form-b" action="" method="">
+                    <form id="form-b" action="{{route('busquedaHabitaciones')}}" method="POST">
+                        @csrf
                         <!-- DIV 1 -->
                         <div class="items-center">
                             <!-- DOMICILIO -->
@@ -416,12 +417,12 @@
                                 <div class="w-[25%]">
                                     <label for="cod_post" class="block text-xs font-medium 
                                     text-gray-700">
-                                        CP
+                                        C.P.
                                     </label>
                                     <input id="cod_post" name="cod_post" class="mt-1 text-xs w-full 
                                     border border-gray-300 rounded-md shadow-sm 
                                     focus:ring-cianna-orange focus:border-cianna-orange" 
-                                    minlength="5" maxlength="5" pattern="[0-9]{5}">
+                                    maxlength="5">
                                 </div>
                             </div>
                         </div>
@@ -797,7 +798,7 @@
 </script> -->
 
 <!-- VERIFICAR DATOS EN CONSOLA ENVIADOS DESDE FORMULARIO B -->
-<script>
+<!-- <script>
     document.getElementById('form-b').addEventListener('submit', function(event) {
         // Evitar el envío del formulario (solo para depuración)
         event.preventDefault();
@@ -826,7 +827,7 @@
         // Si deseas continuar con el envío del formulario después de revisar los datos, puedes descomentar la siguiente línea:
         // this.submit();
     });
-</script>
+</script> -->
 
 <script>
     function toggleForm(formId) {
