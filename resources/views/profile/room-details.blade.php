@@ -108,7 +108,7 @@
                             <x-custom-label>Ciudad</x-custom-label>
                             <div class="bg-white rounded-md text-center py-1 border 
                                 border-cianna-gray">
-                                <p>{{$casa->ciudad}}</p>
+                                <p>{{$ciudades[$casa->ciudad]}}</p>
                             </div>
                         </div>
                         <div class="w-2/5 px-2">
