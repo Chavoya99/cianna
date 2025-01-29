@@ -98,27 +98,7 @@ class CasaSeeder extends Seeder
 
             //Imagenes para casas
             //$clasificaciones = ['img_cuarto','img_banio','img_sala','img_cocina','img_fachada'];
-            $clasificaciones = ['img_banio','img_sala','img_cocina','img_fachada'];
 
-            for($i=0; $i<count($clasificaciones); $i++){
-                $rutaImagen = public_path('img/img_prueba_casas/'.$clasificaciones[$i].'.jpg');
-                if(File::exists($rutaImagen)){
-                
-                    $archivoSimulado = new UploadedFile(
-                        $rutaImagen,
-                        'image/jpg',
-                    );
-            
-                    $ubicacion = $archivoSimulado->store('archivos_casas/img_casas', 'public');
-                    $casa->archivos()->create(
-                        [   
-                            'clasificacion_archivo' => $clasificaciones[$i],
-                            'MIME' => $archivoSimulado->getClientMimeType(),
-                            'ruta_archivo' => $ubicacion,
-                        ]
-                    );
-                }
-            }
 
             $rutaImagen = public_path('img/img_prueba_casas/habitaciones/img_cuarto_'.$numero_de_casa.'.jpg');
             if(File::exists($rutaImagen)){
@@ -148,6 +128,28 @@ class CasaSeeder extends Seeder
                     $ubicacion = $archivoSimulado->store('archivos_casas/img_casas', 'public');
                     $casa->archivos()->create(
                         [   
+                            'clasificacion_archivo' => 'img_cuarto',
+                            'MIME' => $archivoSimulado->getClientMimeType(),
+                            'ruta_archivo' => $ubicacion,
+                        ]
+                    );
+                }
+            }
+
+            $clasificaciones = ['img_banio','img_sala','img_cocina','img_fachada'];
+
+            for($i=0; $i<count($clasificaciones); $i++){
+                $rutaImagen = public_path('img/img_prueba_casas/'.$clasificaciones[$i].'.jpg');
+                if(File::exists($rutaImagen)){
+                
+                    $archivoSimulado = new UploadedFile(
+                        $rutaImagen,
+                        'image/jpg',
+                    );
+            
+                    $ubicacion = $archivoSimulado->store('archivos_casas/img_casas', 'public');
+                    $casa->archivos()->create(
+                        [   
                             'clasificacion_archivo' => $clasificaciones[$i],
                             'MIME' => $archivoSimulado->getClientMimeType(),
                             'ruta_archivo' => $ubicacion,
@@ -155,6 +157,8 @@ class CasaSeeder extends Seeder
                     );
                 }
             }
+
+            
 
 
             //Comprobantes de domicilio
