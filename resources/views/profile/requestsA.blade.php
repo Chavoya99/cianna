@@ -7,6 +7,16 @@
     </x-slot>
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
+        <h2>Favoritos</h2>
+        @if(empty($favoritos))
+            <p>No hay favoritos disponibles.</p>
+        @else
+            <ul>
+                @foreach($favoritos as $favorito)
+            <li>Casa ID: {{ $favorito['casa_id'] }} - Usuario: {{ $favorito['user_b_id'] }}</li>
+            @endforeach
+            </ul>
+        @endif
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones recibidas</div>
         @if(count($postulaciones_pendientes) > 0)
             <div class="mt-2 ml-16">Postulaciones que has recibido y están pendientes</div>

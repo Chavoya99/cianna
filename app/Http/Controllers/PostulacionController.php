@@ -7,6 +7,7 @@ use App\Models\Postulacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Http;
 
 class PostulacionController extends Controller
 {
@@ -23,7 +24,11 @@ class PostulacionController extends Controller
                 $postulacion->pivot->fecha = new DateTime($postulacion->pivot->fecha);              
             }
 
-            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras'));
+            // Llamar a la API Flask
+            $response = Http::get('http://127.0.0.1:5000/favoritos');
+            $favoritos = $response->successful() ? $response->json() : [];
+
+            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'favoritos'));
         }else if(Auth::user()->tipo == 'B'){
             $postulaciones_pendientes = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->where('estado', 'pendiente')->orderBy('fecha', 'desc')->get();
