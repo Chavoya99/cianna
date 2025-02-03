@@ -10,27 +10,13 @@
                 $ruta_home = route('dashboard');
             } 
         ?>
-        <a href="{{$ruta_home}}" class="text-cianna-orange font-bold hover:text-orange-700">INICIO</a>
+        <a href="{{$ruta_home}}" class="text-cianna-orange font-bold hover:text-orange-700">
+            INICIO
+        </a>
     </div>
-    <div>
-        <form>  
-            <div class="relative w-96 h-10">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-                <input type="search" id="busqueda" class="block w-full h-full ps-10 
-                text-sm text-gray-900 border border-cianna-gray rounded-lg bg-gray-50 
-                focus:ring-cianna-orange focus:border-cianna-orange" placeholder="Buscador" required/>
-                <button type="submit" class="text-white bg-cianna-blue absolute end-0.5 bottom-0.5 
-                hover:bg-sky-900 focus:ring-4 focus:outline-none focus:ring-sky-400 font-medium 
-                rounded-lg text-sm px-4 py-2">Buscar</button>
-            </div>
-        </form>
-    </div>
-    <div class="flex items-center bg-gray-300 px-4 py-2 rounded-md cursor-pointer">
-        <i class="fa-solid fa-gear mr-2"></i>
-        Preferencias de búsqueda
-    </div>
+    <!-- PREFERENCIAS DE BÚSQUEDA Y BOTÓN BUSCAR -->
+    <x-search-preferences></x-search-preferences>
+    <!-- DROPDOWN USUARIO -->
     <div class="relative" id="dropDownButton">
         <div class="flex items-center cursor-pointer" onclick="toggleDropDown()">
             @if (Auth::check())

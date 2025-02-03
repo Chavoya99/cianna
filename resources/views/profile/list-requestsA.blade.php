@@ -1,6 +1,6 @@
-<!-- resources/views/profile/requestsA.blade.php -->
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
-@section('title') {{ 'Ver más | Postulaciones recibidas' }} @endsection
+<!-- resources/views/profile/list-requestsA.blade.php -->
+@props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
+@section('title') {{ 'Postulaciones | Todo' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -9,45 +9,11 @@
     <div class="w-full">
         <!-- TITULO -->
         <div class="mt-8 ml-16 mr-16 w-4/5">
-            <h1 class="text-cianna-orange text-3xl font-bold">Todas las postulaciones recibidas</h1>
+            <h1 class="text-cianna-orange text-3xl font-bold">Postulaciones recibidas</h1>
         </div>
-        <!-- MUESTRA DE POSTULACIONES-->
-        <div class="mt-8 px-16 grid grid-cols-2 gap-6"> <!-- Añadir clases de grid para 2 columnas y espacio entre elementos -->
-            @foreach ($postulaciones as $postulacion) <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
-                <div class="flex flex-col py-3 px-3 rounded-lg">
-                    <!-- CONTENEDOR DE IMAGEN Y ENLACES -->
-                    <div class="h-44 w-full overflow-hidden rounded-md flex relative 
-                        transition-transform transform hover:scale-105">
-                        <!-- IMAGEN -->
-                        <a href="{{route('detalles_roomie', $postulacion)}}" class="w-1/2">
-                            <img class="object-contain w-full h-full border border-cianna-gray 
-                                bg-white rounded-lg" src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}"
-                                alt="Imagen previa del roomie" />
-                        </a>
-                        <!-- ENLACES -->
-                        <div class="flex flex-col justify-center px-3 py-3 w-1/2">
-                            <!-- NOMBRE -->
-                            <a href="{{route('detalles_roomie', $postulacion)}}" class="text-lg font-semibold line-clamp-1">
-                                {{$postulacion->user->name.' '.$postulacion->user->apellido}}
-                            </a>
-                            <!-- CARRERA -->
-                            <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify line-clamp-1 mt-1 text-cianna-green font-semibold">
-                                {{$carreras[$postulacion->carrera]}}
-                            </a>
-                            <!-- EDAD -->
-                            <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify line-clamp-1 mt-1 text-gray-600 font-semibold">
-                                {{$postulacion->edad}} años de edad
-                            </a>
-                            <!-- DESCRIPCIÓN -->
-                            <a href="{{route('detalles_roomie', $postulacion)}}" class="text-sm text-justify line-clamp-3 mt-1">
-                                {{$postulacion->descripcion}}
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-            @endforeach
-        </div>
+        <div class="mt-2 ml-16">Aquí están todas las postulaciones que has recibido</div>
+        <!-- MUESTRA DE POSTULACIONES CON PAGINADOR-->
+        <livewire:listado-completo-postulaciones-a>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
         <div class="relative px-20 mt-4">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4

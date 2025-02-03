@@ -21,9 +21,13 @@ class FavoriteButton2 extends Component
         if ($this->isFavorited) {
             Auth::user()->user_b->favoritos_casas()->detach($this->casaId);
             $this->isFavorited = false;
+            // Notificación
+            toastr()->success('¡Habitación eliminada de tus favoritos exitosamente!', 'Notificación');
         } else {
             Auth::user()->user_b->favoritos_casas()->attach($this->casaId);
             $this->isFavorited = true;
+            // Notificación
+            toastr()->success('¡Agregaste la habitación a tus favoritos exitosamente!', 'Notificación');
         }
     }
 

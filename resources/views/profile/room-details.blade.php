@@ -1,5 +1,5 @@
 <!-- resources/views/profile/room-details.blade.php -->
-@section('title') {{ 'Detalles del hogar' }} @endsection
+@section('title') {{ 'Habitación | Detalles' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -20,25 +20,26 @@
                         data-index="{{ $chunkIndex }}">
                         <div class="flex flex-col items-center block w-full">
                             <div class="inline-block relative h-64 w-full overflow-hidden 
-                            rounded-md bg-gray-100">
-                                <img class="w-full h-full object-fill border-2 border-cianna-gray 
+                            rounded-lg bg-gray-100">
+                                <img class="w-full h-full object-cover border border-cianna-gray 
                                 rounded-lg" src="{{ asset('storage/' . $chunk[0]['ruta_archivo']) }}" 
                                 alt="Imagen previa" />
                             </div>
                         </div>
                         <!-- IMAGEN 2 Y 3 -->
                         <div class="flex flex-row items-center mt-2">
-                            <div class="inline-block relative h-64 w-1/2 overflow-hidden rounded-md 
-                                bg-gray-100 mr-1">
-                                <img class="w-full h-full object-fill border-2 border-cianna-gray 
+                            <div class="inline-block relative h-64 
+                                {{ count($chunk) == 3 ? 'w-1/2' : 'w-full' }} overflow-hidden 
+                                rounded-lg bg-gray-100 mr-1">
+                                <img class="w-full h-full object-cover border border-cianna-gray 
                                 rounded-lg" 
                                 src="{{ asset('storage/' . $chunk[1]['ruta_archivo']) }}" 
                                 alt="Imagen previa" />
                             </div>
                             @if(count($chunk) == 3)
                                 <div class="inline-block relative h-64 w-1/2 overflow-hidden 
-                                    rounded-md bg-gray-100 ml-1">
-                                    <img class="w-full h-full object-fill border-2 
+                                    rounded-lg bg-gray-100 ml-1">
+                                    <img class="w-full h-full object-cover border 
                                     border-cianna-gray rounded-lg" 
                                     src="{{ asset('storage/' . $chunk[2]['ruta_archivo']) }}" 
                                     alt="Imagen previa" />
@@ -107,7 +108,7 @@
                             <x-custom-label>Ciudad</x-custom-label>
                             <div class="bg-white rounded-md text-center py-1 border 
                                 border-cianna-gray">
-                                <p>{{$casa->ciudad}}</p>
+                                <p>{{$ciudades[$casa->ciudad]}}</p>
                             </div>
                         </div>
                         <div class="w-2/5 px-2">

@@ -32,11 +32,11 @@
                     <x-custom-label>¿Incluye muebles?</x-custom-label>
                     <div class="flex items-center">
                         <label class="mr-6">
-                            <input type="radio" name="muebles" value="s" id="muebles-s" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" checked @if(old('muebles') == 's') checked @endif >
+                            <input type="radio" name="muebles" value="si" id="muebles-s" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" checked @if(old('muebles') == 'si') checked @endif >
                             Sí.
                         </label>
                         <label class="">
-                            <input type="radio" name="muebles" value="n" id="muebles-n" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" @if(old('muebles') == 'n') checked @endif>
+                            <input type="radio" name="muebles" value="no" id="muebles-n" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" @if(old('muebles') == 'no') checked @endif>
                             No.
                         </label>
                     </div>
@@ -45,11 +45,11 @@
                     <x-custom-label>¿Incluye servicios?</x-custom-label>
                     <div class="flex items-center">
                         <label class="mr-6">
-                            <input type="radio" name="servicios" value="s" id="servicios-s" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" checked @if(old('servicios') == 's') checked @endif >
+                            <input type="radio" name="servicios" value="si" id="servicios-s" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" checked @if(old('servicios') == 'si') checked @endif >
                             Sí.
                         </label>
                         <label class="">
-                            <input type="radio" name="servicios" value="n" id="servicios-n" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" @if(old('servicios') == 'n') checked @endif>
+                            <input type="radio" name="servicios" value="no" id="servicios-n" class="w-4 h-4 text-cianna-orange focus:ring-cianna-orange focus:ring-2 hover:cursor-pointer" @if(old('servicios') == 'no') checked @endif>
                             No.
                         </label>
                     </div>

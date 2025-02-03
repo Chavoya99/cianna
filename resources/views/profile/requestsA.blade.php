@@ -1,6 +1,6 @@
 <!-- resources/views/profile/requestsA.blade.php -->
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
-@section('title') {{ 'Postulaciones recibidas' }} @endsection
+@props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
+@section('title') {{ 'Postulaciones' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -8,18 +8,18 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones recibidas</div>
-        @if(count($postulaciones) > 0)
-            <div class="mt-2 ml-16">Todas las postulaciones que has recibido</div>
+        @if(count($postulaciones_pendientes) > 0)
+            <div class="mt-2 ml-16">Postulaciones que has recibido y están pendientes</div>
         @endif
             <!-- Contenedor principal del carrusel -->
         <div class="relative overflow-hidden mt-2 ml-16 mr-16">
-            @if (count($postulaciones) == 0)
+            @if (count($postulaciones_pendientes) == 0)
                 <div class="w-full text-2xl mt-4">
                     <p class="mb-4 text-justify">
                         ¡Hola, {{Auth::user()->name}}!
                     </p>
                     <p class="mb-4 text-justify"><i class="fa-solid fa-circle-xmark mr-2"></i>
-                        Parece que por ahora no has recibido ninguna postulación.
+                        Parece que por ahora no tienes ninguna postulacion pendiente por revisar.
                     </p>
                     <p class="mb-4 text-justify">
                         ¡No te preocupes! Tarde o temprano llegará la persona adecuada para 
@@ -34,7 +34,7 @@
                     
                 </div>
             @endif
-            @if(count($postulaciones) > 4)
+            @if(count($postulaciones_pendientes) > 4)
                 <!-- Botón de flecha izquierda -->
                 <button id="prevBtn" class="absolute left-0 top-[35%] transform -translate-y-1/2 
                     bg-cianna-gray rounded-full p-2 z-10">
@@ -45,14 +45,19 @@
             <div class="flex transition-transform duration-300 w-full" id="carousel-container" 
                 style="transform: translateX(0);">
                 <!-- Imágenes del carrusel -->
-                @foreach ($postulaciones as $postulacion)
-                <div class="w-1/4 flex-shrink-0 flex flex-col mb-3 mt-5 px-5 transition-transform 
+                @foreach ($postulaciones_pendientes as $postulacion)
+                <div class="w-1/4 flex-shrink-0 flex flex-col mb-6 mt-5 px-5 transition-transform 
                     transform hover:scale-110">
+                    <div class="mb-1">
+                        <p class="font-bold">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->diffForHumans()) }}
+                        </p>
+                    </div>
                     <div class="flex flex-col block">
-                        <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 
-                            relative">
+                        <div class="inline-block h-44 w-full overflow-hidden rounded-md relative">
                             <a href="{{route('detalles_roomie', $postulacion)}}">
-                                <img class="object-contain w-full h-full absolute top-0 left-0 
+                                <img class="object-cover w-full h-full absolute top-0 left-0 
                                     border border-cianna-gray rounded-lg" 
                                     src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}" 
                                     alt="Imagen previa del hogar" />
@@ -70,21 +75,54 @@
                         {{$postulacion->descripcion}}
                     </a>
                     <!-- CARRERA -->
-                    <a href="{{route('detalles_roomie', $postulacion)}}" class="mt-2 text-lg 
+                    <a href="{{route('detalles_roomie', $postulacion)}}" class="text-lg 
                         font-semibold line-clamp-1">
                         {{$carreras[$postulacion->carrera]}}
                     </a>
-                    <p>Fecha: {{date_format($postulacion->pivot->fecha, 'd-m-Y')}}</p>
-                    <p>Estado: {{$postulacion->pivot->estado}}</p>
-                    <form action="{{route('aceptar_postulacion', $postulacion)}}" method="POST">
-                        @csrf
-                        <button type="submit">Aceptar</a>
-                    </form>
+                    <!-- ESTADO POSTULACIÓN -->
+                    <div class="mt-2">
+                        <!-- FECHA DE POSTULACIÓN -->
+                        <div class="flex">
+                            <p class="font-bold mr-1">Recibido: </p>
+                            {{ ucfirst(\Carbon\Carbon::parse($postulacion->pivot->fecha)->translatedFormat('d [\de ]M [\de ] Y')) }}
+                        </div>
+                        @php
+                            $estado_postulacion = $postulacion->pivot->estado;
+                        @endphp
+                        @if ($estado_postulacion == "pendiente")
+                            <div class="flex">
+                                <p class="font-bold">Estado:</p>
+                                <p class="ml-1 text-yellow-600 font-bold">Pendiente</p>
+                            </div>
+                            <!-- BOTÓN ACEPTAR -->
+                            <div>
+                                <form action="{{route('aceptar_postulacion', $postulacion)}}" method="POST">
+                                    @csrf
+                                    <button class="px-2 py-1 mt-2 border rounded bg-cianna-green
+                                        text-white font-bold hover:bg-lime-600" type="submit">
+                                        <i class="fa-solid fa-circle-check mr-1"></i>Aceptar
+                                    </button>
+                                </form>
+                            </div>
+                        @elseif($estado_postulacion == "aceptada")
+                            <div class="flex">
+                                <p class="font-bold">Estado:</p>
+                                <p class="ml-1 text-cianna-green font-bold">Aceptada</p>
+                            </div>
+                            <div>
+                                <button class="px-2 py-1 mt-2 border rounded bg-cianna-blue 
+                                    text-white font-bold hover:bg-sky-900" 
+                                    onclick="">
+                                    <i class="fa-solid fa-message mr-1"></i>Chat
+                                </button>
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 
                 @endforeach
             </div>
-            @if(count($postulaciones) > 4)
+            @if(count($postulaciones_pendientes) > 4)
                 <!-- Botón de flecha derecha -->
                 <button id="nextBtn" class="absolute right-0 top-[35%] transform -translate-y-1/2
                     bg-cianna-gray rounded-full p-2 z-10">
@@ -92,14 +130,24 @@
                 </button>
             @endif
         </div>
-        @if (count($postulaciones) > 4)
+        <div class="flex justify-between @if (count($postulaciones_pendientes) > 4) ml-20 
+            @else ml-16 @endif">
+            @if (count($postulaciones_pendientes) > 4)
             <div class="text-right mr-20 mt-2">
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="{{route('lista_postulaciones')}}">Ver más...
+                    href="{{route('lista_postulaciones_pendientes')}}">Ver más pendientes...
                 </a>
             </div>
-        @endif
-        @if(count($postulaciones) > 0)
+            @endif
+            @if ($total_postulaciones > 0)
+                <div class="text-right mr-20 mt-2">
+                    <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                        href="{{route('lista_postulaciones')}}">Ver todo...
+                    </a>
+                </div>
+            @endif
+        </div>
+        @if($total_postulaciones > 0)
             <!-- RECOMENDACIONES -->
             <div class="w-full">
                 <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">
@@ -112,17 +160,14 @@
                     @for ($i = 0; $i < 5; $i++)
                         <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform 
                             transform hover:scale-110">
-                            <div class="flex flex-col block">
-                                <div class="inline-block h-36 w-full overflow-hidden rounded-md
-                                    bg-gray-100 relative">
+                                <div class="inline-block h-36 w-full overflow-hidden
+                                    bg-cianna-gray border border-cianna-gray rounded-md relative">
                                     <a href="detalles_roomie">
-                                        <img class="object-contain w-full h-full absolute top-0 
-                                        left-0 border border-cianna-gray rounded-lg" 
+                                        <img class="object-cover w-full h-full" 
                                             src="{{ $defaultProfileImage }}" 
-                                            alt="Imagen previa roomie" />
+                                            alt="Imagen previa del roomie" />
                                     </a>
                                 </div>
-                            </div>
                             <!-- NOMBRE ROOMIE -->
                             <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">
                                 Nombre
@@ -145,7 +190,7 @@
             </div>
         @endif
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-16 @if(count($postulaciones) == 0) mt-40 @else mt-4 @endif">
+        <div class="relative px-16 @if(count($postulaciones_pendientes) == 0) mt-40 @else mt-4 @endif">
             <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
                 rounded focus:outline-none focus:shadow-outline" 
                 onclick="window.history.back()">
@@ -163,7 +208,7 @@
 
     let currentIndex = 0;
     const itemsToShow = 4;
-    const totalItems = {{count($postulaciones)}}; // Total de imágenes en el carrusel
+    const totalItems = {{count($postulaciones_pendientes)}}; // Total de imágenes en el carrusel
     //totalItems se ajusta con el número de postulaciones del usuario
 
     // Función para actualizar la posición del carrusel

@@ -1,6 +1,6 @@
-<!-- resources/views/profile/requestsA.blade.php -->
-@props(['defaultProfileImage' => asset('img/avatar-default-svgrepo-com.png')])
-@section('title') {{ 'Ver más | Postulaciones recomendadas' }} @endsection
+<!-- resources/views/profile/suggestsA.blade.php -->
+@props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
+@section('title') {{ 'Postulaciones | Recomendaciones' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -23,7 +23,7 @@
                         transition-transform transform hover:scale-105">
                         <!-- IMAGEN -->
                         <a href="ver_detalles_roomie" class="w-1/2">
-                            <img class="object-contain w-full h-full border border-cianna-gray 
+                            <img class="object-cover w-full h-full border border-cianna-gray 
                                 bg-white rounded-lg" src="{{ $defaultProfileImage }}" 
                                 alt="Imagen previa del roomie" />
                         </a>

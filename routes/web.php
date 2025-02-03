@@ -56,6 +56,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             //para evitar que el usuario pueda entrar a configuracion de hogar sin antes completar el registro del mismo.
             Route::get('/configuracion_inicial_habitacion', [CasaController::class, 'configuracion_inicial_casa'])->name('config_hogar');
             Route::post('/guardar_configuracion_inicial_habitacion', [CasaController::class, 'guardar_configuracion_inicial_casa'])->name('guardar_hogar');
+            Route::get('/configuracion_habitacion', [Casacontroller::class, 'configurar_casa_guardada'])->name('configurar_casa');
+            Route::post('/actualizar_informacion_habitacion', [CasaController::class, 'actualizar_informacion_casa'])->name('actualizar_informacion_casa');
             
         });
 
@@ -86,6 +88,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             
             Route::get('mis_favoritos', 'ver_favoritos')->name( 'ver_favoritos');
 
+            Route::post('busqueda', 'busquedaRoomies')->name('busquedaRoomies');
+            Route::post('busquedaHabitaciones', 'busquedaHabitaciones')->name('busquedaHabitaciones');
+
             
         });
 
@@ -93,11 +98,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::post('crear_chat', 'crear_chat')->name('crear_chat');
             Route::get('chat_privado/{chat_id}/{room_id}/{otherUserId}', 'mostrar_chat')->name('chat_privado');
             Route::get('lista_chats', 'lista_chats')->name('lista_chats');
+            Route::post('ver_chat/{user_id_2}', 'redireccionar_chat')->name('ver_chat');
         });
 
         Route::controller(PostulacionController::class)->group(function(){
             Route::get('ver_postulaciones', 'ver_postulaciones')->name('ver_postulaciones');
             Route::get('lista_postulaciones', 'ver_lista_completa_postulaciones')->name('lista_postulaciones');
+            Route::get('lista_postulaciones_pendientes', 'lista_postulaciones_pendientes')->name('lista_postulaciones_pendientes');
             Route::post('aceptar_postulacion/{postulacion}', 'aceptar_postulacion')->name('aceptar_postulacion');
         });
         
@@ -180,15 +187,42 @@ Route::get('listado_postulacionesA', function(){
     return view('profile.list-requestsA');
 });
 
+Route::get('listado_postulacionesB', function(){
+    return view('profile.list-requestsB');
+});
+
+Route::get('listado_pendientesA', function(){
+    return view('profile.list-pending-requestsA');
+});
+
+Route::get('listado_pendientesB', function(){
+    return view('profile.list-pending-requestsB');
+});
+
 Route::get('listado_recomendacionesA', function(){
     return view('profile.list-suggestsA');
+});
+
+Route::get('listado_recomendacionesB', function(){
+    return view('profile.list-suggestsB');
 });
 
 Route::get('roomies_potenciales', function(){
     return view('profile.potential-roomies');
 });
 
+Route::get('habitaciones_potenciales', function(){
+    return view('profile.potential-rooms');
+});
+
 Route::get('chat', function(){
     return view('chat');
 });
 
+Route::get('resultados_busqueda_A', function(){
+    return view('profile.search-resultsA');
+});
+
+Route::get('resultados_busqueda_B', function(){
+    return view('profile.search-resultsB');
+});

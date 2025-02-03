@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
         <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
         <!-- Fonts -->
@@ -46,6 +47,10 @@
                     <x-home-buttons href="{{route('ver_favoritos')}}">
                         <i class="fa-solid fa-heart mr-2"></i>
                         Favoritos
+                    </x-home-buttons>
+                    <x-home-buttons href="{{route('lista_chats')}}">
+                        <i class="fa-solid fa-comments mr-2"></i>
+                        Chats
                     </x-home-buttons>
                     </div>
                 </div>

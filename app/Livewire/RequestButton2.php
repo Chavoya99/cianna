@@ -21,6 +21,8 @@ class RequestButton2 extends Component
         if (!$this->isRequested) {
             Auth::user()->user_b->postulaciones()->attach($this->casaId, ['fecha' => now('America/Belize'), 'estado' => 'pendiente']);
             $this->isRequested = true;
+            // Notificación
+            toastr()->success('¡Te has postulado exitosamente!', 'Notificación');
         }
     }
     

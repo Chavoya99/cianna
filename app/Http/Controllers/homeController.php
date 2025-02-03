@@ -70,12 +70,14 @@ class HomeController extends Controller
 
         $img_perfil = Auth::user()->archivos()->where('archivo_type', 'img_perf')->first();
         
+        $casa = null;
         $img_casa = null;
         if(Auth::user()->tipo == 'A'){
-            $img_casa = Auth::user()->user_a->casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
+            $casa = Auth::user()->user_a->casa;
+            $img_casa = $casa->archivos()->where('clasificacion_archivo', '!=', 'compDom1')->where('clasificacion_archivo', '!=' , 'compDom2')->get();
         }
 
-        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $this->obtener_nombre_carrera($usuario->carrera), 'img_casa' => $img_casa]);
+        return view('profile.my-profile', ['usuario'=>$usuario, 'img_perfil' => $img_perfil, 'carrera' => $this->obtener_nombre_carrera($usuario->carrera), 'casa' => $casa, 'img_casa' => $img_casa]);
     }
 
     public function actualizar_cuenta(Request $request){
@@ -199,7 +201,9 @@ class HomeController extends Controller
         ->where('clasificacion_archivo', '!=', 'compDom1')
         ->where('clasificacion_archivo', '!=', 'compDom2')
         ->get()->toArray();
-        return view('profile.room-details', compact('casa', 'img_casa'));
+
+        $ciudades = $this->lista_ciudades();
+        return view('profile.room-details', compact('casa', 'img_casa', 'ciudades'));
     }
 
     public function vista_previa_casa(Casa $casa){
@@ -219,17 +223,7 @@ class HomeController extends Controller
     }
 
     public function listado_casas(){
-        if(Auth::user()->tipo == 'A'){
-            $casas = Casa::with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');
-            }])->where('user_a_id', '!=', Auth::id())->get();
-        }else if(Auth::user()->tipo == 'B'){
-            $casas = Casa::with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');
-            }])->get();
-        }
-        
-        return view('profile.homes-list', compact('casas'));
+        return view('profile.homes-list');
     }
 
     public function vista_previa_roomie($roomie){
@@ -270,32 +264,29 @@ class HomeController extends Controller
 
         $user = User::where('id', $roomie)->first();
         $rutaImagenPerfil = $user->archivos()->where('archivo_type', 'img_perf')->first()->ruta_archivo;
+
+        $estado_postulacion = "default";
         
         if($user->tipo == 'A'){
             $roomie_detalle = $user->user_a;
         }else if($user->tipo == 'B'){
             $roomie_detalle = $user->user_b;
+
+            if(Auth::user()->tipo == 'A'){
+                $casa_id = Auth::user()->user_a->casa->id;
+                $consulta_estado = $roomie_detalle->postulaciones()->where('casa_id', $casa_id)->first();
+
+                $estado_postulacion = ($consulta_estado != null) ? $consulta_estado->pivot->estado : $consulta_estado;
+            }
         }
 
         $carrera = $this->obtener_nombre_carrera($roomie_detalle->carrera);
 
-        return view('profile.roomie-details', compact('roomie_detalle', 'carrera', 'rutaImagenPerfil'));
+        return view('profile.roomie-details', compact('roomie_detalle', 'carrera', 'rutaImagenPerfil', 'estado_postulacion'));
     }
 
     public function listado_roomies(){
-        if(Auth::user()->tipo == 'A'){
-            $roomies = UserB::with(['user.archivos' => function($query){
-                $query->where('archivo_type', 'img_perf');
-            }])->get();
-        }else if(Auth::user()->tipo == 'B'){
-            $roomies = UserA::with(['user.archivos' => function($query){
-                $query->where('archivo_type', 'img_perf');
-            }])->get();
-        }
-        
-        $carreras = $this->lista_carreras();
-
-        return view('profile.roomies-list', compact('roomies', 'carreras'));
+        return view('profile.roomies-list');
     }
 
     public function obtener_nombre_carrera($llave){
@@ -326,21 +317,174 @@ class HomeController extends Controller
         return $carreras;
     }
 
+    public function lista_ciudades(){
+        $ciudades = [
+            'gdl' => 'Guadalajara', 
+            'zap' => 'Zapopan', 
+            'tlaq' => 'Tlaquepaque', 
+            'tlaj_z' => 'Tlajomulco de Zúñiga', 
+            'ton' => 'Tonalá', 
+            'salto' => 'El Salto'
+        ];
+
+        return $ciudades;
+    }
+
     public function ver_favoritos(){
         if (Auth::user()->tipo == 'A'){
-            $favoritos = Auth::user()->user_a->favoritos_roomies()->with(['user.archivos' => function ($query) {
-                $query->where('archivo_type', 'img_perf');}])->get();
-
-            $carreras = $this->lista_carreras();
-
-            return view('profile.favsA', compact('favoritos', 'carreras'));
+            return view('profile.favsA');
         }else if(Auth::user()->tipo == 'B'){
-            $favoritos = Auth::user()->user_b->favoritos_casas()->with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
-
-            return view('profile.favsB', compact('favoritos'));
+            return view('profile.favsB');
         }
     }
 
+    public function busquedaRoomies(Request $request){
+
+        if(Auth::user()->tipo == 'A'){
+            $users = UserB::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }]);
+        }else if(Auth::user()->tipo == 'B'){
+            $users = UserA::with(['user.archivos' => function($query){
+                $query->where('archivo_type', 'img_perf');
+            }]);
+        }
+        
+
+        //Filtro edad
+        if($request->has('edad_min') || $request->has('edad_max')){
+            $edad_min = ($request->edad_min != null ) ? $request->edad_min : 0;
+            $edad_max = ($request->edad_max != null ) ? $request->edad_max : 100;
+            $users = $users->whereBetween('edad', [$edad_min, $edad_max]);
+        }
+
+        //Filtro sexo
+        if($request->sexo){
+            $users = $users->where('sexo', $request->sexo);
+        }
+
+        //Filtro carrera
+        if(count($request->carreras) > 1){
+            
+            $carreras = array_slice($request->carreras, 1);
+            $users = $users->whereIn('carrera', $carreras);
+        }
+
+        //Filtro mascota
+        if($request->mascota){
+            $users = $users->where('mascota', $request->mascota);
+        }
+
+        if($request->padecimiento){
+            $users = $users->where('padecimiento', $request->padecimiento);
+        }
+
+        //Filtro carrera
+        if(count($request->lifestyle) > 1){
+            $lifestyle = array_slice($request->lifestyle, 1);
+            $users = $users->whereIn('lifestyle', $lifestyle);
+        }
+
+        $users = $users->get();
+        
+        echo "Resultados obtenidos (". count($users).")<br>";
+        foreach($users as $user){
+            echo "Tipo: ". $user->user->tipo. '<br>';
+            echo 'id: '. $user->user_id. '<br>';
+            echo 'nombre: '. $user->user->name.  '<br>';
+            echo 'edad: '. $user->edad.  '<br>';
+            echo 'sexo: '. $user->sexo. '<br>';
+            echo 'carrera: '. $user->carrera. '<br>';
+            echo 'mascota: '. $user->mascota. '<br>';
+            echo 'padecimiento: '. $user->padecimiento. '<br>';
+            echo 'lifestyle: '.$user->lifestyle. '<br>';
+            echo  '<br>';
+        }
+
+        return "";
+
+    }
+
+    public function busquedaHabitaciones(Request $request){
+        if(Auth::user()->tipo == 'A'){
+            $casas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('user_a_id', '!=', Auth::id());
+        }else if(Auth::user()->tipo == 'B'){
+            $casas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }]);
+        }
+
+        if($request->calle){
+            $casas = $casas->where('calle', 'like', '%'.$request->calle.'%');
+        }
+
+        if($request->num_ext){
+            $casas = $casas->where('num_ext', 'like', '%'.$request->num_ext.'%');
+        }
+
+        if($request->num_int){
+            $casas = $casas->where('num_int', 'like', '%'.$request->num_int.'%');
+        }
+
+        if($request->ciudad){
+            $casas = $casas->where('ciudad', $request->ciudad);
+        }
+
+        if($request->colonia){
+            $casas = $casas->where('colonia', 'like', '%'.$request->colonia.'%');
+        }
+
+        if($request->cod_post){
+            $casas = $casas->where('codigo_postal', 'like', '%'.$request->cod_post.'%');
+        }
+
+        if($request->mascotas){
+            $casas = $casas->where('acepta_mascotas', $request->mascotas);
+        }
+
+        if($request->visitas){
+            $casas = $casas->where('acepta_visitas', $request->visitas);
+        }
+
+        if($request->limpieza){
+            $casas = $casas->where('riguroza_limpieza', $request->limpieza);
+        }
+        
+        if($request->muebles){
+            $casas = $casas->where('muebles', $request->muebles);
+        }
+
+        if($request->servicios){
+            $casas = $casas->where('servicios', $request->servicios);
+        }
+
+        if($request->minPrice|| $request->maxPrice){
+            $casas = $casas->whereBetween('precio', [$request->minPrice, $request->maxPrice]);
+        }
+
+        $casas = $casas->get();
+        
+        echo "Resultados obtenidos (". count($casas).")<br>";
+        foreach($casas as $casa){
+            echo 'id: '. $casa->id. '<br>';
+            echo 'calle: '. $casa->calle.  '<br>';
+            echo 'numero ext: '. $casa->num_ext.  '<br>';
+            echo 'numero int: '. $casa->num_int. '<br>';
+            echo 'ciudad: '. $casa->ciudad. '<br>';
+            echo 'colonia: '. $casa->colonia. '<br>';
+            echo 'codigo postal: '. $casa->codigo_postal. '<br>';
+            echo 'mascotas: '. $casa->acepta_mascotas. '<br>';
+            echo 'visitas: '. $casa->acepta_visitas. '<br>';
+            echo 'limpieza: '. $casa->riguroza_limpieza. '<br>';
+            echo 'muebles: '. $casa->muebles. '<br>';
+            echo 'servicios: '.$casa->servicios. '<br>';
+            echo 'precio: '. $casa->precio. '<br>';
+            echo  '<br>';
+        }
+
+        return "";
+    }
     
 }

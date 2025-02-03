@@ -1,6 +1,6 @@
 <!-- resources/views/profile/about-room.blade.php -->
 @props(['defaultImage' => asset('img/img_prueba_casas/img_fachada.jpg')])
-@section('title') {{ 'Ver más | Hogar' }} @endsection
+@section('title') {{ 'Habitación | Vista previa' }} @endsection
 <x-home-layout>
     <x-slot name="logo">
         <x-authentication-card-logo/>
@@ -18,7 +18,7 @@
                 <div class="flex flex-col block w-full">
                     <div class="inline-block relative h-72 w-[85%] overflow-hidden 
                         rounded-md bg-gray-100">
-                        <img class="w-full h-full object-fill border-2 border-cianna-gray 
+                        <img class="w-full h-full object-cover border-2 border-cianna-gray 
                         rounded-lg" src="{{ asset('storage/'.$img_casa->ruta_archivo) }}" 
                         alt="Imagen previa del hogar" />
                     </div>

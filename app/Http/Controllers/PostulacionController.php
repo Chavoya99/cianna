@@ -12,50 +12,50 @@ class PostulacionController extends Controller
 {
     public function ver_postulaciones(){
         if (Auth::user()->tipo == 'A'){
-            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
-                $query->where('archivo_type', 'img_perf');}])->get();
+            $postulaciones_pendientes = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
+                $query->where('archivo_type', 'img_perf');}])->where('estado', 'pendiente')->orderBy('fecha', 'desc')->get();
+
+            $total_postulaciones = Auth::user()->user_a->casa->postulaciones()->count();
 
             $carreras = $this->lista_carreras();
             
-            foreach($postulaciones as $postulacion){
+            foreach($postulaciones_pendientes as $postulacion){
                 $postulacion->pivot->fecha = new DateTime($postulacion->pivot->fecha);              
             }
 
-            return view('profile.requestsA', compact('postulaciones','carreras'));
+            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras'));
         }else if(Auth::user()->tipo == 'B'){
-            $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
-                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
+            $postulaciones_pendientes = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->where('estado', 'pendiente')->orderBy('fecha', 'desc')->get();
             
-            return view('profile.requestsB', compact('postulaciones'));
+            $total_postulaciones = Auth::user()->user_b->postulaciones()->count();
+
+            foreach($postulaciones_pendientes as $postulacion){
+                $postulacion->pivot->fecha = new DateTime($postulacion->pivot->fecha);              
+            }
+
+            return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones'));
         }
     }
 
     public function ver_lista_completa_postulaciones(){
         if (Auth::user()->tipo == 'A'){
-            $postulaciones = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
-                $query->where('archivo_type', 'img_perf');}])->get();
-
-            $carreras = $this->lista_carreras();
-
-            if(count($postulaciones) == 0){
-                return redirect(route('ver_postulaciones'));
-            }
-
-            return view('profile.list-requestsA', compact('postulaciones','carreras'));
+            
+            return view('profile.list-requestsA');
         }else if(Auth::user()->tipo == 'B'){
-            $postulaciones = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
-                $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
-            
-            if(count($postulaciones) == 0){
-                return redirect(route('ver_postulaciones'));
-            }
 
-            
-
-            return view('profile.list-requestsB', compact('postulaciones'));
+            return view('profile.list-requestsB');
         }
+    }
 
+    public function lista_postulaciones_pendientes(){
+
+        if(Auth::user()->tipo == 'A'){
+            return view('profile.list-pending-requestsA');
         
+        }else if(Auth::user()->tipo == 'B'){  
+            return view('profile.list-pending-requestsB');
+        }
     }
 
     public function aceptar_postulacion($postulacion)
