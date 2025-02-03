@@ -14,7 +14,7 @@ class PostulacionSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = UserB::get();
+        $users = UserB::limit(10)->get();
         $casas = Casa::limit(4)->get();
         foreach($users as $user){
             foreach($casas as $casa){
