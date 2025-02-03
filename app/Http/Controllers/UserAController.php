@@ -21,8 +21,39 @@ class UserAController extends Controller
         $roomies = UserB::with(['user.archivos' => function($query){
             $query->where('archivo_type', 'img_perf');
         }])->limit(6)->get();
+
+        $roomies = $this->ejecutarPython();
+        dd($roomies);
         
         return view('profile.home', compact('casas','roomies'));
+    }
+
+    public function ejecutarPython(){
+        // Ruta al ejecutable de Python
+        $python = "python"; // Cambia a "python" si no usas Python 3
+        $script = public_path("scripts/script.py"); // Ruta al script de Python
+
+        // Argumento que quieres pasar al script
+        $lista_favs = Auth::user()->user_a->favoritos_roomies->pluck('user_id');
+
+        $jsonArgumento = escapeshellarg(json_encode($lista_favs));
+
+        // Ejecutar el script
+        $salida = [];
+        $retorno = 0; // Código de retorno del comando
+        exec("$python $script $jsonArgumento", $salida, $retorno);
+
+        // Mostrar la salida del script
+        if ($retorno === 0) {
+            //dump($salida);
+        } else {
+            //echo "Error al ejecutar el script de Python";
+        }
+
+        $salida_nueva = json_decode($salida[0]);
+        $recomendaciones = UserB::find($salida_nueva->resultado);
+        return $recomendaciones;
+
     }
 
     /**
