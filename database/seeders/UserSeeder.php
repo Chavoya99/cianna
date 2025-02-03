@@ -45,7 +45,12 @@ class UserSeeder extends Seeder
         $mascota = ['si','no'];
         $padecimiento = ['si', 'no'];
         $lifestyle = ['d','t','a'];
-        $carrera = ['ing_comp', 'ing_info', 'ing_civi', 'ing_robo'];
+        $carrera = ['ing_alim_biot' ,'ing_biom','ing_civi',
+        'ing_comp','ing_com_elec','ing_log_trans',
+        'ing_topo','ing_foto','ing_indu',
+        'ing_info','ing_meca','ing_quim',
+        'ing_robo','lic_cien_mate','lic_fis',
+        'lic_mate','lic_quim','lic_qfb'];
     
 
         $faker = Faker::create();
@@ -65,6 +70,25 @@ class UserSeeder extends Seeder
         }
         function generarUsuario($faker,$tipo,$sexo,$mascota,$padecimiento,$lifestyle,$carrera){
             $padecimiento = seleccionarPadecimiento();
+            $nombres_hombres = [
+                'José', 'Juan', 'Carlos', 'Luis', 'Miguel', 'Pedro', 'Alejandro', 'Fernando', 'Ricardo', 'Eduardo',
+                'Jorge', 'Manuel', 'Francisco', 'Antonio', 'Raúl', 'Adrián', 'Héctor', 'Salvador', 'Jesús', 'Rubén',
+                'Omar', 'Emilio', 'Andrés', 'Ernesto', 'Víctor', 'Hugo', 'Ramón', 'César', 'David', 'Martín',
+                'Arturo', 'Gerardo', 'Esteban', 'Roberto', 'Felipe', 'Gustavo', 'Cristian', 'Abel', 'Rodrigo', 'Ismael',
+                'Julio', 'Mauricio', 'Efraín', 'Noé', 'Jaime', 'Óscar', 'Braulio', 'Alan', 'Iván', 'Samuel',
+                'Erick', 'Diego', 'Fabián', 'Jonathan', 'Baltazar', 'Guillermo', 'Leonardo', 'Benjamín', 'Ángel', 'Ezequiel',
+                'Armando', 'Bruno', 'Camilo', 'Damián', 'Gael', 'Humberto', 'Luciano', 'Maximiliano', 'Nicolás', 'Patricio'
+            ];
+            
+            $nombres_mujeres = [
+                'María', 'Guadalupe', 'Carmen', 'Josefina', 'Ana', 'Leticia', 'Rosa', 'Beatriz', 'Laura', 'Patricia',
+                'Gabriela', 'Martha', 'Alejandra', 'Verónica', 'Silvia', 'Norma', 'Lorena', 'Claudia', 'Elizabeth', 'Fernanda',
+                'Daniela', 'Adriana', 'Yolanda', 'Sara', 'Sofía', 'Diana', 'Teresa', 'Isabel', 'Margarita', 'Andrea',
+                'Paola', 'Marisol', 'Fátima', 'Rebeca', 'Mariana', 'Gloria', 'Ximena', 'Natalia', 'Camila', 'Montserrat',
+                'Carolina', 'Julieta', 'Valeria', 'Alicia', 'Celeste', 'Graciela', 'Estefanía', 'Ivonne', 'Liliana', 'Melissa',
+                'Rocío', 'Susana', 'Berenice', 'Angélica', 'Raquel', 'Magdalena', 'Itzel', 'Nayeli', 'Araceli', 'Evelyn',
+                'Elsa', 'Ingrid', 'Aurora', 'Janeth', 'Guillermina', 'Miranda', 'Catalina', 'Perla', 'Victoria', 'Regina'
+            ];
 
             $user = User::factory()->create([
                 'profile_update' => now('America/Belize'),
@@ -103,19 +127,44 @@ class UserSeeder extends Seeder
 
             if($user->tipo == 'A'){
                 if($user->user_a->sexo == 'Masculino'){
-                    $user->update(['name' => $faker->firstNameMale]);
-                    $rutaImagen = public_path('img/masculino.jpg');
+                    $user->update(['name' => $faker->randomElement($nombres_hombres)]);
+                    $rutaImagen = public_path('img/personas/Hombres/img_h_'.$GLOBALS['hombres'].'.png');
+                    
+                    if(!File::exists($rutaImagen)){
+                        $rutaImagen = public_path('img/masculino.jpg');
+
+                    }
+                    $GLOBALS['hombres']++;
                 }else{
-                    $user->update(['name' => $faker->firstNameFemale]);
-                    $rutaImagen = public_path('img/femenino.jpg');
+                    $user->update(['name' => $faker->randomElement($nombres_mujeres)]);
+                    $rutaImagen = public_path('img/personas/Mujeres/img_m_'.$GLOBALS['mujeres'].'.png');
+                    
+                    if(!File::exists($rutaImagen)){
+                        $rutaImagen = public_path('img/femenino.jpg');
+
+                    }
+                    $GLOBALS['mujeres']++;
                 } 
             }else{
                 if($user->user_b->sexo == 'Masculino'){
-                    $user->update(['name' => $faker->firstNameMale]);
-                    $rutaImagen = public_path('img/masculino.jpg');
+                    $user->update(['name' => $faker->randomElement($nombres_hombres)]);
+                    $rutaImagen = public_path('img/personas/Hombres/img_h_'.$GLOBALS['hombres'].'.png');
+                    
+                    if(!File::exists($rutaImagen)){
+                        $rutaImagen = public_path('img/masculino.jpg');
+
+                    }
+                    $GLOBALS['hombres']++;
+
                 }else{
-                    $user->update(['name' => $faker->firstNameFemale]);
-                    $rutaImagen = public_path('img/femenino.jpg');
+                    $user->update(['name' => $faker->randomElement($nombres_mujeres)]);
+                    $rutaImagen = public_path('img/personas/Mujeres/img_m_'.$GLOBALS['mujeres'].'.png');
+                    
+                    if(!File::exists($rutaImagen)){
+                        $rutaImagen = public_path('img/femenino.jpg');
+
+                    }
+                    $GLOBALS['mujeres']++;
                 } 
             }   
 
@@ -156,9 +205,12 @@ class UserSeeder extends Seeder
 
         }
 
-        $cantidad_a = 10; //Cantidad de usuarios A
-        $cantidad_b = 10; //Cantidad de usuarios B
-
+        $cantidad_a = 30; //Cantidad de usuarios A
+        $cantidad_b = 30; //Cantidad de usuarios B
+        global $mujeres;
+        global $hombres;
+        $mujeres = 1;
+        $hombres = 1;
         //Usuarios tipo A
         for($i = 0; $i<=$cantidad_a; $i++){
             $tipo = 'A';

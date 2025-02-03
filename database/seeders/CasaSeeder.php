@@ -43,7 +43,7 @@ class CasaSeeder extends Seeder
                 'tlaq' => ['Alborada', 'Alfredo Barba', 'Alamo Lomas', 'Álvaro Obregón', 'Arboledas Sur', 'Camichines', 'Camino Real',
                 'Paraíso', 'Palmira', 'Vistas del Cuatro'],
 
-                'tlaj_z' => ['Paseo de los Agaves', 'Patría', 'Punto Sur', 'Real del Bosque', 'Real del Sol', 'Real del Valle'],
+                'tlaj_z' => ['Paseo de los Agaves', 'Patria', 'Punto Sur', 'Real del Bosque', 'Real del Sol', 'Real del Valle'],
 
                 'ton' => ['Real Tonalá', 'Bosques de Tonalá', 'Tonala Centro'],
 
