@@ -167,31 +167,27 @@
                     Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo
                 </div>
                 <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
-                    @for ($i = 0; $i < 5; $i++)
+                    @foreach($recomendaciones as $recomendacion)
                         <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform 
                             transform hover:scale-110">
                                 <div class="inline-block h-36 w-full overflow-hidden
                                     bg-cianna-gray border border-cianna-gray rounded-md relative">
                                     <a href="detalles_roomie">
                                         <img class="object-cover w-full h-full" 
-                                            src="{{ $defaultProfileImage }}" 
+                                            src="{{ asset('storage/'.$recomendacion->user->archivos->first()->ruta_archivo) }}" 
                                             alt="Imagen previa del roomie" />
                                     </a>
                                 </div>
                             <!-- NOMBRE ROOMIE -->
                             <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">
-                                Nombre
+                                {{$recomendacion->user->name}}
                             </a>
                             <!-- DESCRIPCIÓN ROOMIE -->
                             <a href="detalles_roomie" class="text-sm text-justify line-clamp-1">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Curabitur sed justo nec tortor laoreet porttitor et ut massa.
-                            Nam eget orci vestibulum velit tristique gravida ut eget massa. 
-                            Aenean ultrices in tellus vel dapibus. 
-                            Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
+                            {{$recomendacion->descripcion}}
                             </a>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
                 <div class="text-right mr-20 mt-2">
                     <a class="text-cianna-green font-semibold hover:text-cianna-orange" 

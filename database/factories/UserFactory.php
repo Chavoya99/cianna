@@ -19,10 +19,19 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
+    {   
+
+        $apellidos = [
+            'García', 'Martínez', 'Hernández', 'López', 'González', 'Rodríguez', 'Pérez', 'Sánchez', 'Ramírez', 'Flores',
+            'Vázquez', 'Torres', 'Jiménez', 'Morales', 'Gutiérrez', 'Reyes', 'Díaz', 'Cruz', 'Ortiz', 'Chávez',
+            'Ramos', 'Castillo', 'Romero', 'Mendoza', 'Herrera', 'Medina', 'Aguilar', 'Ruiz', 'Soto', 'Delgado',
+            'Pineda', 'Valdez', 'Acosta', 'Mejía', 'Rojas', 'Navarro', 'Escobar', 'Castañeda', 'Carrillo', 'Montes',
+            'Miranda', 'Rivera', 'Domínguez', 'Estrada', 'León', 'Villanueva', 'Guerrero', 'Fuentes', 'Lara', 'Salinas'
+        ];
+
         return [
             'name' => "Undefined",
-            'apellido' => $this->faker->lastName(),
+            'apellido' => $this->faker->randomElement($apellidos)." ".$this->faker->randomElement($apellidos),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now('America/Belize'),
             'profile_update' => null,

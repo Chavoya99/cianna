@@ -23,16 +23,15 @@ class UserAController extends Controller
         }])->limit(6)->get();
 
         //$roomies = $this->ejecutarPython();
+        //dd($roomies);
         
         return view('profile.home', compact('casas','roomies'));
     }
-
-
     /*
     public function ejecutarPython(){
         // Ruta al ejecutable de Python
         $python = "python"; // Cambia a "python" si no usas Python 3
-        $script = storage_path("app/scripts/script.py"); // Ruta al script de Python
+        $script = public_path("scripts/script.py"); // Ruta al script de Python
 
         // Argumento que quieres pasar al script
         $lista_favs = Auth::user()->user_a->favoritos_roomies->pluck('user_id');
@@ -56,7 +55,7 @@ class UserAController extends Controller
         return $recomendaciones;
 
     }
-        */
+    */
 
     /**
      * Display a listing of the resource.

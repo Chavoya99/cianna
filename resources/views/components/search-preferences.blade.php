@@ -31,7 +31,8 @@
             <!-- @ if (Auth::user()->tipo != 'B') -->
                 <div id="formulario-a" class="formulario form hidden">
                     <h3 class="font-bold">Compañeros</h3>
-                    <form id="form-a" action="" method="">
+                    <form id="form-a" action="{{route('busquedaRoomies')}}" method="POST">
+                        @csrf
                         <!-- DIV 1 -->
                         <div class="flex items-center space-x-6">
                             <!-- EDAD -->
@@ -93,7 +94,7 @@
                                             <input type="hidden" name="carreras[]" value="">
                                             <label class="px-2 py-1 flex items-center 
                                                 hover:cursor-pointer hover:bg-orange-200 text-sm">
-                                                <input type="checkbox" id="selectAll" 
+                                                <input type="checkbox" id="selectAll"
                                                 class="mr-2 text-cianna-orange hover:cursor-pointer
                                                 focus:ring-cianna-orange" />
                                                 Todas
@@ -351,32 +352,242 @@
             <!-- @ elseif(Auth::user()->tipo != 'A') -->
                 <div id="formulario-b" class="formulario form hidden">
                     <h3 class="font-bold">Habitaciones</h3>
-                    <form id="form-b" action="" method="">
-                        
-                        <label for="category" class="block text-sm font-medium text-gray-700">
-                            Categoría
-                        </label>
-                        <select id="category" name="category" class="mt-1 block w-full border 
-                            border-gray-300 rounded-md shadow-sm focus:ring-cianna-orange 
-                            focus:border-cianna-orange sm:text-sm">
-                            <option value="">Seleccione una categoría</option>
-                            <option value="option1">Opción 1</option>
-                            <option value="option2">Opción 2</option>
-                        </select>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">
-                                Opciones adicionales
-                            </label>
-                            <div class="flex items-start mt-2">
-                                <input type="checkbox" id="option1" name="option1" 
-                                class="h-4 w-4 text-cianna-orange border-gray-300 rounded">
-                                <label for="option1" class="ml-2 text-sm text-gray-700">Opción 1</label>
+                    <form id="form-b" action="{{route('busquedaHabitaciones')}}" method="POST">
+                        @csrf
+                        <!-- DIV 1 -->
+                        <div class="items-center">
+                            <!-- DOMICILIO -->
+                            <label class="block text-sm font-medium text-gray-700">Domicilio</label>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-full">
+                                    <label for="calle" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        Calle
+                                    </label>
+                                    <input id="calle" name="calle" type="text" class="mt-1 text-xs  
+                                    w-full border border-gray-300 rounded-md shadow-sm 
+                                    focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
+                                <div class="w-[32%]">
+                                    <label for="num_ext" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        N° ext.
+                                    </label>
+                                    <input id="num_ext" name="num_ext" type="number" class="mt-1  
+                                        text-xs w-full border border-gray-300 rounded-md shadow-sm 
+                                        focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
+                                <div class="w-[32%]">
+                                    <label for="num_int" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        N° int.
+                                    </label>
+                                    <input id="num_int" name="num_int" type="number" class="mt-1 
+                                    text-xs w-full border border-gray-300 rounded-md shadow-sm 
+                                    focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
                             </div>
-                            <div class="flex items-start mt-2">
-                                <input type="checkbox" id="option2" name="option2" class="h-4 w-4 text-cianna-orange border-gray-300 rounded">
-                                <label for="option2" class="ml-2 text-sm text-gray-700">Opción 2</label>
+                            <div class="flex items-center space-x-2 mt-2">
+                                <div class="w-[60%]">
+                                    <label for="ciudad" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        Ciudad
+                                    </label>
+                                    <select id="ciudad" name="ciudad" class="mt-1 text-xs w-full 
+                                    border border-gray-300 rounded-md shadow-sm 
+                                    focus:ring-cianna-orange focus:border-cianna-orange">
+                                        <option value="">Cualquiera</option>
+                                        <option value="">Guadalajara</option>
+                                        <option value="">El Salto</option>
+                                        <option value="">Tlajomulco de Zúñiga</option>
+                                        <option value="">San Pedro Tlaquepaque</option>
+                                        <option value="">Tonalá</option>
+                                        <option value="">Zapopan</option>
+                                    </select>
+                                </div>
+                                <div class="w-[45%]">
+                                    <label for="colonia" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        Colonia
+                                    </label>
+                                    <input id="colonia" name="colonia" type="text" class="mt-1  
+                                        text-xs w-full border border-gray-300 rounded-md shadow-sm 
+                                        focus:ring-cianna-orange focus:border-cianna-orange">
+                                </div>
+                                <div class="w-[25%]">
+                                    <label for="cod_post" class="block text-xs font-medium 
+                                    text-gray-700">
+                                        C.P.
+                                    </label>
+                                    <input id="cod_post" name="cod_post" class="mt-1 text-xs w-full 
+                                    border border-gray-300 rounded-md shadow-sm 
+                                    focus:ring-cianna-orange focus:border-cianna-orange" 
+                                    maxlength="5">
+                                </div>
                             </div>
                         </div>
+                        <!-- DIV 2 -->
+                        <div class="items-center mt-2">
+                            <!-- REGLAS -->
+                            <label class="block text-sm font-medium text-gray-700">Reglas</label>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700">
+                                    Mascotas
+                                </label>
+                                <div>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="mascotas" value="si" 
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange"> 
+                                        Sí
+                                    </label>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="mascotas" value="no"
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange">
+                                        No
+                                    </label>
+                                    <label class="text-xs hover:cursor-pointer">
+                                        <input type="radio" name="mascotas" value=""
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange" checked>
+                                        Cualquiera
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items-center mt-1">
+                                <label class="block text-xs font-medium text-gray-700">
+                                    Visitas
+                                </label>
+                                <div>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="visitas" value="si" 
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange"> 
+                                        Sí
+                                    </label>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="visitas" value="no"
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange">
+                                        No
+                                    </label>
+                                    <label class="text-xs hover:cursor-pointer">
+                                        <input type="radio" name="visitas" value=""
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange" checked>
+                                        Cualquiera
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="items-center mt-1">
+                                <label class="block text-xs font-medium text-gray-700">
+                                    Limpieza rigurosa
+                                </label>
+                                <div>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="limpieza" value="si" 
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange"> 
+                                        Sí
+                                    </label>
+                                    <label class="text-xs mr-2 hover:cursor-pointer">
+                                        <input type="radio" name="limpieza" value="no"
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange">
+                                        No
+                                    </label>
+                                    <label class="text-xs hover:cursor-pointer">
+                                        <input type="radio" name="limpieza" value=""
+                                        class="text-cianna-orange hover:cursor-pointer
+                                        focus:ring-cianna-orange" checked>
+                                        Cualquiera
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- DIV 3 -->
+                        <div class="items-center mt-2">
+                            <!-- MUEBLES -->
+                            <label class="block text-sm font-medium text-gray-700">
+                                Incluye muebles
+                            </label>
+                            <div>
+                                <label class="text-xs mr-2 hover:cursor-pointer">
+                                    <input type="radio" name="muebles" value="si" 
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange"> 
+                                    Sí
+                                </label>
+                                <label class="text-xs mr-2 hover:cursor-pointer">
+                                    <input type="radio" name="muebles" value="no"
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange">
+                                    No
+                                </label>
+                                <label class="text-xs hover:cursor-pointer">
+                                    <input type="radio" name="muebles" value=""
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange" checked>
+                                    Cualquiera
+                                </label>
+                            </div>
+                        </div>
+                        <!-- DIV 4-->
+                        <div class="items-center mt-2">
+                            <!-- SERVCIOS -->
+                            <label class="block text-sm font-medium text-gray-700">
+                                Incluye servicios
+                            </label>
+                            <div>
+                                <label class="text-xs mr-2 hover:cursor-pointer">
+                                    <input type="radio" name="servicios" value="si" 
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange"> 
+                                    Sí
+                                </label>
+                                <label class="text-xs mr-2 hover:cursor-pointer">
+                                    <input type="radio" name="servicios" value="no"
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange">
+                                    No
+                                </label>
+                                <label class="text-xs hover:cursor-pointer">
+                                    <input type="radio" name="servicios" value=""
+                                    class="text-cianna-orange hover:cursor-pointer
+                                    focus:ring-cianna-orange" checked>
+                                    Cualquiera
+                                </label>
+                            </div>
+                        </div>
+                        <!-- DIV 5-->
+                        <div class="items-center mt-2">
+                            <!-- PRECIO -->
+                            <label class="block text-sm font-medium text-gray-700">Precio</label>
+                            <div>
+                                <!-- Valores dinámicos -->
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>Min: $<span id="minOutput" 
+                                        class="font-bold text-cianna-orange">0</span>
+                                    </span>
+                                    <span>Max: $<span id="maxOutput" 
+                                        class="font-bold text-cianna-orange">10000</span>
+                                    </span>
+                                </div>
+                                <!-- Slider de rango -->
+                                <div class="range-slider mt-4">
+                                    <div class="range-progress" id="rangeProgress"></div>
+                                    <input type="range" id="minSlider" min="0" max="10000" 
+                                    step="10" value="0">
+                                    <input type="range" id="maxSlider" min="0" max="10000" 
+                                    step="10" value="10000">
+                                </div>
+                                <!-- Campos ocultos -->
+                                <input type="hidden" name="minPrice" id="hiddenMinPrice" value="0">
+                                <input type="hidden" name="maxPrice" id="hiddenMaxPrice" value="10000">
+                            </div>
+                        </div>
+                        <!-- BOTÓN PARA ENVIAR -->
                         <div class="mt-4 flex justify-end">
                             <button type="submit" class="px-4 py-2 bg-cianna-blue text-white rounded-lg 
                                 hover:bg-sky-900 focus:ring-4 focus:outline-none focus:ring-sky-400">
@@ -491,7 +702,7 @@
     // Obtener elementos
     const selectAllCheckbox = document.getElementById('selectAll');
     const childCheckboxes = document.querySelectorAll('.childCheckbox');
-    const form = document.getElementById('form-a'); // Selecciona el formulario que contiene los checkboxes
+    const form_a = document.getElementById('form-a'); // Selecciona el formulario que contiene los checkboxes
     const hiddenInput = document.querySelector('input[name="carreras"]'); // Input oculto para "carreras"
 
     // Evento para seleccionar/deseleccionar todos los checkboxes secundarios
@@ -516,7 +727,7 @@
     });
 
     // Evento antes de enviar el formulario
-    form.addEventListener('submit', function (e) {
+    form_a.addEventListener('submit', function (e) {
         // Si "Seleccionar todo" está marcado
         if (selectAllCheckbox.checked) {
             // Desmarcar todos los checkboxes secundarios antes de enviar el formulario
@@ -555,7 +766,7 @@
 
 
 <!-- VERIFICAR DATOS EN CONSOLA ENVIADOS DESDE FORMULARIO A -->
-<script>
+<!-- <script>
     document.getElementById('form-a').addEventListener('submit', function(event) {
         // Evitar el envío del formulario (solo para depuración)
         event.preventDefault();
@@ -584,10 +795,10 @@
         // Si deseas continuar con el envío del formulario después de revisar los datos, puedes descomentar la siguiente línea:
         // this.submit();
     });
-</script>
+</script> -->
 
 <!-- VERIFICAR DATOS EN CONSOLA ENVIADOS DESDE FORMULARIO B -->
-<script>
+<!-- <script>
     document.getElementById('form-b').addEventListener('submit', function(event) {
         // Evitar el envío del formulario (solo para depuración)
         event.preventDefault();
@@ -616,7 +827,7 @@
         // Si deseas continuar con el envío del formulario después de revisar los datos, puedes descomentar la siguiente línea:
         // this.submit();
     });
-</script>
+</script> -->
 
 <script>
     function toggleForm(formId) {
@@ -637,4 +848,91 @@
 
     // Mostrar por defecto el Formulario A al cargar
     //toggleForm('formulario-a');
+</script>
+
+<style>
+    /* Estilo personalizado para el rango doble */
+    .range-slider {
+        position: relative;
+        width: 100%;
+        height: 2px;
+        background-color: #e5e7eb; /* bg-gray-300 */
+        border-radius: 5px;
+    }
+    .range-slider input[type="range"] {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: none;
+        pointer-events: none;
+        -webkit-appearance: none;
+    }
+    .range-slider input[type="range"]::-webkit-slider-thumb {
+        position: relative;
+        z-index: 2;
+        pointer-events: all;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background-color: #D47814; 
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .range-slider .range-progress {
+        position: absolute;
+        height: 100%;
+        background-color: #D47814; 
+        z-index: 1;
+        border-radius: 5px;
+    }
+</style>
+
+<!-- SCRIPT PARA MANIPULAR EL SLIDER DE PRECIO -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const minSlider = document.getElementById("minSlider");
+        const maxSlider = document.getElementById("maxSlider");
+        const minOutput = document.getElementById("minOutput");
+        const maxOutput = document.getElementById("maxOutput");
+        const rangeProgress = document.getElementById("rangeProgress");
+        const hiddenMinPrice = document.getElementById("hiddenMinPrice");
+        const hiddenMaxPrice = document.getElementById("hiddenMaxPrice");
+
+        // Función para actualizar el rango visual y sincronizar con los inputs ocultos
+        const updateRange = () => {
+            const minValue = parseInt(minSlider.value);
+            const maxValue = parseInt(maxSlider.value);
+
+            // Evitar que los sliders se crucen
+            if (minValue >= maxValue) {
+            minSlider.value = maxValue - 10;
+            }
+            if (maxValue <= minValue) {
+            maxSlider.value = minValue + 10;
+            }
+
+            // Actualizar los valores mostrados
+            minOutput.textContent = minSlider.value;
+            maxOutput.textContent = maxSlider.value;
+
+            // Actualizar la barra de progreso
+            const rangeWidth = maxSlider.max - maxSlider.min;
+            const minPosition = ((minSlider.value - minSlider.min) / rangeWidth) * 100;
+            const maxPosition = ((maxSlider.value - maxSlider.min) / rangeWidth) * 100;
+
+            rangeProgress.style.left = `${minPosition}%`;
+            rangeProgress.style.right = `${100 - maxPosition}%`;
+
+            // Sincronizar los valores con los inputs ocultos
+            hiddenMinPrice.value = minSlider.value;
+            hiddenMaxPrice.value = maxSlider.value;
+        };
+
+        // Actualizar rango al mover los sliders
+        minSlider.addEventListener("input", updateRange);
+        maxSlider.addEventListener("input", updateRange);
+
+        // Inicializar el rango
+        updateRange();
+    });
 </script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DateTime;
+use App\Models\UserB;
 use App\Models\Postulacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +24,22 @@ class PostulacionController extends Controller
             foreach($postulaciones_pendientes as $postulacion){
                 $postulacion->pivot->fecha = new DateTime($postulacion->pivot->fecha);              
             }
+            
+            $postulaciones = Auth::user()->user_a->casa->postulaciones;
+            $id_postulaciones = [];
+            foreach($postulaciones as $postulacion){
+                $id_postulaciones[] = $postulacion->user_id;
+            }
 
             // Llamar a la API Flask
             $response = Http::get('http://127.0.0.1:5000/favoritos');
             $favoritos = $response->successful() ? $response->json() : [];
 
-            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'favoritos'));
+            //return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'favoritos'));
+            $recomendaciones = UserB::whereNotIn('user_id', $id_postulaciones)->with(['user.archivos' => function ($query) {
+                $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
+            
+            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'recomendaciones', 'favoritos'));
         }else if(Auth::user()->tipo == 'B'){
             $postulaciones_pendientes = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->where('estado', 'pendiente')->orderBy('fecha', 'desc')->get();
@@ -38,6 +49,8 @@ class PostulacionController extends Controller
             foreach($postulaciones_pendientes as $postulacion){
                 $postulacion->pivot->fecha = new DateTime($postulacion->pivot->fecha);              
             }
+
+            //$recomendaciones = 
 
             return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones'));
         }

@@ -88,6 +88,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             
             Route::get('mis_favoritos', 'ver_favoritos')->name( 'ver_favoritos');
 
+            Route::post('busqueda', 'busquedaRoomies')->name('busquedaRoomies');
+            Route::post('busquedaHabitaciones', 'busquedaHabitaciones')->name('busquedaHabitaciones');
+
             
         });
 
@@ -181,10 +184,12 @@ Route::get('favsB', function(){
 });
 
 Route::get('listado_postulacionesA', function(){
+    
     return view('profile.list-requestsA');
 });
 
 Route::get('listado_postulacionesB', function(){
+
     return view('profile.list-requestsB');
 });
 
@@ -197,7 +202,41 @@ Route::get('listado_pendientesB', function(){
 });
 
 Route::get('listado_recomendacionesA', function(){
-    return view('profile.list-suggestsA');
+
+    function lista_carreras(){
+        $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
+        'ing_biom' => 'Ing. Biómedica',
+        'ing_civi' => 'Ing. Civil',
+        'ing_comp' => 'Ing. en Computación',
+        'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
+        'ing_log_trans' => 'Ing. en Logística y Transporte',
+        'ing_topo' => 'Ing. en Topografía Geomática',
+        'ing_foto' => 'Ing. Fotónica',
+        'ing_indu' => 'Ing. Industrial',
+        'ing_info' => 'Ing. Informática',
+        'ing_meca' => 'Ing. Mecánica Eléctrica',
+        'ing_quim' => 'Ing. Química',
+        'ing_robo' => 'Ing. Robótica',
+        'lic_cien_mate' => 'Lic. en Ciencia de Materiales',
+        'lic_fis' => 'Lic. en Física',
+        'lic_mate' => 'Lic. en Matemáticas',
+        'lic_quim' => 'Lic. en Química',
+        'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
+
+        return $carreras;
+    }
+    $carreras = lista_carreras();
+    $postulaciones = Auth::user()->user_a->casa->postulaciones;
+            $id_postulaciones = [];
+            foreach($postulaciones as $postulacion){
+                $id_postulaciones[] = $postulacion->user_id;
+            }
+
+            $recomendaciones = UserB::whereNotIn('user_id', $id_postulaciones)->with(['user.archivos' => function ($query) {
+                $query->where('archivo_type', 'img_perf');}])->get();
+
+               
+    return view('profile.list-suggestsA' ,compact('recomendaciones', 'carreras'));
 });
 
 Route::get('listado_recomendacionesB', function(){
