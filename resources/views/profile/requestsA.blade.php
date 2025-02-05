@@ -8,13 +8,21 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
         <h2>Favoritos</h2>
+        <!-- Mostrar mensaje de error si existe -->
+        @if(isset($error_message))
+            <div class="bg-red-500 text-white p-4 rounded-md">
+                {{ $error_message }}
+            </div>
+        @endif
+
+        <!-- Verificar si hay favoritos -->
         @if(empty($favoritos))
             <p>No hay favoritos disponibles.</p>
         @else
             <ul>
                 @foreach($favoritos as $favorito)
-            <li>Casa ID: {{ $favorito['casa_id'] }} - Usuario: {{ $favorito['user_b_id'] }}</li>
-            @endforeach
+                    <li>Casa ID: {{ $favorito['casa_id'] }} - Usuario: {{ $favorito['user_b_id'] }}</li>
+                @endforeach
             </ul>
         @endif
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">Postulaciones recibidas</div>

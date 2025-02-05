@@ -31,15 +31,44 @@ class PostulacionController extends Controller
                 $id_postulaciones[] = $postulacion->user_id;
             }
 
-            // Llamar a la API Flask
-            $response = Http::get('http://127.0.0.1:5000/favoritos');
-            $favoritos = $response->successful() ? $response->json() : [];
+            // Llamar a la API Flask con la API Key en los encabezados
+            
+            //$apiKey = env('API_KEY');  // Obtener la clave API desde .env
+            
+            $apiKey = config('app.api_key');
+            //dd(config('app.api_key'));
 
+            // Inicializar la variable para evitar el error de variable no definida
+            $error_message = null;
+
+            try {
+                $response = Http::withHeaders([
+                    'Authorization' => "Bearer $apiKey",  // Incluir la API Key en los encabezados
+                ])->get('http://127.0.0.1:5000/favoritos');
+    
+                // Verificar si la respuesta fue exitosa
+                if ($response->successful()) {
+                    $favoritos = $response->json(); // Obtener los favoritos
+                } else {
+                    // Manejar el caso de error de la API
+                    $favoritos = null;
+                    $error_message = "Error al recuperar los favoritos desde la API. Código de error: " . $response->status();
+                }
+            } catch (\Illuminate\Http\Client\RequestException $e) {
+                // Manejar error de la solicitud HTTP (problemas con la API o la conexión)
+                $favoritos = null;
+                $error_message = "Hubo un problema al conectarse con la API Flask: " . $e->getMessage();
+            } catch (\Exception $e) {
+                // Manejar cualquier otro tipo de error inesperado
+                $favoritos = null;
+                $error_message = "Error inesperado: " . $e->getMessage();
+            }
+            
             //return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'favoritos'));
             $recomendaciones = UserB::whereNotIn('user_id', $id_postulaciones)->with(['user.archivos' => function ($query) {
                 $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
             
-            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'recomendaciones', 'favoritos'));
+            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'recomendaciones', 'favoritos', 'error_message'));
         }else if(Auth::user()->tipo == 'B'){
             $postulaciones_pendientes = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->where('estado', 'pendiente')->orderBy('fecha', 'desc')->get();
