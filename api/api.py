@@ -14,58 +14,71 @@ app = Flask(__name__)
 # Conexión a la BD
 def get_db_connection():
     try:
-        connection = mysql.connector.connect(
+        return mysql.connector.connect(
             host='localhost',  # Dirección del servidor donde se encuentra la BD
             user="root",       # Usuario para acceder a la BD
             password='',       # Contraseña para acceder a la BD
             database="cianna"  # Nombre de la BD
         )
-        return connection
     except mysql.connector.Error as err:
-        # En caso de error al conectar, retornar un mensaje de error
-        return jsonify({"error": "Error al conectar con la base de datos: " + str(err)}), 500
+        print(f"Error al conectar con la base de datos: {err}")  # Log para depuración
+        return None  # Retornar None en lugar de JSON
 
 # Ruta para recuperar datos de la tabla 'favoritos' con validación de API_KEY
 @app.route('/favoritos', methods=['GET'])
 def get_favoritos():
     # Verificar que la API_KEY proporcionada en el encabezado sea válida
     api_key_from_request = request.headers.get('Authorization')  # Recibir el token de autorización
-
     if api_key_from_request != f"Bearer {api_key}":
-        return jsonify({"error": "Unauthorized: API Key no válida o no proporcionada."}), 401  # Si la API_KEY no coincide
+        return jsonify({"error": "Unauthorized: API Key no válida o no proporcionada."}), 401
+
+    # Obtener parámetros
+    user_id = request.args.get('user_id')
+    user_type = request.args.get('user_type')
+
+    # Validaciones
+    if not user_id:
+        return jsonify({"error": "ID del usuario no válido o no proporcionado."}), 400
+    if not user_type:
+        return jsonify({"error": "Tipo del usuario no válido o no proporcionado."}), 400
+    if user_type not in ["A", "B"]:
+        return jsonify({"error": "Tipo de usuario no reconocido."}), 400
+    
+    # Convertir user_id a entero (manejo de error seguro)
+    try:
+        user_id = int(user_id)
+    except ValueError:
+        return jsonify({"error": "ID del usuario no es un número entero válido."}), 400
 
     # Intentar recuperar los datos
-    try:
-        connection = get_db_connection()
-        if isinstance(connection, tuple):  # Si la conexión no fue exitosa
-            return connection  # Ya es un error con mensaje y código adecuado
+    connection = get_db_connection()
+    if connection is None:
+        return jsonify({"error": "No se pudo conectar a la base de datos."}), 500
 
-        cursor = connection.cursor(dictionary=True)  # Manejo de diccionario para facilitar el acceso
-        cursor.execute('SELECT * FROM favoritos_casas;')  # Consulta
-        favoritos = cursor.fetchall()  # Datos obtenidos de la consulta
-        cursor.close()  # Importante cerrar el cursor al terminar
-        connection.close()  # Importante también cerrar la conexión al terminar
+    cursor = None  # Inicializar cursor para manejo seguro
+    try:
+        cursor = connection.cursor(dictionary=True)
+        
+        if user_type == "A":
+            query = "SELECT * FROM favoritos_roomies WHERE user_a_id = %s;"
+        else:  # user_type == "B"
+            query = "SELECT * FROM favoritos_casas WHERE user_b_id = %s;"
+
+        cursor.execute(query, (user_id,))
+        favoritos = cursor.fetchall()
 
         if not favoritos:
-            return jsonify({"error": "No se encontraron favoritos."}), 404  # Si no hay resultados en la consulta
+            return jsonify({"error": "No se encontraron favoritos."}), 404
 
-        return jsonify(favoritos)  # Retorno de resultados
-    
+        return jsonify(favoritos)
     except mysql.connector.Error as err:
         return jsonify({"error": f"Error en la base de datos: {err}"}), 500
     except Exception as err:
         return jsonify({"error": f"Error inesperado: {str(err)}"}), 500
-
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
-
-
-'''
-@app.route('/')
-def home():
-    return jsonify({"message": "Hola Mundo desde Flask!"})
+    finally:
+        if cursor:
+            cursor.close()
+        connection.close()
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
-'''

@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Http;
 class PostulacionController extends Controller
 {
     public function ver_postulaciones(){
+        // Llamar a la API Flask con la API Key en los encabezados
+            
+            //$apiKey = env('API_KEY');  // Obtener la clave API desde .env
+            
+            $apiKey = config('app.api_key');
+            //dd(config('app.api_key'));
+
+            // Inicializar la variable para evitar el error de variable no definida
+            $error_message = null;
+
         if (Auth::user()->tipo == 'A'){
             $postulaciones_pendientes = Auth::user()->user_a->casa->postulaciones()->with(['user.archivos' => function ($query){
                 $query->where('archivo_type', 'img_perf');}])->where('estado', 'pendiente')->orderBy('fecha', 'desc')->get();
@@ -31,36 +41,32 @@ class PostulacionController extends Controller
                 $id_postulaciones[] = $postulacion->user_id;
             }
 
-            // Llamar a la API Flask con la API Key en los encabezados
-            
-            //$apiKey = env('API_KEY');  // Obtener la clave API desde .env
-            
-            $apiKey = config('app.api_key');
-            //dd(config('app.api_key'));
-
-            // Inicializar la variable para evitar el error de variable no definida
-            $error_message = null;
-
             try {
+                $userId = Auth::user()->id; 
+                $userType = Auth::user()->tipo;
+                
                 $response = Http::withHeaders([
                     'Authorization' => "Bearer $apiKey",  // Incluir la API Key en los encabezados
-                ])->get('http://127.0.0.1:5000/favoritos');
+                ])->get('http://127.0.0.1:5000/favoritos',[
+                    'user_id' => $userId, //Enviamos el id del usuario como parámetro en la URL
+                    'user_type' => $userType
+                ]);
     
                 // Verificar si la respuesta fue exitosa
                 if ($response->successful()) {
                     $favoritos = $response->json(); // Obtener los favoritos
                 } else {
                     // Manejar el caso de error de la API
-                    $favoritos = null;
+                    $favoritos = [];
                     $error_message = "Error al recuperar los favoritos desde la API. Código de error: " . $response->status();
                 }
             } catch (\Illuminate\Http\Client\RequestException $e) {
                 // Manejar error de la solicitud HTTP (problemas con la API o la conexión)
-                $favoritos = null;
+                $favoritos = [];
                 $error_message = "Hubo un problema al conectarse con la API Flask: " . $e->getMessage();
             } catch (\Exception $e) {
                 // Manejar cualquier otro tipo de error inesperado
-                $favoritos = null;
+                $favoritos = [];
                 $error_message = "Error inesperado: " . $e->getMessage();
             }
             
@@ -79,9 +85,38 @@ class PostulacionController extends Controller
                 $postulacion->pivot->fecha = new DateTime($postulacion->pivot->fecha);              
             }
 
+            try {
+                $userId = Auth::user()->id; 
+                $userType = Auth::user()->tipo;
+                
+                $response = Http::withHeaders([
+                    'Authorization' => "Bearer $apiKey",  // Incluir la API Key en los encabezados
+                ])->get('http://127.0.0.1:5000/favoritos',[
+                    'user_id' => $userId, //Enviamos el id del usuario como parámetro en la URL
+                    'user_type' => $userType
+                ]);
+    
+                // Verificar si la respuesta fue exitosa
+                if ($response->successful()) {
+                    $favoritos = $response->json(); // Obtener los favoritos
+                } else {
+                    // Manejar el caso de error de la API
+                    $favoritos = [];
+                    $error_message = "Error al recuperar los favoritos desde la API. Código de error: " . $response->status();
+                }
+            } catch (\Illuminate\Http\Client\RequestException $e) {
+                // Manejar error de la solicitud HTTP (problemas con la API o la conexión)
+                $favoritos = [];
+                $error_message = "Hubo un problema al conectarse con la API Flask: " . $e->getMessage();
+            } catch (\Exception $e) {
+                // Manejar cualquier otro tipo de error inesperado
+                $favoritos = [];
+                $error_message = "Error inesperado: " . $e->getMessage();
+            }
+
             //$recomendaciones = 
 
-            return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones'));
+            return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones', 'favoritos', 'error_message'));
         }
     }
 
