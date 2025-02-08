@@ -154,8 +154,27 @@
                     Recomendado para ti
                 </div>
                 <div class="mt-2 ml-16">
-                    Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo
+                    Basado en tus favoritos creemos que podrían ser más compatibles contigo
                 </div>
+                
+                <!-- Mostrar mensaje de error si existe -->
+                @if(isset($error_message))
+                    <div class="bg-red-500 text-white p-4 rounded-md">
+                        {{ $error_message }}
+                    </div>
+                @endif
+
+                <!-- Verificar si hay favoritos -->
+                @if(isset($favoritos) && count($favoritos) > 0)
+                    <h2>Favoritos</h2>
+                    <ul>
+                        @foreach($favoritos as $favorito)
+                            <li>ID usuario: {{ $favorito['user_a_id'] }} - ID roomie: {{ $favorito['user_b_id'] }}</li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>No hay favoritos disponibles. No podemos generar recomendaciones para ti en este momento.</p>
+                @endif
                 <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
                     @foreach($recomendaciones as $recomendacion)
                         <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform 
