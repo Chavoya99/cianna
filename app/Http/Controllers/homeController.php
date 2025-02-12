@@ -387,21 +387,9 @@ class HomeController extends Controller
 
         $users = $users->get();
         
-        echo "Resultados obtenidos (". count($users).")<br>";
-        foreach($users as $user){
-            echo "Tipo: ". $user->user->tipo. '<br>';
-            echo 'id: '. $user->user_id. '<br>';
-            echo 'nombre: '. $user->user->name.  '<br>';
-            echo 'edad: '. $user->edad.  '<br>';
-            echo 'sexo: '. $user->sexo. '<br>';
-            echo 'carrera: '. $user->carrera. '<br>';
-            echo 'mascota: '. $user->mascota. '<br>';
-            echo 'padecimiento: '. $user->padecimiento. '<br>';
-            echo 'lifestyle: '.$user->lifestyle. '<br>';
-            echo  '<br>';
-        }
+        $carreras = $this->lista_carreras();
 
-        return "";
+        return view('profile.search-resultsA', compact('users', 'carreras'));
 
     }
 
@@ -465,26 +453,8 @@ class HomeController extends Controller
         }
 
         $casas = $casas->get();
-        
-        echo "Resultados obtenidos (". count($casas).")<br>";
-        foreach($casas as $casa){
-            echo 'id: '. $casa->id. '<br>';
-            echo 'calle: '. $casa->calle.  '<br>';
-            echo 'numero ext: '. $casa->num_ext.  '<br>';
-            echo 'numero int: '. $casa->num_int. '<br>';
-            echo 'ciudad: '. $casa->ciudad. '<br>';
-            echo 'colonia: '. $casa->colonia. '<br>';
-            echo 'codigo postal: '. $casa->codigo_postal. '<br>';
-            echo 'mascotas: '. $casa->acepta_mascotas. '<br>';
-            echo 'visitas: '. $casa->acepta_visitas. '<br>';
-            echo 'limpieza: '. $casa->riguroza_limpieza. '<br>';
-            echo 'muebles: '. $casa->muebles. '<br>';
-            echo 'servicios: '.$casa->servicios. '<br>';
-            echo 'precio: '. $casa->precio. '<br>';
-            echo  '<br>';
-        }
 
-        return "";
+        return view('profile.search-resultsB', compact('casas'));
     }
     
 }
