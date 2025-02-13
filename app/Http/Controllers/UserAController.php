@@ -22,12 +22,12 @@ class UserAController extends Controller
             $query->where('archivo_type', 'img_perf');
         }])->limit(6)->get();
 
-        $roomies = $this->ejecutarPython();
-        dd($roomies);
+        //$roomies = $this->ejecutarPython();
+        //dd($roomies);
         
         return view('profile.home', compact('casas','roomies'));
     }
-
+    /*
     public function ejecutarPython(){
         // Ruta al ejecutable de Python
         $python = "python"; // Cambia a "python" si no usas Python 3
@@ -55,6 +55,7 @@ class UserAController extends Controller
         return $recomendaciones;
 
     }
+    */
 
     /**
      * Display a listing of the resource.

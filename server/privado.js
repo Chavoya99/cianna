@@ -26,7 +26,18 @@ const io = new Server(server, {
 
 // Función para crear una sala única para cada par de usuarios
 function createRoomId(user1, user2) {
-    return [user1, user2].sort().join('_');
+    // Verificar que los ID sean válidos
+    if (!user1 || !user2) {
+        console.error('Error: Uno de los IDs es inválido', { user1, user2 });
+        return null;
+    }
+
+    // Convertimos a números para ordenar correctamente
+    const id1 = Number(user1);
+    const id2 = Number(user2);
+
+    // Ordenamos de mayor a menor
+    return [id1, id2].sort((a, b) => b - a).join('_');
 }
 
 io.on('connection', async (socket) => {
@@ -39,6 +50,7 @@ io.on('connection', async (socket) => {
     // Evento para unirse a una sala específica para una conversación privada
     socket.on('join room', async ({ userId, otherUserId }) => {
         const roomId = createRoomId(userId, otherUserId);
+        // console.log(`User ${userId} se intenta conectar con ${otherUserId} en ${roomId}`);
         socket.join(roomId); // Une al usuario a la sala
         console.log(`User ${userId} joined room ${roomId}`);
 
@@ -51,7 +63,7 @@ io.on('connection', async (socket) => {
             if (rows.length > 0) {
                 const otherUserName = rows[0].name;
                 const otherUserApellido = rows[0].apellido;
-                //console.log(`El nombre de otherUserId (${otherUserId}) es ${otherUserName} ${otherUserApellido}`);
+                // console.log(`El nombre de otherUserId (${otherUserId}) es ${otherUserName} ${otherUserApellido}`);
     
                 // Puedes enviar el nombre al cliente si es necesario
                 socket.emit('other_user_name', { otherUserId, otherUserName, otherUserApellido });

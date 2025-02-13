@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Cianna'),
 
     /*
     |--------------------------------------------------------------------------
@@ -138,6 +138,9 @@ return [
     | Supported drivers: "file", "cache"
     |
     */
+
+    // API KEY PARA LA SEGURIDAD DE LA API
+    'api_key' => env('API_KEY', 'zW7rP5TnJkD8iRz2LqXbF6U3K9LwVz1Y'),
 
     'maintenance' => [
         'driver' => 'file',

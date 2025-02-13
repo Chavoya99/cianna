@@ -397,12 +397,12 @@
                                     border border-gray-300 rounded-md shadow-sm 
                                     focus:ring-cianna-orange focus:border-cianna-orange">
                                         <option value="">Cualquiera</option>
-                                        <option value="">Guadalajara</option>
-                                        <option value="">El Salto</option>
-                                        <option value="">Tlajomulco de Zúñiga</option>
-                                        <option value="">San Pedro Tlaquepaque</option>
-                                        <option value="">Tonalá</option>
-                                        <option value="">Zapopan</option>
+                                        <option value="gdl">Guadalajara</option>
+                                        <option value="salto">El Salto</option>
+                                        <option value="tlaj_z">Tlajomulco de Zúñiga</option>
+                                        <option value="tlaq">San Pedro Tlaquepaque</option>
+                                        <option value="ton">Tonalá</option>
+                                        <option value="zap">Zapopan</option>
                                     </select>
                                 </div>
                                 <div class="w-[45%]">
