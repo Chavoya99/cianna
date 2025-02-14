@@ -165,11 +165,11 @@
                 @endif
 
                 <!-- Verificar si hay favoritos -->
-                @if(isset($favoritos) && count($favoritos) > 0)
-                    <h2>Favoritos</h2>
+                @if(isset($outcomes) && count($outcomes) > 0)
+                    <h2>Resultados</h2>
                     <ul>
-                        @foreach($favoritos as $favorito)
-                            <li>ID usuario: {{ $favorito['user_a_id'] }} - ID roomie: {{ $favorito['user_b_id'] }}</li>
+                        @foreach($outcomes as $outcome)
+                            <li>ID usuario: {{ $outcome }}</li>
                         @endforeach
                     </ul>
                 @else
