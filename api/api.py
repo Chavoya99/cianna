@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 import mysql.connector
 from flask import Flask, jsonify, request
+import numpy as np
+from sklearn.neighbors import NearestNeighbors
 
 # Cargar las variables del archivo .env
 load_dotenv()
@@ -60,17 +62,66 @@ def get_favoritos():
         cursor = connection.cursor(dictionary=True)
         
         if user_type == "A":
-            query = "SELECT * FROM favoritos_roomies WHERE user_a_id = %s;"
+            query = """
+                SELECT users_b.*
+                FROM favoritos_roomies
+                JOIN users_b ON favoritos_roomies.user_b_id = users_b.user_id
+                WHERE favoritos_roomies.user_a_id = %s;
+                """
         else:  # user_type == "B"
-            query = "SELECT * FROM favoritos_casas WHERE user_b_id = %s;"
+            query = """
+                SELECT casas.*
+                FROM favoritos_casas
+                JOIN casas ON favoritos_casas.casa_id = casas.id
+                WHERE favoritos_casas.user_b_id = %s;
+                """
 
         cursor.execute(query, (user_id,))
         favoritos = cursor.fetchall()
+        print(f"Estos son los favoritos rescatados desde la BD: \n{favoritos}")
 
         if not favoritos:
             return jsonify({"error": "No se encontraron favoritos."}), 404
 
-        return jsonify(favoritos)
+        # Extracción de características de favoritos
+        features = []
+        if user_type == "A":
+            for favorito in favoritos:
+                features.append([favorito['user_id'], favorito['edad'], favorito['sexo'], favorito['carrera'], 
+                                 favorito['lifestyle'], favorito['padecimiento'], favorito['mascota']])
+                #print(features)
+        else:
+            for favorito in favoritos:
+                features.append([favorito['id'], favorito['ciudad'], favorito['colonia'], favorito['precio'], 
+                                 favorito['muebles'], favorito['acepta_mascotas'], favorito['acepta_visitas']])
+
+        #print(f"Features antes de NP {features}")
+        # Convertir la lista de características a un array de NumPy
+        features_array = np.array(features)
+        print(f"Features despues de NP: \n {features_array}")
+        ids = features_array[:, 0].astype(int).tolist()  # Convertir a enteros y luego a lista
+
+        """
+        # Entrenar el modelo KNN
+        model_knn = NearestNeighbors(n_neighbors=5, metric='euclidean')
+        model_knn.fit(features_array)
+
+        # Obtener las recomendaciones de los K vecinos más cercanos
+        distances, indices = model_knn.kneighbors(features_array)
+
+        # Buscar los usuarios o casas recomendados en la base de datos
+        recommended = []
+        if user_type == "A":
+            for index in indices.flatten():
+                recommended.append(favoritos[index]['user_id'])  # Añadimos los IDs de los usuarios recomendados
+        else:
+            for index in indices.flatten():
+                recommended.append(favoritos[index]['id'])  # Añadimos los IDs de las casas recomendadas
+        """
+        #print(f"Recomendaciones: {recommended}")
+        print(f"Estos son los ID que se val a devolver al controlador:\n{ids}")
+        return jsonify(ids)
+    
     except mysql.connector.Error as err:
         return jsonify({"error": f"Error en la base de datos: {err}"}), 500
     except Exception as err:

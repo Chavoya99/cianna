@@ -54,19 +54,20 @@ class PostulacionController extends Controller
     
                 // Verificar si la respuesta fue exitosa
                 if ($response->successful()) {
-                    $favoritos = $response->json(); // Obtener los favoritos
+                    $outcomes = $response->json(); // Obtener los resultados
+                    //dd($outcomes);
                 } else {
                     // Manejar el caso de error de la API
-                    $favoritos = [];
-                    $error_message = "Error al recuperar los favoritos desde la API. Código de error: " . $response->status();
+                    $outcomes = [];
+                    $error_message = "Error al recuperar los resultados desde la API. Código de error: " . $response->status();
                 }
             } catch (\Illuminate\Http\Client\RequestException $e) {
                 // Manejar error de la solicitud HTTP (problemas con la API o la conexión)
-                $favoritos = [];
+                $outcomes = [];
                 $error_message = "Hubo un problema al conectarse con la API Flask: " . $e->getMessage();
             } catch (\Exception $e) {
                 // Manejar cualquier otro tipo de error inesperado
-                $favoritos = [];
+                $outcomes = [];
                 $error_message = "Error inesperado: " . $e->getMessage();
             }
             
@@ -74,7 +75,7 @@ class PostulacionController extends Controller
             $recomendaciones = UserB::whereNotIn('user_id', $id_postulaciones)->with(['user.archivos' => function ($query) {
                 $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
             
-            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'recomendaciones', 'favoritos', 'error_message'));
+            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'recomendaciones', 'outcomes', 'error_message'));
         }else if(Auth::user()->tipo == 'B'){
             $postulaciones_pendientes = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->where('estado', 'pendiente')->orderBy('fecha', 'desc')->get();
@@ -98,25 +99,25 @@ class PostulacionController extends Controller
     
                 // Verificar si la respuesta fue exitosa
                 if ($response->successful()) {
-                    $favoritos = $response->json(); // Obtener los favoritos
+                    $outcomes = $response->json(); // Obtener los resultados
                 } else {
                     // Manejar el caso de error de la API
-                    $favoritos = [];
-                    $error_message = "Error al recuperar los favoritos desde la API. Código de error: " . $response->status();
+                    $outcomes = [];
+                    $error_message = "Error al recuperar los resultados desde la API. Código de error: " . $response->status();
                 }
             } catch (\Illuminate\Http\Client\RequestException $e) {
                 // Manejar error de la solicitud HTTP (problemas con la API o la conexión)
-                $favoritos = [];
+                $outcomes = [];
                 $error_message = "Hubo un problema al conectarse con la API Flask: " . $e->getMessage();
             } catch (\Exception $e) {
                 // Manejar cualquier otro tipo de error inesperado
-                $favoritos = [];
+                $outcomes = [];
                 $error_message = "Error inesperado: " . $e->getMessage();
             }
 
             //$recomendaciones = 
 
-            return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones', 'favoritos', 'error_message'));
+            return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones', 'outcomes', 'error_message'));
         }
     }
 
