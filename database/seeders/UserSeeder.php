@@ -29,14 +29,14 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'pruebaA',
             'apellido' => 'A',
-            'email' => 'pruebaA@gmail.com',
+            'email' => 'pruebaA@alumnos.udg.mx',
             'tipo' => 'A'
         ]);
 
         User::factory()->create([
             'name' => 'pruebaB',
             'apellido' => 'B',
-            'email' => 'pruebaB@gmail.com',
+            'email' => 'pruebaB@alumnos.udg.mx',
             'tipo' => 'B'
         ]);
 
@@ -227,12 +227,53 @@ class UserSeeder extends Seeder
         User::where('tipo', 'A')
             ->whereNotNull('profile_update')
             ->first()
-            ->update(['email' => 'example@gmail.com']);
+            ->update(['email' => 'example@alumnos.udg.mx']);
 
         User::where('tipo', 'B')
             ->whereNotNull('profile_update')
             ->first()
-            ->update(['email' => 'exampleB@gmail.com']);
+            ->update(['email' => 'exampleB@alumnos.udg.mx']);
+
+        //Actualizar todos los emails por alumnos.udg.mx
+        $usersA = User::where('tipo', 'A')
+            ->whereNotNull('profile_update')
+            ->where('email', '!=', 'example@alumnos.udg.mx')
+
+            ->get();
+        $usersB = User::where('tipo', 'B')
+            ->whereNotNull('profile_update')
+            ->where('email', '!=', 'exampleB@alumnos.udg.mx')
+            ->get();
+
+        function quitarAcentos($cadena) {
+            $acentos = [
+                'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u',
+                'Á' => 'A', 'É' => 'E', 'Í' => 'I', 'Ó' => 'O', 'Ú' => 'U',
+                'ñ' => 'n', 'Ñ' => 'N'
+            ];
+            return strtr($cadena, $acentos);
+        }
+        
+        function generar_email($nombre, $apellido){
+            $partes_nombre = explode(" ", $nombre);
+            $partes_apellido = explode(" ", $apellido);
+            $numero = rand(1000, 9999);
+            
+            $email = quitarAcentos(strtolower($partes_nombre[0]))."."
+            .quitarAcentos(strtolower($partes_apellido[0])).$numero."@alumnos.udg.mx";
+
+            return $email;
+        }
+            
+        foreach($usersA as $user){
+            $email = generar_email($user->name, $user->apellido );
+            $user->update(['email'=> $email]);
+        }
+
+        foreach($usersB as $user){
+            $email = generar_email($user->name, $user->apellido );
+            $user->update(['email'=> $email]);
+        }
 
         UserA::where('mascota', 'no')
         ->update(['num_mascotas' => 0]);
