@@ -29,7 +29,7 @@ def get_db_connection():
         print(f"Error al conectar con la base de datos: {err}")  # Log para depuración
         return None  # Retornar None en lugar de JSON
 
-# Ruta para recuperar datos de la tabla 'favoritos' con validación de API_KEY
+# Endpoint de prueba para recuperar datos de la tabla 'favoritos' con validación de API_KEY
 @app.route('/favoritos', methods=['GET'])
 def get_favoritos():
     # Verificar que la API_KEY proporcionada en el encabezado sea válida
@@ -104,24 +104,6 @@ def get_favoritos():
         print(f"Features despues de NP: \n {features_array}")
         ids = features_array[:, 0].astype(int).tolist()  # Convertir a enteros y luego a lista
 
-        """
-        # Entrenar el modelo KNN
-        model_knn = NearestNeighbors(n_neighbors=5, metric='euclidean')
-        model_knn.fit(features_array)
-
-        # Obtener las recomendaciones de los K vecinos más cercanos
-        distances, indices = model_knn.kneighbors(features_array)
-
-        # Buscar los usuarios o casas recomendados en la base de datos
-        recommended = []
-        if user_type == "A":
-            for index in indices.flatten():
-                recommended.append(favoritos[index]['user_id'])  # Añadimos los IDs de los usuarios recomendados
-        else:
-            for index in indices.flatten():
-                recommended.append(favoritos[index]['id'])  # Añadimos los IDs de las casas recomendadas
-        """
-        #print(f"Recomendaciones: {recommended}")
         print(f"Estos son los ID que se val a devolver al controlador:\n{ids}")
         return jsonify(ids)
     
@@ -235,13 +217,19 @@ def get_recommendations():
     # Calcular centroide
     centroide = np.asarray(np.mean(x_favoritos, axis=0)).reshape(1, -1)
     
+    # Obtener el total de datos
+    total_datos = len(all_data)
+
+    # Calcular k como la raíz cuadrada del total de datos
+    k = int(np.sqrt(total_datos))
+
     # Entrenar modelo k-NN
-    knn = NearestNeighbors(n_neighbors=5, metric='euclidean')
+    knn = NearestNeighbors(n_neighbors=k, metric='euclidean')
     knn.fit(x_todo)
     
-    k_total = 5
-    distancias, indices = knn.kneighbors(centroide, n_neighbors = k_total + len(favorites))
+    distancias, indices = knn.kneighbors(centroide, n_neighbors=k + len(favorites))
 
+    # Filtrar solo los recomendados (evitando favoritos)
     recomendaciones = []
     for idx in indices.flatten():
         recomendado_id = df_todo.iloc[idx]["user_id" if user_type == "A" else "id"]
