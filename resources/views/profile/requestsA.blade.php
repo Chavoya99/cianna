@@ -155,26 +155,24 @@
                 </div>
                 <div class="mt-2 ml-16">
                     Basado en tus favoritos creemos que podrían ser más compatibles contigo
+                    <!-- Mostrar mensaje de error si existe -->
+                    @if(isset($error_message))
+                        <div class="bg-red-500 text-white p-4 rounded-md">
+                            {{ $error_message }}
+                        </div>
+                    @endif
+                    <!-- Verificar si hay favoritos -->
+                    @if(isset($outcomes) && count($outcomes) > 0)
+                        <h2 class="font-bold">Resultados</h2>
+                        <ul>
+                            @foreach($outcomes as $outcome)
+                                <li>ID usuario: {{ $outcome }}</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p>No hay favoritos disponibles. No podemos generar recomendaciones para ti en este momento.</p>
+                    @endif
                 </div>
-                
-                <!-- Mostrar mensaje de error si existe -->
-                @if(isset($error_message))
-                    <div class="bg-red-500 text-white p-4 rounded-md">
-                        {{ $error_message }}
-                    </div>
-                @endif
-
-                <!-- Verificar si hay favoritos -->
-                @if(isset($outcomes) && count($outcomes) > 0)
-                    <h2>Resultados</h2>
-                    <ul>
-                        @foreach($outcomes as $outcome)
-                            <li>ID usuario: {{ $outcome }}</li>
-                        @endforeach
-                    </ul>
-                @else
-                    <p>No hay favoritos disponibles. No podemos generar recomendaciones para ti en este momento.</p>
-                @endif
                 <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
                     @foreach($recomendaciones as $recomendacion)
                         <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform 
