@@ -8,8 +8,8 @@
                     transition-transform transform hover:scale-105">
                     <!-- IMAGEN -->
                     <a href="{{route('vista_previa_casa', $casa)}}" class="w-1/2">
-                        <img class="object-cover w-full h-full border border-cianna-gray rounded-lg" 
-                             src="{{asset('storage/'.$casa->archivos->first()->ruta_archivo)}}" 
+                        <img class="object-cover w-full h-full border border-cianna-gray rounded-lg lazyload"
+                             data-src="{{asset('storage/'.$casa->archivos->first()->ruta_archivo)}}" 
                              alt="Imagen previa del hogar" />
                     </a>
                     <!-- ENLACES -->

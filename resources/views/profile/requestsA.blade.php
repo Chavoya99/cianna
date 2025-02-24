@@ -58,8 +58,8 @@
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md relative">
                             <a href="{{route('detalles_roomie', $postulacion)}}">
                                 <img class="object-cover w-full h-full absolute top-0 left-0 
-                                    border border-cianna-gray rounded-lg" 
-                                    src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}" 
+                                    border border-cianna-gray rounded-lg lazyload"
+                                    data-src="{{ asset('storage/'. $postulacion->user->archivos->first()->ruta_archivo) }}" 
                                     alt="Imagen previa del hogar" />
                             </a>
                         </div>
@@ -180,8 +180,8 @@
                                 <div class="inline-block h-36 w-full overflow-hidden
                                     bg-cianna-gray border border-cianna-gray rounded-md relative">
                                     <a href="detalles_roomie">
-                                        <img class="object-cover w-full h-full" 
-                                            src="{{ asset('storage/'.$recomendacion->user->archivos->first()->ruta_archivo) }}" 
+                                        <img class="object-cover w-full h-full lazyload" 
+                                            data-src="{{ asset('storage/'.$recomendacion->user->archivos->first()->ruta_archivo) }}" 
                                             alt="Imagen previa del roomie" />
                                     </a>
                                 </div>

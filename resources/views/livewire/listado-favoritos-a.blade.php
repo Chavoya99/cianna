@@ -41,7 +41,8 @@
                         <!-- IMAGEN -->
                         <a href="{{route('detalles_roomie', $favorito)}}" class="w-1/2">
                             <img class="object-cover w-full h-full border border-cianna-gray 
-                                bg-white rounded-lg" src="{{ asset('storage/'.$favorito->user->archivos->first()->ruta_archivo) }}" 
+                                bg-white rounded-lg lazyload" 
+                                data-src="{{ asset('storage/'.$favorito->user->archivos->first()->ruta_archivo) }}" 
                                 alt="Imagen previa del roomie" />
                         </a>
                         <!-- ENLACES -->
