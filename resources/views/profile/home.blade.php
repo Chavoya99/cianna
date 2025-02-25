@@ -18,8 +18,8 @@
                             bg-gray-100 relative">
                             <a href="{{route('vista_previa_casa', $casa)}}">
                                 <img class="object-cover w-full h-full absolute top-0 left-0 
-                                border border-cianna-gray rounded-lg" 
-                                src="{{ asset('storage/'. $casa->archivos->first()->ruta_archivo)}}" 
+                                border border-cianna-gray rounded-lg lazyload"
+                                data-src="{{ asset('storage/'. $casa->archivos->first()->ruta_archivo)}}" 
                                 alt="Vista previa de la imagen del hogar" />
                             </a>
                         </div>
@@ -45,7 +45,7 @@
         <div class="text-right mr-20 mt-2">
             @if (Auth::user()->tipo == 'B')
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="habitaciones_potenciales">
+                    href="{{route('recomendaciones_b_casas')}}">
                     Habitaciones recomendadas...
                 </a>
             @endif
@@ -58,7 +58,12 @@
     <!-- ROOMIES -->
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">¿Buscas un compañero?</div>
-        <div class="mt-2 ml-16">Compañeros buscando habitación</div>
+        @if(Auth::user()->tipo == 'A')
+            <div class="mt-2 ml-16">Compañeros buscando habitación</div>
+        @elseif(Auth::user()->tipo == 'B')
+            <div class="mt-2 ml-16">Compañeros que ofrecen una habitación</div>
+        @endif
+        
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($roomies as $roomie)
                 @php
@@ -71,8 +76,8 @@
                             bg-gray-100 relative">
                             <a href="{{route('vista_previa_roomie', $roomie)}}">
                                 <img class="object-cover w-full h-full absolute top-0 left-0 
-                                border border-cianna-gray rounded-lg" 
-                                src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
+                                border border-cianna-gray rounded-lg lazyload"
+                                data-src="{{ asset('storage/'. $imagen->ruta_archivo) }}"
                                 alt="Vista previa de la imagen de perfil del roomie"/>
                             </a>
                         </div>
@@ -93,7 +98,12 @@
             @if (Auth::user()->tipo == 'A')
             <!-- NOTA PARA EL BACK: También ocultar si el usuario no tiene favoritos agregados -->
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="roomies_potenciales">
+                    href="{{route('recomendaciones_a')}}">
+                    Compañeros recomendados...
+                </a>
+            @elseif(Auth::user()->tipo == 'B')
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                    href="{{route('recomendaciones_b_roomies')}}">
                     Compañeros recomendados...
                 </a>
             @endif

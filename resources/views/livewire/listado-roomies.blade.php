@@ -8,8 +8,9 @@
             <div class="flex flex-col py-3 px-3 rounded-lg">
                 <div class="h-44 w-full overflow-hidden rounded-md flex relative transition-transform transform hover:scale-105">
                     <a href="{{route('vista_previa_roomie', $roomie)}}" class="w-1/2">
-                        <img class="object-cover w-full h-full border border-cianna-gray bg-white rounded-lg" 
-                             src="{{ asset('storage/'.$roomie->user->archivos->first()->ruta_archivo) }}" 
+                        <img class="object-cover w-full h-full border border-cianna-gray 
+                             bg-white rounded-lg lazyload" 
+                             data-src="{{ asset('storage/'.$roomie->user->archivos->first()->ruta_archivo) }}" 
                              alt="Imagen previa del roomie" />
                     </a>
                     <div class="flex flex-col justify-center px-3 py-3 w-1/2">

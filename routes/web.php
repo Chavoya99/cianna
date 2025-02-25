@@ -50,6 +50,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
         Route::middleware(UserAMiddleware::class)->group(function(){
             Route::controller(UserAController::class)->group(function(){
                 Route::get('/homeA','homeA')->name('homeA');
+                Route::get('listado_recomendaciones_roomies', 'recomendaciones_a')->name('recomendaciones_a');
             });
 
             //Nota: cuando se establezcan las nuevas rutas relacionadas a la casa se deberá implementar un redireccionamiento
@@ -59,11 +60,15 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('/configuracion_habitacion', [Casacontroller::class, 'configurar_casa_guardada'])->name('configurar_casa');
             Route::post('/actualizar_informacion_habitacion', [CasaController::class, 'actualizar_informacion_casa'])->name('actualizar_informacion_casa');
             
+            
         });
 
         Route::middleware(UserBMiddleware::class)->group(function(){
             Route::controller(UserBController::class)->group(function(){
-                Route::get('/homeB','homeB')->name('homeB'); 
+                Route::get('/homeB','homeB')->name('homeB');
+
+                Route::get('listado_recomendaciones_roomies_habitacion', 'recomendaciones_b_roomies')->name('recomendaciones_b_roomies');
+                Route::get('listado_recomendaciones_habitaciones', 'recomendaciones_b_casas')->name('recomendaciones_b_casas');
             });
             
         });//Final Middleware UserB
@@ -201,47 +206,6 @@ Route::get('listado_pendientesB', function(){
     return view('profile.list-pending-requestsB');
 });
 
-Route::get('listado_recomendacionesA', function(){
-
-    function lista_carreras(){
-        $carreras = ['ing_alim_biot' => 'Ing. en Alimentos y Biotecnología',
-        'ing_biom' => 'Ing. Biómedica',
-        'ing_civi' => 'Ing. Civil',
-        'ing_comp' => 'Ing. en Computación',
-        'ing_com_elec' => 'Ing. en Comunicaciones y Eléctrónica',
-        'ing_log_trans' => 'Ing. en Logística y Transporte',
-        'ing_topo' => 'Ing. en Topografía Geomática',
-        'ing_foto' => 'Ing. Fotónica',
-        'ing_indu' => 'Ing. Industrial',
-        'ing_info' => 'Ing. Informática',
-        'ing_meca' => 'Ing. Mecánica Eléctrica',
-        'ing_quim' => 'Ing. Química',
-        'ing_robo' => 'Ing. Robótica',
-        'lic_cien_mate' => 'Lic. en Ciencia de Materiales',
-        'lic_fis' => 'Lic. en Física',
-        'lic_mate' => 'Lic. en Matemáticas',
-        'lic_quim' => 'Lic. en Química',
-        'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
-
-        return $carreras;
-    }
-    $carreras = lista_carreras();
-    $postulaciones = Auth::user()->user_a->casa->postulaciones;
-            $id_postulaciones = [];
-            foreach($postulaciones as $postulacion){
-                $id_postulaciones[] = $postulacion->user_id;
-            }
-
-            $recomendaciones = UserB::whereNotIn('user_id', $id_postulaciones)->with(['user.archivos' => function ($query) {
-                $query->where('archivo_type', 'img_perf');}])->get();
-
-               
-    return view('profile.list-suggestsA' ,compact('recomendaciones', 'carreras'));
-});
-
-Route::get('listado_recomendacionesB', function(){
-    return view('profile.list-suggestsB');
-});
 
 Route::get('roomies_potenciales', function(){
     return view('profile.potential-roomies');

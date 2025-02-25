@@ -36,8 +36,8 @@
                     
                     <!-- Imagen de perfil -->
                     <div class="h-20 w-20 overflow-hidden rounded-full bg-cianna-orange">
-                        <img class="object-cover w-full h-full" 
-                            src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
+                        <img class="object-cover w-full h-full lazyload" 
+                            data-src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
                             alt="Vista previa de la imagen de perfil del roomie" />
                     </div>
                     

@@ -56,9 +56,9 @@
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md 
                             bg-gray-100 relative">
                             <a href="{{route('detalles_casa', $postulacion)}}">
-                                <img class="object-cover w-full h-full absolute top-0 left-0 
+                                <img class="object-cover w-full h-full absolute top-0 left-0 lazyload
                                     border border-cianna-gray rounded-lg" 
-                                    src="{{ asset('storage/'. $postulacion->archivos->first()->ruta_archivo) }}" 
+                                    data-src="{{ asset('storage/'. $postulacion->archivos->first()->ruta_archivo) }}" 
                                     alt="Imagen previa del hogar" />
                             </a>
                         </div>
@@ -138,64 +138,64 @@
                 </div>
                 <div class="mt-2 ml-16">
                     Basado en en tus intereses creemos que podrían ser más compatibles contigo
-                </div>
-                <!-- Mostrar mensaje de error si existe -->
-                @if(isset($error_message))
-                    <div class="bg-red-500 text-white p-4 rounded-md">
-                        {{ $error_message }}
-                    </div>
-                @endif
-
-                <!-- Verificar si hay favoritos -->
-                @if(isset($favoritos) && count($favoritos) > 0)
-                    <h2>Favoritos</h2>
-                    <ul>
-                        @foreach($favoritos as $favorito)
-                            <li>ID usuario: {{ $favorito['user_b_id'] }} - ID roomie: {{ $favorito['casa_id'] }}</li>
-                        @endforeach
-                    </ul>
-                @else
-                    <p>No hay favoritos disponibles. No podemos generar recomendaciones para ti en este momento.</p>
-                @endif
-                <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
-                    @for ($i = 0; $i < 5; $i++)
-                        <div class="w-1/5 flex flex-col mb-3 mt-5 px-5 transition-transform 
-                            transform hover:scale-110">
-                            <div class="flex flex-col block">
-                                <div class="inline-block h-36 w-full overflow-hidden rounded-md 
-                                    bg-gray-100 relative">
-                                    <a href="ver_detalles_habitacion">
-                                        <img class="object-cover w-full h-full absolute top-0 
-                                        left-0 border border-cianna-gray rounded-lg" 
-                                            src="{{ $defaultRoomImage }}" 
-                                            alt="Imagen previa roomie" />
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- COLONIA -->
-                            <a href="ver_detalles_habitacion" 
-                                class="mt-2 text-lg font-semibold line-clamp-1">
-                                Colonia
-                            </a>
-                            <!-- DESCRIPCIÓN ROOMIE -->
-                            <a href="ver_detalles_habitacion" 
-                                class="text-sm text-justify line-clamp-1">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Curabitur sed justo nec tortor laoreet porttitor et ut massa.
-                                Nam eget orci vestibulum velit tristique gravida ut eget massa. 
-                                Aenean ultrices in tellus vel dapibus. 
-                                Nam elementum, dui a tempor viverra, mauris ante interdum eros, in vestibulum.
-                            </a>
-                            <!-- PRECIO  -->
-                            <a href="ver_detalles_habitacion" class="mt-2 font-semibold">
-                                $9,999.00
-                            </a>
+                    <!-- Mostrar mensaje de error si existe -->
+                    @if(isset($error_message))
+                        <div class="bg-red-500 text-white p-4 rounded-md">
+                            {{ $error_message }}
                         </div>
-                    @endfor
+                    @endif
+                    <!-- Verificar si hay favoritos -->
+                    {{--@if(isset($outcomes) && count($outcomes) > 0)
+                        <h2>Resultados</h2>
+                        <ul>
+                            @foreach($outcomes as $outcome)
+                                <li>ID casa: {{ $outcome }}</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p>No hay favoritos disponibles. No podemos generar recomendaciones para ti en este momento.</p>
+                    @endif--}}
+                </div>
+                <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
+                    @if (count($recomendaciones) > 0)
+                        
+                        @foreach ($recomendaciones as $recomendacion)
+                            <div class="w-1/5 flex flex-col mb-3 mt-5 px-5 transition-transform 
+                                transform hover:scale-110">
+                                <div class="flex flex-col block">
+                                    <div class="inline-block h-36 w-full overflow-hidden rounded-md 
+                                        bg-gray-100 relative">
+                                        <a href="{{route('detalles_casa', $recomendacion)}}">
+                                            <img class="object-cover w-full h-full absolute top-0 lazyload
+                                            left-0 border border-cianna-gray rounded-lg" 
+                                                data-src="{{ asset('Storage/'.$recomendacion->archivos->first()->ruta_archivo) }}" 
+                                                alt="Imagen previa roomie" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- COLONIA -->
+                                <a href="ver_detalles_habitacion" 
+                                    class="mt-2 text-lg font-semibold line-clamp-1">
+                                    {{$recomendacion->colonia}}
+                                </a>
+                                <!-- DESCRIPCIÓN ROOMIE -->
+                                <a href="ver_detalles_habitacion" 
+                                    class="text-sm text-justify line-clamp-1">
+                                    {{$recomendacion->descripcion}}
+                                </a>
+                                <!-- PRECIO  -->
+                                <a href="ver_detalles_habitacion" class="mt-2 font-semibold">
+                                    $ {{number_format($recomendacion->precio, 2, '.', ',')}}
+                                </a>
+                            </div>
+                        @endforeach
+                    @else
+                        <p>No hay favoritos disponibles. No podemos generar recomendaciones para ti en este momento.</p>
+                    @endif
                 </div>
                 <div class="text-right mr-20 mt-2">
                     <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                        href="listado_recomendacionesB">
+                        href="{{route('recomendaciones_b_casas')}}">
                         Ver más...
                     </a>
                 </div>
