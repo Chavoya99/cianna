@@ -14,6 +14,11 @@
         <div class="mt-2 ml-16">
             Se han postulado y basado en tus favoritos creemos que podrían ser más compatibles contigo
         </div>
+        @if(isset($error_message))
+            <div class="bg-red-500 text-white p-4 rounded-md">
+                {{ $error_message }}
+            </div>
+        @endif
         <!-- MUESTRA DE POSTULACIONES-->
         <div class="mt-8 px-16 grid grid-cols-2 gap-6"> <!-- Añadir clases de grid para 2 columnas y espacio entre elementos -->
             @foreach ($recomendaciones as $recomendacion) <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
