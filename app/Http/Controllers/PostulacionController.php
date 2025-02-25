@@ -47,7 +47,7 @@ class PostulacionController extends Controller
                 
                 $response = Http::withHeaders([
                     'Authorization' => "Bearer $apiKey",  // Incluir la API Key en los encabezados
-                ])->get('http://127.0.0.1:5000/favoritos',[
+                ])->get('http://127.0.0.1:5000/recommendations',[
                     'user_id' => $userId, //Enviamos el id del usuario como parámetro en la URL
                     'user_type' => $userType
                 ]);
@@ -92,7 +92,7 @@ class PostulacionController extends Controller
                 
                 $response = Http::withHeaders([
                     'Authorization' => "Bearer $apiKey",  // Incluir la API Key en los encabezados
-                ])->get('http://127.0.0.1:5000/favoritos',[
+                ])->get('http://127.0.0.1:5000/recommendations',[
                     'user_id' => $userId, //Enviamos el id del usuario como parámetro en la URL
                     'user_type' => $userType
                 ]);

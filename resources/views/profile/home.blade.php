@@ -18,8 +18,8 @@
                             bg-gray-100 relative">
                             <a href="{{route('vista_previa_casa', $casa)}}">
                                 <img class="object-cover w-full h-full absolute top-0 left-0 
-                                border border-cianna-gray rounded-lg" 
-                                src="{{ asset('storage/'. $casa->archivos->first()->ruta_archivo)}}" 
+                                border border-cianna-gray rounded-lg lazyload"
+                                data-src="{{ asset('storage/'. $casa->archivos->first()->ruta_archivo)}}" 
                                 alt="Vista previa de la imagen del hogar" />
                             </a>
                         </div>
@@ -71,8 +71,8 @@
                             bg-gray-100 relative">
                             <a href="{{route('vista_previa_roomie', $roomie)}}">
                                 <img class="object-cover w-full h-full absolute top-0 left-0 
-                                border border-cianna-gray rounded-lg" 
-                                src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
+                                border border-cianna-gray rounded-lg lazyload"
+                                data-src="{{ asset('storage/'. $imagen->ruta_archivo) }}"
                                 alt="Vista previa de la imagen de perfil del roomie"/>
                             </a>
                         </div>
