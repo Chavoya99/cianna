@@ -338,59 +338,8 @@ class HomeController extends Controller
         }
     }
 
-    public function busquedaRoomies(Request $request){
-
-        if(Auth::user()->tipo == 'A'){
-            $users = UserB::with(['user.archivos' => function($query){
-                $query->where('archivo_type', 'img_perf');
-            }]);
-        }else if(Auth::user()->tipo == 'B'){
-            $users = UserA::with(['user.archivos' => function($query){
-                $query->where('archivo_type', 'img_perf');
-            }]);
-        }
-        
-
-        //Filtro edad
-        if($request->has('edad_min') || $request->has('edad_max')){
-            $edad_min = ($request->edad_min != null ) ? $request->edad_min : 0;
-            $edad_max = ($request->edad_max != null ) ? $request->edad_max : 100;
-            $users = $users->whereBetween('edad', [$edad_min, $edad_max]);
-        }
-
-        //Filtro sexo
-        if($request->sexo){
-            $users = $users->where('sexo', $request->sexo);
-        }
-
-        //Filtro carrera
-        if(count($request->carreras) > 1){
-            
-            $carreras = array_slice($request->carreras, 1);
-            $users = $users->whereIn('carrera', $carreras);
-        }
-
-        //Filtro mascota
-        if($request->mascota){
-            $users = $users->where('mascota', $request->mascota);
-        }
-
-        if($request->padecimiento){
-            $users = $users->where('padecimiento', $request->padecimiento);
-        }
-
-        //Filtro carrera
-        if(count($request->lifestyle) > 1){
-            $lifestyle = array_slice($request->lifestyle, 1);
-            $users = $users->whereIn('lifestyle', $lifestyle);
-        }
-
-        $users = $users->get();
-        
-        $carreras = $this->lista_carreras();
-
-        return view('profile.search-resultsA', compact('users', 'carreras'));
-
+    public function busquedaRoomies(){
+        return view('profile.search-resultsA');
     }
 
     public function busquedaHabitaciones(Request $request){
