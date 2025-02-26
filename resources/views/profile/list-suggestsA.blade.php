@@ -36,6 +36,16 @@
                         <div class="flex flex-col justify-center px-3 py-3 w-1/2">
                             <!-- NOMBRE -->
                             <a href="ver_detalles_roomie" class="text-lg font-semibold line-clamp-1">
+                                @if (Auth::user()->tipo == 'A')
+                                    @if (in_array($recomendacion->user_id, $id_postulaciones))
+                                        *
+                                    @endif
+                                @elseif(Auth::user()->tipo == 'B')
+                                    @if (in_array($recomendacion->user_id, $id_postulaciones_roomies))
+                                        *
+                                    @endif
+                                @endif
+                                
                                 {{$recomendacion->user->name." ".$recomendacion->user->apellido}}
                             </a>
                             <!-- CARRERA -->

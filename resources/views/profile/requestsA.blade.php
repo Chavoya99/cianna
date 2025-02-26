@@ -188,6 +188,9 @@
                                     </div>
                                 <!-- NOMBRE ROOMIE -->
                                 <a href="{{route('detalles_roomie', $recomendacion)}}" class="mt-2 text-lg font-semibold line-clamp-1">
+                                    @if (in_array($recomendacion->user_id, $id_postulaciones ))
+                                        *
+                                    @endif
                                     {{$recomendacion->user->name}}
                                 </a>
                                 <!-- DESCRIPCIÓN ROOMIE -->

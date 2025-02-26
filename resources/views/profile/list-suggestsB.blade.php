@@ -34,6 +34,9 @@
                         <div class="flex flex-col justify-center px-3 py-3 w-1/2">
                             <!-- COLONIA -->
                             <a href="{{route('detalles_casa', $casa)}}" class="text-lg font-semibold line-clamp-1">
+                                @if (in_array($casa->id, $id_postulaciones_casas))
+                                    *
+                                @endif
                                 {{$casa->colonia}}
                             </a>
                             <!-- DESCRIPCIÓN -->

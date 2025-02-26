@@ -174,6 +174,9 @@
                                     </div>
                                 </div>
                                 <!-- COLONIA -->
+                                @if (in_array($recomendacion->id, $id_postulaciones))
+                                    *
+                                @endif
                                 <a href="ver_detalles_habitacion" 
                                     class="mt-2 text-lg font-semibold line-clamp-1">
                                     {{$recomendacion->colonia}}

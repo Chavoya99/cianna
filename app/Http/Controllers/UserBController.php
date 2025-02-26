@@ -34,7 +34,7 @@ class UserBController extends Controller
         }
 
         $roomies = UserA::whereIn('user_id', $id_recomendados)->with(['user.archivos' => function ($query) {
-            $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
+            $query->where('archivo_type', 'img_perf');}])->limit(6)->get();
         
         return view('profile.home', compact('casas','roomies', 'id_postulaciones_casas', 'id_postulaciones_roomies'));
     }
