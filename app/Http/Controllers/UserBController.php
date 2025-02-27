@@ -24,7 +24,7 @@ class UserBController extends Controller
 
         $outcomes = $this->obtener_recomendaciones();
 
-        $casas = Casa::whereIn('id', $outcomes)->whereNotIn('id', $id_postulaciones_casas)->with(['archivos' => function ($query) {
+        $casas = Casa::whereIn('id', $outcomes)->with(['archivos' => function ($query) {
             $query->where('clasificacion_archivo', 'img_cuarto');}])->limit(4)->get();
 
         $id_recomendados = [];
@@ -33,10 +33,10 @@ class UserBController extends Controller
             $id_recomendados[] = $casa->user_a->user_id;
         }
 
-        $roomies = UserA::whereIn('user_id', $id_recomendados)->whereNotIn('user_id', $id_postulaciones_roomies)->with(['user.archivos' => function ($query) {
-            $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
+        $roomies = UserA::whereIn('user_id', $id_recomendados)->with(['user.archivos' => function ($query) {
+            $query->where('archivo_type', 'img_perf');}])->limit(6)->get();
         
-        return view('profile.home', compact('casas','roomies'));
+        return view('profile.home', compact('casas','roomies', 'id_postulaciones_casas', 'id_postulaciones_roomies'));
     }
 
 
@@ -82,10 +82,10 @@ class UserBController extends Controller
             $id_recomendados[] = $casa->user_a->user_id;
         }
 
-        $recomendaciones = UserA::whereIn('user_id', $id_recomendados)->whereNotIn('user_id', $id_postulaciones_roomies)->with(['user.archivos' => function ($query) {
+        $recomendaciones = UserA::whereIn('user_id', $id_recomendados)->with(['user.archivos' => function ($query) {
             $query->where('archivo_type', 'img_perf');}])->get();
     
-        return view('profile.list-suggestsA' ,compact('recomendaciones', 'carreras'));
+        return view('profile.list-suggestsA' ,compact('recomendaciones', 'carreras', 'id_postulaciones_roomies'));
     }
 
     public function recomendaciones_b_casas(){
@@ -101,10 +101,10 @@ class UserBController extends Controller
 
         $outcomes = $this->obtener_recomendaciones();
 
-        $casas = Casa::whereIn('id', $outcomes)->whereNotIn('id', $id_postulaciones_casas)->with(['archivos' => function ($query) {
+        $casas = Casa::whereIn('id', $outcomes)->with(['archivos' => function ($query) {
             $query->where('clasificacion_archivo', 'img_cuarto');}])->get();
 
-        return view('profile.list-suggestsB', compact('casas'));
+        return view('profile.list-suggestsB', compact('casas', 'id_postulaciones_casas'));
 
     }
 

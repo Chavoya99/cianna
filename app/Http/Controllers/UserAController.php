@@ -26,10 +26,10 @@ class UserAController extends Controller
         }
 
         $outcomes = $this->obtener_recomendaciones();
-        $roomies = UserB::whereIn('user_id', $outcomes)->whereNotIn('user_id', $id_postulaciones)->with(['user.archivos' => function ($query) {
+        $roomies = UserB::whereIn('user_id', $outcomes)->with(['user.archivos' => function ($query) {
             $query->where('archivo_type', 'img_perf');}])->limit(6)->get();
         
-        return view('profile.home', compact('casas','roomies'));
+        return view('profile.home', compact('casas','roomies', 'id_postulaciones'));
     }
 
     public function recomendaciones_A(){
@@ -65,10 +65,10 @@ class UserAController extends Controller
         
         $outcomes = $this->obtener_recomendaciones();
 
-        $recomendaciones = UserB::whereIn('user_id', $outcomes)->whereNotIn('user_id', $id_postulaciones)->with(['user.archivos' => function ($query) {
+        $recomendaciones = UserB::whereIn('user_id', $outcomes)->with(['user.archivos' => function ($query) {
             $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
     
-        return view('profile.list-suggestsA' ,compact('recomendaciones', 'carreras'));
+        return view('profile.list-suggestsA' ,compact('recomendaciones', 'carreras', 'id_postulaciones'));
     }
 
     public function obtener_recomendaciones(){

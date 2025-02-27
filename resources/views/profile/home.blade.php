@@ -27,6 +27,11 @@
                     <!-- COLONIA -->
                     <a href="{{route('vista_previa_casa', $casa)}}" 
                         class="mt-2 text-lg font-semibold line-clamp-1">
+                        @if(Auth::user()->tipo == 'B')
+                            @if(in_array($casa->id, $id_postulaciones_casas))
+                                *
+                            @endif
+                        @endif
                         {{ $casa->colonia }}
                     </a>
                     <!-- DESCRIPCIÓN -->
@@ -85,6 +90,15 @@
                     <!-- NOMBRE ROOMIE -->
                     <a href="{{route('vista_previa_roomie', $roomie)}}"
                         class="mt-2 text-lg font-semibold line-clamp-1">
+                        @if(Auth::user()->tipo == 'A' )
+                            @if (in_array($roomie->user_id, $id_postulaciones))
+                                *
+                            @endif
+                        @elseif(Auth::user()->tipo == 'B')
+                            @if(in_array($roomie->user_id, $id_postulaciones_roomies))
+                                *
+                            @endif
+                        @endif
                         {{ $roomie->user->name }}
                     </a>
                     <!-- DESCRIPCIÓN ROOMIE -->
