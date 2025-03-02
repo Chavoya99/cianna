@@ -253,9 +253,7 @@
             <!-- @ elseif(Auth::user()->tipo != 'A') -->
             <div id="formulario-b" class="formulario form hidden">
                 <h3 class="font-bold">Habitaciones</h3>
-                <form id="form-b" action="{{ route('busquedaHabitaciones') }}"
-                    method="POST">
-                    @csrf
+                <form id="form-b" action="{{ route('busquedaHabitaciones') }}"method="GET">
                     <!-- DIV 1 -->
                     <div class="items-center">
                         <!-- DOMICILIO -->
@@ -267,7 +265,8 @@
                                     Calle
                                 </label>
                                 <input id="calle" name="calle" type="text"
-                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange">
+                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange"
+                                    value="{{ request('calle') }}">
                             </div>
                             <div class="w-[32%]">
                                 <label for="num_ext"
@@ -275,7 +274,8 @@
                                     N° ext.
                                 </label>
                                 <input id="num_ext" name="num_ext" type="number"
-                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange">
+                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange"
+                                    value="{{ request('num_ext') }}">
                             </div>
                             <div class="w-[32%]">
                                 <label for="num_int"
@@ -283,7 +283,8 @@
                                     N° int.
                                 </label>
                                 <input id="num_int" name="num_int" type="number"
-                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange">
+                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange"
+                                    value="{{ request('num_int') }}">
                             </div>
                         </div>
                         <div class="mt-2 flex items-center space-x-2">
@@ -292,17 +293,14 @@
                                     class="block text-xs font-medium text-gray-700">
                                     Ciudad
                                 </label>
-                                <select id="ciudad" name="ciudad"
-                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange">
-                                    <option value="">Cualquiera</option>
-                                    <option value="gdl">Guadalajara</option>
-                                    <option value="salto">El Salto</option>
-                                    <option value="tlaj_z">Tlajomulco de Zúñiga
-                                    </option>
-                                    <option value="tlaq">San Pedro
-                                        Tlaquepaque</option>
-                                    <option value="ton">Tonalá</option>
-                                    <option value="zap">Zapopan</option>
+                                <select id="ciudad" name="ciudad" class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange">
+                                    <option value="" {{ request('ciudad') == '' ? 'selected' : '' }}>Cualquiera</option>
+                                    <option value="gdl" {{ request('ciudad') == 'gdl' ? 'selected' : '' }}>Guadalajara</option>
+                                    <option value="salto" {{ request('ciudad') == 'salto' ? 'selected' : '' }}>El Salto</option>
+                                    <option value="tlaj_z" {{ request('ciudad') == 'tlaj_z' ? 'selected' : '' }}>Tlajomulco de Zúñiga</option>
+                                    <option value="tlaq" {{ request('ciudad') == 'tlaq' ? 'selected' : '' }}>San Pedro Tlaquepaque</option>
+                                    <option value="ton" {{ request('ciudad') == 'ton' ? 'selected' : '' }}>Tonalá</option>
+                                    <option value="zap" {{ request('ciudad') == 'zap' ? 'selected' : '' }}>Zapopan</option>
                                 </select>
                             </div>
                             <div class="w-[45%]">
@@ -311,7 +309,8 @@
                                     Colonia
                                 </label>
                                 <input id="colonia" name="colonia" type="text"
-                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange">
+                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange"
+                                    value="{{ request('colonia') }}">
                             </div>
                             <div class="w-[25%]">
                                 <label for="cod_post"
@@ -320,7 +319,7 @@
                                 </label>
                                 <input id="cod_post" name="cod_post"
                                     class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange"
-                                    maxlength="5">
+                                    maxlength="5" value="{{ request('cod_post') }}">
                             </div>
                         </div>
                     </div>
@@ -334,19 +333,18 @@
                             </label>
                             <div>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="mascotas" value="si"
+                                    <input type="radio" name="mascotas" value="si" {{ request('mascotas') == 'si' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Sí
                                 </label>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="mascotas" value="no"
+                                    <input type="radio" name="mascotas" value="no" {{ request('mascotas') == 'no' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     No
                                 </label>
                                 <label class="text-xs hover:cursor-pointer">
-                                    <input type="radio" name="mascotas" value=""
-                                        class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange"
-                                        checked>
+                                    <input type="radio" name="mascotas" value="" {{ request('mascotas') == '' ? 'checked' : '' }}
+                                        class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Cualquiera
                                 </label>
                             </div>
@@ -357,19 +355,18 @@
                             </label>
                             <div>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="visitas" value="si"
+                                    <input type="radio" name="visitas" value="si" {{ request('visitas') == 'si' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Sí
                                 </label>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="visitas" value="no"
+                                    <input type="radio" name="visitas" value="no" {{ request('visitas') == 'no' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     No
                                 </label>
                                 <label class="text-xs hover:cursor-pointer">
-                                    <input type="radio" name="visitas" value=""
-                                        class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange"
-                                        checked>
+                                    <input type="radio" name="visitas" value="" {{ request('visitas') == '' ? 'checked' : '' }}
+                                        class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Cualquiera
                                 </label>
                             </div>
@@ -380,19 +377,18 @@
                             </label>
                             <div>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="limpieza" value="si"
+                                    <input type="radio" name="limpieza" value="si" {{ request('limpieza') == 'si' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Sí
                                 </label>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="limpieza" value="no"
+                                    <input type="radio" name="limpieza" value="no" {{ request('limpieza') == 'no' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     No
                                 </label>
                                 <label class="text-xs hover:cursor-pointer">
-                                    <input type="radio" name="limpieza" value=""
-                                        class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange"
-                                        checked>
+                                    <input type="radio" name="limpieza" value="" {{ request('limpieza') == '' ? 'checked' : '' }}
+                                        class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Cualquiera
                                 </label>
                             </div>
@@ -406,19 +402,18 @@
                         </label>
                         <div>
                             <label class="mr-2 text-xs hover:cursor-pointer">
-                                <input type="radio" name="muebles" value="si"
+                                <input type="radio" name="muebles" value="si" {{ request('muebles') == 'si' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 Sí
                             </label>
                             <label class="mr-2 text-xs hover:cursor-pointer">
-                                <input type="radio" name="muebles" value="no"
+                                <input type="radio" name="muebles" value="no" {{ request('muebles') == 'no' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 No
                             </label>
                             <label class="text-xs hover:cursor-pointer">
-                                <input type="radio" name="muebles" value=""
-                                    class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange"
-                                    checked>
+                                <input type="radio" name="muebles" value="" {{ request('muebles') == '' ? 'checked' : '' }}
+                                    class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 Cualquiera
                             </label>
                         </div>
@@ -431,19 +426,18 @@
                         </label>
                         <div>
                             <label class="mr-2 text-xs hover:cursor-pointer">
-                                <input type="radio" name="servicios" value="si"
+                                <input type="radio" name="servicios" value="si" {{ request('servicios') == 'si' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 Sí
                             </label>
                             <label class="mr-2 text-xs hover:cursor-pointer">
-                                <input type="radio" name="servicios" value="no"
+                                <input type="radio" name="servicios" value="no" {{ request('servicios') == 'no' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 No
                             </label>
                             <label class="text-xs hover:cursor-pointer">
-                                <input type="radio" name="servicios" value=""
-                                    class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange"
-                                    checked>
+                                <input type="radio" name="servicios" value="" {{ request('servicios') == '' ? 'checked' : '' }}
+                                    class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 Cualquiera
                             </label>
                         </div>
@@ -472,9 +466,9 @@
                             </div>
                             <!-- Campos ocultos -->
                             <input type="hidden" name="minPrice" id="hiddenMinPrice"
-                                value="0">
+                                value="{{ request('minPrice', 0) }}">
                             <input type="hidden" name="maxPrice" id="hiddenMaxPrice"
-                                value="10000">
+                                value="{{ request('minPrice', 10000) }}">
                         </div>
                     </div>
                     <!-- BOTÓN PARA ENVIAR -->

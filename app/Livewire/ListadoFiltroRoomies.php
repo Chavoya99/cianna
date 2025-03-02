@@ -110,7 +110,7 @@ class ListadoFiltroRoomies extends Component
         }
 
         // Imprimir la consulta SQL generada
-        dd($users->toSql(), $users->getBindings());
+        //dd($users->toSql(), $users->getBindings());
         $users = $users->paginate(10);
 
         return view('livewire.listado-filtro-roomies', [
