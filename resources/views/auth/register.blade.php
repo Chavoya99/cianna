@@ -12,7 +12,7 @@
         </x-slot>
 
         <x-validation-errors class="mb-4" />
-        <div class="rounded-lg border bg-white px-4 py-2">
+        <div class="rounded-lg border bg-white px-4 py-2 shadow-lg">
             <div>
                 <h1 class="mb-4 border-b-2 pb-4 text-center text-3xl font-bold text-cianna-orange">
                     Crea una cuenta
@@ -111,7 +111,7 @@
                         {{ __('Ya tengo una cuenta') }}
                     </a>
 
-                    <x-button class="ms-4">
+                    <x-button class="ms-4" id="register-button">
                         {{ __('Registrarme') }}
                     </x-button>
                 </div>
@@ -163,17 +163,26 @@
             let email = this.value.trim();
             let allowedDomains = ["alumnos.udg.mx", "alumno.udg.mx"];
             let errorMessage = document.getElementById("error");
+            let registerButton = document.getElementById("register-button");
 
             if (email.includes("@")) {
                 let domain = email.split("@")[1];
                 if (!allowedDomains.includes(domain)) {
                     errorMessage.classList.remove("hidden");
+                    registerButton.disabled = true;
+                    registerButton.classList.add("opacity-50",
+                    "cursor-not-allowed");
                 } else {
                     errorMessage.classList.add("hidden");
+                    registerButton.disabled = false;
+                    registerButton.classList.remove("opacity-50",
+                        "cursor-not-allowed");
                 }
             } else {
                 errorMessage.classList.add(
                 "hidden"); // Oculta el mensaje si el input está vacío
+                registerButton.disabled = false;
+                registerButton.classList.remove("opacity-50", "cursor-not-allowed");
             }
         });
     });
