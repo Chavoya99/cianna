@@ -162,7 +162,7 @@
                         </div>
                     @endif
                     <!-- Verificar si hay favoritos -->
-                    @if(isset($outcomes) && count($outcomes) > 0)
+                    {{--@if(isset($outcomes) && count($outcomes) > 0)
                         <h2 class="font-bold">Resultados</h2>
                         <ul>
                             @foreach($outcomes as $outcome)
@@ -171,34 +171,46 @@
                         </ul>
                     @else
                         <p>No hay favoritos disponibles. No podemos generar recomendaciones para ti en este momento.</p>
-                    @endif
+                    @endif--}}
                 </div>
                 <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
-                    @foreach($recomendaciones as $recomendacion)
-                        <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform 
-                            transform hover:scale-110">
-                                <div class="inline-block h-36 w-full overflow-hidden
-                                    bg-cianna-gray border border-cianna-gray rounded-md relative">
-                                    <a href="detalles_roomie">
-                                        <img class="object-cover w-full h-full lazyload" 
-                                            data-src="{{ asset('storage/'.$recomendacion->user->archivos->first()->ruta_archivo) }}" 
-                                            alt="Imagen previa del roomie" />
-                                    </a>
-                                </div>
-                            <!-- NOMBRE ROOMIE -->
-                            <a href="detalles_roomie" class="mt-2 text-lg font-semibold line-clamp-1">
-                                {{$recomendacion->user->name}}
-                            </a>
-                            <!-- DESCRIPCIÓN ROOMIE -->
-                            <a href="detalles_roomie" class="text-sm text-justify line-clamp-1">
-                            {{$recomendacion->descripcion}}
-                            </a>
-                        </div>
-                    @endforeach
+                    @if(count($recomendaciones)>0)
+                        @foreach($recomendaciones as $recomendacion)
+                            <div class="w-1/5 flex flex-col py-3 pl-3 pr-3 transition-transform 
+                                transform hover:scale-110">
+                                    <div class="inline-block h-36 w-full overflow-hidden
+                                        bg-cianna-gray border border-cianna-gray rounded-md relative">
+                                        <a href="{{route('detalles_roomie', $recomendacion)}}">
+                                            <img class="object-cover w-full h-full lazyload" 
+                                                data-src="{{ asset('storage/'.$recomendacion->user->archivos->first()->ruta_archivo) }}" 
+                                                alt="Imagen previa del roomie" />
+                                        </a>
+                                    </div>
+                                <!-- NOMBRE ROOMIE -->
+                                <a href="{{route('detalles_roomie', $recomendacion)}}" class="mt-2 text-lg font-semibold line-clamp-1">
+                                    @if (in_array($recomendacion->user_id, $id_postulaciones ))
+                                        *
+                                    @endif
+                                    {{$recomendacion->user->name}}
+                                </a>
+                                <!-- DESCRIPCIÓN ROOMIE -->
+                                <a href="{{route('detalles_roomie', $recomendacion)}}" class="text-sm text-justify line-clamp-1">
+                                {{$recomendacion->descripcion}}
+                                </a>
+                            </div>
+                        @endforeach
+                    @else
+                        <p>No hay favoritos disponibles. No podemos generar recomendaciones para ti en este momento.</p>
+                    @endif
                 </div>
                 <div class="text-right mr-20 mt-2">
-                    <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="listado_recomendacionesA">Ver más...</a>
+                    <a class="text-cianna-green font-semibold hover:text-cianna-orange"
+                    @if(Auth::user()->tipo == 'A')
+                        href="{{route('recomendaciones_a')}}">Ver más...</a>
+                    @elseif(Auth::user()->tipo == 'B')
+                        href="{{route('recomendaciones_b')}}">Ver más...</a>
+                    @endif
+                    
                 </div>
             </div>
         @endif

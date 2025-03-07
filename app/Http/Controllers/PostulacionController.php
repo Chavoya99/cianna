@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Casa;
 use DateTime;
 use App\Models\UserB;
 use App\Models\Postulacion;
@@ -70,12 +71,14 @@ class PostulacionController extends Controller
                 $outcomes = [];
                 $error_message = "Error inesperado: " . $e->getMessage();
             }
-            
+
             //return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'favoritos'));
-            $recomendaciones = UserB::whereNotIn('user_id', $id_postulaciones)->with(['user.archivos' => function ($query) {
+            $recomendaciones = UserB::whereIn('user_id', $outcomes)->with(['user.archivos' => function ($query) {
                 $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
             
-            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'recomendaciones', 'outcomes', 'error_message'));
+            
+            
+            return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'recomendaciones', 'outcomes', 'error_message', 'id_postulaciones'));
         }else if(Auth::user()->tipo == 'B'){
             $postulaciones_pendientes = Auth::user()->user_b->postulaciones()->with(['archivos' => function ($query){
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->where('estado', 'pendiente')->orderBy('fecha', 'desc')->get();
@@ -115,9 +118,18 @@ class PostulacionController extends Controller
                 $error_message = "Error inesperado: " . $e->getMessage();
             }
 
-            //$recomendaciones = 
+            $postulaciones = Auth::user()->user_b->postulaciones;
 
-            return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones', 'outcomes', 'error_message'));
+            $id_postulaciones = [];
+            foreach($postulaciones as $postulacion){
+                $id_postulaciones[] = $postulacion->id;
+            }
+
+            $recomendaciones = Casa::whereIn('id', $outcomes)->with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');}])->limit(5)->get();
+
+
+            return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones', 'recomendaciones','outcomes', 'error_message', 'id_postulaciones'));
         }
     }
 

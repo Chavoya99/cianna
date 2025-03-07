@@ -27,6 +27,11 @@
                     <!-- COLONIA -->
                     <a href="{{route('vista_previa_casa', $casa)}}" 
                         class="mt-2 text-lg font-semibold line-clamp-1">
+                        @if(Auth::user()->tipo == 'B')
+                            @if(in_array($casa->id, $id_postulaciones_casas))
+                                *
+                            @endif
+                        @endif
                         {{ $casa->colonia }}
                     </a>
                     <!-- DESCRIPCIÓN -->
@@ -45,7 +50,7 @@
         <div class="text-right mr-20 mt-2">
             @if (Auth::user()->tipo == 'B')
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="habitaciones_potenciales">
+                    href="{{route('recomendaciones_b_casas')}}">
                     Habitaciones recomendadas...
                 </a>
             @endif
@@ -58,7 +63,12 @@
     <!-- ROOMIES -->
     <div class="w-full">
         <div class="font-bold text-3xl mt-8 ml-16 mr-16">¿Buscas un compañero?</div>
-        <div class="mt-2 ml-16">Compañeros buscando habitación</div>
+        @if(Auth::user()->tipo == 'A')
+            <div class="mt-2 ml-16">Compañeros buscando habitación</div>
+        @elseif(Auth::user()->tipo == 'B')
+            <div class="mt-2 ml-16">Compañeros que ofrecen una habitación</div>
+        @endif
+        
         <div class="flex justify-between mt-2 ml-16 mr-16 overflow-hidden">
             @foreach ($roomies as $roomie)
                 @php
@@ -80,6 +90,15 @@
                     <!-- NOMBRE ROOMIE -->
                     <a href="{{route('vista_previa_roomie', $roomie)}}"
                         class="mt-2 text-lg font-semibold line-clamp-1">
+                        @if(Auth::user()->tipo == 'A' )
+                            @if (in_array($roomie->user_id, $id_postulaciones))
+                                *
+                            @endif
+                        @elseif(Auth::user()->tipo == 'B')
+                            @if(in_array($roomie->user_id, $id_postulaciones_roomies))
+                                *
+                            @endif
+                        @endif
                         {{ $roomie->user->name }}
                     </a>
                     <!-- DESCRIPCIÓN ROOMIE -->
@@ -93,7 +112,12 @@
             @if (Auth::user()->tipo == 'A')
             <!-- NOTA PARA EL BACK: También ocultar si el usuario no tiene favoritos agregados -->
                 <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
-                    href="roomies_potenciales">
+                    href="{{route('recomendaciones_a')}}">
+                    Compañeros recomendados...
+                </a>
+            @elseif(Auth::user()->tipo == 'B')
+                <a class="text-cianna-green font-semibold hover:text-cianna-orange" 
+                    href="{{route('recomendaciones_b_roomies')}}">
                     Compañeros recomendados...
                 </a>
             @endif
