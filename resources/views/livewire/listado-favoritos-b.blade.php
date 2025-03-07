@@ -28,15 +28,17 @@
                 <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
                 <div class="flex flex-col py-3 px-3 rounded-lg">
                     <!-- CONTENEDOR DE IMAGEN Y ENLACES -->
-                    <div class="h-44 w-full overflow-hidden rounded-md flex relative 
+                    <div class="overflow-hidden rounded-md flex relative 
                         transition-transform transform hover:scale-105">
                         <!-- IMAGEN -->
-                        <a href="{{route('detalles_casa', $favorito)}}" class="w-1/2">
-                            <img class="object-cover w-full h-full border border-cianna-gray 
-                                bg-white rounded-lg lazyload" 
-                                data-src="{{ asset('storage/'.$favorito->archivos->first()->ruta_archivo) }}" 
-                                alt="Imagen previa de la habitación" />
-                        </a>
+                        <div class="h-44 w-80">
+                            <a href="{{route('detalles_casa', $favorito)}}" class="w-1/2">
+                                <img class="object-fill w-full h-full border border-cianna-gray 
+                                    bg-white rounded-lg lazyload" 
+                                    data-src="{{ asset('storage/'.$favorito->archivos->first()->ruta_archivo) }}" 
+                                    alt="Imagen previa de la habitación" />
+                            </a>
+                        </div>
                         <!-- ENLACES -->
                         <div class="flex flex-col justify-center px-3 py-3 w-1/2">
                             <p class="absolute right-0 top-0 text-cianna-orange">
@@ -48,7 +50,7 @@
                                 {{$favorito->colonia}}
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="{{route('detalles_casa', $favorito)}}" class="text-sm text-justify line-clamp-3">
+                            <a href="{{route('detalles_casa', $favorito)}}" class="text-sm line-clamp-4">
                                 {{$favorito->descripcion}}
                             </a>
                             <!-- PRECIO -->

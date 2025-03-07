@@ -15,9 +15,9 @@
             <!-- IMAGEN DEL ROOMIE -->
             <div class="w-1/2">
                 <div class="flex flex-col block w-full ml-20 mt-5">
-                    <div class="inline-block relative h-[330px] w-[60%] overflow-hidden 
+                    <div class="inline-block relative h-[330px] w-[65%] overflow-hidden 
                         rounded-md bg-gray-100">
-                        <img class="w-full h-full object-fill border-2 border-cianna-gray 
+                        <img class="w-full h-full object-cover border border-cianna-gray 
                         rounded-lg" src="{{asset('storage/'.$rutaImagenPerfil)}}" 
                         alt="Imagen previa del roomie" />
                     </div>
@@ -75,10 +75,10 @@
                 <div class="w-1/4 flex flex-col py-3 pl-3 pr-3 transition-transform transform 
                     hover:scale-110">
                     <div class="flex flex-col block">
-                        <div class="inline-block h-60 w-full overflow-hidden rounded-md bg-gray-100 
+                        <div class="inline-block h-52 w-full overflow-hidden rounded-md bg-gray-100 
                             relative">
                             <a href="{{route('vista_previa_roomie', $roomie)}}">
-                                <img class="object-fill w-full h-full absolute top-0 
+                                <img class="object-cover w-full h-full absolute top-0 
                                 left-0 border border-cianna-gray rounded-lg" 
                                 src="{{asset('storage/'.$roomie->user->archivos->first()->ruta_archivo)}}"
                                 alt="Imagen previa del roomie" />
