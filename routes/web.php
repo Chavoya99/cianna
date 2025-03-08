@@ -94,7 +94,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('mis_favoritos', 'ver_favoritos')->name( 'ver_favoritos');
 
             Route::get('busqueda', 'busquedaRoomies')->name('busquedaRoomies');
-            Route::post('busquedaHabitaciones', 'busquedaHabitaciones')->name('busquedaHabitaciones');
+            Route::get('busquedaHabitaciones', 'busquedaHabitaciones')->name('busquedaHabitaciones');
 
             
         });

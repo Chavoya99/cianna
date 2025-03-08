@@ -16,9 +16,9 @@
             <!-- IMAGEN DEL HOGAR -->
             <div class="w-1/2">
                 <div class="flex flex-col block w-full">
-                    <div class="inline-block relative h-72 w-[85%] overflow-hidden 
+                    <div class="inline-block relative h-72 w-[80%] overflow-hidden 
                         rounded-md bg-gray-100">
-                        <img class="w-full h-full object-cover border-2 border-cianna-gray 
+                        <img class="w-full h-full object-fill border border-cianna-gray 
                         rounded-lg" src="{{ asset('storage/'.$img_casa->ruta_archivo) }}" 
                         alt="Imagen previa del hogar" />
                     </div>
@@ -61,7 +61,7 @@
                     <div class="flex flex-col block">
                         <div class="inline-block h-44 w-full overflow-hidden rounded-md bg-gray-100 relative">
                             <a href="{{route('vista_previa_casa', $casa)}}">
-                                <img class="object-cover w-full h-full absolute top-0 
+                                <img class="object-fill w-full h-full absolute top-0 
                                 left-0 border border-cianna-gray rounded-lg" 
                                         src="{{ asset('storage/'. $casa->archivos->first()->ruta_archivo)}}"
                                         alt="Imagen previa del hogar" />

@@ -1,61 +1,69 @@
 <!-- resources/views/profile/list-suggestsB.blade.php -->
 @props(['defaultRoomImage' => asset('img/img_prueba_casas/img_cuarto.jpg')])
-@section('title') {{ 'Postulaciones | Recomendaciones' }} @endsection
+@section('title')
+    {{ 'Recomendaciones' }}
+@endsection
 <x-home-layout>
     <x-slot name="logo">
-        <x-authentication-card-logo/>
+        <x-authentication-card-logo />
     </x-slot>
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="w-full">
         <!-- TITULO -->
-        <div class="font-bold text-3xl mt-8 ml-16 mr-16 text-cianna-orange">
-            <h1 class="text-cianna-orange text-3xl">Recomendado para ti</h1>
+        <div class="ml-16 mr-16 mt-8 text-3xl font-bold text-cianna-orange">
+            <h1 class="text-3xl text-cianna-orange">Recomendado para ti</h1>
         </div>
-        <div class="mt-2 ml-16">
-            <p>Te has postulado y con base en en tus intereses creemos que podrían ser más compatibles contigo</p>
+        <div class="ml-16 mt-2">
+            <p>Te has postulado y con base en en tus intereses creemos que podrían ser más
+                compatibles contigo</p>
         </div>
         <!-- MUESTRA DE HOGARES -->
-        <div class="mt-8 px-16 grid grid-cols-2 gap-6">
+        <div class="mt-8 grid grid-cols-2 gap-6 px-16">
             <!-- Bucle para crear 10 elementos (2 columnas x 5 filas) -->
 
             @foreach ($casas as $casa)
-                <div class="flex flex-col py-3 px-3 rounded-lg">
+                <div class="flex flex-col rounded-lg px-3 py-3">
                     <!-- CONTENEDOR DE IMAGEN Y ENLACES -->
-                    <div class="h-44 w-full overflow-hidden rounded-md flex relative 
-                        transition-transform transform hover:scale-105">
+                    <div
+                        class="relative flex transform overflow-hidden rounded-md transition-transform hover:scale-105">
                         <!-- IMAGEN -->
-                        <a href="{{route('detalles_casa', $casa)}}" class="w-1/2">
-                            <img class="object-cover w-full h-full border border-cianna-gray 
-                                 rounded-lg" 
-                                 src="{{ asset('storage/'. $casa->archivos->first()->ruta_archivo) }}" 
-                                 alt="Imagen previa del hogar" />
-                        </a>
+                        <div class="h-44 w-80">
+                            <a href="{{ route('detalles_casa', $casa) }}" class="w-1/2">
+                                <img class="h-full w-full rounded-lg border border-cianna-gray object-fill"
+                                    src="{{ asset('storage/' . $casa->archivos->first()->ruta_archivo) }}"
+                                    alt="Imagen previa del hogar" />
+                            </a>
+                        </div>
                         <!-- ENLACES -->
-                        <div class="flex flex-col justify-center px-3 py-3 w-1/2">
+                        <div class="flex w-1/2 flex-col justify-center px-3 py-3">
                             <!-- COLONIA -->
-                            <a href="{{route('detalles_casa', $casa)}}" class="text-lg font-semibold line-clamp-1">
+                            <a href="{{ route('detalles_casa', $casa) }}"
+                                class="line-clamp-1 text-lg font-semibold">
                                 @if (in_array($casa->id, $id_postulaciones_casas))
-                                    *
+                                    <i
+                                        class="fa-solid fa-envelope-circle-check mr-1 animate-bounce text-xs text-cianna-orange"></i>
                                 @endif
-                                {{$casa->colonia}}
+                                {{ $casa->colonia }}
                             </a>
                             <!-- DESCRIPCIÓN -->
-                            <a href="{{route('detalles_casa', $casa)}}" class="text-sm text-justify line-clamp-3">
-                                {{$casa->descripcion}}
+                            <a href="{{ route('detalles_casa', $casa) }}"
+                                class="line-clamp-3 text-justify text-sm">
+                                {{ $casa->descripcion }}
                             </a>
                             <!-- PRECIO -->
-                            <a href="{{route('detalles_casa', $casa)}}" class="text-md font-semibold line-clamp-1">
-                                $ {{number_format($casa->precio, 2, '.', ',')}}
+                            <a href="{{ route('detalles_casa', $casa) }}"
+                                class="text-md line-clamp-1 font-semibold">
+                                $ {{ number_format($casa->precio, 2, '.', ',') }}
                             </a>
                         </div>
                     </div>
                 </div>
             @endforeach
-        </div>        
+        </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
-        <div class="relative px-20 mt-4">
-            <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
-                rounded focus:outline-none focus:shadow-outline" 
+        <div class="relative mt-4 px-20">
+            <button
+                class="focus:shadow-outline rounded bg-cianna-blue px-4 py-2 font-bold text-white hover:bg-sky-900 focus:outline-none"
                 onclick="window.history.back()">
                 <i class="fa-solid fa-left-long mr-2"></i>Regresar
             </button>

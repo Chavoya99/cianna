@@ -27,7 +27,7 @@ class UserAController extends Controller
 
         $outcomes = $this->obtener_recomendaciones();
         $roomies = UserB::whereIn('user_id', $outcomes)->with(['user.archivos' => function ($query) {
-            $query->where('archivo_type', 'img_perf');}])->limit(6)->get();
+            $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
         
         return view('profile.home', compact('casas','roomies', 'id_postulaciones'));
     }
@@ -66,7 +66,7 @@ class UserAController extends Controller
         $outcomes = $this->obtener_recomendaciones();
 
         $recomendaciones = UserB::whereIn('user_id', $outcomes)->with(['user.archivos' => function ($query) {
-            $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
+            $query->where('archivo_type', 'img_perf');}])->get();
     
         return view('profile.list-suggestsA' ,compact('recomendaciones', 'carreras', 'id_postulaciones'));
     }
