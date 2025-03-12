@@ -162,7 +162,7 @@
                                     <input type="radio" id="mascota_cualquiera" name="mascota"
                                         value=""
                                         class="text-cianna-orange focus:ring-cianna-orange"
-                                        {{ request('mascota') === '' ? 'checked' : '' }}>
+                                        {{ request('mascota') == '' ? 'checked' : '' }}>
                                     Cualquiera
                                 </label>
                             </div>
@@ -197,7 +197,7 @@
                                     <input type="radio" id="padecimiento_cualquiera"
                                         name="padecimiento" value=""
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange"
-                                        {{ request('padecimiento') === '' ? 'checked' : '' }}>
+                                        {{ request('padecimiento') == '' ? 'checked' : '' }}>
                                     Cualquiera
                                 </label>
                             </div>
@@ -293,14 +293,29 @@
                                     class="block text-xs font-medium text-gray-700">
                                     Ciudad
                                 </label>
-                                <select id="ciudad" name="ciudad" class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange">
-                                    <option value="" {{ request('ciudad') == '' ? 'selected' : '' }}>Cualquiera</option>
-                                    <option value="gdl" {{ request('ciudad') == 'gdl' ? 'selected' : '' }}>Guadalajara</option>
-                                    <option value="salto" {{ request('ciudad') == 'salto' ? 'selected' : '' }}>El Salto</option>
-                                    <option value="tlaj_z" {{ request('ciudad') == 'tlaj_z' ? 'selected' : '' }}>Tlajomulco de Zúñiga</option>
-                                    <option value="tlaq" {{ request('ciudad') == 'tlaq' ? 'selected' : '' }}>San Pedro Tlaquepaque</option>
-                                    <option value="ton" {{ request('ciudad') == 'ton' ? 'selected' : '' }}>Tonalá</option>
-                                    <option value="zap" {{ request('ciudad') == 'zap' ? 'selected' : '' }}>Zapopan</option>
+                                <select id="ciudad" name="ciudad"
+                                    class="mt-1 w-full rounded-md border border-gray-300 text-xs shadow-sm focus:border-cianna-orange focus:ring-cianna-orange">
+                                    <option value=""
+                                        {{ request('ciudad') == '' ? 'selected' : '' }}>Cualquiera
+                                    </option>
+                                    <option value="gdl"
+                                        {{ request('ciudad') == 'gdl' ? 'selected' : '' }}>
+                                        Guadalajara</option>
+                                    <option value="salto"
+                                        {{ request('ciudad') == 'salto' ? 'selected' : '' }}>El
+                                        Salto</option>
+                                    <option value="tlaj_z"
+                                        {{ request('ciudad') == 'tlaj_z' ? 'selected' : '' }}>
+                                        Tlajomulco de Zúñiga</option>
+                                    <option value="tlaq"
+                                        {{ request('ciudad') == 'tlaq' ? 'selected' : '' }}>San
+                                        Pedro Tlaquepaque</option>
+                                    <option value="ton"
+                                        {{ request('ciudad') == 'ton' ? 'selected' : '' }}>Tonalá
+                                    </option>
+                                    <option value="zap"
+                                        {{ request('ciudad') == 'zap' ? 'selected' : '' }}>Zapopan
+                                    </option>
                                 </select>
                             </div>
                             <div class="w-[45%]">
@@ -333,17 +348,20 @@
                             </label>
                             <div>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="mascotas" value="si" {{ request('mascotas') == 'si' ? 'checked' : '' }}
+                                    <input type="radio" name="mascotas" value="si"
+                                        {{ request('mascotas') == 'si' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Sí
                                 </label>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="mascotas" value="no" {{ request('mascotas') == 'no' ? 'checked' : '' }}
+                                    <input type="radio" name="mascotas" value="no"
+                                        {{ request('mascotas') == 'no' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     No
                                 </label>
                                 <label class="text-xs hover:cursor-pointer">
-                                    <input type="radio" name="mascotas" value="" {{ request('mascotas') == '' ? 'checked' : '' }}
+                                    <input type="radio" name="mascotas" value=""
+                                        {{ request('mascotas') == '' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Cualquiera
                                 </label>
@@ -355,17 +373,20 @@
                             </label>
                             <div>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="visitas" value="si" {{ request('visitas') == 'si' ? 'checked' : '' }}
+                                    <input type="radio" name="visitas" value="si"
+                                        {{ request('visitas') == 'si' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Sí
                                 </label>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="visitas" value="no" {{ request('visitas') == 'no' ? 'checked' : '' }}
+                                    <input type="radio" name="visitas" value="no"
+                                        {{ request('visitas') == 'no' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     No
                                 </label>
                                 <label class="text-xs hover:cursor-pointer">
-                                    <input type="radio" name="visitas" value="" {{ request('visitas') == '' ? 'checked' : '' }}
+                                    <input type="radio" name="visitas" value=""
+                                        {{ request('visitas') == '' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Cualquiera
                                 </label>
@@ -377,17 +398,20 @@
                             </label>
                             <div>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="limpieza" value="si" {{ request('limpieza') == 'si' ? 'checked' : '' }}
+                                    <input type="radio" name="limpieza" value="si"
+                                        {{ request('limpieza') == 'si' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Sí
                                 </label>
                                 <label class="mr-2 text-xs hover:cursor-pointer">
-                                    <input type="radio" name="limpieza" value="no" {{ request('limpieza') == 'no' ? 'checked' : '' }}
+                                    <input type="radio" name="limpieza" value="no"
+                                        {{ request('limpieza') == 'no' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     No
                                 </label>
                                 <label class="text-xs hover:cursor-pointer">
-                                    <input type="radio" name="limpieza" value="" {{ request('limpieza') == '' ? 'checked' : '' }}
+                                    <input type="radio" name="limpieza" value=""
+                                        {{ request('limpieza') == '' ? 'checked' : '' }}
                                         class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                     Cualquiera
                                 </label>
@@ -402,17 +426,20 @@
                         </label>
                         <div>
                             <label class="mr-2 text-xs hover:cursor-pointer">
-                                <input type="radio" name="muebles" value="si" {{ request('muebles') == 'si' ? 'checked' : '' }}
+                                <input type="radio" name="muebles" value="si"
+                                    {{ request('muebles') == 'si' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 Sí
                             </label>
                             <label class="mr-2 text-xs hover:cursor-pointer">
-                                <input type="radio" name="muebles" value="no" {{ request('muebles') == 'no' ? 'checked' : '' }}
+                                <input type="radio" name="muebles" value="no"
+                                    {{ request('muebles') == 'no' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 No
                             </label>
                             <label class="text-xs hover:cursor-pointer">
-                                <input type="radio" name="muebles" value="" {{ request('muebles') == '' ? 'checked' : '' }}
+                                <input type="radio" name="muebles" value=""
+                                    {{ request('muebles') == '' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 Cualquiera
                             </label>
@@ -426,17 +453,20 @@
                         </label>
                         <div>
                             <label class="mr-2 text-xs hover:cursor-pointer">
-                                <input type="radio" name="servicios" value="si" {{ request('servicios') == 'si' ? 'checked' : '' }}
+                                <input type="radio" name="servicios" value="si"
+                                    {{ request('servicios') == 'si' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 Sí
                             </label>
                             <label class="mr-2 text-xs hover:cursor-pointer">
-                                <input type="radio" name="servicios" value="no" {{ request('servicios') == 'no' ? 'checked' : '' }}
+                                <input type="radio" name="servicios" value="no"
+                                    {{ request('servicios') == 'no' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 No
                             </label>
                             <label class="text-xs hover:cursor-pointer">
-                                <input type="radio" name="servicios" value="" {{ request('servicios') == '' ? 'checked' : '' }}
+                                <input type="radio" name="servicios" value=""
+                                    {{ request('servicios') == '' ? 'checked' : '' }}
                                     class="text-cianna-orange hover:cursor-pointer focus:ring-cianna-orange">
                                 Cualquiera
                             </label>
@@ -656,31 +686,32 @@
 <!-- COMPORTAMIENTO DE LAS CASILLAS PARA LIFESTYLE -->
 <script>
     // Obtener los elementos
-    const allLifestyle = document.getElementById('allLifestyle');
+    const allLifestyle = document.getElementById('allLifestyle'); // Checkbox "Todos"
     const otherLifestyleCheckboxes = document.querySelectorAll(
-        'input[name="lifestyle[]"]:not(#allLifestyle)');
+        'input[name="lifestyle[]"]:not(#allLifestyle)'
+    ); // Resto de checkboxes
 
-    // Evento al marcar "Cualquiera"
+    // Evento para marcar/desmarcar todos los checkboxes cuando se selecciona "Todos"
     allLifestyle.addEventListener('change', function() {
-        if (this.checked) {
-            // Desmarcar todas las otras casillas
-            otherLifestyleCheckboxes.forEach(checkbox => checkbox
-                .checked =
-                false);
-        }
+        otherLifestyleCheckboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
     });
 
-    // Evento al marcar cualquier otra casilla
+    // Evento para actualizar el estado del checkbox "Todos"
     otherLifestyleCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
-            if (this.checked) {
-                // Desmarcar la casilla "Cualquiera"
+            // Si alguno se desmarca, desmarcar "Todos"
+            if (!this.checked) {
                 allLifestyle.checked = false;
+            } else {
+                // Si todos los checkboxes están marcados, marcar "Todos"
+                const allChecked = Array.from(otherLifestyleCheckboxes).every(cb => cb.checked);
+                allLifestyle.checked = allChecked;
             }
         });
     });
 </script>
-
 
 
 <!-- VERIFICAR DATOS EN CONSOLA ENVIADOS DESDE FORMULARIO A -->
