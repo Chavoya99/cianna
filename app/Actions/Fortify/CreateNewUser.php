@@ -22,11 +22,11 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'apellido' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[a-zA-Z0-9._%+-]+@alumnos\.udg\.mx$/'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[a-zA-Z0-9._-]{8,}@(alumnos|alumno)\.udg\.mx$/'],
             'tipo' => ['required', 'string', new validateUserType],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-        ],)->validate();
+        ])->validate();
 
         return User::create([
             'name' => $input['name'],
