@@ -1,57 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Livewire;
 
+use Livewire\WithPagination;
 use App\Models\Casa;
-use App\Models\UserA;
-use App\Models\UserB;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Livewire\Component;
 
-class UserBController extends Controller
+class ListadoRecomendacionesHabitaciones extends Component
 {
-    public function homeB()
-    {
-
-        $postulaciones = Auth::user()->user_b->postulaciones;
-
-        $id_postulaciones_casas = []; //Casas que estan en las postulaciones del usuario
-        $id_postulaciones_roomies = []; //Roomies a los que pertenece la casa
-        foreach ($postulaciones as $postulacion) {
-            $id_postulaciones_casas[] = $postulacion->id;
-            $id_postulaciones_roomies[] = $postulacion->user_a->user_id;
-        }
-
-        $outcomes = $this->obtener_recomendaciones();
-
-        $casas = Casa::whereIn('id', $outcomes)->with(['archivos' => function ($query) {
-            $query->where('clasificacion_archivo', 'img_cuarto');
-        }])->limit(4)->get();
-
-        $id_recomendados = [];
-        foreach ($outcomes as $outcome) {
-            $casa = Casa::find($outcome);
-            $id_recomendados[] = $casa->user_a->user_id;
-        }
-
-        $roomies = UserA::whereIn('user_id', $id_recomendados)->with(['user.archivos' => function ($query) {
-            $query->where('archivo_type', 'img_perf');
-        }])->limit(5)->get();
-
-        return view('profile.home', compact('casas', 'roomies', 'id_postulaciones_casas', 'id_postulaciones_roomies'));
-    }
-
-
-    public function recomendaciones_b_roomies()
-    {
-        return view('profile.list-suggestsA');
-    }
-
-    public function recomendaciones_b_casas()
-    {
-        return view('profile.list-suggestsB');
-    }
+    use WithPagination;
 
     public function obtener_recomendaciones()
     {
@@ -91,5 +50,25 @@ class UserBController extends Controller
         }
 
         return $outcomes;
+    }
+
+    public function render()
+    {
+        $postulaciones = Auth::user()->user_b->postulaciones;
+
+        $id_postulaciones_casas = []; //Casas que estan en las postulaciones del usuario
+        $id_postulaciones_roomies = []; //Roomies a los que pertenece la casa
+        foreach ($postulaciones as $postulacion) {
+            $id_postulaciones_casas[] = $postulacion->id;
+            $id_postulaciones_roomies[] = $postulacion->user_a->user_id;
+        }
+
+        $outcomes = $this->obtener_recomendaciones();
+
+        $casas = Casa::whereIn('id', $outcomes)->with(['archivos' => function ($query) {
+            $query->where('clasificacion_archivo', 'img_cuarto');
+        }])->paginate(10);
+
+        return view('livewire.listado-recomendaciones-habitaciones', compact('casas', 'id_postulaciones_casas'));
     }
 }
