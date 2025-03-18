@@ -13,6 +13,7 @@
         <div class="ml-16 mr-16 mt-8 w-4/5">
             <h1 class="text-3xl text-cianna-orange">Resultados de la búsqueda</h1>
         </div>
+        <!-- RESULTADOS CON PAGINADOR -->
         <livewire:listado-filtro-roomies />
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
         <div class="relative mt-4 px-20">

@@ -342,68 +342,8 @@ class HomeController extends Controller
         return view('profile.search-resultsA');
     }
 
-    public function busquedaHabitaciones(Request $request){
-        if(Auth::user()->tipo == 'A'){
-            $casas = Casa::with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');
-            }])->where('user_a_id', '!=', Auth::id());
-        }else if(Auth::user()->tipo == 'B'){
-            $casas = Casa::with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');
-            }]);
-        }
-
-        if($request->calle){
-            $casas = $casas->where('calle', 'like', '%'.$request->calle.'%');
-        }
-
-        if($request->num_ext){
-            $casas = $casas->where('num_ext', 'like', '%'.$request->num_ext.'%');
-        }
-
-        if($request->num_int){
-            $casas = $casas->where('num_int', 'like', '%'.$request->num_int.'%');
-        }
-
-        if($request->ciudad){
-            $casas = $casas->where('ciudad', $request->ciudad);
-        }
-
-        if($request->colonia){
-            $casas = $casas->where('colonia', 'like', '%'.$request->colonia.'%');
-        }
-
-        if($request->cod_post){
-            $casas = $casas->where('codigo_postal', 'like', '%'.$request->cod_post.'%');
-        }
-
-        if($request->mascotas){
-            $casas = $casas->where('acepta_mascotas', $request->mascotas);
-        }
-
-        if($request->visitas){
-            $casas = $casas->where('acepta_visitas', $request->visitas);
-        }
-
-        if($request->limpieza){
-            $casas = $casas->where('riguroza_limpieza', $request->limpieza);
-        }
-        
-        if($request->muebles){
-            $casas = $casas->where('muebles', $request->muebles);
-        }
-
-        if($request->servicios){
-            $casas = $casas->where('servicios', $request->servicios);
-        }
-
-        if($request->minPrice|| $request->maxPrice){
-            $casas = $casas->whereBetween('precio', [$request->minPrice, $request->maxPrice]);
-        }
-
-        $casas = $casas->get();
-
-        return view('profile.search-resultsB', compact('casas'));
+    public function busquedaHabitaciones(){
+        return view('profile.search-resultsB');
     }
     
 }
