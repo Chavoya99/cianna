@@ -99,7 +99,7 @@ class UserSeeder extends Seeder
                 $user->user_a()->create([
                     'edad' => random_int(18,35),
                     'sexo' => $sexo[array_rand($sexo, 1)],
-                    'descripcion' => $faker->text(100),
+                    'descripcion' => 'descripcion',
                     'mascota' => $mascota[array_rand($mascota, 1)],
                     'num_mascotas' => random_int(1, 5),
                     'padecimiento' => $padecimiento[0],
@@ -113,7 +113,7 @@ class UserSeeder extends Seeder
                 $user->user_b()->create([
                     'edad' => random_int(18,35),
                     'sexo' => $sexo[array_rand($sexo, 1)],
-                    'descripcion' => $faker->text(100),
+                    'descripcion' => 'descripcion',
                     'mascota' => $mascota[array_rand($mascota, 1)],
                     'num_mascotas' => random_int(1, 5),
                     'padecimiento' => $padecimiento[0],
@@ -166,7 +166,25 @@ class UserSeeder extends Seeder
                     }
                     $GLOBALS['mujeres']++;
                 } 
-            }   
+            }  
+
+            //Actualizar descricion personalizada
+            $descripcion = sprintf(
+                "%s, mi nombre es %s, me considero una persona %s, que disfruta de %s y sueña con %s. Me conocen por ser %s y %s.",
+                $faker->randomElement(['Hola que tal', 'Hola', 'Hey hola', 'Hey que tal', 'Hey aquí buscando roomie', 'Hola hola']),
+                $user->name,
+                $faker->randomElement(['optimista', 'creativa', 'detallista', 'introvertida', 'extrovertida']),
+                $faker->randomElement(['leer libros', 'explorar la naturaleza', 'escuchar música', 'jugar videojuegos', 'cocinar']),
+                $faker->randomElement(['viajar por el mundo', 'aprender un nuevo idioma', 'escribir un libro', 'crear una empresa']),
+                $faker->randomElement(['amable', 'curiosa', 'trabajadora', 'ingeniosa']),
+                $faker->randomElement(['organizada', 'aventurera', 'sociable', 'tranquila'])
+            );
+
+            if($tipo == 'A'){
+                $user->user_a()->update(['descripcion' => $descripcion]);
+            }else{
+                $user->user_b()->update(['descripcion' => $descripcion]);
+            }
 
             if(File::exists($rutaImagen)){
                 
