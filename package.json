@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "watch": "node --watch .server/index.js"
+        "watch": "node --watch .server/index.js",
+        "start_server": "node server/privado.js"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
