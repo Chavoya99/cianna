@@ -1,0 +1,14 @@
+{
+    "private": true,
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start_server": "node server/privado.js"
+    },
+    "dependencies": {
+        "express": "4.21.1",
+        "morgan": "1.10.0",
+        "mysql2": "3.11.3",
+        "socket.io": "4.8.1"
+    }
+}
