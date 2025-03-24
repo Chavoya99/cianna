@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 import mysql.connector
 from flask import Flask, jsonify, request
 import numpy as np
@@ -7,9 +6,9 @@ import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
-
+#from dotenv import load_dotenv
 # Cargar las variables del archivo .env
-load_dotenv()
+#load_dotenv()
 
 # Obtener la API_KEY del archivo .env
 api_key = os.getenv('API_KEY')
@@ -20,10 +19,10 @@ app = Flask(__name__)
 def get_db_connection():
     try:
         return mysql.connector.connect(
-            host='localhost',  # Dirección del servidor donde se encuentra la BD
-            user="root",       # Usuario para acceder a la BD
-            password='',       # Contraseña para acceder a la BD
-            database="cianna"  # Nombre de la BD
+            host=os.getenv('DB_HOST'),  # Dirección del servidor donde se encuentra la BD
+            user=os.getenv('DB_USERNAME'),       # Usuario para acceder a la BD
+            password=os.getenv('DB_PASSWORD'),       # Contraseña para acceder a la BD
+            database=os.getenv('DB_DATABASE') # Nombre de la BD
         )
     except mysql.connector.Error as err:
         print(f"Error al conectar con la base de datos: {err}")  # Log para depuración
