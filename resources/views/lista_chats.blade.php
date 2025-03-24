@@ -101,9 +101,10 @@
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js'></script>
 <script>
-    const msg_encriptado = "{{$ultimoMensaje->contenido}}";
+    
 
-    if(msg_encriptado != null){
+    if({{$ultimoMensaje}} != null){
+        const msg_encriptado = "{{$ultimoMensaje->contenido}}";
         const secretKey = "{{env('SECRET_KEY')}}";
         const msg_desencriptado =  CryptoJS.AES.decrypt(msg_encriptado, secretKey).toString(CryptoJS.enc.Utf8);
         document.getElementById('ultimo_mensaje').innerHTML = msg_desencriptado;
