@@ -22,7 +22,8 @@ def get_db_connection():
             host=os.getenv('DB_HOST'),  # Dirección del servidor donde se encuentra la BD
             user=os.getenv('DB_USERNAME'),       # Usuario para acceder a la BD
             password=os.getenv('DB_PASSWORD'),       # Contraseña para acceder a la BD
-            database=os.getenv('DB_DATABASE') # Nombre de la BD
+            database=os.getenv('DB_DATABASE'), # Nombre de la BD
+            port=os.getenv('DB_PORT'),
         )
     except mysql.connector.Error as err:
         print(f"Error al conectar con la base de datos: {err}")  # Log para depuración
