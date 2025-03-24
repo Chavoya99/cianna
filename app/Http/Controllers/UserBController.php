@@ -29,6 +29,7 @@ class UserBController extends Controller
             $query->where('clasificacion_archivo', 'img_cuarto');
         }])->limit(4)->get();
 
+
         $id_recomendados = [];
         foreach ($outcomes as $outcome) {
             $casa = Casa::find($outcome);
@@ -38,6 +39,18 @@ class UserBController extends Controller
         $roomies = UserA::whereIn('user_id', $id_recomendados)->with(['user.archivos' => function ($query) {
             $query->where('archivo_type', 'img_perf');
         }])->limit(5)->get();
+
+        if(count($casas) == 0){
+            $casas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('user_a_id', '!=', Auth::id())->limit(4)->get();
+        }
+
+        if(count($roomies) == 0){
+            $roomies = UserA::with(['user.archivos' => function ($query) {
+                $query->where('archivo_type', 'img_perf');
+            }])->limit(5)->get();
+        }
 
         return view('profile.home', compact('casas', 'roomies', 'id_postulaciones_casas', 'id_postulaciones_roomies'));
     }
