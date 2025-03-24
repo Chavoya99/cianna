@@ -76,7 +76,11 @@ class PostulacionController extends Controller
             $recomendaciones = UserB::whereIn('user_id', $outcomes)->with(['user.archivos' => function ($query) {
                 $query->where('archivo_type', 'img_perf');}])->limit(5)->get();
             
-            
+            if(count($recomendaciones) == 0){
+                $recomendaciones = UserB::with(['user.archivos' => function ($query) {
+                    $query->where('archivo_type', 'img_perf');
+                }])->limit(5)->get();
+            }
             
             return view('profile.requestsA', compact('postulaciones_pendientes', 'total_postulaciones','carreras', 'recomendaciones', 'outcomes', 'error_message', 'id_postulaciones'));
         }else if(Auth::user()->tipo == 'B'){
@@ -128,7 +132,11 @@ class PostulacionController extends Controller
             $recomendaciones = Casa::whereIn('id', $outcomes)->with(['archivos' => function ($query) {
                 $query->where('clasificacion_archivo', 'img_cuarto');}])->limit(5)->get();
 
-
+            if(count($recomendaciones) == 0){
+                $recomendaciones = Casa::with(['archivos' => function ($query) {
+                    $query->where('clasificacion_archivo', 'img_cuarto');
+                }])->where('user_a_id', '!=', Auth::id())->limit(4)->get();
+            }
             return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones', 'recomendaciones','outcomes', 'error_message', 'id_postulaciones'));
         }
     }

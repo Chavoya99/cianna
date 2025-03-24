@@ -97,6 +97,12 @@ class ListadoRecomendacionesRoomies extends Component
                 $query->where('archivo_type', 'img_perf');
             }])->paginate(10);
 
+            if(count($recomendaciones) == 0){
+                $recomendaciones = UserB::with(['user.archivos' => function ($query) {
+                    $query->where('archivo_type', 'img_perf');
+                }])->limit(5)->get();
+            }
+
             return view('livewire.listado-recomendaciones-roomies', compact('recomendaciones', 'carreras', 'id_postulaciones'));
         } elseif (Auth::user()->tipo == 'B') {
             $postulaciones = Auth::user()->user_b->postulaciones;
@@ -117,6 +123,12 @@ class ListadoRecomendacionesRoomies extends Component
             $recomendaciones = UserA::whereIn('user_id', $id_recomendados)->with(['user.archivos' => function ($query) {
                 $query->where('archivo_type', 'img_perf');
             }])->paginate(10);
+
+            if(count($recomendaciones) == 0){
+                $recomendaciones = UserA::with(['user.archivos' => function ($query) {
+                    $query->where('archivo_type', 'img_perf');
+                }])->limit(5)->get();
+            }
 
             return view('livewire.listado-recomendaciones-roomies', compact('recomendaciones', 'carreras', 'id_postulaciones_roomies'));
         }
