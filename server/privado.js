@@ -10,11 +10,11 @@ const secretKey = '5e884898da28047151d0e56f8dc6292773603d0d2c73d1a6a56e1d9b1c6bf
 
 // Conexión a la base de datos
 const connection = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    port: 3306,
-    password: "",
-    database: "cianna"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME,
+    port: process.env.DB_PORT,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 const app = express();
