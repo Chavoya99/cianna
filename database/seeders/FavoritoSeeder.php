@@ -16,21 +16,28 @@ class FavoritoSeeder extends Seeder
      */
     public function run(): void
     {
-        $userA = UserA::first();
+        $usersA = UserA::all();
         $roomies = UserB::limit(4)->get();
 
-        $userB = UserB::first();
+        $usersB = UserB::all();
         $casas = Casa::limit(4)->get();
         
-        foreach($roomies as $roomie){
-            $userA->favoritos_roomies()->attach($roomie->user_id);
+        // Asignar 4 roomies aleatorios a cada UserA
+        foreach ($usersA as $userA) {
+
+            $roomiesAleatorios = UserB::inRandomOrder()->limit(4)->pluck('user_id');
+            
+
+            $userA->favoritos_roomies()->attach($roomiesAleatorios);
         }
 
-        foreach($casas as $casa){
-            $userB->favoritos_casas()->attach($casa->id);
-        }
-        
+        foreach ($usersB as $userB) {
 
+            $casasAleatorias = Casa::inRandomOrder()->limit(4)->pluck('id');
+            
+
+            $userB->favoritos_casas()->attach($casasAleatorias);
+        }
 
     }
 }
