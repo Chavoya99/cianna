@@ -8,11 +8,11 @@ const port = 3000;
 
 // Conexión a la base de datos
 const connection = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    port: 3306,
-    password: "",
-    database: "cianna"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME,
+    port: process.env.DB_PORT,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 const app = express();
