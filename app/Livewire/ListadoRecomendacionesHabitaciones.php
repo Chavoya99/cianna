@@ -25,7 +25,7 @@ class ListadoRecomendacionesHabitaciones extends Component
 
             $response = Http::withHeaders([
                 'Authorization' => "Bearer $apiKey",  // Incluir la API Key en los encabezados
-            ])->get('http://127.0.0.1:5000/recommendations', [
+            ])->get(env('API_PYTHON_URL'), [
                 'user_id' => $userId, //Enviamos el id del usuario como parámetro en la URL
                 'user_type' => $userType
             ]);
