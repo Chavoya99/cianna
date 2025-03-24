@@ -3,6 +3,7 @@
 @section('title') {{ 'Chats | Todos' }} @endsection
 
 <x-home-layout>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js'></script>
     <x-slot name="logo">
         <x-authentication-card-logo/>
     </x-slot>
@@ -15,6 +16,9 @@
         
         <!-- Lista de chats -->
         <div class="mt-4 space-y-4">
+            @php
+                $loop_index = 0;
+            @endphp
             @foreach ($chats as $chat)
                 @php
                     // Obtener la imagen del usuario
@@ -25,6 +29,10 @@
                         ->where('chat_id', $chat->pivot->id)
                         ->latest('fecha_hora')  // Ordena por la fecha más reciente
                         ->first(); // Obtener solo el último mensaje
+
+                    if(!$ultimoMensaje){
+                        $ultimoMensaje = "";
+                    }  
 
                 @endphp
 
@@ -56,7 +64,7 @@
                                         <p class="mr-1 font-bold group-hover:text-white">Tú:</p>
                                     @endif
                                     <!-- Muestra los primeros 40 caracteres -->
-                                    <p id="ultimo_mensaje" class="group-hover:text-white">
+                                    <p id="ultimo_mensaje_{{$loop_index}}" class="group-hover:text-white">
                                         
                                     </p> 
                                 </div>
@@ -86,6 +94,29 @@
                         </div>
                     </a>
                 </div>
+
+                <!-- Script para desencriptar el último mensaje -->
+                @if ($ultimoMensaje)
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const msg_encriptado = "{{ $ultimoMensaje->contenido }}";
+                            const secretKey = "{{ env('SECRET_KEY') }}";
+                            const msg_desencriptado = CryptoJS.AES.decrypt(msg_encriptado, secretKey).toString(CryptoJS.enc.Utf8);
+                            document.getElementById('ultimo_mensaje_{{ $loop_index }}').innerHTML = msg_desencriptado;
+                            console.log(secretKey);
+                            if (!msg_desencriptado) {
+                            console.log("Error: El mensaje no se pudo desencriptar correctamente");
+                            }
+                        });
+
+                        
+                    </script>
+                @endif
+
+                @php
+                    $loop_index++;
+                @endphp
+
             @endforeach
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
@@ -99,16 +130,4 @@
     </div>
 </x-home-layout>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js'></script>
-<script>
-    
-    const secretKey = "{{env('SECRET_KEY')}}";
-    const msg_encriptado = "{{$ultimoMensaje->contenido}}";
-    const msg_desencriptado =  CryptoJS.AES.decrypt(msg_encriptado, secretKey).toString(CryptoJS.enc.Utf8);
-    console.log(msg_desencriptado)
 
-    document.getElementById('ultimo_mensaje').innerHTML = msg_desencriptado;
-
-
-
-</script>
