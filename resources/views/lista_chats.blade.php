@@ -25,6 +25,7 @@
                         ->where('chat_id', $chat->pivot->id)
                         ->latest('fecha_hora')  // Ordena por la fecha más reciente
                         ->first(); // Obtener solo el último mensaje
+
                 @endphp
 
                 <!-- Contenedor del chat -->
@@ -55,8 +56,8 @@
                                         <p class="mr-1 font-bold group-hover:text-white">Tú:</p>
                                     @endif
                                     <!-- Muestra los primeros 40 caracteres -->
-                                    <p class="group-hover:text-white">
-                                        {{ Str::limit($ultimoMensaje->contenido, 40) }}
+                                    <p id="ultimo_mensaje" class="group-hover:text-white">
+                                        
                                     </p> 
                                 </div>
                                 <!-- Fecha en formato "hace X minutos/horas" -->
@@ -97,3 +98,17 @@
         </div>
     </div>
 </x-home-layout>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js'></script>
+<script>
+    
+    const secretKey = "{{env('SECRET_KEY')}}";
+    const msg_encriptado = "{{$ultimoMensaje->contenido}}";
+    const msg_desencriptado =  CryptoJS.AES.decrypt(msg_encriptado, secretKey).toString(CryptoJS.enc.Utf8);
+    console.log(msg_desencriptado)
+
+    document.getElementById('ultimo_mensaje').innerHTML = msg_desencriptado;
+
+
+
+</script>

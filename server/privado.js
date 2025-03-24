@@ -3,16 +3,18 @@ import logger from 'morgan';
 import { Server } from 'socket.io';
 import { createServer } from 'node:http';
 import mysql from 'mysql2/promise';
+import CryptoJS from 'crypto-js';
 
 const port = 3000;
+const secretKey = '5e884898da28047151d0e56f8dc6292773603d0d2c73d1a6a56e1d9b1c6bfa4c';
 
 // Conexión a la base de datos
 const connection = await mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USERNAME,
-    port: process.env.DB_PORT,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+    host: "localhost",
+    user: "root",
+    port: 3306,
+    password: "",
+    database: "cianna"
 });
 
 const app = express();
@@ -106,7 +108,8 @@ io.on('connection', async (socket) => {
 
                 results[0].forEach(row => {
                     const fecha = formatoFecha(row.fecha_hora);
-                    socket.emit('chat message', row.contenido, row.id.toString(), row.username, fecha);
+                    const msg_desencriptado =  CryptoJS.AES.decrypt(row.contenido, secretKey).toString(CryptoJS.enc.Utf8);
+                    socket.emit('chat message', msg_desencriptado, row.id.toString(), row.username, fecha);
                 });
                 
             } catch (e) {
@@ -122,12 +125,12 @@ io.on('connection', async (socket) => {
         const username = socket.handshake.auth.username ?? 'anonymous';
         const fechaTimeStamp = formatoTimestamp(fecha);
         const chatId = chat_id;
-
+        const msg_encriptado = CryptoJS.AES.encrypt(msg.toString(), secretKey).toString();
         let result;
         try {
             result = await connection.execute(
                 'INSERT INTO mensajes (room_id, chat_id, contenido, username, user_id_emisor, user_id_receptor, fecha_hora) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                [roomId, chatId, msg.toString(), username.toString(), userId, otherUserId, fechaTimeStamp]
+                [roomId, chatId, msg_encriptado, username.toString(), userId, otherUserId, fechaTimeStamp]
             );
 
             let update = connection.execute("Update chats set fecha_ultimo_mensaje = ? where room_id = ? ", [fechaTimeStamp, roomId]);
