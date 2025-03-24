@@ -169,7 +169,7 @@
                                         class="relative inline-block h-32 w-full overflow-hidden rounded-md bg-gray-100">
                                         <a href="{{ route('detalles_casa', $recomendacion) }}">
                                             <img class="lazyload absolute left-0 top-0 h-full w-full rounded-lg border border-cianna-gray object-fill"
-                                                data-src="{{ asset('Storage/' . $recomendacion->archivos->first()->ruta_archivo) }}"
+                                                data-src="{{ asset('storage/' . $recomendacion->archivos->first()->ruta_archivo) }}"
                                                 alt="Imagen previa roomie" />
                                         </a>
                                     </div>

@@ -70,8 +70,10 @@
 
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 <script>
+
+    const chat_url = "{{env('CHAT_SERVER_URL')}}";
     // Inicialización de socket.io
-    const socket = io('http://localhost:3000', {
+    const socket = io(chat_url, {
         auth: {
             user_id: {{ Auth::id() }},
             other_user_id: {{$otherUserId}},

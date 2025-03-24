@@ -10,7 +10,7 @@
                     <div class="h-52 w-52">
                         <a href="{{ route('detalles_roomie', $user) }}" class="w-1/2">
                             <img class="lazyload h-full w-full rounded-lg border border-cianna-gray bg-white object-cover"
-                                data-src="{{ asset('Storage/' . $user->user->archivos->first()->ruta_archivo) }}"
+                                src="{{ asset('storage/' . $user->user->archivos->first()->ruta_archivo) }}"
                                 alt="Imagen previa del roomie" />
                         </a>
                     </div>

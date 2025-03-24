@@ -223,8 +223,8 @@ class UserSeeder extends Seeder
 
         }
 
-        $cantidad_a = 30; //Cantidad de usuarios A
-        $cantidad_b = 30; //Cantidad de usuarios B
+        $cantidad_a = 50; //Cantidad de usuarios A
+        $cantidad_b = 50; //Cantidad de usuarios B
         global $mujeres;
         global $hombres;
         $mujeres = 1;
