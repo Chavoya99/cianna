@@ -24,6 +24,7 @@ def get_db_connection():
             password=os.getenv('DB_PASSWORD'),       # Contraseña para acceder a la BD
             database=os.getenv('DB_DATABASE'), # Nombre de la BD
             port=os.getenv('DB_PORT'),
+            auth_plugin='mysql_native_password'
         )
     except mysql.connector.Error as err:
         print(f"Error al conectar con la base de datos: {err}")  # Log para depuración
