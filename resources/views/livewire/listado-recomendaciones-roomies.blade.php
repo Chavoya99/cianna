@@ -12,7 +12,7 @@
                     <div class="h-52 w-52">
                         <a href="{{ route('detalles_roomie', $recomendacion) }}" class="w-1/2">
                             <img class="h-full w-full rounded-lg border border-cianna-gray bg-white object-cover"
-                                src="{{ asset('Storage/' . $recomendacion->user->archivos->first()->ruta_archivo) }}"
+                                src="{{ asset('storage/' . $recomendacion->user->archivos->first()->ruta_archivo) }}"
                                 alt="Imagen previa del roomie" />
                         </a>
                     </div>

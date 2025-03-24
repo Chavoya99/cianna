@@ -13,7 +13,7 @@
                     <div class="h-44 w-80">
                         <a href="{{ route('detalles_casa', $casa) }}" class="w-1/2">
                             <img class="lazyload h-full w-full rounded-lg border border-cianna-gray object-fill"
-                                data-src="{{ asset('Storage/' . $casa->archivos->first()->ruta_archivo) }}"
+                                src="{{ asset('storage/' . $casa->archivos->first()->ruta_archivo) }}"
                                 alt="Imagen previa del hogar" />
                         </a>
                     </div>
