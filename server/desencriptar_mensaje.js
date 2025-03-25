@@ -1,12 +1,34 @@
+import express from 'express';
 import CryptoJS from 'crypto-js';
 
-// Leer argumentos del proceso
-const args = process.argv.slice(2);
-const encryptedMessage = args[0];
-const secretKey = args[1];
+const app = express();
+const port = 4000; 
+const secretKey = process.env.SECRET_KEY;
 
-// Desencriptar el mensaje
-const decrypted = CryptoJS.AES.decrypt(encryptedMessage, secretKey).toString(CryptoJS.enc.Utf8);
+app.use(express.json());
 
-// Imprimir el resultado para que PHP pueda capturarlo
-console.log(decrypted);
+app.post('/decrypt', (req, res) => {
+    const { encryptedMessage } = req.body; 
+
+    if (!encryptedMessage) {
+        return res.status(400).json({ error: 'No se proporcionó el mensaje encriptado' });
+    }
+
+    try {
+        const bytes = CryptoJS.AES.decrypt(encryptedMessage, secretKey);
+        const decryptedMessage = bytes.toString(CryptoJS.enc.Utf8);
+
+        if (!decryptedMessage) {
+            return res.status(500).json({ error: 'Error al desencriptar el mensaje' });
+        }
+        console.log('Desencriptado con éxito');
+        return res.status(200).json({ decryptedMessage });
+    } catch (err) {
+        console.error('Error de desencriptación:', err);
+        return res.status(500).json({ error: 'Error interno al procesar el mensaje' });
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Servidor de desencriptado corriendo en el puerto ${port}`);
+});
