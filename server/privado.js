@@ -6,7 +6,7 @@ import mysql from 'mysql2/promise';
 import CryptoJS from 'crypto-js';
 
 const port = 3000;
-const secretKey = process.env.SECRET_KEY;
+const secretKey = "a1b4f2d7e6b8a9c2f3d9c0b2e0f7d2e6c3b1a8f9d4a6c5b7a2e4c9f1b6a3d2";
 
 // Conexión a la base de datos
 const connection = await mysql.createConnection({

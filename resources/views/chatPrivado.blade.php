@@ -77,7 +77,7 @@
         auth: {
             user_id: {{ Auth::id() }},
             other_user_id: {{$otherUserId}},
-            username: "{{ Auth::user()->name }}",
+            username: "{{ Auth::user()->name.Auth::id() }}",
             serverOffset: 0,
             room_id: "{{$room_id}}",
             chat_id: "{{$chat_id}}"
