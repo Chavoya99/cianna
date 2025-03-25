@@ -56,8 +56,7 @@
                                 </div>
                                 <!-- Fecha en formato "hace X minutos/horas" -->
                                 <p class="text-sm group-hover:text-white">
-                                    {{ ucfirst(\Carbon\Carbon::parse($chat['ultimoMensaje']->fecha_hora)->
-                                    diffForHumans()) }}
+                                {{ \Carbon\Carbon::parse($chat['ultimoMensaje']->fecha_hora)->setTimezone(config('app.timezone'))->diffForHumans() }}
                                 </p> 
                             </div>
                         @else
