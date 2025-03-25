@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Http;
 
 class ChatController extends Controller
 {
@@ -101,14 +102,30 @@ class ChatController extends Controller
 
     public function desencriptar_mensaje($contenido){
 
-        $secretKey = env('SECRET_KEY');
+        $encryptedMessage = $contenido;
+        $decryptServerUrl = env('DECRYPT_SERVER');
 
-        // Ejecutar el script de Node.js y capturar la salida
-        $output = shell_exec("node " . base_path('server/desencriptar_mensaje.js') . " " . escapeshellarg($contenido) . " " . escapeshellarg($secretKey));
-        
-        return response()->json([
-            'mensaje_descifrado' => trim($output) // Enviar el mensaje desencriptado a la vista
-        ]);      
+        if (!$encryptedMessage) {
+            return response()->json(['error' => 'Mensaje encriptado no proporcionado'], 400);
+        }
+
+        try {
+            $response = Http::post($decryptServerUrl, [
+                'encryptedMessage' => $encryptedMessage,
+            ]);
+
+            $data = $response->json();
+
+            if (isset($data['decryptedMessage'])) {
+                return response()->json([
+                    'mensaje_descifrado' => $data['decryptedMessage']
+                ]);
+            } else {
+                return response()->json(['error' => 'No se pudo desencriptar el mensaje'], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al comunicar con el servidor de desencriptado: ' . $e->getMessage()], 500);
+        }
     }
 
 
