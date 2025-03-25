@@ -31,6 +31,12 @@ class UserAController extends Controller
             $query->where('archivo_type', 'img_perf');
         }])->limit(5)->get();
 
+        if(count($roomies) == 0){
+            $roomies = UserB::with(['user.archivos' => function ($query) {
+                $query->where('archivo_type', 'img_perf');
+            }])->limit(5)->get();
+        }
+
         return view('profile.home', compact('casas', 'roomies', 'id_postulaciones'));
     }
 

@@ -69,6 +69,12 @@ class ListadoRecomendacionesHabitaciones extends Component
             $query->where('clasificacion_archivo', 'img_cuarto');
         }])->paginate(10);
 
+        if(count($casas) == 0){
+            $casas = Casa::with(['archivos' => function ($query) {
+                $query->where('clasificacion_archivo', 'img_cuarto');
+            }])->where('user_a_id', '!=', Auth::id())->limit(4)->get();
+        }
+
         return view('livewire.listado-recomendaciones-habitaciones', compact('casas', 'id_postulaciones_casas'));
     }
 }
