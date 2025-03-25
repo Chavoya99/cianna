@@ -16,24 +16,10 @@
         
         <!-- Lista de chats -->
         <div class="mt-4 space-y-4">
-            @php
-                $loop_index = 0;
-            @endphp
-            @foreach ($chats as $chat)
+            @foreach ($chats_obtenidos as $chat)
                 @php
                     // Obtener la imagen del usuario
-                    $imagen = $chat->user->archivos->first();
-
-                    // Consulta directa a la tabla 'mensajes' para obtener el último mensaje
-                    $ultimoMensaje = \DB::table('mensajes')
-                        ->where('chat_id', $chat->pivot->id)
-                        ->latest('fecha_hora')  // Ordena por la fecha más reciente
-                        ->first(); // Obtener solo el último mensaje
-
-                    if(!$ultimoMensaje){
-                        $ultimoMensaje = "";
-                    }  
-
+                    $imagen = $chat['chat']->user->archivos->first();
                 @endphp
 
                 <!-- Contenedor del chat -->
@@ -41,12 +27,12 @@
                     items-center gap-4 p-4 rounded-lg shadow-sm hover:bg-cianna-orange
                     hover:shadow-md transition hover:cursor-pointer group" 
                     onclick="window.location.href='{{route('chat_privado', 
-                    [$chat->pivot->id, $chat->pivot->room_id, $chat])}}'">
+                    [$chat['chat']->pivot->id, $chat['chat']->pivot->room_id, $chat['chat']])}}'">
                     
                     <!-- Imagen de perfil -->
                     <div class="h-20 w-20 overflow-hidden rounded-full bg-cianna-orange">
                         <img class="object-cover w-full h-full lazyload" 
-                            data-src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
+                            src="{{ asset('storage/'. $imagen->ruta_archivo) }}" 
                             alt="Vista previa de la imagen de perfil del roomie" />
                     </div>
                     
@@ -54,23 +40,23 @@
                     <div>
                         <p class="text-cianna-blue text-xl font-bold group-hover:text-white">
                             <!-- Nombre del compañero -->
-                            {{$chat->user->name}}
+                            {{$chat['chat']->user->name}}
                         </p>
                         <!-- Mostrar el último mensaje -->
-                        @if ($ultimoMensaje)
+                        @if ($chat['ultimoMensaje'])
                             <div class="text-md text-gray-500 group-hover:text-white">
                                 <div class="flex">
-                                    @if(Auth::id() == $ultimoMensaje->user_id_emisor)
+                                    @if(Auth::id() == $chat['ultimoMensaje']->user_id_emisor)
                                         <p class="mr-1 font-bold group-hover:text-white">Tú:</p>
                                     @endif
                                     <!-- Muestra los primeros 40 caracteres -->
-                                    <p id="ultimo_mensaje_{{$loop_index}}" class="group-hover:text-white">
-                                        
+                                    <p class="group-hover:text-white">
+                                        {{$chat['contenido']}}
                                     </p> 
                                 </div>
                                 <!-- Fecha en formato "hace X minutos/horas" -->
                                 <p class="text-sm group-hover:text-white">
-                                    {{ ucfirst(\Carbon\Carbon::parse($ultimoMensaje->fecha_hora)->
+                                    {{ ucfirst(\Carbon\Carbon::parse($chat['ultimoMensaje']->fecha_hora)->
                                     diffForHumans()) }}
                                 </p> 
                             </div>
@@ -84,7 +70,7 @@
                             </div> 
                         @endif
                     </div>
-                    <a href="{{route('detalles_roomie', $chat->user->id)}}" 
+                    <a href="{{route('detalles_roomie', $chat['chat']->user->id)}}" 
                         class="absolute right-0 mr-4 rounded bg-cianna-orange group-hover:bg-white 
                         group-hover:text-black">
                         <div class="px-2 py-1 rounded hover:font-bold hover:bg-cianna-blue 
@@ -94,29 +80,6 @@
                         </div>
                     </a>
                 </div>
-
-                <!-- Script para desencriptar el último mensaje -->
-                @if ($ultimoMensaje)
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const msg_encriptado = "{{ $ultimoMensaje->contenido }}";
-                            const secretKey = "{{ env('SECRET_KEY') }}";
-                            const msg_desencriptado = CryptoJS.AES.decrypt(msg_encriptado, secretKey).toString(CryptoJS.enc.Utf8);
-                            document.getElementById('ultimo_mensaje_{{ $loop_index }}').innerHTML = msg_desencriptado;
-                            console.log(secretKey);
-                            if (!msg_desencriptado) {
-                            console.log("Error: El mensaje no se pudo desencriptar correctamente");
-                            }
-                        });
-
-                        
-                    </script>
-                @endif
-
-                @php
-                    $loop_index++;
-                @endphp
-
             @endforeach
         </div>
         <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->

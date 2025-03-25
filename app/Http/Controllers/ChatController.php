@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Casa;
 use App\Models\Chat;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Http;
 
 class ChatController extends Controller
 {
@@ -49,9 +51,27 @@ class ChatController extends Controller
             ->with(['user.archivos' => function ($query){
                 $query->where('archivo_type', 'img_perf');}])->orderBy('fecha_ultimo_mensaje', 'desc')->get();
         }
-        //dd($chats);
+
+        $chats_obtenidos = [];
+        foreach($chats as $chat){
+            // Consulta directa a la tabla 'mensajes' para obtener el último mensaje
+            $ultimoMensaje = DB::table('mensajes')
+            ->where('chat_id', $chat->pivot->id)
+            ->latest('fecha_hora')  // Ordena por la fecha más reciente
+            ->first(); // Obtener solo el último mensaje
+
+            $msj_descrifrado = "";
+            if($ultimoMensaje){
+                $msj_descrifrado = json_decode(($this->desencriptar_mensaje($ultimoMensaje->contenido)->getContent()))->mensaje_descifrado;
+            }
+            $chats_obtenidos[] = [
+                'chat' => $chat, 
+                'ultimoMensaje' => $ultimoMensaje,
+                'contenido' => $msj_descrifrado
+            ];
+        }
         
-        return view('lista_chats', compact('chats'));
+        return view('lista_chats', compact('chats_obtenidos'));
     }
 
     public function redireccionar_chat($id_aux){
@@ -78,6 +98,34 @@ class ChatController extends Controller
 
         return redirect()->route('chat_privado', [$chat_id->id, $room_id, $id_aux]);
 
+    }
+
+    public function desencriptar_mensaje($contenido){
+
+        $encryptedMessage = $contenido;
+        $decryptServerUrl = env('DECRYPT_SERVER');
+
+        if (!$encryptedMessage) {
+            return response()->json(['error' => 'Mensaje encriptado no proporcionado'], 400);
+        }
+
+        try {
+            $response = Http::post($decryptServerUrl, [
+                'encryptedMessage' => $encryptedMessage,
+            ]);
+
+            $data = $response->json();
+
+            if (isset($data['decryptedMessage'])) {
+                return response()->json([
+                    'mensaje_descifrado' => $data['decryptedMessage']
+                ]);
+            } else {
+                return response()->json(['error' => 'No se pudo desencriptar el mensaje'], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al comunicar con el servidor de desencriptado: ' . $e->getMessage()], 500);
+        }
     }
 
 
