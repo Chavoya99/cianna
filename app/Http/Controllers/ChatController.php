@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Casa;
 use App\Models\Chat;
 use Illuminate\Http\Request;
@@ -49,9 +50,27 @@ class ChatController extends Controller
             ->with(['user.archivos' => function ($query){
                 $query->where('archivo_type', 'img_perf');}])->orderBy('fecha_ultimo_mensaje', 'desc')->get();
         }
-        //dd($chats);
+
+        $chats_obtenidos = [];
+        foreach($chats as $chat){
+            // Consulta directa a la tabla 'mensajes' para obtener el último mensaje
+            $ultimoMensaje = DB::table('mensajes')
+            ->where('chat_id', $chat->pivot->id)
+            ->latest('fecha_hora')  // Ordena por la fecha más reciente
+            ->first(); // Obtener solo el último mensaje
+
+            $msj_descrifrado = "";
+            if($ultimoMensaje){
+                $msj_descrifrado = json_decode(($this->desencriptar_mensaje($ultimoMensaje->contenido)->getContent()))->mensaje_descifrado;
+            }
+            $chats_obtenidos[] = [
+                'chat' => $chat, 
+                'ultimoMensaje' => $ultimoMensaje,
+                'contenido' => $msj_descrifrado
+            ];
+        }
         
-        return view('lista_chats', compact('chats'));
+        return view('lista_chats', compact('chats_obtenidos'));
     }
 
     public function redireccionar_chat($id_aux){
@@ -78,6 +97,18 @@ class ChatController extends Controller
 
         return redirect()->route('chat_privado', [$chat_id->id, $room_id, $id_aux]);
 
+    }
+
+    public function desencriptar_mensaje($contenido){
+
+        $secretKey = env('SECRET_KEY');
+
+        // Ejecutar el script de Node.js y capturar la salida
+        $output = shell_exec("node " . base_path('server/desencriptar_mensaje.js') . " " . escapeshellarg($contenido) . " " . escapeshellarg($secretKey));
+        
+        return response()->json([
+            'mensaje_descifrado' => trim($output) // Enviar el mensaje desencriptado a la vista
+        ]);      
     }
 
 
