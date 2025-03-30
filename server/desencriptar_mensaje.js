@@ -1,5 +1,6 @@
 import express from 'express';
 import CryptoJS from 'crypto-js';
+import dotenv from 'dotenv';
 
 const app = express();
 const port = 4000; 
