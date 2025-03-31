@@ -56,9 +56,7 @@
                                 </div>
                                 <!-- Fecha en formato "hace X minutos/horas" -->
                                 <p class="text-sm group-hover:text-white">
-                                {{ "Hace " . \Carbon\Carbon::parse($chat['ultimoMensaje']->fecha_hora)
-                                ->timezone('America/Belize') // Para asegurarse de que se maneja en la zona horaria correcta
-                                ->diffForHumans(\Carbon\Carbon::now('America/Belize'), \Carbon\CarbonInterface::DIFF_ABSOLUTE) }}
+                                {{ \Carbon\Carbon::parse($chat['ultimoMensaje']->fecha_hora)->setTimezone(config('app.timezone'))->diffForHumans() }}
                                 </p> 
                             </div>
                         @else
