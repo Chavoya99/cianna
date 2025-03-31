@@ -219,8 +219,8 @@
             
             // Crear una nueva fecha en formato 'YYYY-MM-DDTHH:MM:SS'
             const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]} ${timeParts[0]}:${timeParts[1]}:${timeParts[2]}`;
-            
-            const date = new Date(formattedDate);
+            console.log("Formated", formattedDate);
+            const date = new Date();
             console.log("DATE", date);
             
             if (isNaN(date)) {
@@ -229,7 +229,7 @@
             }
             console.log(fecha);
             // Retornar la hora en formato de 12 horas con AM/PM
-            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true, timezone: 'America/Belize' });
         }
     });
 
