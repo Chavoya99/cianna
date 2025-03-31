@@ -221,12 +221,13 @@
             const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]} ${timeParts[0]}:${timeParts[1]}:${timeParts[2]}`;
             
             const date = new Date(formattedDate);
+            console.log("DATE", date);
             
             if (isNaN(date)) {
                 console.error('Fecha inválida:', fecha);
                 return ''; // Si la fecha no es válida, retorna una cadena vacía o el valor predeterminado
             }
-            
+            console.log(fecha);
             // Retornar la hora en formato de 12 horas con AM/PM
             return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
         }
