@@ -162,11 +162,11 @@
                 <div class="ml-16 mt-2">
                     Basado en tus favoritos creemos que podrían ser más compatibles contigo
                     <!-- Mostrar mensaje de error si existe -->
-                    @if (isset($error_message))
+                    {{--@if (isset($error_message))
                         <div class="rounded-md bg-red-500 p-4 text-white">
                             {{ $error_message }}
                         </div>
-                    @endif
+                    @endif--}}
                     <!-- Verificar si hay favoritos -->
                     {{-- @if (isset($outcomes) && count($outcomes) > 0)
                         <h2 class="font-bold">Resultados</h2>
