@@ -2,6 +2,7 @@ import express from 'express';
 import CryptoJS from 'crypto-js';
 import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 const port = 4000; 
 const secretKey = process.env.SECRET_KEY;
