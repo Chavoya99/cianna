@@ -96,6 +96,7 @@
     function sendMessage() {
         if (input.value.trim()) {
             const fecha = new Date();
+            console.log(fecha);
             socket.emit('chat message', input.value.trim(), user_id, socket.auth.other_user_id,
             room_id, chat_id, fecha);
             
@@ -178,6 +179,8 @@
             `;
             lastDate = messageDate;  // Actualizar la última fecha
         }
+        console.log(lastDate);
+        console.log(messageDate);
 
         userMessageName = isOwnMessage ? "Tú" : username;
 
