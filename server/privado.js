@@ -164,7 +164,6 @@ server.listen(port, () => {
 
 function formatoFecha(fecha){
     const nuevaFecha = new Date(fecha)
-    console.log(nuevaFecha);
     
     const formatoFecha = nuevaFecha.toLocaleDateString('es-ES', {
         year: 'numeric',
