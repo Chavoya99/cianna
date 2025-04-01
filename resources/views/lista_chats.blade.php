@@ -2,7 +2,7 @@
 
 @section('title') {{ 'Chats | Todos' }} @endsection
 <script>
-    function diffForHumans(fecha1, fecha2 = new Date()) {
+    function diffForHumans(fecha1, fecha2) {
         const diferenciaEnMs = fecha2 - fecha1;
 
         const segundos = Math.floor(diferenciaEnMs / 1000);
