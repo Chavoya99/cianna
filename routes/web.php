@@ -101,7 +101,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
 
         Route::controller(ChatController::class)->group(function(){
             Route::post('crear_chat', 'crear_chat')->name('crear_chat');
-            Route::get('chat_privado/{chat_id}/{room_id}/{otherUserId}', 'mostrar_chat')->name('chat_privado');
+            Route::get('chat/{chat_id}/{room_id}/{otherUserId}', 'mostrar_chat')->name('chat_privado');
             Route::get('lista_chats', 'lista_chats')->name('lista_chats');
             Route::post('ver_chat/{user_id_2}', 'redireccionar_chat')->name('ver_chat');
         });
@@ -131,98 +131,3 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
     
 });//Final middleware Auth
 
-/* QUITAR AL FINAL*/
-Route::get('/usuarioA', function(){
-    return view('userA.usera');
-});
-
-Route::get('/configuracion_hogar', function(){
-    return view('userA.config-hogar');
-});
-
-Route::get('/home', function(){
-    return view('profile.home');
-});
-
-Route::get('/account-settings', function(){
-    return view('profile.account-settings');
-});
-
-Route::get('/my-profile', function(){
-    return view('profile.my-profile');
-});
-
-Route::get('/detalles_hogar', function(){
-    return view('profile.room-details');
-});
-
-Route::get('/ver_mas_hogar', function(){
-    return view('profile.about-room');
-});
-
-Route::get('/vista_previa_roomie', function(){
-    return view('profile.about-roomie');
-});
-
-Route::get('/detalles_roomie', function(){
-    return view('profile.roomie-details');
-});
-
-Route::get('otros_hogares', function(){
-    return view('profile.homes-list');
-});
-
-Route::get('postulacionesA', function(){
-    return view('profile.requestsA');
-});
-
-Route::get('postulacionesB', function(){
-    return view('profile.requestsB');
-});
-
-Route::get('favsA', function(){
-    return view('profile.favsA');
-});
-
-Route::get('favsB', function(){
-    return view('profile.favsB');
-});
-
-Route::get('listado_postulacionesA', function(){
-    
-    return view('profile.list-requestsA');
-});
-
-Route::get('listado_postulacionesB', function(){
-
-    return view('profile.list-requestsB');
-});
-
-Route::get('listado_pendientesA', function(){
-    return view('profile.list-pending-requestsA');
-});
-
-Route::get('listado_pendientesB', function(){
-    return view('profile.list-pending-requestsB');
-});
-
-
-Route::get('roomies_potenciales', function(){
-    return view('profile.potential-roomies');
-});
-
-Route::get('habitaciones_potenciales', function(){
-    return view('profile.potential-rooms');
-});
-
-Route::get('chat', function(){
-    return view('chat');
-});
-
-Route::get('resultados_busqueda_A', function(){
-    return view('profile.search-resultsA');
-});
-
-Route::get('resultados_busqueda_B', function(){
-    return view('profile.search-resultsB');
-});
