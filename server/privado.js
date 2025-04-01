@@ -164,16 +164,20 @@ server.listen(port, () => {
 
 function formatoFecha(fecha){
     const nuevaFecha = new Date(fecha)
+    console.log(nuevaFecha);
     
     const formatoFecha = nuevaFecha.toLocaleDateString('es-ES', {
         year: 'numeric',
         month: '2-digit',
-        day: '2-digit'
+        day: '2-digit',
+        timeZone:'America/Belize'
+        
     });
     const formatoHora = nuevaFecha.toLocaleTimeString('es-ES', {
         hour: '2-digit',
         minute: '2-digit',
-        second: '2-digit'
+        second: '2-digit',
+        timeZone:'America/Belize'
     });
 
     const fechaCompleta = `${formatoFecha} ${formatoHora}`;
