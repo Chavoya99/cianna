@@ -96,7 +96,6 @@
     function sendMessage() {
         if (input.value.trim()) {
             const fecha = new Date();
-            console.log(fecha);
             socket.emit('chat message', input.value.trim(), user_id, socket.auth.other_user_id,
             room_id, chat_id, fecha);
             
@@ -154,10 +153,6 @@
     socket.on('chat message', (msg, serverOffset, username, fecha) => {
         // Verificar si el mensaje es del usuario actual o de otro usuario
         const isOwnMessage = username === socket.auth.username;
-        //console.log(profileImage);
-        //console.log('Username:', socket.auth.username);
-        //const otherUserProfImg = socket.auth.otherUserProfImg;
-        //console.log('Imagen del perfil:', socket.auth.otherUserProfImg);
         
         // Clases para las burbujas
         const bubbleClass = isOwnMessage 
@@ -179,8 +174,6 @@
             `;
             lastDate = messageDate;  // Actualizar la última fecha
         }
-        console.log(lastDate);
-        console.log(messageDate);
 
         userMessageName = isOwnMessage ? "Tú" : username;
 
@@ -192,7 +185,7 @@
                 class="w-10 h-10 rounded-full object-cover">` : ''}
                 <div class="p-3 max-w-xs md:max-w-md text-sm shadow-md ${bubbleClass} rounded-2xl">
                     <p class="break-words">${msg}</p>
-                    <small class="block mt-1 text-right opacity-75">${convertTo12HourFormat(fecha)}</small>
+                    <small class="block mt-1 text-right opacity-75">${horaFormato12Horas(fecha)}</small>
                 </div>
             </li>
         `;
@@ -209,7 +202,8 @@
             const dateParts = parts[0].split('/');
             return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;  // Formato DD/MM/YYYY
         }
-        function convertTo12HourFormat(fecha) {
+
+        function horaFormato12Horas(fecha) {
             const parts = fecha.split(' ');
             const dateParts = parts[0].split('/');
             const timeParts = parts[1].split(':');
@@ -221,33 +215,12 @@
             // Determinar AM o PM
             const modifier = hours >= 12 ? 'p. m.' : 'a. m.';
 
-            // Convertir horas a formato de 12 horas
-            hours = hours % 12 || 12; // 0 o 12 en 24H se convierten a 12 en 12H
+            //Formato de 12 horas
+            hours = hours % 12 || 12;
 
-            // Retornar la fecha con la hora convertida
+            
             return `${hours}:${minutes} ${modifier}`;
         }
-
-        // Función para formatear la hora a 'HH:MM AM/PM'
-        // function formatTime(fecha) {
-        //     // Convertir el formato 'DD/MM/YYYY HH:MM:SS' a 'YYYY-MM-DDTHH:MM:SS'
-        //     const parts = fecha.split(' ');
-        //     const dateParts = parts[0].split('/');
-        //     const timeParts = parts[1].split(':');
-            
-        //     // Crear una nueva fecha en formato 'YYYY-MM-DDTHH:MM:SS'
-        //     const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${timeParts[0]}:${timeParts[1]}:${timeParts[2]}Z`;
-        //     const date = new Date(formattedDate);
-        //     console.log("DATE", date);
-            
-        //     if (isNaN(date)) {
-        //         console.error('Fecha inválida:', fecha);
-        //         return ''; // Si la fecha no es válida, retorna una cadena vacía o el valor predeterminado
-        //     }
-        //     console.log(fecha);
-        //     // Retornar la hora en formato de 12 horas con AM/PM
-        //     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'America/Belize'});
-        // }
     });
 
     // Enviar un mensaje privado
