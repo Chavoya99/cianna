@@ -1,5 +1,5 @@
 @props(['defaultProfileImage' => asset('img/selfie_mujer.jpg')])
-@section('title') {{ 'Chat privado' }} @endsection
+@section('title') {{ 'Chat' }} @endsection
 
 <x-home-layout>
     <x-slot name="logo">
