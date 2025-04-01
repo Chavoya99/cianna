@@ -4,17 +4,23 @@ import { Server } from 'socket.io';
 import { createServer } from 'node:http';
 import mysql from 'mysql2/promise';
 import CryptoJS from 'crypto-js';
+import dotenv from 'dotenv';
 
+// Cargar las variables de entorno
+dotenv.config();
 const port = 3000;
 const secretKey = process.env.SECRET_KEY;
 
 // Conexión a la base de datos
-const connection = await mysql.createConnection({
+const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
-    port: process.env.DB_PORT,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 const app = express();
@@ -55,10 +61,9 @@ io.on('connection', async (socket) => {
         // console.log(`User ${userId} se intenta conectar con ${otherUserId} en ${roomId}`);
         socket.join(roomId); // Une al usuario a la sala
         console.log(`User ${userId} joined room ${roomId}`);
-
         try {
             // Realiza la consulta para obtener el nombre de 'otherUserId'
-            const [rows] = await connection.execute(
+            const [rows] = await pool.execute(
                 'SELECT name, apellido FROM users WHERE id = ?', [otherUserId]
             );
     
@@ -78,16 +83,15 @@ io.on('connection', async (socket) => {
 
         
         try {
+
             // Realiza la consulta para obtener la imagen de 'otherUserId'
-            const [rows] = await connection.execute(
+            const [rows] = await pool.execute(
                 `SELECT ruta_archivo FROM archivos WHERE archivo_type = 'img_perf' AND user_id = ?`,
                 [otherUserId]
             );
         
             if (rows.length > 0) {
                 const otherUserProfImg = rows[0].ruta_archivo;
-                //console.log(`La ruta de (${otherUserId}) es ${otherUserProfImg}`);
-                //console.log(socket);
                 // Envía la ruta de la imagen al cliente
                 socket.emit('other_user_prof_img', { otherUserProfImg });
             } else {
@@ -96,12 +100,12 @@ io.on('connection', async (socket) => {
         } catch (e) {
             console.error('Error al obtener la ruta de la imagen del usuario:', e);
         }
-        //const otherUserProfImg = socket.handshake.auth.otherUserProfImg;
 
         // Recupera mensajes anteriores solo para la sala privada
         if (!socket.recovered) {
+            
             try {
-                const results = await connection.execute(
+                const results = await pool.execute(
                     'SELECT * FROM mensajes WHERE room_id = ? && id > ?',
                     [roomId, socket.handshake.auth.serverOffset ?? 0]
                 );
@@ -128,12 +132,12 @@ io.on('connection', async (socket) => {
         const msg_encriptado = CryptoJS.AES.encrypt(msg.toString(), secretKey).toString();
         let result;
         try {
-            result = await connection.execute(
+            result = await pool.execute(
                 'INSERT INTO mensajes (room_id, chat_id, contenido, username, user_id_emisor, user_id_receptor, fecha_hora) VALUES (?, ?, ?, ?, ?, ?, ?)',
                 [roomId, chatId, msg_encriptado, username.toString(), userId, otherUserId, fechaTimeStamp]
             );
 
-            let update = connection.execute("Update chats set fecha_ultimo_mensaje = ? where room_id = ? ", [fechaTimeStamp, roomId]);
+            let update = pool.execute("Update chats set fecha_ultimo_mensaje = ? where room_id = ? ", [fechaTimeStamp, roomId]);
         } catch (e) {
             console.error(e);
             return;
@@ -164,12 +168,15 @@ function formatoFecha(fecha){
     const formatoFecha = nuevaFecha.toLocaleDateString('es-ES', {
         year: 'numeric',
         month: '2-digit',
-        day: '2-digit'
+        day: '2-digit',
+        timeZone:'America/Belize'
+        
     });
     const formatoHora = nuevaFecha.toLocaleTimeString('es-ES', {
         hour: '2-digit',
         minute: '2-digit',
-        second: '2-digit'
+        second: '2-digit',
+        timeZone:'America/Belize'
     });
 
     const fechaCompleta = `${formatoFecha} ${formatoHora}`;
