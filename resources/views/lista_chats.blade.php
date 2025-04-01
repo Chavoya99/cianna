@@ -94,7 +94,7 @@
                                 const fechaUtc = new Date();  // Fecha UTC actual
                                 const fecha1 = new Date("{{$chat['ultimoMensaje']->fecha_hora}}") 
                                 const zona_horaria_js = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
+                                console.log(zona_horaria_js);
                                 if(zona_horaria_js != "America/Mexico_City" ){
                                     fechaUtc.setHours(fechaUtc.getHours() - 6); //Resta 6 horas
                                 }
