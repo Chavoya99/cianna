@@ -55,7 +55,7 @@
         @endforeach
     </div>
     <!-- Paginación -->
-    @if ($recomendaciones->hasPages())
+    @if (isset($recomendaciones) && method_exists($recomendaciones, 'hasPages') && $recomendaciones->hasPages())
         <div class="mt-8 px-20">
             {{ $recomendaciones->links() }}
         </div>

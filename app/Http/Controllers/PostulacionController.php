@@ -135,7 +135,7 @@ class PostulacionController extends Controller
             if(count($recomendaciones) == 0){
                 $recomendaciones = Casa::with(['archivos' => function ($query) {
                     $query->where('clasificacion_archivo', 'img_cuarto');
-                }])->where('user_a_id', '!=', Auth::id())->limit(4)->get();
+                }])->where('user_a_id', '!=', Auth::id())->limit(5)->get();
             }
             return view('profile.requestsB', compact('postulaciones_pendientes', 'total_postulaciones', 'recomendaciones','outcomes', 'error_message', 'id_postulaciones'));
         }

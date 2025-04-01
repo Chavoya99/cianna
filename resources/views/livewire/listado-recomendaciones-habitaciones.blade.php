@@ -42,7 +42,7 @@
         @endforeach
     </div>
     <!-- Paginación -->
-    @if ($casas->hasPages())
+    @if (isset($casas) && method_exists($casas, 'hasPages') && $casas->hasPages())
         <div class="mt-8 px-20">
             {{ $casas->links() }}
         </div>
