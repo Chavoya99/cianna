@@ -10,7 +10,7 @@
                     $ruta_home = route('homeB');
                 }
             }else{
-                $ruta_home = route('login');
+                $ruta_home = route('home_guest');
             } 
         ?>
         <a href="{{$ruta_home}}" class="text-cianna-orange font-bold hover:text-orange-700">

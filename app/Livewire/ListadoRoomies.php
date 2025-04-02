@@ -8,6 +8,9 @@ use Livewire\WithPagination;
 use App\Models\UserA;
 use App\Models\UserB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ListadoRoomies extends Component
 {
@@ -17,15 +20,30 @@ class ListadoRoomies extends Component
     // Casi el mismo código original 
     public function render()
     {
-        if (Auth::user()->tipo == 'A') {
-            $roomies = UserB::with(['user.archivos' => function ($query) {
+        if(Auth::check()){
+            if (Auth::user()->tipo == 'A') {
+                $roomies = UserB::with(['user.archivos' => function ($query) {
+                    $query->where('archivo_type', 'img_perf');
+                }])->paginate(10); //Solo modificamos el get por paginate y se especifica cantidad de registros
+            } else if (Auth::user()->tipo == 'B') {
+                $roomies = UserA::with(['user.archivos' => function ($query) {
+                    $query->where('archivo_type', 'img_perf');
+                }])->paginate(10); // Misma situación que arriba
+            }
+        }else{
+            $userA = UserA::with(['user.archivos' => function($query) {
                 $query->where('archivo_type', 'img_perf');
-            }])->paginate(10); //Solo modificamos el get por paginate y se especifica cantidad de registros
-        } else if (Auth::user()->tipo == 'B') {
-            $roomies = UserA::with(['user.archivos' => function ($query) {
+            }])->get();
+            
+            $userB = UserB::with(['user.archivos' => function($query) {
                 $query->where('archivo_type', 'img_perf');
-            }])->paginate(10); // Misma situación que arriba
+            }])->get();
+
+            $combinados = $userA->merge($userB);
+            
+            $roomies = $this->paginar($combinados, 10);
         }
+        
 
         $carreras = $this->lista_carreras();
 
@@ -54,6 +72,15 @@ class ListadoRoomies extends Component
         'lic_qfb' => 'Lic. en Químico Farmacéutico Biólogo'];
 
         return $carreras;
+    }
+
+    public function paginar($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        $paginatedItems = $items->slice(($page - 1) * $perPage, $perPage)->values();
+        
+        return new LengthAwarePaginator($paginatedItems, $items->count(), $perPage, $page, $options);
     }
 }
 

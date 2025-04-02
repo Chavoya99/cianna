@@ -44,7 +44,7 @@
         <div class="mr-20 mt-2 text-right">
 
             <a class="ml-10 font-semibold text-cianna-green hover:text-cianna-orange"
-                href="{{ route('listado_casas') }}">
+                href="{{ route('listado_casas_invitado') }}">
                 Más habitaciones...
             </a>
         </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="mr-20 mt-2 text-right">
             <a class="ml-10 font-semibold text-cianna-green hover:text-cianna-orange"
-                href="{{ route('listado_roomies') }}">
+                href="{{ route('listado_roomies_invitado') }}">
                 Más compañeros...
             </a>
         </div>

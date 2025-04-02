@@ -36,6 +36,8 @@ Route::get('/', function () {
 });
 
 Route::get('/home_guest', [HomeController::class, 'home_invitado'])->middleware('guest')->name('home_guest');
+Route::get('/listado_roomies_invitado', [HomeController::class, 'listado_roomies'])->middleware('guest')->name('listado_roomies_invitado');
+Route::get('/listado_casas_invitado', [HomeController::class, 'listado_casas'])->middleware('guest')->name('listado_casas_invitado');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
     'verified',])->group(function () {

@@ -35,7 +35,7 @@
                                 $ruta_home = route('homeB');
                             }
                         }else{
-                            $ruta_home = route('login');
+                            $ruta_home = route('home_guest');
                         } 
                         
                     ?>

@@ -16,16 +16,23 @@ class ListadoHabitaciones extends Component
 
     // Casi el mismo código original
     public function render()
-    {
-        if(Auth::user()->tipo == 'A'){
-            $casas = Casa::with(['archivos' => function ($query) {
-                $query->where('clasificacion_archivo', 'img_cuarto');
-            }])->where('user_a_id', '!=', Auth::id())->paginate(10); //Solo modificamos el get por paginate y se especifica cantidad de registros
-        }else if(Auth::user()->tipo == 'B'){
+    {   
+        if(Auth::check()){
+            if(Auth::user()->tipo == 'A'){
+                $casas = Casa::with(['archivos' => function ($query) {
+                    $query->where('clasificacion_archivo', 'img_cuarto');
+                }])->where('user_a_id', '!=', Auth::id())->paginate(10); //Solo modificamos el get por paginate y se especifica cantidad de registros
+            }else if(Auth::user()->tipo == 'B'){
+                $casas = Casa::with(['archivos' => function ($query) {
+                    $query->where('clasificacion_archivo', 'img_cuarto');
+                }])->paginate(10); //Misma situación que arriba
+            }
+        }else{
             $casas = Casa::with(['archivos' => function ($query) {
                 $query->where('clasificacion_archivo', 'img_cuarto');
             }])->paginate(10); //Misma situación que arriba
         }
+       
         
         return view('livewire.listado-habitaciones', compact('casas'));
     }
