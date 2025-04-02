@@ -70,6 +70,7 @@ class ChatController extends Controller
                 'contenido' => $msj_descrifrado
             ];
         }
+        dd(now());
         
         return view('lista_chats', compact('chats_obtenidos'));
     }
