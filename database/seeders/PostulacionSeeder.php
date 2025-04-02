@@ -18,7 +18,7 @@ class PostulacionSeeder extends Seeder
         $casas = Casa::limit(4)->get();
         foreach($users as $user){
             foreach($casas as $casa){
-                $user->postulaciones()->attach($casa->id, ['fecha' => now(), 'estado' => 'pendiente']);
+                $user->postulaciones()->attach($casa->id, ['fecha' => now('America/Belize'), 'estado' => 'pendiente']);
             }
         }
         
