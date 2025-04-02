@@ -94,6 +94,9 @@
                                 const fechaUtc = new Date();  // Fecha UTC actual
                                 const fecha1 = new Date("{{$chat['ultimoMensaje']->fecha_hora}}") 
                                 const zona_horaria_js = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                                console.log(fechaUtc);
+                                console.log(fecha1.getHours()) 
+                                console.log(fecha1.getHours() + 6) 
                                 //console.log(zona_horaria_js);
                                 //console.log(fechaUtc.getTimezoneOffset());
                                 
