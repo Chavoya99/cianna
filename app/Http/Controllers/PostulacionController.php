@@ -15,7 +15,7 @@ class PostulacionController extends Controller
 {
     public function ver_postulaciones(){
         // Llamar a la API Flask con la API Key en los encabezados
-            
+            dd(now());
             //$apiKey = env('API_KEY');  // Obtener la clave API desde .env
             
             $apiKey = config('app.api_key');
