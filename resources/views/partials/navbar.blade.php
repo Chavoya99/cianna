@@ -2,12 +2,15 @@
 <div class="w-full flex items-center justify-between bg-white px-20 py-3">
     <div>
         <?php 
-            if(Illuminate\Support\Facades\Auth::user()->tipo == 'A'){
-                $ruta_home=route('homeA');
-            }else if(Illuminate\Support\Facades\Auth::user()->tipo == 'B'){
-                $ruta_home = route('homeB');
+
+            if(Illuminate\Support\Facades\Auth::check()){
+                if(Illuminate\Support\Facades\Auth::user()->tipo == 'A'){
+                    $ruta_home=route('homeA');
+                }else if(Illuminate\Support\Facades\Auth::user()->tipo == 'B'){
+                    $ruta_home = route('homeB');
+                }
             }else{
-                $ruta_home = route('dashboard');
+                $ruta_home = route('login');
             } 
         ?>
         <a href="{{$ruta_home}}" class="text-cianna-orange font-bold hover:text-orange-700">

@@ -31,7 +31,8 @@ use App\Http\Controllers\Auth\LoginRegisterController;
 
 
 Route::get('/', function () {
-    return redirect(route('login'));
+    return redirect(route('home_guest'));
+    //return redirect(route('login'));
 });
 
 Route::get('/home_guest', [HomeController::class, 'home_invitado'])->middleware('guest')->name('home_guest');

@@ -41,7 +41,7 @@ class HomeController extends Controller
         }])->limit(3)->get();
 
         $roomies = $userA->concat($userB);
-        return view('profile.home', compact('casas', 'roomies'));
+        return view('profile.home_invitado', compact('casas', 'roomies'));
     }
 
     public function configuracion_cuenta(){

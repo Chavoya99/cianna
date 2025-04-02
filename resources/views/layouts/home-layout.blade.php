@@ -27,14 +27,17 @@
                         {{ $logo }}
                     </div>
                     <div class=" w-full flex flex-col mt-5">
-                    <?php 
-                        if(Illuminate\Support\Facades\Auth::user()->tipo == 'A'){
-                            $ruta_home=route('homeA');
-                        }else if(Illuminate\Support\Facades\Auth::user()->tipo == 'B'){
-                            $ruta_home = route('homeB');
+                    <?php
+                        if(Illuminate\Support\Facades\Auth::check()){
+                            if(Illuminate\Support\Facades\Auth::user()->tipo == 'A'){
+                                $ruta_home=route('homeA');
+                            }else if(Illuminate\Support\Facades\Auth::user()->tipo == 'B'){
+                                $ruta_home = route('homeB');
+                            }
                         }else{
-                            $ruta_home = route('dashboard');
+                            $ruta_home = route('login');
                         } 
+                        
                     ?>
                     <x-home-buttons href="{{$ruta_home}}">
                         <i class="fa-solid fa-house mr-2"></i>
