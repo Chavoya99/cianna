@@ -2,6 +2,15 @@
 
 <!-- Aquí solo pasamos la vista del for y el paginador -->
 <div>
+    @if(count($favoritos) > 0)
+        <div class="mt-4 px-16">
+            <p class="mb-4 text-justify">
+                <b>¡Excelente!</b> ¡Ya has agregado habitaciones a tus favoritos! <br>
+                No olvides seguir añadiendo más habitaciones para que podamos darte mejores 
+                recomendaciones
+            </p>
+        </div>
+        @endif
     <!-- MUESTRA DE FAVORITOS -->
     <div class="mt-8 px-16 @if(count($favoritos) == 0) grid grid-cols-1 
         @else grid grid-cols-2 gap-6 @endif"> <!-- Grid de 1 columna si no hay favoritos, 2 columnas y espacio de 6 si los hay -->
