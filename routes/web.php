@@ -17,6 +17,7 @@ use App\Http\Controllers\UserBController;
 use App\Http\Middleware\ProfileNotUpdated;
 use App\Http\Controllers\PostulacionController;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\ReporteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +116,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),
             Route::get('lista_postulaciones_pendientes', 'lista_postulaciones_pendientes')->name('lista_postulaciones_pendientes');
             Route::post('aceptar_postulacion/{postulacion}', 'aceptar_postulacion')->name('aceptar_postulacion');
         });
+
+        Route::post('reportar_usuario/{autor}/{reportado}', [ReporteController::class, 'crear_reporte'])->name('reportar_usuario');
         
         
         

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Reporte;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserA extends Model
 {
@@ -28,6 +29,16 @@ class UserA extends Model
 
     public function chats_a(){
         return $this->belongsToMany(UserB::class, 'chats', 'user_a_id', 'user_b_id')->withPivot('id', 'room_id', 'fecha_hora_creacion', 'fecha_ultimo_mensaje');
+    }
+
+    public function reportesEnviados()
+    {
+        return $this->morphMany(Reporte::class, 'autor');
+    }
+
+    public function reportesRecibidos()
+    {
+        return $this->morphMany(Reporte::class, 'reportado');
     }
 
 }

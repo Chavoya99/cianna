@@ -5,6 +5,17 @@
     <x-slot name="logo">
         <x-authentication-card-logo/>
     </x-slot>
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="w-full h-full flex justify-center">
             <div class="w-1/3 mx-2">
                 <!-- CONTENEDOR NOMBRE ROOMIE -->
@@ -24,7 +35,17 @@
                             VER PERFIL
                         </div>
                     </a>
+                    <form action="{{route('reportar_usuario', [Auth::id(), $otherUserId])}}" method="POST">
+                        @csrf
+                        <!-- BOTON REPORTAR (CORREGIR)-->
+                        <button type="submit" class="bg-red-700 hover:bg-sky-900 text-white font-bold py-2 px-4
+                            rounded focus:outline-none focus:shadow-outline" >
+                            <i class="fa-solid fa-flag mr-2"></i>Reportar
+                        </button>
+                        <input name="motivo" type="text">
+                    </form>
                 </div>
+                
                 <!-- CONTENEDOR HORIZONTAL BOTÓN REGRESAR -->
                 <div class="absolute bottom-4 px-8">
                     <button class=" bg-cianna-blue hover:bg-sky-900 text-white font-bold py-2 px-4
